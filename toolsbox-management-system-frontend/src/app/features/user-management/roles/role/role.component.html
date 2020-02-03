@@ -1,0 +1,22 @@
+<!-- Title-->
+<div class="title">
+  <div class="row">
+    <div class="col-lg-6">
+      <h3>{{'Gestion des rôles' | translate}}</h3>
+    </div>
+    <!-- Add Role Button-->
+    <div class="col-lg-6 text-right">
+      <button type="button" class="btn btn-primary btn-add" id="add-role-btn" title="Ajouter un nouveau rôle"
+        data-toggle="modal" data-target="#addModal">
+        <i class="fa fa-plus-circle fa-lg"></i> {{'Nouveau rôle' | translate}}
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Content-->
+<div class="content">
+  <!-- Add Role Modal -->
+  <app-role-add (reloadEvent)="roleList.reloadData()"></app-role-add>
+  <!-- Roles Table -->
+  <app-role-list #roleList></app-role-list>
+</div>

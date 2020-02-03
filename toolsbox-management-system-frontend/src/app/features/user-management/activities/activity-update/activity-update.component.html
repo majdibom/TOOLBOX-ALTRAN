@@ -1,0 +1,36 @@
+<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Modifier cette activité' | translate}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #updateActivityForm="ngForm">
+          <!-- Title field -->
+          <div class="form-group">
+            <label for="title" class="required">{{'Nom' | translate}}</label>
+            <input type="text" class="form-control" id="name-update" name="title" pattern="[a-zA-Z]{1}[a-z,A-Z,' ',é,è,ê,ù,û,ç,à,â,ô]{1,}"
+              [(ngModel)]="activityToEdit.title" required>
+          </div>
+          <!-- Description field -->
+          <div class="form-group">
+            <label for="description">{{'Description' | translate}}</label>
+            <input type="text" class="form-control" id="description-update" name="description" [(ngModel)]="activityToEdit.description">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- Close button -->
+        <button type="button" id="exit-update-activity" class="btn btn-secondary" data-dismiss="modal">{{'Fermer' |
+          translate}}</button>
+        &nbsp;
+        <!-- Update button -->
+        <button type="button" id="submit-update-activity" class="btn btn-primary" data-dismiss="modal" (click)="updateActivity()"
+          [disabled]="!updateActivityForm.valid">{{'Enregistrer'| translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

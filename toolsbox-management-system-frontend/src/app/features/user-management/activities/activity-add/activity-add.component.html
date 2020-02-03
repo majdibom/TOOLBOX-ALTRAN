@@ -1,0 +1,36 @@
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Ajouter une activité' | translate}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addActivityForm="ngForm">
+          <!-- Title field -->
+          <div class="form-group">
+            <label for="lastname" class="required">{{'Titre' | translate}}</label>
+            <input type="text" id="name-add" class="form-control" name="title" pattern="[a-zA-Z]{1}[a-z,A-Z,' ',é,è,ê,ù,û,ç,à,â,ô]{1,}"
+              [(ngModel)]="activityToAdd.title" required>
+          </div>
+          <!-- Description field -->
+          <div class="form-group">
+            <label for="firstname">{{'Description' | translate}}</label>
+            <input type="text" class="form-control" id="description-add" name="description" [(ngModel)]="activityToAdd.description">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- Close button -->
+        <button type="button" id="exit-add-activity" class="btn btn-secondary" data-dismiss="modal" (click)="emptyObject()">{{'Fermer'
+          | translate}}</button>
+        &nbsp;
+        <!-- Add button -->
+        <button type="button" id="submit-add-activity" class="btn btn-primary" (click)="createActivity()" data-dismiss="modal"
+          [disabled]="!addActivityForm.valid">{{'Enregistrer' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

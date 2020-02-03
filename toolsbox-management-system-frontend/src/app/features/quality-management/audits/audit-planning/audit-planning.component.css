@@ -1,0 +1,20 @@
+table, th, td {
+  border: 1px solid #ddd !important;
+  padding: 19px !important;
+}
+
+.fixed{
+  color: #8898aa;
+  background-color: #f6f9fc;
+  position: sticky;
+  left: 0;
+
+
+}
+
+.tdHoverBackgroundColor:hover {
+  background-color: #ccc;
+}
+
+
+

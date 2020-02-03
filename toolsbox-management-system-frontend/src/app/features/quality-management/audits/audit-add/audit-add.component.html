@@ -1,0 +1,137 @@
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Ajouter un audit' | translate}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addAuditForm="ngForm">
+          <!-- Reference field -->
+          <div class="form-group  ">
+            <label for="reference" class="required">{{'Référence' | translate}}</label>
+            <input type="text" id="reference" name="reference" class="form-control" [(ngModel)]="auditToAdd.reference"
+              required>
+          </div>
+          <!-- Primary Auditor field -->
+          <div class="form-group">
+            <label for="primaryAuditor" class="required">{{'Auditeur principal' | translate}}</label>
+            <select id="primaryAuditor" name="primaryAuditor" class="form-control"
+              [(ngModel)]="auditToAdd.primaryAuditor " required>
+              <option *ngFor="let auditor of listOfAuditors" [ngValue]="auditor">{{auditor.lastName}}</option>
+            </select>
+          </div>
+
+          <!-- Accompanying Auditor field -->
+          <div class="form-group">
+            <label for="accompanyingAuditor" class="required">{{'Auditeur accompagnant' | translate}}</label>
+            <select id="accompanyingAuditor" name="accompanyingAuditor" class="form-control"
+              [(ngModel)]="auditToAdd.accompanyingAuditor " required>
+              <option *ngFor="let auditor of listOfAuditors" [ngValue]="auditor">{{auditor.lastName}}</option>
+            </select>
+          </div>
+
+          <!-- Audited field -->
+          <div class="form-group">
+            <label for="audited" class="required">{{'Audités' | translate}}</label>
+            <p-listbox id="audited" [options]="listOfUsers" multiple="multiple" checkbox="checkbox" filter="filter"
+              [(ngModel)]="auditToAdd.audited" name="audited" optionLabel="lastName" [style]="{'width':'100%'}"
+              [listStyle]="{'max-height':'250px'}">
+              <p-header>
+                <i class="fa fa-users"></i> Audités
+              </p-header>
+            </p-listbox>
+          </div>
+
+          <hr>
+          <!-- Process or project Auditor field -->
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="defaultInline1" name="projectProcessToggle"
+              [checked]='true' (click)="setradio('Project')">
+            <label class="custom-control-label" for="defaultInline1">Project</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="defaultInline2" name="projectProcessToggle"
+              (click)="setradio('Process')">
+            <label class="custom-control-label" for="defaultInline2">Process</label>
+          </div>
+
+          <br><br>
+          <div *ngIf="isSelected('Project')">
+            <select id="project" name="project" class="form-control" [(ngModel)]="auditToAdd.project ">
+              <option *ngFor="let project of listOfProjects" [ngValue]="project">{{project.title}}</option>
+            </select>
+          </div>
+          <div *ngIf="isSelected('Process')">
+            <select id="process" name="process" class="form-control" [(ngModel)]="auditToAdd.process ">
+              <option *ngFor="let process of listOfProcesses" [ngValue]="process">{{process.title}}</option>
+            </select>
+          </div>
+          <hr>
+
+          <!--  Impacted Processes field -->
+          <div class="form-group">
+            <label for="impactedProcesses" class="required">{{'Processus impactés' | translate}}</label>
+            <p-listbox id="impactedProcesses" name="impactedProcesses" [options]="listOfProcesses" multiple="multiple"
+              checkbox="checkbox" filter="filter" [(ngModel)]="auditToAdd.processImpacts" optionLabel="title"
+              [style]="{'width':'100%'}" [listStyle]="{'max-height':'250px'}">
+              <p-header>
+                <i class="fa fa-arrows-alt"></i> Processus impactés
+              </p-header>
+            </p-listbox>
+          </div>
+          <div class="form-row">
+            <!-- week field -->
+            <div class="form-group  col-md-6">
+              <label for="week" class="required">{{'Semaine' | translate}}</label>
+              <select id="week" name="week" class="form-control" [(ngModel)]="auditToAdd.week " required>
+                <option *ngFor="let week of listOfWeeks" [ngValue]="week">{{week.number}}</option>
+              </select>
+            </div>
+            <!-- duration field -->
+            <div class="form-group  col-md-6">
+              <label for="duration" class="required">{{'Durée(h)' | translate}}</label>
+              <input type="number" id="duration" name="duration" class="form-control" pattern="[0-9]"
+                [(ngModel)]="auditToAdd.duration" required>
+            </div>
+          </div>
+
+          <hr>
+          <div class="form-group">
+
+            <label for="auditTheme">Thème d'audit</label><br>
+            <textarea id="auditTheme" name="auditTheme" rows="5" cols="102" autoResize="autoResize"
+              [(ngModel)]="auditToAdd.auditTheme" class="form-control"></textarea>
+          </div>
+          <hr>
+          <div class="form-group">
+
+            <label for="enjeux">Enjeux</label><br>
+            <textarea id="enjeux" name="enjeux" rows="5" cols="102" autoResize="autoResize"
+              [(ngModel)]="auditToAdd.issues" class="form-control"></textarea>
+          </div>
+          <hr>
+          <div class="form-group">
+
+            <label for="risques">Risques</label><br>
+            <textarea id="risques" name="risques" rows="5" cols="102" autoResize="autoResize" class="form-control"
+              [(ngModel)]="auditToAdd.risks"></textarea>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- Close button -->
+        <button type="button" id="exit-add-audit" class="btn btn-secondary" data-dismiss="modal"
+          (click)="emptyObject()">{{'Fermer'
+            | translate}}</button>
+        &nbsp;
+        <!-- Add button -->
+        <button type="button" id="submit-add-audit" class="btn btn-primary" (click)="createAudit()" data-dismiss="modal"
+          [disabled]="!addAuditForm.valid">{{'Enregistrer' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+<div class="row">
+  <!-- Number of elements select form -->
+  <div class=" col-md-8">
+    <div class="btn-group">
+      <span class="label label-default">{{'Afficher' | translate}}</span>&nbsp;
+      <button type="button" id="show-items-list-btn" class="btn dropdown-toggle btn-dropdown" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {{item}}
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" id="five-items" (click)="getItems(5)">5</a>
+        <a class="dropdown-item" id="ten-items" (click)="getItems(10)">10</a>
+        <a class="dropdown-item" id="twenty-items" (click)="getItems(20)">20</a>
+        <a class="dropdown-item" id="fifty-items" (click)="getItems(50)">50</a>
+      </div>
+      &nbsp;
+      <span class="label label-default">{{'éléments' | translate}}</span>
+    </div>
+  </div>
+  <!-- Search form -->
+  <div class=" col-md-4 text-right">
+    <div class="input-group search">
+      <input type="text" id="search-user" class="form-control search" placeholder="{{'Recherche...' | translate}}"
+        [(ngModel)]="searchInput" (input)="onSearch($event.target.value)">
+    </div>
+  </div>
+</div>
+<!-- Users list Table -->
+<div class="table-responsive-lg">
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th style="width: 12%;">{{'Prénom' | translate}}</th>
+        <th style="width: 12%;">{{'Nom' | translate}}</th>
+        <th style="width: 15%;">{{'Email' | translate}}</th>
+        <th style="width: 6%;">{{'Téléphone' | translate}}</th>
+        <th style="width: 14%;">{{'Adresse' | translate}}</th>
+        <th style="width: 16%;">{{'Rôle' | translate}}</th>
+        <th style="width: 6%;">{{'Activité' | translate}}</th>
+        <th style="width: 11%;" class="text-center">{{'Compte' | translate}}</th>
+        <th style="width: 8%;" class="text-center">{{'Actions' | translate}}</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="pageClient?.content">
+      <tr *ngFor="let recruiter of listRecruiters | paginate: { itemsPerPage: item, currentPage: p, totalItems: total }">
+        <td>{{recruiter.firstName }}</td>
+        <td>{{recruiter.lastName}}</td>
+        <td><span class="mail-link" (click)="mailTo(recruiter.email)">{{recruiter.email}}</span></td>
+        <td>{{recruiter.phoneNumber }}</td>
+        <td>{{recruiter.address}}</td>
+
+        <td *ngIf="recruiter">{{recruiter.roles[0]?.title}}
+          <!--Roles list-->
+          <label *ngIf="recruiter.roles.length > 1">
+            <strong> ... </strong>
+            <ng-template #tipContent>
+              <div *ngFor="let role of recruiter.roles">
+                {{role?.title}}
+              </div>
+            </ng-template>
+            <button type="button" class="btn icon-button btn-sm" placement="right" [ngbTooltip]="tipContent">
+              <i class="fa fa-info-circle"></i>
+            </button>
+          </label>
+        </td>
+
+        <td>{{recruiter.activity.title}}</td>
+        <td>
+          <div *ngIf="recruiter.activated == true">
+            <span class="badge badge-success">{{'Activé' | translate}}
+            </span>
+            &nbsp;&nbsp;
+            <label class="switch" *ngIf="recruiter.activated == true">
+              <input type="checkbox" checked (click)="changeStateUserAccount(recruiter.id)">
+              <span class="slider round">
+              </span>
+            </label>
+          </div>
+          <div *ngIf="recruiter.activated !== true">
+            <span class="badge badge-secondary">{{'Désactivé' | translate}}
+            </span>
+            &nbsp;&nbsp;
+            <label class="switch" *ngIf="recruiter.activated !== true">
+              <input type="checkbox" (click)="changeStateUserAccount(recruiter.id,recruiter.firstName,recruiter.lastName)">
+              <span class="slider round">
+              </span>
+            </label>
+          </div>
+        <td>
+          <button type="button" title="Modifier cet utilisateur" class="btn btn-primary btn-circle" data-toggle="modal"
+            data-target="#update-modal" (click)="openEditModal(recruiter)">
+            <i class="fa fa-edit">
+            </i>
+          </button>
+          &nbsp;
+          <button type="button" title="Supprimer cet utilisateur" class="btn btn-danger btn-circle" (click)="deleteRecruiter(recruiter.id, recruiter.firstName, recruiter.lastName)">
+            <i class="fa fa-remove">
+            </i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- No data in table message-->
+  <div *ngIf="listRecruiters?.length==0">
+    <div class="nodata-box">
+      <div class="nodata-text" id="no-data-available">{{'Aucune donnée trouvée.' | translate}}</div>
+    </div>
+  </div>
+  <!-- Pagination-->
+  <div class="clearfix">
+    <div class="hint-text">{{'Total' | translate}}: <b>{{total}}</b> {{'éléments' | translate}}</div>
+    <div class="pagination justify-content-end">
+      <nav class="Page navigation example">
+        <pagination-controls (pageChange)="p=$event" (click)="onSelect(p)" previousLabel="{{'Précédente' | translate}}"
+          nextLabel="{{'Suivante' | translate}}"></pagination-controls>
+      </nav>
+    </div>
+  </div>
+</div>
+<!-- Edit User Modal  -->
+<app-user-update [userToEdit]="editUser" (reloadEvent)="reloadData()"></app-user-update>

@@ -1,0 +1,44 @@
+.title {
+  position: relative;
+  padding: 15px 20px 13px;
+  background: #fff;
+  -webkit-box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
+  font-family:Verdana, Geneva, sans-serif	 ;
+  color: #242a33;    
+}
+    
+.content{
+  position: relative;
+  padding: 15px 20px 13px;
+  background: #fff;
+  -webkit-box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+    
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+  
+.headline {
+  font-size: 180px;
+  font-weight: 900;
+  line-height: initial;
+}
+  
+.text-gray {
+  color: #a4a7ac;
+  text-align: center;
+}
+  
+.margin-top-0 {
+  margin-top: 0;
+}

@@ -1,0 +1,148 @@
+<div class="title">
+  <h3>{{'Détails de l action' | translate}}</h3>
+</div>
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="profile-card-4 z-depth-3">
+          <!-- action generale information section -->
+          <div class="card">
+            <div class="card-body text-center bg-altran rounded-top">
+              <h6 class="text-light">{{'Responsable' | translate}} :</h6>
+              <h5 class="mb-1 text-white">
+                {{action?.responsibleAction?.firstName}}&nbsp;{{action?.responsibleAction?.lastName}}</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group shadow-none">
+                <li class="list-group-item">
+                  <div class="list-icon">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                  </div>
+                  <div class="list-details">
+                    <span>{{'Type' | translate}}: </span>{{action?.typeAction}}
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="list-icon">
+                    <i class="fa fa-thumb-tack"></i>
+                  </div>
+                  <div class="list-details">
+                    <span>{{'Statut' | translate}}: </span>
+                    <span *ngIf="action?.status == 'Open'" class="badge badge-success">{{action?.status}}</span>
+                    <span *ngIf="action?.status == 'Closed'" class="badge badge-danger">{{action?.status}}</span>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="list-icon">
+                    <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                  </div>
+                  <div class="list-details">
+                    <span>{{'Priority' | translate}}: </span>
+                    <span *ngIf="action?.priority == 'Low'" class="badge badge-secondary">{{action?.priority}}</span>
+                    <span *ngIf="action?.priority == 'Normal'" class="badge badge-info">{{action?.priority}}</span>
+                    <span *ngIf="action?.priority == 'High'" class="badge badge-warning">{{action?.priority}}</span>
+
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="list-icon">
+                    <i class="fa fa-percent" aria-hidden="true"></i>
+                  </div>
+                  <div class="list-details">
+                    <span>{{'Pourcentage' | translate}}: </span>{{action?.percentage}} %
+                  </div>
+                </li>
+              </ul>
+              <div class="row text-center mt-4">
+                <div class="col p-2">
+                  <h4 class="mb-1 line-height-5" style="font-size: 20px">{{action?.identificationDate |
+                                            date:'dd/MM/yyyy'}}</h4>
+                  <small class="mb-0 font-weight-bold">{{'Date d identification' | translate}}</small>
+                </div>
+                <div class="col p-2">
+                  <h4 class="mb-1 line-height-5" style="font-size: 20px">{{action?.deadline |
+                                        date:'dd/MM/yyyy'}}</h4>
+                  <small class="mb-0 font-weight-bold">{{'Date d écheance' | translate}}</small>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <div class="card z-depth-3">
+          <div class="card-body">
+            <ul class="nav nav-pills nav-pills-primary nav-justified">
+              <!-- Details menu -->
+              <li class="nav-item">
+                <a href="javascript:void();" data-target="#detail" data-toggle="pill" class="nav-link active show"><i
+                    class="icon-user"></i> <span class="hidden-xs">{{'Détails généraux' | translate}}</span></a>
+              </li>
+              <!-- Remarks menu -->
+              <li class="nav-item">
+                <a href="javascript:void();" data-target="#quizzes" data-toggle="pill" class="nav-link"><i
+                    class="icon-envelope-open"></i> <span
+                    class="hidden-xs">{{'Remarques et notes' | translate}}</span></a>
+              </li>
+
+            </ul>
+            <div class="tab-content p-3">
+              <!-- Details section -->
+              <div class="tab-pane active show" id="detail">
+                <h5 class="mb-3"></h5>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h6 class="font-weight-bold">{{'Cause' | translate}}</h6>
+                    <p>
+                      {{action?.cause}}
+                    </p>
+                    <h6 class="font-weight-bold">{{'Origine' | translate}}</h6>
+                    <p>
+                      {{action?.origin}}
+                    </p>
+                    <h6 class="font-weight-bold">{{'Critére de perfermance' | translate}}</h6>
+                    <p>
+                      {{action?.performanceCriteria}}
+                    </p>
+                    <h6 class="font-weight-bold">{{'Critére d efficacité' | translate}}</h6>
+                    <p>
+                      {{action?.efficiencyCriteria}}
+                    </p>
+                    <h6 class="font-weight-bold">{{'Efficacité' | translate}}</h6>
+                    <p>
+                      {{action?.efficiency}}
+                    </p>
+                    <h6 class="font-weight-bold">{{'Valeur initiale' | translate}}</h6>
+                    <p>
+                      {{action?.initialValue}}
+                    </p>
+                    <h6 class="font-weight-bold">{{'Valeur final' | translate}}</h6>
+                    <p>
+                      {{action?.finalValue}}
+                    </p>
+                  </div>
+                  <div class="col-md-6">
+                    {{action?.processImpacts.title}}
+                    <h6 class="font-weight-bold">{{'Processus impacté' | translate}}</h6>
+                    <span *ngFor="let process of action?.processImpacts">
+                      <span class="badge badge-dark badge-pill">{{process.title}}</span>&nbsp;
+                    </span>
+                  </div>
+                </div>
+                <!-- Interviews information section 
+                <div class="tab-pane" id="quizzes">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h5><strong>{{'QCM affectés' | translate}}</strong></h5>
+                    </div>
+                  </div>
+                </div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

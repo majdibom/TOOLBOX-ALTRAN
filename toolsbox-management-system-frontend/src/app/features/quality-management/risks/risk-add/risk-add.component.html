@@ -1,0 +1,294 @@
+<div class="title">
+  <h3>{{'Ajout d un nouveau risque' | translate}}</h3>
+</div>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row" >
+ <form #addRiskForm="ngForm" class="container-fluid">
+      <div class="modal-content" >
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Ajouter un risque' | translate}}</h5>
+          
+        </div>
+        <div class="modal-body">
+          <div class="form-row">
+            <!-- Probability field -->
+            <div class="form-group col-md-4">
+              <label for="probability" class="required">{{'Probabilité' | translate}}</label>
+              <select id="probability-add" name="riskProbability" class="form-control"
+                [(ngModel)]="riskToAdd.probability" required>
+                <option *ngFor="let probability of probabilityEnum" [value]="probability">
+                  {{probabilityLabel[probability]}}
+                </option>
+              </select>
+            </div>
+            <!-- Severity field -->
+            <div class="form-group col-md-4">
+              <label for="severity" class="required">{{'Sévérité' | translate}}</label>
+              <select id="severity-add" name="riskSeverity" class="form-control" [(ngModel)]="riskToAdd.severity"
+                required>
+                <option *ngFor="let severity of severityEnum" [value]="severity">
+                  {{severityLabel[severity]}}
+                </option>
+              </select>
+            </div>
+            <!-- Status field -->
+            <div class="form-group col-md-4">
+              <label for="Status" class="required">{{'Statut' | translate}}</label>
+              <select id="Status-add" name="riskStatus" class="form-control" [(ngModel)]="riskToAdd.riskStatus"
+                required>
+                <option *ngFor="let status of statusEnum" [value]="status">
+                  {{statusLabel[status]}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <!-- detectionDate field -->
+            <div class="form-group col-md-6">
+              <label for="detectionDate" class="required">{{'Date de detection' | translate}}</label>
+              <input type="date" class="form-control" id="detectionDate-add" name="detectionDate"
+                [(ngModel)]="riskToAdd.detectionDate" required>
+            </div>
+            <!-- closureDate field -->
+            <div class="form-group col-md-6">
+              <label for="closureDate" class="required">{{'Date de fermeture' | translate}}</label>
+              <input type="date" class="form-control" id="closureDate-add" name="closureDate"
+                [(ngModel)]="riskToAdd.closureDate" required>
+            </div>
+          </div>
+
+          <!-- Strategy field -->
+          <div class="form-group">
+            <label for="strategy" class="required">{{'Strategie' | translate}}</label>
+            <textarea class="form-control" id="strategy-add" name="strategy" [(ngModel)]="riskToAdd.strategy" rows="3"
+              required> </textarea>
+          </div>
+
+
+          <!-- Action form -->
+          <form #createActionForm="ngForm">
+            <div class="form-group">
+              <label for="Actions" class="required">{{'Actions' | translate}}</label>
+              <!-- Number of action alert -->
+              <div class="alert alert-danger" *ngIf="riskToAdd.actions.length < 1" role="alert">
+                <div align-text="center">{{'Il faut ajouter plus qu une actions !' | translate}} </div>
+              </div>
+              
+               
+              <div class="form-row">
+                 <!-- identificationDate field -->
+            <div class="form-group col-md-4">
+                <label for="identificationDate" class="required">{{'Date d identification' | translate}}</label>
+                <input type="date" class="form-control" id="identificationDate-add" name="identificationDate"
+                  [(ngModel)]="actionToAdd.identificationDate" required>
+              </div>
+               <!-- deadline field -->
+            <div class="form-group col-md-4">
+                <label for="deadline" class="required">{{'Date d écheance' | translate}}</label>
+                <input type="date" class="form-control" id="deadline-add" name="deadline"
+                  [(ngModel)]="actionToAdd.deadline" required>
+              </div>
+               <!-- realizationDate field -->
+            <div class="form-group col-md-4">
+                <label for="realizationDate" class="required">{{'Date de realisation' | translate}}</label>
+                <input type="date" class="form-control" id="realizationDate-add" name="realizationDate"
+                  [(ngModel)]="actionToAdd.realizationDate" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <!-- percentage field -->
+          <div class="form-group col-md-3">
+              <label for="percentage" class="required">{{'Pourcentage' | translate}} %</label>
+              <input  type="number" class="form-control" id="percentage-add" name="percentage" [(ngModel)]="actionToAdd.percentage"
+                required> 
+            </div>
+           
+            <!-- performanceCriteria field -->
+          <div class="form-group col-md-3">
+              <label for="performanceCriteria" class="required">{{'Critére de performance' | translate}}</label>
+              <input type="text" id="performanceCriteria-add" name="performanceCriteria" class="form-control" [(ngModel)]="actionToAdd.performanceCriteria"
+                required>
+            </div>
+              <!-- efficiencyCriteria field -->
+          <div class="form-group col-md-3">
+              <label for="efficiencyCriteria" class="required">{{'Critére de efficience' | translate}}</label>
+              <input type="text" id="efficiencyCriteria-add" name="efficiencyCriteria" class="form-control" [(ngModel)]="actionToAdd.efficiencyCriteria"
+                required>
+            </div>
+             <!-- responsibleAction field -->
+          <div class="form-group col-md-3">
+              <label for="responsibleAction" class="required">{{'responsible d Action' | translate}}</label>
+              <select id="responsibleAction-add" name="titleresponsibleAction" class="form-control" [(ngModel)]="actionToAdd.responsibleAction"
+                required>
+                <option *ngFor="let user of listOfUsers" [ngValue]="user">{{user.firstName}} {{user.lastName}}</option>
+              </select>
+            </div>
+          </div>
+
+             <!-- Action cause field -->
+             <div class="form-group">
+                <label for="cause" class="required">{{'cause' | translate}} </label>
+            <textarea id="cause-action-add" type="textarea" class="form-control" name="cause-action"
+            [(ngModel)]="actionToAdd.cause" required></textarea>
+          &nbsp;
+        </div>
+        <div class="form-row">
+             <!-- initialValue field -->
+          <div class="form-group col-md-4">
+              <label for="initialValue" class="required">{{'Valeur initiale' | translate}}</label>
+              <input type="text" id="initialValue-add" name="initialValue" class="form-control" [(ngModel)]="actionToAdd.initialValue"
+                required>
+            </div>
+             <!-- finalValue field -->
+          <div class="form-group col-md-4">
+              <label for="finalValue" class="required">{{'Valeur finale' | translate}}</label>
+              <input type="text" id="finalValue-add" name="finalValue" class="form-control" [(ngModel)]="actionToAdd.finalValue"
+                required>
+            </div>
+             <!-- efficiency field -->
+          <div class="form-group col-md-4">
+              <label for="efficiency" class="required">{{'Efficience' | translate}}</label>
+              <input type="text" id="efficiency-add" name="efficiency" class="form-control" [(ngModel)]="actionToAdd.efficiency"
+                required>
+            </div>
+          </div>
+          <div class="form-row">
+              <!-- status field -->
+              <div class="form-group col-md-3">
+                  <label for="status" class="required">{{'status' | translate}}</label>
+                  <select id="status-add" name="ActionStatus" class="form-control" [(ngModel)]="actionToAdd.status"
+                    required>
+                    <option *ngFor="let status of ActionstatusEnum" [value]="status">
+                      {{statusLabel[status]}}
+                    </option>
+                  </select>
+                </div>
+                <!-- priority field -->
+              <div class="form-group col-md-3">
+                  <label for="priority" class="required">{{'priorité' | translate}}</label>
+                  <select id="priority-add" name="priority" class="form-control" [(ngModel)]="actionToAdd.priority"
+                    required>
+                    <option *ngFor="let priority of priorityEnum" [value]="priority">
+                      {{priorityLabel[priority]}}
+                    </option>
+                  </select>
+                </div>
+               
+           <!-- typeAction field -->
+           <div class="form-group col-md-3">
+              <label for="typeAction" class="required">{{'type d Action' | translate}}</label>
+              <select id="typeAction-add" name="typeAction" class="form-control" [(ngModel)]="actionToAdd.typeAction"
+                required>
+                <option *ngFor="let typeAction of typeActionEnum" [value]="typeAction">
+                  {{typeActionLabel[typeAction]}}
+                </option>
+              </select>
+            </div>
+            <!-- origin field -->
+           <div class="form-group col-md-3">
+              <label for="origin" class="required">{{'Origine' | translate}}</label>
+              <select id="origin-add" name="origin" class="form-control" [(ngModel)]="actionToAdd.origin"
+                required>
+                <option *ngFor="let origin of OriginEnum" [value]="origin">
+                  {{OriginLabel[origin]}}
+                </option>
+              </select>
+            </div>
+          </div>
+             
+            <div class="form-row">
+                <!-- remarks field -->
+            <div class="form-group col-md-6">
+                <label for="remarks" class="required">{{'Remarques' | translate}}</label>
+                <textarea type="text" id="remarks-add" name="remarks" class="form-control" [(ngModel)]="actionToAdd.remarks"
+                  required></textarea>
+              </div>
+              <!-- notes field -->
+            <div class="form-group col-md-6">
+                <label for="notes" class="required">{{'Notes' | translate}}</label>
+                <textarea    type="text" id="notes-add" name="notes" class="form-control" [(ngModel)]="actionToAdd.notes"
+                  required></textarea>
+              </div>
+            </div>
+                <!-- Add Action button -->
+                <button id="add-action-btn" type="button" class="btn btn-secondary" data-toggle="modal"
+                  [disabled]="!createActionForm.valid" (click)="addAction(actionToAdd.identificationDate, actionToAdd.deadline, actionToAdd.realizationDate, actionToAdd.percentage,
+                  actionToAdd.performanceCriteria, actionToAdd.efficiencyCriteria, actionToAdd.responsibleAction, actionToAdd.cause, actionToAdd.initialValue,
+                  actionToAdd.finalValue, actionToAdd.efficiency, actionToAdd.status, actionToAdd.priority, actionToAdd.typeAction, actionToAdd.origin, actionToAdd.remarks, actionToAdd.notes)">
+                  <i class="fa fa-plus"></i>
+                </button>
+              
+
+              <!-- Action list section -->
+              <div class="data">
+                <br>
+                <ul class="list-unstyled">
+                  <li *ngFor="let action of riskToAdd.actions">
+                    <div class="row">
+                      <!--    <div class="col-1">
+                        <td *ngIf="proposition.valid === true"> <i class="fa fa-check-square-o" aria-hidden="true"
+                            [ngStyle]="{'color':'green'}"></i></td>
+                        <td *ngIf="proposition.valid === false"> <i class="fa fa-square-o" aria-hidden="false"
+                            [ngStyle]="{'color':'red'}"></i></td>
+                      </div>-->
+                      <div class="col-9">
+                        <td><span *ngIf="!action.editMode" id="cause" name="cause">{{action.cause}}</span></td>
+                        <form *ngIf="action.editMode">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <!-- <div class="input-group-text">
+                                <input type="checkbox" aria-label="Checkbox for following text input" id="valid"
+                                  name="valid" [(ngModel)]="proposition.valid">
+                              </div>-->
+                            </div>
+                            <input type="text" class="form-control" id="cause" name="cause" *ngIf="action.editMode"
+                              [(ngModel)]="action.cause">
+                            &nbsp;
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                              (click)="editAction(action)">
+                              <i class="fa fa-check"></i>
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="col-2">
+                        <td><button type="button" class="icon-button" (click)="action.editMode=true"
+                            data-toggle="tooltip">
+                            <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                          </button>
+                        </td>
+                        <td><button type="button" class="icon-button" (click)="deleteAction(action)"
+                            data-toggle="tooltip">
+                            <i class="fa fa-times fa-lg" aria-hidden="true" [ngStyle]="{'color':'red'}"></i>
+                          </button>
+                        </td>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </form>
+
+         
+          
+        </div>
+
+        <div class="modal-footer">
+          <!-- Close button -->
+          <button type="button" id="exit-add-risk" name="exit-add-risk" class="btn btn-secondary" data-dismiss="modal"
+            (click)="emptyObject()">{{'Fermer' | translate}}</button>
+          &nbsp;
+          <!-- Add button -->
+          <button type="button" id="submit-add-risk" name="submit-add-risk " class="btn btn-primary"
+            (click)="createRisk()" data-dismiss="modal" [disabled]="!addRiskForm.valid">{{'Enregistrer'
+            | translate}}</button>
+        </div>
+      </div>
+    </form>
+
+    </div>
+  </div>
+</div>

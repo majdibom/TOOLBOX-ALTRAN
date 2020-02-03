@@ -1,0 +1,84 @@
+.btn-circle {
+  width: 33px;
+  height: 33px;
+  text-align: center;
+  padding: 0px 0;
+  font-size: 16px;
+  border-radius: 20px;
+}
+
+/* table gray line */
+table.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #fcfcfc;
+}
+
+/* table gray hover */
+table.table-striped.table-hover tbody tr:hover {
+background: #f4f6f9;
+}
+
+/* table head color */
+th {
+  background-color: #343b46;
+  color: #f4f6f9;
+  overflow-x: hidden;
+} 
+
+/* text center */
+.text-center{
+  text-align: center; 
+}
+
+/* select page element and sersh button section */
+.btn-group {
+  display: table-cell;
+  vertical-align: middle;
+  height: 50px;
+}
+
+/* total elements*/
+.hint-text {
+  float: left;
+  margin-top: 0px;
+  font-size: 15px;
+} 
+
+/* select number of element */
+.btn-dropdown {
+background-color: #ffffff;
+border-color :#343b46;
+height: 25px;
+padding-top:1px;
+}
+
+/* Search form */
+.search  {
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-bottom: 1px solid #343b46;
+}
+
+/* No data in table message style */
+.nodata-box {
+  text-align: center;
+  display: block;
+  background: #fff;
+  padding: 12px 18px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px 0px;
+}
+.nodata {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.5em;
+  margin-bottom: 20px;
+  padding: .1em 0;
+  color: #444;
+	position: relative;
+	overflow: hidden;
+	white-space: nowrap;
+	text-align: center;
+}

@@ -1,0 +1,22 @@
+<!-- Title-->
+<div class="title">
+  <div class="row">
+    <div class="col-lg-6">
+      <h3>{{'Gestion des activités' | translate}}</h3>
+    </div>
+    <!-- Add Activity Button -->
+    <div class="col-lg-6 text-right">
+      <button id="add-activity-btn" type="button" class="btn btn-primary btn-add" data-toggle="modal" title="Ajouter une nouvelle activité"
+        data-target="#addModal">
+        <i class="fa fa-plus-circle fa-lg"></i> {{'Nouvelle activité' | translate}}
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Content-->
+<div class="content">
+  <!-- Add Activity Modal -->
+  <app-activity-add (reloadEvent)="activityList.reloadData()"></app-activity-add>
+  <!-- Activities Table -->
+  <app-activity-list #activityList></app-activity-list>
+</div>

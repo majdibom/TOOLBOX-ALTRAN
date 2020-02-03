@@ -1,0 +1,62 @@
+.sidenav {
+  background: #007EAF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, rgba(0, 125, 175), rgb(1, 84, 117));  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, rgba(0, 125, 175), rgba(1, 84, 117)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  margin-top: 60px;
+  -webkit-box-shadow: 1px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 1px 0px 5px 0px rgba(0,0,0,0.75);
+}
+  
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: medium;
+  color: #818181;
+  display: block; 
+}  
+  
+.sidenav a:hover {
+  color: #f1f1f1;
+  cursor: pointer; 
+  font-weight: bold;
+  background-color: #09385f;
+}
+  
+.sidebar.navbar-nav{
+  padding-top: 15px;
+  line-height: 35px;
+}  
+
+.menu-title{
+  padding-left: 10px;
+  color: white;
+  font-size: small;
+}
+
+.nav-item .nav-link span {
+  color: white;
+}
+
+.nav-item .nav-link  {
+  color: white;
+  margin: 5px;
+  font-family: 'Roboto';
+}
+
+.active-link{
+  background-color: #09385f;
+  border-left: 6px solid rgb(248, 163, 6);
+}
+
+.active-link {
+  background-color: #09385f;
+  border-left: 6px solid rgb(248, 163, 6);
+}

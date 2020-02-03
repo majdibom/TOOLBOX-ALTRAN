@@ -1,0 +1,18 @@
+body {
+  font-family: "Lato", sans-serif;
+  background-color:#f4f6f9;
+}
+  
+.main {
+  margin-left: 250px; /* Same as the width of the sidenav */
+  font-size: 1rem; /* Increased text to enable scrolling */
+  padding: 0px 0px;
+  margin-top: 70px;
+  min-height:  830px;
+}
+    
+@media screen and (max-height: 440px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+  

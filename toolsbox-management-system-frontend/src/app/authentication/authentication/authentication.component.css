@@ -1,0 +1,165 @@
+html,body{
+  background: #007EAF; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover,  rgba(0, 125, 175, 0.493) 1%, rgb(0, 68, 95) 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,rgba(0, 125, 175, 0.473)), color-stop(100%,rgb(0, 68, 95))); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(0, 125, 175, 0.534) 1%,rgba(0, 68, 95, 0.452) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover,  rgba(0, 125, 175, 0.473) 1%,rgb(0, 68, 95) 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover,  rgba(0, 125, 175, 0.5) 1%,rgb(0, 68, 95) 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center,  rgba(0, 125, 175, 0.568) 1%,rgb(0, 68, 95) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007EAF', endColorstr='#1c2b5a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  height:calc(100vh);
+  width:100%;
+ }
+  
+.container{
+  height: 100%;
+  align-content: center;
+}
+  
+.card{
+  height: 370px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  background-color: rgba(0,0,0,0.5) !important;
+}
+  
+/*  fadeInDown */  
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity:0;
+    -webkit-transform: translatey(-10px);
+    -moz-transform: translatey(-10px);
+    -o-transform: translatey(-10px);
+    transform: translatey(-10px);
+  }
+  to {
+      opacity:1;
+      -webkit-transform: translatey(0);
+      -moz-transform: translatey(0);
+      -o-transform: translatey(0);
+      transform: translatey(0);
+  }
+}
+@-moz-keyframes fadeInDown {
+  from {
+      opacity:0;
+      -webkit-transform: translatey(-10px);
+      -moz-transform: translatey(-10px);
+      -o-transform: translatey(-10px);
+      transform: translatey(-10px);
+  }
+  to {
+      opacity:1;
+      -webkit-transform: translatey(0);
+      -moz-transform: translatey(0);
+      -o-transform: translatey(0);
+      transform: translatey(0);
+  }
+}
+@keyframes fadeInDown {
+  from {
+      opacity:0;
+      -webkit-transform: translatey(-10px);
+      -moz-transform: translatey(-10px);
+      -o-transform: translatey(-10px);
+      transform: translatey(-10px);
+  }
+  to {
+      opacity:1;
+      -webkit-transform: translatey(0);
+      -moz-transform: translatey(0);
+      -o-transform: translatey(0);
+      transform: translatey(0);
+  }
+}
+.in-down {
+  -webkit-animation-name: fadeInDown;
+  -moz-animation-name: fadeInDown;
+  -o-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+}
+  
+/*  End fadeInDown */  
+.social_icon span{
+  font-size: 60px;
+  margin-left: 10px;
+  color: #007EAF;
+}
+  
+.social_icon span:hover{
+  color: white;
+  cursor: pointer;
+}
+  
+.card-header h3{
+  color: white;
+}
+  
+.social_icon{
+  position: absolute;
+  right: 20px;
+  top: -45px;
+}
+  
+.input-group-prepend span{
+  width: 50px;
+  background-color: #007EAF;
+  color: black;
+  border:0 !important;
+}
+  
+input:focus{
+  outline: 0 0 0 0  !important;
+  box-shadow: 0 0 0 0 !important;  
+}
+  
+.remember{
+  color: white;
+}
+  
+.remember input{
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+  margin-right: 5px;
+}
+  
+.login_btn{
+  color: black;
+  background-color: #007EAF;  
+}
+  
+.login_btn:hover{
+  color: black;
+  background-color: #09385f;
+}
+  
+.links{
+  color: white;
+}
+  
+.links a{
+  margin-left: 4px;
+}
+  
+.altran-color {
+  color: #007EAF;
+}
+  
+.tilte-altran {
+  padding-top: 20px;
+  color: white;
+}
+  
+.quiz-title{
+  font-size: 25px;
+}

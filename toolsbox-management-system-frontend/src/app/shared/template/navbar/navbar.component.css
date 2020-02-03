@@ -1,0 +1,39 @@
+.navbar{
+  background-color: #343A40; 
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+}
+
+.logo-altran{
+  max-width: 200px;
+  height: auto;
+}
+
+.quiz-title{
+  font-size: 25px;
+}
+
+.username{
+  color: white;
+  font-weight: bold;
+}
+
+.dropdown-menu{
+  background-color: #343A40;
+}
+
+.dropdown-item{
+  color: white;
+}
+
+.dropdown-item:hover{
+background-color: #09385f;
+}
+
+a { 
+  cursor: pointer; 
+}
+
+
+   

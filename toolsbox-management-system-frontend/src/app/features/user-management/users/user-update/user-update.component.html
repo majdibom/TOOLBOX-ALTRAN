@@ -1,0 +1,89 @@
+<form #updateUserForm="ngForm">
+  <div class="modal fade" id="update-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Modifier cet utilisateur' | translate}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-row">
+            <!-- FirstName field -->
+            <div class="form-group col-md-6">
+              <label for="firstName" class="required">{{'Prénom' | translate}}</label>
+              <input type="text" id="firstName-update" name="firstName" class="form-control"
+                pattern="[a-zA-Z]{1}[a-z,A-Z,' ']{2,}" [(ngModel)]="userToEdit.firstName" required>
+            </div>
+            <!-- Name field -->
+            <div class="form-group col-md-6">
+              <label for="lastName" class="required">{{'Nom' | translate}}</label>
+              <input type="text" id="lastName-update" name="lastName" class="form-control"
+                pattern="[a-zA-Z]{1}[a-z,A-Z,' ']{2,}" [(ngModel)]="userToEdit.lastName" required>
+            </div>
+          </div>
+          <!-- Email field -->
+          <div class="form-group">
+            <label for="email" class="required">{{'Email' | translate}}</label>
+            <input type="email" id="email-update" name="email" class="form-control"
+              (input)="onSearchChangeEmail($event.target.value)"
+              pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" [(ngModel)]="userToEdit.email" required>
+          </div>
+          <div class="alert alert-danger" *ngIf="errorMail == true">
+            <h6>{{'Cet email est déja utilisé !' | translate}}</h6>
+          </div>
+          <!-- PhoneNumber field -->
+          <div class="form-group">
+            <label for="phoneNumber" class="required">{{'Téléphone' | translate}}</label>
+            <input type="number" id="phoneNumber-update" name="phoneNumber" class="form-control" pattern="[0-9]{8}"
+              [(ngModel)]="userToEdit.phoneNumber" required>
+          </div>
+          <!-- Address field -->
+          <div class="form-group">
+            <label for="address" class="required">{{'Adresse' | translate}}</label>
+            <input type="text" id="address-update" name="address" class="form-control" [(ngModel)]="userToEdit.address"
+              required>
+          </div>
+          <!-- BirthDate field -->
+          <div class="form-group">
+            <label for="birthDate" class="required">{{'Date de naissance' | translate}}</label>
+            <input type="date" id="birthdate-update" name="birthDate" class="form-control"
+              [(ngModel)]="userToEdit.birthDate" required>
+          </div>
+          <!-- Activity field -->
+          <div class="form-group">
+            <label for="activity" class="required">{{'Activité' | translate}}</label>
+            <select id="activity" name="activity" class="form-control" [(ngModel)]="userToEdit.activity.id" required>
+              <option *ngFor="let activity of listOfActivities" [ngValue]="activity.id">{{activity.title}}</option>
+            </select>
+          </div>
+          <!-- Role field -->
+          <div class="form-group col-md-4">
+            <p-listbox [options]="listOfRoles" [(ngModel)]="userToEdit.roles" name="roles" multiple="multiple"
+              checkbox="checkbox" filter="filter" optionLabel="title" [style]="{'width':'450px'}">
+              <p-header>
+                <i class="fa fa-sliders"></i>
+                {{'Rôles' | translate}}
+              </p-header>
+            </p-listbox>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <!-- Close button -->
+          <button type="button" id="exit-update-user" name="exit-update-user" class="btn btn-secondary"
+            data-dismiss="modal">{{'Fermer'
+            | translate}}</button>
+          &nbsp;
+          <!-- Update button -->
+          <button type="button" id="submit-update-user" name="submit-update-user" class="btn btn-primary"
+            data-dismiss="modal" (click)="updateRecruiter()"
+            [disabled]="!updateUserForm.valid || errorMail == true || errorUserName == true">{{'Enregistrer'
+            | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
