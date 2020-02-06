@@ -1,7 +1,5 @@
 package com.altran.toolsbox.qualitymanagement.model;
 
-public enum RiskStatus {
-
-	Open, Closed
-
+public enum RiskNature {
+		RISK, OPPORTUNITY
 }

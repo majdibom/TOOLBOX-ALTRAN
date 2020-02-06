@@ -4,6 +4,10 @@ import { Severity } from './severity';
 import { Exposure } from './exposure';
 import { RiskStatus } from './risk-status';
 import { Action } from './action';
+import { RiskNature } from './risk-nature';
+import { Priority } from './priority';
+import { RiskStrategy } from './risk-strategy';
+import { User } from './user';
 
 export class Risk {
 
@@ -11,10 +15,15 @@ export class Risk {
     probability: Probability;
     severity: Severity;
     exposure: Exposure;
+    riskNature: RiskNature;
+    riskPriority: Priority;
+    riskStrategy: RiskStrategy;
+    riskPilote: User;
     riskStatus: RiskStatus;
     detectionDate: Date;
     closureDate: Date;
-    strategy: String;
+    impact: String;
+    Identoffactors: String;
     actions: Array<Action> = [];
     contingencyPlan: Array<Action> = [];
     mitigationApproach: Array<Action> = [];

@@ -1,10 +1,19 @@
 export enum Status {
 
-    Open= 'Open',
-    Closed= 'Closed'
+    OPEN= 'OPEN',
+    CLOSED= 'CLOSED',
+    DONE= 'DONE',
+    BLOCKED= 'BLOCKED',
+    DELAYED= 'DELAYED',
+    CANCELLED= 'CANCELLED',
 
 }
 export const ActionstatusLabel: Record<Status, string> = {
-    [Status.Open]: 'Open',
-    [Status.Closed]: 'Closed',
+    [Status.OPEN]: 'OPEN',
+    [Status.CLOSED]: 'CLOSED',
+    [Status.DONE]: 'DONE',
+    [Status.BLOCKED]: 'BLOCKED',
+    [Status.DELAYED]: 'DELAYED',
+    [Status.CANCELLED]: 'CANCELLED',
+
 };

@@ -32,6 +32,16 @@
                 </option>
               </select>
             </div>
+            <!-- Severity field -->
+            <div class="form-group col-md-4">
+              <label for="riskNature" class="required">{{'Nature de risque' | translate}}</label>
+              <select id="riskNature-add" name="riskNature" class="form-control" [(ngModel)]="riskToAdd.riskNature"
+                required>
+                <option *ngFor="let riskNature of riskNatureEnum" [value]="riskNature">
+                  {{RiskNatureLabel[riskNature]}}
+                </option>
+              </select>
+            </div>
             <!-- Status field -->
             <div class="form-group col-md-4">
               <label for="Status" class="required">{{'Statut' | translate}}</label>

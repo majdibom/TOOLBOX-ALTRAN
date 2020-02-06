@@ -13,9 +13,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.altran.toolsbox.usermanagement.model.User;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -44,7 +47,32 @@ public class Risk implements Serializable {
 	 */
 	@Enumerated(EnumType.STRING)
 	private Probability probability;
-
+	/**
+	 * The Risk Nature of this risk.
+	 */
+	@Enumerated(EnumType.STRING)
+	private RiskNature riskNature;
+	/**
+	 * The priority of this risk
+	 * 
+	 * @see Priority
+	 */
+	@Enumerated(EnumType.STRING)
+	private Priority riskPriority;
+	/**
+	 * The Risk Strategy of this risk
+	 * 
+	 */
+	@Enumerated(EnumType.STRING)
+	private RiskStrategy riskStrategy;
+	/**
+	 * The responsible of this risk
+	 * 
+	 * @see User
+	 */
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User riskPilote;
 	/**
 	 * The Severity of this risk.
 	 */
@@ -76,9 +104,13 @@ public class Risk implements Serializable {
 	private Date closureDate;
 
 	/**
-	 * The strategy of this risk.
+	 * The Impact of this risk.
 	 */
-	private String strategy;
+	private String impact;
+	/**
+	 * The Identification of the factors of this risk.
+	 */
+	private String Identoffactors;
 
 	/**
 	 * The list of actions corresponding to this risk.
@@ -97,9 +129,7 @@ public class Risk implements Serializable {
 	 */
 	@OneToMany
 	private List<Action> mitigationApproach;
-
 	/****** Getters and setters *****/
-
 	public Long getId() {
 		return id;
 	}
@@ -114,6 +144,38 @@ public class Risk implements Serializable {
 
 	public void setProbability(Probability probability) {
 		this.probability = probability;
+	}
+
+	public RiskNature getRiskNature() {
+		return riskNature;
+	}
+
+	public void setRiskNature(RiskNature riskNature) {
+		this.riskNature = riskNature;
+	}
+
+	public Priority getRiskPriority() {
+		return riskPriority;
+	}
+
+	public void setRiskPriority(Priority riskPriority) {
+		this.riskPriority = riskPriority;
+	}
+
+	public RiskStrategy getRiskStrategy() {
+		return riskStrategy;
+	}
+
+	public void setRiskStrategy(RiskStrategy riskStrategy) {
+		this.riskStrategy = riskStrategy;
+	}
+
+	public User getRiskPilote() {
+		return riskPilote;
+	}
+
+	public void setRiskPilote(User riskPilote) {
+		this.riskPilote = riskPilote;
 	}
 
 	public Severity getSeverity() {
@@ -156,12 +218,20 @@ public class Risk implements Serializable {
 		this.closureDate = closureDate;
 	}
 
-	public String getStrategy() {
-		return strategy;
+	public String getImpact() {
+		return impact;
 	}
 
-	public void setStrategy(String strategy) {
-		this.strategy = strategy;
+	public void setImpact(String impact) {
+		this.impact = impact;
+	}
+
+	public String getIdentoffactors() {
+		return Identoffactors;
+	}
+
+	public void setIdentoffactors(String identoffactors) {
+		Identoffactors = identoffactors;
 	}
 
 	public List<Action> getActions() {
@@ -187,5 +257,13 @@ public class Risk implements Serializable {
 	public void setMitigationApproach(List<Action> mitigationApproach) {
 		this.mitigationApproach = mitigationApproach;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+
+	
 
 }

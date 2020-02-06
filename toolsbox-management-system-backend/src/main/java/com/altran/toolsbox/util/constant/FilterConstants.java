@@ -30,5 +30,11 @@ public final class FilterConstants {
 	/**
 	 * Training Management
 	 */
+	public static final String NEED_FILTER = "NeedFilter";
+	public static final String PARTICIPANT_FILTER = "ParticipantFilter";
+	public static final String TRAINING_FILTER = "TrainingFilter";
+	public static final String ORGANISM_FILTER = "OrganismFilter";
+	public static final String TRAINER_FILTER = "TrainerFilter";
+
 
 }

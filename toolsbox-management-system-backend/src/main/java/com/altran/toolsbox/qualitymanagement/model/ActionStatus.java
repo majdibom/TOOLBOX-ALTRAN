@@ -2,6 +2,6 @@ package com.altran.toolsbox.qualitymanagement.model;
 
 public enum ActionStatus {
 
-	Open, Closed
+	OPEN, DONE, BLOCKED, DELAYED, CANCELLED, CLOSED
 
 }

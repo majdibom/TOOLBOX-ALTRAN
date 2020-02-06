@@ -103,27 +103,25 @@ export class RiskAddComponent implements OnInit {
   }
 
   /**Add action */
-  addAction(identificationDate: any, deadline: any, realizationDate: any, percentage: any,
-    performanceCriteria: any, efficiencyCriteria: any, responsibleAction: any, cause: any, initialValue: any,
-    finalValue: any, efficiency: any, status: any, priority: any, typeAction: any, origin: any, remarks: any, notes: any) {
+  addAction(Description: any, effMesCriterion: any, openDate: any, dueDate: any,
+    updatedDueDate: any, effMesDate: any, responsibleAction: any, realisationDate: any, comments: any,
+     efficiency: any, status: any, priority: any, typeAction: any, origin: any, processImpacts: any) {
     const action = {
-      identificationDate: identificationDate,
-      deadline: deadline,
-      realizationDate: realizationDate,
-      percentage: percentage,
-      performanceCriteria: performanceCriteria,
-      efficiencyCriteria: efficiencyCriteria,
-      responsibleAction: responsibleAction,
-      cause: cause,
-      initialValue: initialValue,
-      finalValue: finalValue,
+      Description: Description,
+      effMesCriterion: effMesCriterion,
+      openDate: openDate,
+      dueDate: dueDate,
+      updatedDueDate: updatedDueDate,
+      effMesDate: effMesDate,
+      realisationDate: realisationDate,
+      comments: comments,
       efficiency: efficiency,
       status: status,
       priority: priority,
+      responsibleAction: responsibleAction,
       typeAction: typeAction,
       origin: origin,
-      remarks: remarks,
-      notes: notes
+      processImpacts: processImpacts
     };
     this.riskToAdd.actions.push(action);
     this.actionToAdd = new Action();
@@ -134,7 +132,7 @@ export class RiskAddComponent implements OnInit {
   editAction(action: any) {
     action.editMode = false;
     this.actionToEdit = new Action();
-    this.actionToEdit.cause = action.cause;
+    this.actionToEdit.Description = action.cause;
     // this.propositionToEdit.title = proposition.title;
     // this.propositionToEdit.valid = proposition.valid;
     const index = this.riskToAdd.actions.indexOf(action);
@@ -144,7 +142,7 @@ export class RiskAddComponent implements OnInit {
   /**Delete action */
   deleteAction(action: any) {
     this.riskToAdd.actions.forEach((element, index) => {
-      if (action.cause === element.cause) {
+      if (action.Description === element.Description) {
         this.riskToAdd.actions.splice(index, 1);
       }
     });

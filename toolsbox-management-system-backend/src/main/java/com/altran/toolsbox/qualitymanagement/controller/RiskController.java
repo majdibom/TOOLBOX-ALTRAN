@@ -6,6 +6,7 @@ import static com.altran.toolsbox.util.constant.ColumnConstants.LASTNAME;
 import static com.altran.toolsbox.util.constant.ColumnConstants.DESCRIPTION;
 import static com.altran.toolsbox.util.constant.ColumnConstants.CONTINGENCYPLAN;
 import static com.altran.toolsbox.util.constant.ColumnConstants.MITIGATIONAPPROACH;
+import static com.altran.toolsbox.util.constant.ColumnConstants.TYPEACTION;
 import static com.altran.toolsbox.util.constant.FilterConstants.RISK_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.USER_FILTER;
 import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_CREATED;
@@ -247,5 +248,24 @@ public class RiskController {
 			messageResponse.setValue(Translator.toLocale(RISK_NOT_DELETED));
 			return ResponseEntity.status(HttpStatus.IM_USED).body(messageResponse);
 		}
+	}
+	/**
+	 * Gets the list of all risks of one responsible
+	 * 
+	 * @param username userName of the responsible
+	 * @param pageable pagination information
+	 * @return list of all risks of the responsible
+	 */
+	@GetMapping(value = "/responsible/{username}")
+	public MappingJacksonValue getRisksByRiskResponsable(@PathVariable String username, Pageable pageable) {
+		Page<Risk> riskList = riskService.findByRiskPilote(username, pageable);
+		// Filter the action object
+		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.filterOutAllExcept(TYPEACTION);
+		// Add filters to filter provider
+		FilterProvider filters = new SimpleFilterProvider().addFilter(RISK_FILTER, riskFilter);
+		// Create the mapping object and set the filters to the mapping
+		MappingJacksonValue risksMapping = new MappingJacksonValue(riskList);
+		risksMapping.setFilters(filters);
+		return risksMapping;
 	}
 }

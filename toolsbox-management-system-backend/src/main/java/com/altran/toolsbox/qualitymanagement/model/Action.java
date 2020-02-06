@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 /**
  * Represents Actions
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Entity
@@ -45,72 +45,48 @@ public class Action implements Serializable {
 	private Long id;
 
 	/**
-	 * The cause of this action
+	 * The Description of this action
 	 */
 	@Column(columnDefinition = "text")
-	private String cause;
-
+	private String Description;
 	/**
-	 * The indentification's date of this action
+	 * The Effectiveness measurement criterion of this action
+	 */
+	@Column(columnDefinition = "text")
+	private String effMesCriterion;
+	/**
+	 * The open date of this action
 	 */
 	@JsonFormat(pattern = "dd-MM-yyy")
-	private Date identificationDate;
+	private Date openDate;
 
 	/**
-	 * The deadline of the action
+	 * The due Date of the action
 	 */
 	@JsonFormat(pattern = "dd-MM-yyy")
-	private Date deadline;
+	private Date dueDate;
 
 	/**
-	 * The realization date of this action
+	 * The Updated Due Date of this action
 	 */
 	@JsonFormat(pattern = "dd-MM-yyy")
-	private Date realizationDate;
-
+	private Date updatedDueDate;
 	/**
-	 * The percentage of this action
+	 * The Effectiveness measurement date of this action
 	 */
-	private byte percentage;
-
+	@JsonFormat(pattern = "dd-MM-yyy")
+	private Date effMesDate;
 	/**
-	 * The performance criteria of this action
+	 * The Realisation Date of this action
 	 */
-	@Column(columnDefinition = "text")
-	private String performanceCriteria;
+	@JsonFormat(pattern = "dd-MM-yyy")
+	private Date realisationDate;
 
 	/**
-	 * The efficiency criteria of this action
-	 */
-	@Column(columnDefinition = "text")
-	private String efficiencyCriteria;
-
-	/**
-	 * The initial value of this action
-	 */
-	private String initialValue;
-
-	/**
-	 * The final value of this action
-	 */
-	private String finalValue;
-
-	/**
-	 * The efficiency of the action
-	 */
-	private String efficiency;
-
-	/**
-	 * Remarks about this action
+	 * comments about this action
 	 */
 	@Column(columnDefinition = "text")
-	private String remarks;
-
-	/**
-	 * The notes of the action
-	 */
-	@Column(columnDefinition = "text")
-	private String notes;
+	private String comments;
 
 	/**
 	 * The responsible of this action
@@ -169,7 +145,6 @@ public class Action implements Serializable {
 	 */
 	@Enumerated(EnumType.STRING)
 	private Origin origin;
-
 	/****** Getters and setters *****/
 
 	public Long getId() {
@@ -180,116 +155,68 @@ public class Action implements Serializable {
 		this.id = id;
 	}
 
-	public Date getIdentificationDate() {
-		return identificationDate;
+	public String getDescription() {
+		return Description;
 	}
 
-	public void setIdentificationDate(Date identificationDate) {
-		this.identificationDate = identificationDate;
+	public void setDescription(String description) {
+		Description = description;
 	}
 
-	public Date getDeadline() {
-		return deadline;
+	public String getEffMesCriterion() {
+		return effMesCriterion;
 	}
 
-	public void setDeadline(Date deadline) {
-		this.deadline = deadline;
+	public void setEffMesCriterion(String effMesCriterion) {
+		this.effMesCriterion = effMesCriterion;
 	}
 
-	public Date getRealizationDate() {
-		return realizationDate;
+	public Date getOpenDate() {
+		return openDate;
 	}
 
-	public void setRealizationDate(Date realizationDate) {
-		this.realizationDate = realizationDate;
+	public void setOpenDate(Date openDate) {
+		this.openDate = openDate;
 	}
 
-	public byte getPercentage() {
-		return percentage;
+	public Date getDueDate() {
+		return dueDate;
 	}
 
-	public void setPercentage(byte percentage) {
-		this.percentage = percentage;
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
 	}
 
-	public String getCause() {
-		return cause;
+	public Date getUpdatedDueDate() {
+		return updatedDueDate;
 	}
 
-	public void setCause(String cause) {
-		this.cause = cause;
+	public void setUpdatedDueDate(Date updatedDueDate) {
+		this.updatedDueDate = updatedDueDate;
 	}
 
-	public String getPerformanceCriteria() {
-		return performanceCriteria;
+	public Date getEffMesDate() {
+		return effMesDate;
 	}
 
-	public void setPerformanceCriteria(String performanceCriteria) {
-		this.performanceCriteria = performanceCriteria;
+	public void setEffMesDate(Date effMesDate) {
+		this.effMesDate = effMesDate;
 	}
 
-	public String getEfficiencyCriteria() {
-		return efficiencyCriteria;
+	public Date getRealisationDate() {
+		return realisationDate;
 	}
 
-	public void setEfficiencyCriteria(String efficiencyCriteria) {
-		this.efficiencyCriteria = efficiencyCriteria;
+	public void setRealisationDate(Date realisationDate) {
+		this.realisationDate = realisationDate;
 	}
 
-	public String getInitialValue() {
-		return initialValue;
+	public String getComments() {
+		return comments;
 	}
 
-	public void setInitialValue(String initialValue) {
-		this.initialValue = initialValue;
-	}
-
-	public String getFinalValue() {
-		return finalValue;
-	}
-
-	public void setFinalValue(String finalValue) {
-		this.finalValue = finalValue;
-	}
-
-	public String getEfficiency() {
-		return efficiency;
-	}
-
-	public void setEfficiency(String efficiency) {
-		this.efficiency = efficiency;
-	}
-
-	public String getRemarks() {
-		return remarks;
-	}
-
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-
-	public String getNotes() {
-		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
-	public ActionStatus getActionStatus() {
-		return actionStatus;
-	}
-
-	public void setActionStatus(ActionStatus actionStatus) {
-		this.actionStatus = actionStatus;
-	}
-
-	public Priority getPriority() {
-		return priority;
-	}
-
-	public void setPriority(Priority priority) {
-		this.priority = priority;
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
 	public User getResponsibleAction() {
@@ -298,22 +225,6 @@ public class Action implements Serializable {
 
 	public void setResponsibleAction(User responsibleAction) {
 		this.responsibleAction = responsibleAction;
-	}
-
-	public TypeAction getTypeAction() {
-		return typeAction;
-	}
-
-	public void setTypeAction(TypeAction typeAction) {
-		this.typeAction = typeAction;
-	}
-
-	public Origin getOrigin() {
-		return origin;
-	}
-
-	public void setOrigin(Origin origin) {
-		this.origin = origin;
 	}
 
 	public Set<Process> getProcessImpacts() {
@@ -332,4 +243,42 @@ public class Action implements Serializable {
 		this.gap = gap;
 	}
 
+	public ActionStatus getActionStatus() {
+		return actionStatus;
+	}
+
+	public void setActionStatus(ActionStatus actionStatus) {
+		this.actionStatus = actionStatus;
+	}
+
+	public Priority getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Priority priority) {
+		this.priority = priority;
+	}
+
+	public TypeAction getTypeAction() {
+		return typeAction;
+	}
+
+	public void setTypeAction(TypeAction typeAction) {
+		this.typeAction = typeAction;
+	}
+
+	public Origin getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(Origin origin) {
+		this.origin = origin;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	
 }

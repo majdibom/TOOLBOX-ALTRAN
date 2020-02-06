@@ -30,34 +30,26 @@
   <table class="table table-bordered table-striped table-hover">
     <thead class="row-border hover">
       <tr>
-        <th style="width: 10%;">{{'Type' | translate}}</th>
+        <th style="width: 10%;">{{'Type Action' | translate}}</th>
         <th style="width: 5%;" class="text-center">{{'Statut' | translate}}</th>
         <th style="width: 13%;">{{'Responsable action' | translate}}</th>
         <th style="width: 10%;">{{'Origine' | translate}}</th>
-        <th style="width: 10%;">{{'Date d\'écheance' | translate}}</th>
-        <th style="width: 12%;">{{'Pourcentage' | translate}}</th>
-        <th style="width: 30%;">{{'cause' | translate}}</th>
+        <th style="width: 10%;">{{'Open Date' | translate}}</th>
+        <th style="width: 12%;">{{'process Impacts' | translate}}</th>
+        <th style="width: 30%;">{{'Comments' | translate}}</th>
         <th style="width: 15%;" class="text-center">{{'Actions' | translate}}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let action of listActions | paginate: { itemsPerPage: item, currentPage: p, totalItems: total }">
         <td>{{action.typeAction}}</td>
-        <div *ngIf="action.status == 'Closed'">
-          <span class="badge badge-danger">{{action.status}}
-          </span>
-        </div>
-        <td class="text-center">
-          <div *ngIf="action.status == 'Open'">
-            <span class="badge badge-success">{{action.status}}
-            </span>
-          </div>
-        </td>
+        <td>{{action.status}}</td>
         <td>{{action.responsibleAction?.firstName}} {{action.responsibleAction?.lastName}}</td>
         <td>{{action.origin}}</td>
-        <td>{{action.deadline}}</td>
-        <td>{{action.percentage}} %</td>
-        <td>{{action.cause}}</td>
+        <td>{{action.openDate}}</td>
+        <td>{{action.processImpacts}}</td>
+        <td>{{action.comments}}</td>
+
         <td class="text-center">
           <button type="button" class="btn btn-detail" title="Afficher les details de cette action" data-toggle="modal"
             data-target="#detailsmodal" (click)="openDetails(action.id)"><i

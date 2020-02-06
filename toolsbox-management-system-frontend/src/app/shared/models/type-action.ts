@@ -1,14 +1,14 @@
 export enum TypeAction {
 
     Préventive= 'Préventive',
-    Curative= 'Curative',
+    Protection= 'Protection',
     Amélioration= 'Amélioration',
-    Corrective= 'Corrective'
+    Transfert= 'Transfert'
 
 }
 export const TypeActionLabel: Record<TypeAction, string> = {
     [TypeAction.Préventive]: 'Préventive',
-    [TypeAction.Curative]: 'Curative',
+    [TypeAction.Protection]: 'Protection',
     [TypeAction.Amélioration]: 'Amélioration',
-    [TypeAction.Corrective]: 'Corrective'
+    [TypeAction.Transfert]: 'Transfert'
 };

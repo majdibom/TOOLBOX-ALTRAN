@@ -21,6 +21,8 @@ public interface RiskService {
 	List<Risk> findAll();
 
 	Page<Risk> findAllByPage(Pageable pageable);
+	
+	Page<Risk> findByRiskPilote(String username, Pageable pageable);
 
 	Risk findById(Long id);
 

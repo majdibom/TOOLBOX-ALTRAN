@@ -1,3 +1,111 @@
-<p>
-  risk-detail works!
-</p>
+<div class="title">
+  <h3>{{'Détails de l action' | translate}}</h3>
+</div>
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="profile-card-4 z-depth-3">
+          <!-- action generale information section -->
+          <div class="card">
+            <div class="card-body text-center bg-altran rounded-top">
+              <h6 class="text-light">{{'RISK' | translate}} :</h6>
+              
+            </div>
+            <div class="card-body">
+              <ul class="list-group shadow-none">
+                <li class="list-group-item">
+                  <div class="list-icon">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                  </div>
+                  <div class="list-details">
+                    <span>{{'probability' | translate}}: </span>{{risk?.probability}}
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="list-icon">
+                    <i class="fa fa-thumb-tack"></i>
+                  </div>
+                  <div class="list-details">
+                    <span>{{'Statut' | translate}}: </span>
+                    <span *ngIf="risk?.riskStatus == 'Open'" class="badge badge-success">{{risk?.riskStatus}}</span>
+                    <span *ngIf="risk?.riskStatus == 'Closed'" class="badge badge-danger">{{risk?.riskStatus}}</span>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="list-icon">
+                    <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                  </div>
+                  <div class="list-details">
+                    <span>{{'Severity' | translate}}: </span>{{risk?.severity}}
+                    
+
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="list-icon">
+                    <i class="fa fa-percent" aria-hidden="true"></i>
+                  </div>
+                  <div class="list-details">
+                    <span>{{'Exposure' | translate}}: </span>{{risk?.exposure}} 
+                  </div>
+                </li>
+              </ul>
+              <div class="row text-center mt-4">
+                <div class="col p-2">
+                  <h4 class="mb-1 line-height-5" style="font-size: 20px">{{risk?.detectionDate |
+                                            date:'dd/MM/yyyy'}}</h4>
+                  <small class="mb-0 font-weight-bold">{{'Date d identification' | translate}}</small>
+                </div>
+                <div class="col p-2">
+                  <h4 class="mb-1 line-height-5" style="font-size: 20px">{{risk?.closureDate |
+                                        date:'dd/MM/yyyy'}}</h4>
+                  <small class="mb-0 font-weight-bold">{{'Date d écheance' | translate}}</small>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <div class="card z-depth-3">
+          <div class="card-body">
+            <ul class="nav nav-pills nav-pills-primary nav-justified">
+              <!-- Details menu -->
+              <li class="nav-item">
+                <a href="javascript:void();" data-target="#detail" data-toggle="pill" class="nav-link active show"><i
+                    class="icon-user"></i> <span class="hidden-xs">{{'Strategie' | translate}}</span></a>
+              </li>
+              
+
+            </ul>
+            <div class="tab-content p-3">
+              <!-- Details section -->
+              <div class="tab-pane active show" id="detail">
+                <h5 class="mb-3"></h5>
+                <div class="row">
+                  <div class="col-md-6">
+                   
+                    <p>
+                      {{risk?.strategy}}
+                    </p>
+                    
+                  </div>
+              
+                </div>
+                <!-- Interviews information section 
+                <div class="tab-pane" id="quizzes">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h5><strong>{{'QCM affectés' | translate}}</strong></h5>
+                    </div>
+                  </div>
+                </div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

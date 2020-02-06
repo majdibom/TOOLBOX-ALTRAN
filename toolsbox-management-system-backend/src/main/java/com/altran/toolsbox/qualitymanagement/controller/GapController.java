@@ -95,8 +95,8 @@ public class GapController {
 		filterProvider.addFilter(GAP_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(AUDITREPORT, JUSTIFICATION,
 				IMPROVEMENTCLUE, IDENTIFIEDCAUSES, AUDITREPORT));
 		filterProvider.addFilter(ACTION_FILTER,
-				SimpleBeanPropertyFilter.serializeAllExcept(PRIORITY, IDENTIFICATIONDATE, PERCENTAGE, CAUSE,
-						PERFORMANCECRITERIA, EFFICIENCYCRITERIA, INITIALVALUE, FINALVALUE, EFFICIENCY, REMARKS, NOTES,
+				SimpleBeanPropertyFilter.serializeAllExcept(PRIORITY, IDENTIFICATIONDATE, 
+						PERFORMANCECRITERIA, EFFICIENCYCRITERIA,
 						PROCESSIMPACTS, GAP, ORIGIN, DESCRIPTION, TYPEACTION, ACTIONSTATUS, RESPONSIBLEACTION));
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue gapsMapping = new MappingJacksonValue(gapsList);
@@ -131,9 +131,9 @@ public class GapController {
 					AUDITREPORT, DURATION, PROJECT, PROCESS));
 			filterProvider.addFilter(PROCESS_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(ID));
 			filterProvider.addFilter(ACTION_FILTER,
-					SimpleBeanPropertyFilter.serializeAllExcept(PRIORITY, IDENTIFICATIONDATE, PERCENTAGE, CAUSE,
-							PERFORMANCECRITERIA, EFFICIENCYCRITERIA, INITIALVALUE, FINALVALUE, EFFICIENCY, REMARKS,
-							NOTES, PROCESSIMPACTS, GAP, ORIGIN, DEADLINE, REALIZATIONDATE));
+					SimpleBeanPropertyFilter.serializeAllExcept(PRIORITY, IDENTIFICATIONDATE, 
+							PERFORMANCECRITERIA, EFFICIENCYCRITERIA, 
+							 PROCESSIMPACTS, GAP, ORIGIN, REALIZATIONDATE));
 			filterProvider.addFilter(USER_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(EMAIL, USERNAME, PASSW,
 					ROLES, ACTIVITY, AUDITS, ACTIONS));
 			// Create the mapping object and set the filters to the mapping

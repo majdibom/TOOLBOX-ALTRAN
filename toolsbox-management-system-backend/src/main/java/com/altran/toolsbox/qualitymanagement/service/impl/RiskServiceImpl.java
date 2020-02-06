@@ -24,6 +24,8 @@ import com.altran.toolsbox.qualitymanagement.model.Severity;
 import com.altran.toolsbox.qualitymanagement.repository.RiskRepository;
 import com.altran.toolsbox.qualitymanagement.service.ActionService;
 import com.altran.toolsbox.qualitymanagement.service.RiskService;
+import com.altran.toolsbox.usermanagement.model.User;
+import com.altran.toolsbox.usermanagement.service.UserService;
 
 /**
  * Represents implementation of activity service
@@ -36,6 +38,7 @@ public class RiskServiceImpl implements RiskService {
 
 	private final RiskRepository riskRepository;
 
+	private UserService userService;
 	private ActionService actionService;
 
 	/**
@@ -222,6 +225,12 @@ public class RiskServiceImpl implements RiskService {
 			break;
 		}
 		return Exposure.Low;
+	}
+
+	@Override
+	public Page<Risk> findByRiskPilote(String username, Pageable pageable) {
+		User responsable = userService.findByUsername(username);
+		return riskRepository.findByRiskPilote(responsable, pageable);
 	}
 
 }

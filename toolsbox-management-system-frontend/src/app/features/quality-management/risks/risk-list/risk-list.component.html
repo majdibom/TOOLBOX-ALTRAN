@@ -30,25 +30,27 @@
   <table class="table table-bordered table-striped table-hover">
     <thead class="row-border hover">
       <tr>
+        <th style="width: 7%;">{{'Référence' | translate}}</th>
         <th style="width: 7%;">{{'Probability' | translate}}</th>
         <th style="width: 10%;">{{'Severity' | translate}}</th>
         <th style="width: 7%;">{{'Exposure' | translate}}</th>
-        <th style="width: 7%;">{{'Status' | translate}}</th>
+        <th style="width: 7%;">{{'risk Status' | translate}}</th>
         <th style="width: 10%;" class="text-center">{{'Date de detection'  | translate}}</th>
         <th style="width: 10%;" class="text-center">{{'Date de fermeture'  | translate}}</th>
-        <th style="width: 25%;" class="text-center">{{'Strategie' | translate}}</th>
+        <th style="width: 25%;" class="text-center">{{'risk Nature' | translate}}</th>
         <th style="width: 10%;" class="text-center">{{'Actions' | translate}}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let risk of listRisks | paginate: { itemsPerPage: item, currentPage: p, totalItems: total }">
+        <td>{{risk.id}}</td>
         <td>{{risk.probability}}</td>
         <td>{{risk.severity}}</td>
         <td>{{risk.exposure}}</td>
         <td>{{risk.riskStatus}}</td>
         <td>{{risk.detectionDate}}</td>
         <td>{{risk.closureDate}}</td>
-        <td>{{risk.strategy}}</td>
+        <td>{{risk.riskNature}}</td>
         <td class="text-center">
           <button type="button" class="btn btn-detail" title="Afficher les details de ce risque" data-toggle="modal"
             data-target="#detailsmodal" (click)="openDetails(risk.id)"><i

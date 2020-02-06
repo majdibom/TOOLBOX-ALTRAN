@@ -37,6 +37,9 @@ import static com.altran.toolsbox.util.constant.ResponseConstants.*;
 import static com.altran.toolsbox.util.constant.FilterConstants.USER_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.ROLE_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.ACTIVITY_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.AUDIT_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.ACTION_FILTER;
+
 
 /**
  * Represents Rest controller of user
@@ -58,7 +61,8 @@ public class UserController {
 	/**
 	 * Constructor of UserController
 	 * 
-	 * @param userService the service of user
+	 * @param userService
+	 *            the service of user
 	 */
 	@Autowired
 	public UserController(UserService userService) {
@@ -68,7 +72,8 @@ public class UserController {
 	/**
 	 * Changes valid object response object for sending data
 	 * 
-	 * @param validResponse generic response with role as object.
+	 * @param validResponse
+	 *            generic response with role as object.
 	 */
 	@Autowired
 	public void setObjectResponse(GenericResponse<User> objectResponse) {
@@ -78,7 +83,8 @@ public class UserController {
 	/**
 	 * Changes message response object for sending message
 	 * 
-	 * @param messageResponse generic response with string as object.
+	 * @param messageResponse
+	 *            generic response with string as object.
 	 */
 	@Autowired
 	public void setMessageResponse(GenericResponse<String> messageResponse) {
@@ -108,7 +114,8 @@ public class UserController {
 	/**
 	 * Gets the list of all users by page
 	 * 
-	 * @param pageable pagination information
+	 * @param pageable
+	 *            pagination information
 	 * @return list of all users by page
 	 */
 	@GetMapping
@@ -134,7 +141,8 @@ public class UserController {
 	/**
 	 * Gets authenticated user
 	 * 
-	 * @param Authentication object
+	 * @param Authentication
+	 *            object
 	 * @return authenticated user
 	 */
 	@GetMapping(value = "/auth")
@@ -182,7 +190,8 @@ public class UserController {
 	 * Handles NoSuchElementException if no element is present with such ID and any
 	 * other exception
 	 * 
-	 * @param id the id of the user
+	 * @param id
+	 *            the id of the user
 	 * @return ResponseEntity: the object or the error to display when getting user
 	 *         by id with HttpStatus status code
 	 */
@@ -199,9 +208,14 @@ public class UserController {
 			SimpleBeanPropertyFilter roleFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
 			// Filter the activity object
 			SimpleBeanPropertyFilter activityFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
+			// Filter the audit object
+			SimpleBeanPropertyFilter auditFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, RISKS);
+			// Filter the audit object
+			SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, DESCRIPTION);
 			// Add filters to filter provider
 			FilterProvider filters = new SimpleFilterProvider().addFilter(USER_FILTER, userFilter)
-					.addFilter(ROLE_FILTER, roleFilter).addFilter(ACTIVITY_FILTER, activityFilter);
+					.addFilter(ROLE_FILTER, roleFilter).addFilter(ACTIVITY_FILTER, activityFilter)
+					.addFilter(AUDIT_FILTER, auditFilter).addFilter(ACTION_FILTER, actionFilter);;
 			// Create the mapping object and set the filters to the mapping
 			MappingJacksonValue userMapping = new MappingJacksonValue(objectResponse);
 			userMapping.setFilters(filters);
@@ -223,7 +237,8 @@ public class UserController {
 	 * Handles UsernameNotFoundException if there is no user with such userName and
 	 * any other exception
 	 * 
-	 * @param userName the userName of the user
+	 * @param userName
+	 *            the userName of the user
 	 * @return ResponseEntity: the object or the error to display when getting user
 	 *         by userName with HttpStatus status code
 	 */
@@ -267,7 +282,8 @@ public class UserController {
 	 * ID, AddressException if sender's address mail is not correct,
 	 * MessagingException, IOException and any other exception
 	 * 
-	 * @param user the user to create
+	 * @param user
+	 *            the user to create
 	 * @return ResponseEntity: the message or the error to display after creating
 	 *         user with HttpStatus status code
 	 */
@@ -295,8 +311,10 @@ public class UserController {
 	 * Handles EntityNotFoundException if there is no entity with such ID and any
 	 * other exception
 	 * 
-	 * @param user the new user object with the new values
-	 * @param id   the id of the updated user
+	 * @param user
+	 *            the new user object with the new values
+	 * @param id
+	 *            the id of the updated user
 	 * @return ResponseEntity: the message or the error to display after updating
 	 *         user with HttpStatus status code
 	 */
@@ -330,7 +348,8 @@ public class UserController {
 	 * Handles EntityNotFoundException if there is no entity with such ID, exception
 	 * if this user is used and any other exception
 	 * 
-	 * @param id the of the deleted user
+	 * @param id
+	 *            the of the deleted user
 	 * @return ResponseEntity: the message or the error to display after deleting
 	 *         user with HttpStatus status code
 	 */
@@ -358,7 +377,8 @@ public class UserController {
 	 * Handles EntityNotFoundException if there is no entity with such ID and any
 	 * other exception
 	 * 
-	 * @param id the id of the updated user
+	 * @param id
+	 *            the id of the updated user
 	 * @return ResponseEntity: the object or the error to display after updating
 	 *         user with HttpStatus status code
 	 */

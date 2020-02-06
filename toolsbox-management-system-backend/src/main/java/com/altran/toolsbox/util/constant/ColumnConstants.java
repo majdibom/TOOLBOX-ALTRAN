@@ -48,22 +48,21 @@ public final class ColumnConstants {
 
 	// Action
 	public static final String IDENTIFICATIONDATE = "identificationDate";
-	public static final String DEADLINE = "deadline";
-	public static final String PERCENTAGE = "percentage";
-	public static final String CAUSE = "cause";
+	public static final String OPENDATE = "openDate";
+	public static final String EFFMESCRITERION = "effMesCriterion";
 	public static final String PERFORMANCECRITERIA = "performanceCriteria";
 	public static final String EFFICIENCYCRITERIA = "efficiencyCriteria";
-	public static final String INITIALVALUE = "initialValue";
-	public static final String FINALVALUE = "finalValue";
-	public static final String EFFICIENCY = "efficiency";
-	public static final String REMARKS = "remarks";
-	public static final String NOTES = "notes";
+	public static final String DUEDATE = "dueDate";
+	public static final String UPDATEDDUEDATE = "updatedDueDate";
+	public static final String COMMENTS = "comments";
+	public static final String EFFMESDATE = "effMesDate";
 	public static final String RESPONSIBLEACTION = "responsibleAction";
 	public static final String GAP = "gap";
 	public static final String ACTIONSTATUS = "actionStatus";
 	public static final String PRIORITY = "priority";
 	public static final String TYPEACTION = "typeAction";
 	public static final String ORIGIN = "origin";
+	public static final String REALISATIONDATE = "realisationDate";
 
 	// Audit
 	public static final String RISKS = "risks";
@@ -92,13 +91,20 @@ public final class ColumnConstants {
 	public static final String JUSTIFICATION = "justification";
 	public static final String IMPROVEMENTCLUE = "improvementClue";
 	public static final String IDENTIFIEDCAUSES = "identifiedCauses";
-
+	// Origin
+	public static final String Risk = "Risk";
 	// Project
 	public static final String DELIVERYMODEL = "deliveryModel";
 
 	// Week
 	public static final String NUMBER = "number";
-	
+	// Action Status
+	public static final String OPEN ="OPEN" ;
+	public static final String DONE ="DONE";
+	public static final String BLOCKED ="BLOCKED";
+	public static final String DELAYED ="DELAYED" ;
+	public static final String CANCELLED ="CANCELLED";
+	public static final String CLOSED ="CLOSED";
 	// Risk
 	public static final String PROBABILITY ="probability" ;
 	public static final String SEVERITY ="severity";
@@ -106,11 +112,16 @@ public final class ColumnConstants {
 	public static final String RISKSTATUS ="riskStatus" ;
 	public static final String DETECTIONDATE ="detectionDate";
 	public static final String CLOSUREDATE ="closureDate";
-	public static final String STRATEGY ="strategy";
+	public static final String RISKSTRATEGY ="riskStrategy";
 	public static final String ACTION ="Action" ;
 	public static final String CONTINGENCYPLAN ="contingencyPlan";
 	public static final String MITIGATIONAPPROACH ="mitigationApproach";
-	
+	public static final String RISKNATURE ="riskNature";
+	public static final String RISKPRIORITY ="riskPriority";
+	public static final String RISKPILOTE ="riskPilote";
+	public static final String IMPACT ="impact";
+	public static final String IDENTOFFACTORS ="Identoffactors";
+
 	// Probability
 	public static final String UNLIKELY ="Unlikely" ;
 	public static final String LIKELY ="Likely";

@@ -9,18 +9,15 @@ import { Gap } from './gap';
 export class Action {
 
     id?: number;
-    identificationDate: Date;
-    deadline: Date;
-    realizationDate: Date;
-    percentage: number;
-    cause: string;
-    performanceCriteria: string;
-    efficiencyCriteria: string;
-    initialValue: string;
-    finalValue: string;
+    Description: string;
+    effMesCriterion: string;
+    openDate: Date;
+    dueDate: Date;
+    updatedDueDate: Date;
+    effMesDate: Date;
+    realisationDate: Date;
+    comments: string;
     efficiency: string;
-    remarks: string;
-    notes: string;
     status: Status;
     priority: Priority;
     responsibleAction: User;

@@ -99,8 +99,8 @@ public class ActionController {
 		List<Action> actionList = actionService.findAll();
 		/** Filtering data to send **/
 		// Filter the action object
-		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, CAUSE, TYPEACTION,
-				ACTIONSTATUS, ORIGIN, DEADLINE, PERCENTAGE);
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, DESCRIPTION, TYPEACTION,
+				ACTIONSTATUS, ORIGIN);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter);
 		// Create the mapping object and set the filters to the mapping
@@ -120,8 +120,8 @@ public class ActionController {
 		Page<Action> actionList = actionService.findAllByPage(pageable);
 		/** Filtering data to send **/
 		// Filter the action object
-		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, CAUSE, TYPEACTION,
-				ACTIONSTATUS, RESPONSIBLEACTION, ORIGIN, DEADLINE, PERCENTAGE);
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, DESCRIPTION, TYPEACTION,
+				ACTIONSTATUS, RESPONSIBLEACTION, ORIGIN);
 		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter)
@@ -142,7 +142,7 @@ public class ActionController {
 	public MappingJacksonValue getActionsByEcart(@PathVariable Long id) {
 		List<Action> actionList = actionService.findByGap(id);
 		// Filter the action object
-		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, CAUSE, TYPEACTION,
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, DESCRIPTION, TYPEACTION,
 				ORIGIN);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter);
@@ -163,7 +163,7 @@ public class ActionController {
 	public MappingJacksonValue getActionsByResponsableAction(@PathVariable String username, Pageable pageable) {
 		Page<Action> actionList = actionService.findByResponsibleAction(username, pageable);
 		// Filter the action object
-		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, CAUSE, TYPEACTION,
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, DESCRIPTION, TYPEACTION,
 				ORIGIN);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter);
