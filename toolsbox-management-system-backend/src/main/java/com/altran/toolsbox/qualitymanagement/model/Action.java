@@ -48,12 +48,14 @@ public class Action implements Serializable {
 	 * The Description of this action
 	 */
 	@Column(columnDefinition = "text")
-	private String Description;
+	private String description;
+
 	/**
 	 * The Effectiveness measurement criterion of this action
 	 */
 	@Column(columnDefinition = "text")
-	private String effMesCriterion;
+	private String effMeasCriterion;
+
 	/**
 	 * The open date of this action
 	 */
@@ -71,16 +73,18 @@ public class Action implements Serializable {
 	 */
 	@JsonFormat(pattern = "dd-MM-yyy")
 	private Date updatedDueDate;
+
 	/**
 	 * The Effectiveness measurement date of this action
 	 */
 	@JsonFormat(pattern = "dd-MM-yyy")
-	private Date effMesDate;
+	private Date effMeasDate;
+
 	/**
-	 * The Realisation Date of this action
+	 * The Realization Date of this action
 	 */
 	@JsonFormat(pattern = "dd-MM-yyy")
-	private Date realisationDate;
+	private Date realizationDate;
 
 	/**
 	 * comments about this action
@@ -145,6 +149,7 @@ public class Action implements Serializable {
 	 */
 	@Enumerated(EnumType.STRING)
 	private Origin origin;
+
 	/****** Getters and setters *****/
 
 	public Long getId() {
@@ -156,19 +161,19 @@ public class Action implements Serializable {
 	}
 
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 
-	public String getEffMesCriterion() {
-		return effMesCriterion;
+	public String getEffMeasCriterion() {
+		return effMeasCriterion;
 	}
 
-	public void setEffMesCriterion(String effMesCriterion) {
-		this.effMesCriterion = effMesCriterion;
+	public void setEffMeasCriterion(String effMeasCriterion) {
+		this.effMeasCriterion = effMeasCriterion;
 	}
 
 	public Date getOpenDate() {
@@ -195,20 +200,20 @@ public class Action implements Serializable {
 		this.updatedDueDate = updatedDueDate;
 	}
 
-	public Date getEffMesDate() {
-		return effMesDate;
+	public Date getEffMeasDate() {
+		return effMeasDate;
 	}
 
-	public void setEffMesDate(Date effMesDate) {
-		this.effMesDate = effMesDate;
+	public void setEffMeasDate(Date effMeasDate) {
+		this.effMeasDate = effMeasDate;
 	}
 
-	public Date getRealisationDate() {
-		return realisationDate;
+	public Date getRealizationDate() {
+		return realizationDate;
 	}
 
-	public void setRealisationDate(Date realisationDate) {
-		this.realisationDate = realisationDate;
+	public void setRealizationDate(Date realizationDate) {
+		this.realizationDate = realizationDate;
 	}
 
 	public String getComments() {
@@ -279,6 +284,4 @@ public class Action implements Serializable {
 		return serialVersionUID;
 	}
 
-
-	
 }

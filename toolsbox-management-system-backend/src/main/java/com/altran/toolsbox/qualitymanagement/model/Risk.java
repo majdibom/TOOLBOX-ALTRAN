@@ -47,11 +47,13 @@ public class Risk implements Serializable {
 	 */
 	@Enumerated(EnumType.STRING)
 	private Probability probability;
+
 	/**
 	 * The Risk Nature of this risk.
 	 */
 	@Enumerated(EnumType.STRING)
 	private RiskNature riskNature;
+
 	/**
 	 * The priority of this risk
 	 * 
@@ -59,12 +61,14 @@ public class Risk implements Serializable {
 	 */
 	@Enumerated(EnumType.STRING)
 	private Priority riskPriority;
+
 	/**
 	 * The Risk Strategy of this risk
 	 * 
 	 */
 	@Enumerated(EnumType.STRING)
 	private RiskStrategy riskStrategy;
+
 	/**
 	 * The responsible of this risk
 	 * 
@@ -73,6 +77,7 @@ public class Risk implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User riskPilote;
+
 	/**
 	 * The Severity of this risk.
 	 */
@@ -107,10 +112,11 @@ public class Risk implements Serializable {
 	 * The Impact of this risk.
 	 */
 	private String impact;
+
 	/**
 	 * The Identification of the factors of this risk.
 	 */
-	private String Identoffactors;
+	private String factorsIdentif;
 
 	/**
 	 * The list of actions corresponding to this risk.
@@ -129,7 +135,9 @@ public class Risk implements Serializable {
 	 */
 	@OneToMany
 	private List<Action> mitigationApproach;
+
 	/****** Getters and setters *****/
+
 	public Long getId() {
 		return id;
 	}
@@ -226,12 +234,12 @@ public class Risk implements Serializable {
 		this.impact = impact;
 	}
 
-	public String getIdentoffactors() {
-		return Identoffactors;
+	public String getFactorsIdentif() {
+		return factorsIdentif;
 	}
 
-	public void setIdentoffactors(String identoffactors) {
-		Identoffactors = identoffactors;
+	public void setFactorsIdentif(String factorsIdentif) {
+		this.factorsIdentif = factorsIdentif;
 	}
 
 	public List<Action> getActions() {
@@ -261,9 +269,5 @@ public class Risk implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-
-
-	
 
 }

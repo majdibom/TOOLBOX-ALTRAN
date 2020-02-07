@@ -1,4 +1,4 @@
-package com.altran.toolsbox.qualitymanagement.model;
+package com.altran.toolsbox.trainingmanagement.model;
 
 import java.io.Serializable;
 import java.util.Set;
