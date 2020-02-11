@@ -1,3 +1,115 @@
-<p>
-  risk-update works!
-</p>
+<form #updateRiskForm="ngForm">
+  <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Modifier ce risque' | translate}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <!-- Probability field -->
+            <div class="form-group  col-md-6">
+              <label for="probability" class="required">{{'Probabilité' | translate}}</label>
+              <select id="probability" (change)="parseValue($event.target.value)" name="probability" class="form-control"
+                [(ngModel)]="riskToEdit.probability" required>
+                <option *ngFor="let Probability of listOfProbability" [value]="Probability">{{Probability}}</option>
+              </select>
+            </div>
+          <div class="form-row">
+            <!-- Severity field -->
+            <div class="form-group  col-md-6">
+              <label for="severity" class="required">{{'Severité' | translate}}</label>
+              <select id="severity" (change)="parseValue($event.target.value)" name="severity" class="form-control"
+                [(ngModel)]="riskToEdit.severity" required>
+                <option *ngFor="let Severity of listOfSeverity" [value]="Severity">{{Severity}}</option>
+              </select>
+            </div>
+          </div>
+         <!-- Risk Nature field -->
+         <div class="form-group  col-md-6">
+          <label for="riskNature" class="required">{{'Nature de risque' | translate}}</label>
+          <select id="riskNature" (change)="parseValue($event.target.value)" name="riskNature" class="form-control"
+            [(ngModel)]="riskToEdit.riskNature" required>
+            <option *ngFor="let RiskNature of listOfRiskNature" [value]="RiskNature">{{RiskNature}}</option>
+          </select>
+        </div>
+      <!-- Risk Priority field -->
+      <div class="form-group  col-md-6">
+        <label for="riskPriority" class="required">{{'Priorité' | translate}}</label>
+        <select id="riskPriority" (change)="parseValue($event.target.value)" name="riskPriority" class="form-control"
+          [(ngModel)]="riskToEdit.riskPriority" required>
+          <option *ngFor="let Priority of listOfPriority" [value]="Priority">{{Priority}}</option>
+        </select>
+      </div>
+        <!-- Risk responsible field -->
+        <div class="form-group  col-md-6">
+          <label for="riskPilote" class="required">{{'Pilote de risque' | translate}}</label>
+          <select id="riskPilote" (change)="parseValue($event.target.value)" name="riskPilote" class="form-control"
+            [(ngModel)]="riskToEdit.riskPilote" required>
+            <option *ngFor="let user of listOfUsers" [ngValue]="user">{{user.firstName}} {{user.lastName}}</option>
+          </select>
+        </div>
+  
+      <!-- Status field -->
+      <div class="form-group  col-md-6">
+        <label for="riskStatus" class="required">{{'Status' | translate}}</label>
+        <select id="riskStatus" (change)="parseValue($event.target.value)" name="riskStatus" class="form-control"
+          [(ngModel)]="riskToEdit.riskStatus" required>
+          <option *ngFor="let RiskStatus of listOfRiskStatus" [value]="RiskStatus">{{RiskStatus}}</option>
+        </select>
+      </div>
+    
+    <!-- Risk Strategy field -->
+    <div class="form-group  col-md-6">
+      <label for="riskStrategy" class="required">{{'Strategie' | translate}}</label>
+      <select id="riskStrategy" (change)="parseValue($event.target.value)" name="riskStrategy" class="form-control"
+        [(ngModel)]="riskToEdit.riskStrategy" required>
+        <option *ngFor="let RiskStrategy of listOfRiskStrategy" [value]="RiskStrategy">{{RiskStrategy}}</option>
+      </select>
+    </div>
+    </div>
+    <div class="form-row">
+      <!-- detectionDate field -->
+      <div class="form-group col-md-6">
+        <label for="detectionDate" class="required">{{'Date de detection' | translate}}</label>
+        <input type="date" class="form-control" id="detectionDate-add" name="detectionDate"
+          [(ngModel)]="riskToEdit.detectionDate" required>
+      </div>
+      <!-- closureDate field -->
+      <div class="form-group col-md-6">
+        <label for="closureDate" class="required">{{'Date de fermeture' | translate}}</label>
+        <input type="date" class="form-control" id="closureDate-add" name="closureDate"
+          [(ngModel)]="riskToEdit.closureDate" required>
+      </div>
+    </div>
+
+    <!-- impact field -->
+    <div class="form-group">
+      <label for="impact" class="required">{{'Impact' | translate}}</label>
+      <textarea class="form-control" id="impact-add" name="impact" [(ngModel)]="riskToEdit.impact" rows="1"
+        required> </textarea>
+    </div>
+    <!-- Identoffactors field -->
+    <div class="form-group">
+      <label for="factorsIdentif" class="required">{{'Identification des facteurs  +/-' | translate}}</label>
+      <textarea class="form-control" id="factorsIdentif-add" name="factorsIdentif" [(ngModel)]="riskToEdit.factorsIdentif" rows="2"
+        required> </textarea>
+    </div>
+        <div class="modal-footer">
+          <!-- Close button -->
+          <button type="button" id="exit-update-risk" name="exit-update-risk" class="btn btn-secondary"
+            data-dismiss="modal">{{'Fermer'
+              | translate}}</button>
+          &nbsp;
+          <!-- Update button -->
+          <button type="button" id="submit-update-risk" name="submit-update-risk" class="btn btn-primary"
+            data-dismiss="modal" (click)="updateRisk()" [disabled]="!updateRiskForm.valid">{{'Enregistrer'
+              | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

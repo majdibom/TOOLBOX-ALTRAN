@@ -23,7 +23,7 @@ export class Risk {
     detectionDate: Date;
     closureDate: Date;
     impact: String;
-    Identoffactors: String;
+    factorsIdentif: String;
     actions: Array<Action> = [];
     contingencyPlan: Array<Action> = [];
     mitigationApproach: Array<Action> = [];

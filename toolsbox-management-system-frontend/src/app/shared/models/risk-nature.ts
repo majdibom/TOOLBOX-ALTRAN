@@ -1,12 +1,12 @@
 export enum RiskNature {
 
-    RISK= 'RISK',
-    OPPORTUNITY= 'OPPORTUNITY'
+    Risk= 'Risk',
+    Opportunity= 'Opportunity'
   
 }
 export const RiskNatureLabel: Record<RiskNature, string> = {
-    [RiskNature.RISK]: 'RISK',
-    [RiskNature.OPPORTUNITY]: 'OPPORTUNITY'
+    [RiskNature.Risk]: 'Risk',
+    [RiskNature.Opportunity]: 'Opportunity'
     
 
 };

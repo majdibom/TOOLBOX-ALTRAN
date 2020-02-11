@@ -4,19 +4,19 @@
     <div class="col-lg-6">
       <h3>{{'Gestion des actions' | translate}}</h3>
     </div>
-    <!-- Add Action Button 
+    <!-- Add Action Button -->
       <div class="col-lg-6 text-right">
-        <button id="add-activity-btn" type="button" class="btn btn-primary btn-add" data-toggle="modal" title="Ajouter une nouvelle activité"
+        <button id="add-action-btn" type="button" class="btn btn-primary btn-add" data-toggle="modal" title="Ajouter une nouvelle action"
           data-target="#addModal">
-          <i class="fa fa-plus-circle fa-lg"></i> {{'Nouvelle activité' | translate}}
+          <i class="fa fa-plus-circle fa-lg"></i> {{'Nouvelle action' | translate}}
         </button>
-      </div>-->
+      </div>
   </div>
 </div>
 <!-- Content-->
 <div class="content">
-  <!-- Add Activity Modal 
-    <app-action-add (reloadEvent)="actionList.reloadData()"></app-action-add>-->
+  <!-- Add Activity Modal -->
+    <app-action-add (reloadEvent)="actionList.reloadData()"></app-action-add>
   <!-- Actions Table -->
   <app-action-list #actionList></app-action-list>
 </div>

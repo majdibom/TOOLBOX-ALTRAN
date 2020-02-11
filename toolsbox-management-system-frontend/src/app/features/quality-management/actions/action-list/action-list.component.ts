@@ -119,7 +119,7 @@ export class ActionListComponent implements OnInit {
     this.onSelect(1);
   }
 
-  /** Search Activity */
+  /** Search Action */
   onSearch(search: String) {
     if (this.searchInput !== '') {
       this.genericService.searchGeneric('/actions/search', search, this.selectedPage, this.item)

@@ -6,10 +6,11 @@ import { SeverityLabel, Severity } from '@models/severity';
 import { ProbabilityLabel, Probability } from '@models/probability';
 import { RiskStatusLabel, RiskStatus } from '@models/risk-status';
 import { Action } from '@models/action';
-import { Status, ActionstatusLabel } from '@models/status';
+import { ActionstatusLabel, ActionStatus } from '@models/action-Status';
 import { PriorityLabel, Priority } from '@models/priority';
 import { TypeActionLabel, TypeAction } from '@models/type-action';
 import { OriginLabel, Origin } from '@models/origin';
+import { RiskNatureLabel, RiskNature } from '@models/risk-nature';
 
 
 
@@ -41,17 +42,23 @@ export class RiskAddComponent implements OnInit {
   // Priority enum Label
   public priorityLabel = PriorityLabel;
   public priorityEnum = Object.values(Priority);
-  // Action Status enum Label
-  public actionstatusLabel = ActionstatusLabel;
-  public ActionstatusEnum = Object.values(Status);
 
   // Severity enum Label
   public severityLabel = SeverityLabel;
   public severityEnum = Object.values(Severity);
 
   // Risk Status enum Label
-  public statusLabel = RiskStatusLabel;
-  public statusEnum = Object.values(RiskStatus);
+  public riskStatusLabel = RiskStatusLabel;
+  public riskStatusEnum = Object.values(RiskStatus);
+ // Risk Nature enum Label
+ public riskNatureLabel = RiskNatureLabel;
+ public riskNatureEnum = Object.values(RiskNature);
+  // Risk Priority enum Label
+  public riskPriorityLabel = PriorityLabel;
+  public riskPriorityEnum = Object.values(Priority);
+   // Action Status enum Label
+   public ActionstatusLabel = ActionstatusLabel;
+   public ActionStatusEnum = Object.values(ActionStatus);
 
   // Action to create in risk form
   actionToAdd: Action = new Action();
@@ -75,7 +82,7 @@ export class RiskAddComponent implements OnInit {
 
   /** Create Risk */
   createRisk() {
-    console.log(this.riskToAdd);
+    console.log("add object:   " + this.riskToAdd);
 
     this.genericService.createGeneric('/risks', this.riskToAdd)
       .subscribe(data => {
@@ -103,25 +110,22 @@ export class RiskAddComponent implements OnInit {
   }
 
   /**Add action */
-  addAction(Description: any, effMesCriterion: any, openDate: any, dueDate: any,
-    updatedDueDate: any, effMesDate: any, responsibleAction: any, realisationDate: any, comments: any,
-     efficiency: any, status: any, priority: any, typeAction: any, origin: any, processImpacts: any) {
+  addAction(description: any, effMeasCriterion: any, openDate: any, dueDate: any,
+    updatedDueDate: any, effMeasDate: any, realizationDate: any,  responsibleAction: any, ActionStatus: any, priority: any, typeAction: any, origin: any, comments: any) {
     const action = {
-      Description: Description,
-      effMesCriterion: effMesCriterion,
+      description: description,
+      effMeasCriterion: effMeasCriterion,
       openDate: openDate,
       dueDate: dueDate,
       updatedDueDate: updatedDueDate,
-      effMesDate: effMesDate,
-      realisationDate: realisationDate,
-      comments: comments,
-      efficiency: efficiency,
-      status: status,
+      effMeasDate: effMeasDate,
+      realizationDate: realizationDate,
+      actionStatus: ActionStatus,
       priority: priority,
       responsibleAction: responsibleAction,
       typeAction: typeAction,
       origin: origin,
-      processImpacts: processImpacts
+      comments: comments
     };
     this.riskToAdd.actions.push(action);
     this.actionToAdd = new Action();
@@ -132,7 +136,7 @@ export class RiskAddComponent implements OnInit {
   editAction(action: any) {
     action.editMode = false;
     this.actionToEdit = new Action();
-    this.actionToEdit.Description = action.cause;
+    this.actionToEdit.description = action.description;
     // this.propositionToEdit.title = proposition.title;
     // this.propositionToEdit.valid = proposition.valid;
     const index = this.riskToAdd.actions.indexOf(action);
@@ -142,7 +146,7 @@ export class RiskAddComponent implements OnInit {
   /**Delete action */
   deleteAction(action: any) {
     this.riskToAdd.actions.forEach((element, index) => {
-      if (action.Description === element.Description) {
+      if (action.description === element.description) {
         this.riskToAdd.actions.splice(index, 1);
       }
     });

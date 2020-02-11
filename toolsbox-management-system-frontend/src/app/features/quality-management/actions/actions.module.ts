@@ -8,9 +8,10 @@ import { ActionDetailComponent } from './action-detail/action-detail.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { ActionAddComponent } from './action-add/action-add.component';
 
 @NgModule({
-  declarations: [ActionComponent, ActionListComponent, ActionUpdateComponent, ActionDetailComponent],
+  declarations: [ActionComponent, ActionListComponent, ActionUpdateComponent, ActionDetailComponent,ActionAddComponent],
   imports: [
     CommonModule,
     ActionsRoutingModule,

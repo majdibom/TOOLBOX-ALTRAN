@@ -3,6 +3,9 @@ import { Action } from '@models/action';
 import { GenericService } from '@services/generic.service';
 import swal from 'sweetalert2';
 import { TypeAction } from '@models/type-action';
+import { Priority } from '@models/priority';
+import { Origin } from '@models/origin';
+import { ActionStatus } from '@models/action-Status';
 
 @Component({
   selector: 'app-action-update',
@@ -10,7 +13,8 @@ import { TypeAction } from '@models/type-action';
   styleUrls: ['./action-update.component.css']
 })
 export class ActionUpdateComponent implements OnInit {
-
+   // List of users for Action edit
+   listOfUsers: any = [];
   // Get Action to edit form users list component
   @Input() actionToEdit: Action;
 
@@ -20,18 +24,39 @@ export class ActionUpdateComponent implements OnInit {
   // List of action's types for action update
   listOfTypes: string[];
   typeValue: TypeAction;
-
+  listOfActionStatus: string[];
+  ActionStatusValue: ActionStatus;
+  listOfPriority: string[];
+  PriorityValue: Priority;
+  listOfOrigin: string[];
+  originValue: Origin;
   constructor(private genericService: GenericService) { }
 
   ngOnInit() {
+    this.getListOfUsers();
     // Enum setting
     this.listOfTypes = Object.keys(TypeAction);
-    this.listOfTypes = this.listOfTypes.slice(this.listOfTypes.length / 2);
+    this.listOfTypes = this.listOfTypes.slice(this.listOfTypes.length / 5);
+    this.listOfActionStatus = Object.keys(ActionStatus);
+    this.listOfActionStatus = this.listOfActionStatus.slice(this.listOfActionStatus.length / 7);
+    this.listOfPriority = Object.keys(Priority);
+    this.listOfPriority = this.listOfPriority.slice(this.listOfPriority.length / 5);
+    this.listOfOrigin = Object.keys(Origin);
+    this.listOfOrigin = this.listOfOrigin.slice(this.listOfOrigin.length / 5);
   }
-
+ /** Get all users **/
+ getListOfUsers() {
+  this.genericService.getGenericList('/users/all').subscribe(data => {
+    this.listOfUsers = data;
+  });
+}
   /** Enum selected value parsing */
   parseValue(value: string) {
     this.typeValue = TypeAction[value];
+    this.ActionStatusValue = ActionStatus[value];
+    this.PriorityValue = Priority[value];
+    this.originValue = Origin[value];
+
   }
 
   /** Update Action */

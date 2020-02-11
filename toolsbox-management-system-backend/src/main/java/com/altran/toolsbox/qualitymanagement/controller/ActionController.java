@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.altran.toolsbox.qualitymanagement.model.Action;
 import com.altran.toolsbox.qualitymanagement.service.ActionService;
-import com.altran.toolsbox.usermanagement.model.Activity;
 import com.altran.toolsbox.util.GenericResponse;
 import com.altran.toolsbox.util.Translator;
 

@@ -59,31 +59,31 @@ public class Action implements Serializable {
 	/**
 	 * The open date of this action
 	 */
-	@JsonFormat(pattern = "dd-MM-yyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date openDate;
 
 	/**
 	 * The due Date of the action
 	 */
-	@JsonFormat(pattern = "dd-MM-yyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dueDate;
 
 	/**
 	 * The Updated Due Date of this action
 	 */
-	@JsonFormat(pattern = "dd-MM-yyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date updatedDueDate;
 
 	/**
 	 * The Effectiveness measurement date of this action
 	 */
-	@JsonFormat(pattern = "dd-MM-yyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date effMeasDate;
 
 	/**
 	 * The Realization Date of this action
 	 */
-	@JsonFormat(pattern = "dd-MM-yyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date realizationDate;
 
 	/**

@@ -25,30 +25,83 @@
                 <option *ngFor="let type of listOfTypes" [value]="type">{{type}}</option>
               </select>
             </div>
-            <!-- Percentage field -->
-            <div class="form-group  col-md-6">
-              <label for="percentage-update" class="required">{{'Pourcentage' | translate}}</label>
-              <input type="number" id="percentage-update" name="percentage" class="form-control" pattern="[0-9]{2}"
-                [(ngModel)]="actionToEdit.percentage" required>
+             <!-- Action Staus field -->
+             <div class="form-group  col-md-6">
+              <label for="actionStatus" class="required">{{'Action Status' | translate}}</label>
+              <select id="actionStatus" (change)="parseValue($event.target.value)" name="actionStatus" class="form-control"
+                [(ngModel)]="actionToEdit.actionStatus" required>
+                <option *ngFor="let actionStatus of listOfActionStatus" [value]="actionStatus">{{actionStatus}}</option>
+              </select>
+            </div>
+             <!-- Action Priotity field -->
+             <div class="form-group  col-md-6">
+              <label for="priority" class="required">{{'Priorité' | translate}}</label>
+              <select id="priority" (change)="parseValue($event.target.value)" name="priority" class="form-control"
+                [(ngModel)]="actionToEdit.priority" required>
+                <option *ngFor="let Priority of listOfPriority" [value]="Priority">{{Priority}}</option>
+              </select>
+            </div>
+            
+            <!-- Risk responsible field -->
+        <div class="form-group  col-md-6">
+          <label for="responsibleAction" class="required">{{'responsable d Action' | translate}}</label>
+          <select id="responsibleAction" (change)="parseValue($event.target.value)" name="responsibleAction" class="form-control"
+            [(ngModel)]="actionToEdit.responsibleAction" required>
+            <option *ngFor="let user of listOfUsers" [ngValue]="user">{{user.firstName}} {{user.lastName}}</option>
+          </select>
+        </div>
+          <!-- Action origin field -->
+          <div class="form-group  col-md-6">
+            <label for="origin" class="required">{{'Origine' | translate}}</label>
+            <select id="origin" (change)="parseValue($event.target.value)" name="origin" class="form-control"
+              [(ngModel)]="actionToEdit.origin" required>
+              <option *ngFor="let origin of listOfOrigin" [value]="origin">{{origin}}</option>
+            </select>
+          </div>
+          </div>
+          <div class="form-row">
+          <!-- due Date field -->
+          <div class="form-group col-md-6">
+            <label for="dueDate" class="required">{{'Due Date' | translate}}</label>
+            <input type="date" class="form-control" id="dueDate-update" name="dueDate"
+            [(ngModel)]="actionToEdit.dueDate" required>
+            </div>
+           <!-- open Date field -->
+          <div class="form-group col-md-6">
+          <label for="openDate" class="required">{{'Open Date' | translate}}</label>
+          <input type="date" class="form-control" id="openDate-update" name="openDate"
+          [(ngModel)]="actionToEdit.openDate" required>
+          </div>
+          <!-- Updated Due Date field -->
+          <div class="form-group col-md-6">
+            <label for="updatedDueDate" class="required">{{'Updated Due Date' | translate}}</label>
+            <input type="date" class="form-control" id="updatedDueDate-update" name="updatedDueDate"
+            [(ngModel)]="actionToEdit.updatedDueDate" required>
+            </div>
+            <!-- realization Date field -->
+          <div class="form-group col-md-6">
+            <label for="realizationDate" class="required">{{'Date de realisation' | translate}}</label>
+            <input type="date" class="form-control" id="realizationDate-update" name="realizationDate"
+            [(ngModel)]="actionToEdit.realizationDate" required>
+            </div>
+            <!-- Date de mesure de l efficacité field -->
+          <div class="form-group col-md-6">
+            <label for="effMeasDate" class="required">{{'Date de mesure de l efficacité' | translate}}</label>
+            <input type="date" class="form-control" id="effMeasDate-update" name="effMeasDate"
+            [(ngModel)]="actionToEdit.effMeasDate" required>
             </div>
           </div>
-          <!-- Cause field -->
+          <!-- Effectiveness measurement criterion field -->
           <div class="form-group">
-            <label for="cause" class="required">{{'Cause' | translate}}</label>
-            <textarea rows="2" id="cause-update" name="cause" class="form-control" [(ngModel)]="actionToEdit.cause"
-              required></textarea>
+            <label for="effMeasCriterion">{{'Effectiveness measurement criterion' | translate}}</label>
+            <textarea rows="2" id="effMeasCriterion-update" name="effMeasCriterion" class="form-control"
+              [(ngModel)]="actionToEdit.effMeasCriterion"></textarea>
           </div>
-          <!-- Remarks field -->
+          <!-- Comments field -->
           <div class="form-group">
-            <label for="remarks">{{'Remarques' | translate}}</label>
-            <textarea rows="2" id="remarks-update" name="remarks" class="form-control"
-              [(ngModel)]="actionToEdit.remarks"></textarea>
-          </div>
-          <!-- Notes field -->
-          <div class="form-group">
-            <label for="notes">{{'Notes' | translate}}</label>
-            <textarea rows="2" id="notes-update" name="notes" class="form-control"
-              [(ngModel)]="actionToEdit.notes"></textarea>
+            <label for="comments">{{'commentaires' | translate}}</label>
+            <textarea rows="2" id="comments-update" name="comments" class="form-control"
+              [(ngModel)]="actionToEdit.comments"></textarea>
           </div>
         </div>
         <div class="modal-footer">
