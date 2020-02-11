@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.altran.toolsbox.qualitymanagement.model.Action;
 import com.altran.toolsbox.qualitymanagement.service.ActionService;
+import com.altran.toolsbox.usermanagement.model.Activity;
 import com.altran.toolsbox.util.GenericResponse;
 import com.altran.toolsbox.util.Translator;
 
@@ -45,7 +46,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 /**
  * Represents Rest controller of action
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  *
  */
@@ -99,8 +100,7 @@ public class ActionController {
 		List<Action> actionList = actionService.findAll();
 		/** Filtering data to send **/
 		// Filter the action object
-		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, DESCRIPTION, TYPEACTION,
-				ACTIONSTATUS, ORIGIN);
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAll();
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter);
 		// Create the mapping object and set the filters to the mapping
@@ -120,8 +120,7 @@ public class ActionController {
 		Page<Action> actionList = actionService.findAllByPage(pageable);
 		/** Filtering data to send **/
 		// Filter the action object
-		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, DESCRIPTION, TYPEACTION,
-				ACTIONSTATUS, RESPONSIBLEACTION, ORIGIN);
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAll();
 		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter)
@@ -142,8 +141,7 @@ public class ActionController {
 	public MappingJacksonValue getActionsByEcart(@PathVariable Long id) {
 		List<Action> actionList = actionService.findByGap(id);
 		// Filter the action object
-		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, DESCRIPTION, TYPEACTION,
-				ORIGIN);
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAll();
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter);
 		// Create the mapping object and set the filters to the mapping
@@ -163,8 +161,7 @@ public class ActionController {
 	public MappingJacksonValue getActionsByResponsableAction(@PathVariable String username, Pageable pageable) {
 		Page<Action> actionList = actionService.findByResponsibleAction(username, pageable);
 		// Filter the action object
-		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, DESCRIPTION, TYPEACTION,
-				ORIGIN);
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAll();
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter);
 		// Create the mapping object and set the filters to the mapping
@@ -307,4 +304,25 @@ public class ActionController {
 			return ResponseEntity.status(HttpStatus.IM_USED).body(messageResponse);
 		}
 	}
+	/**
+	 * Searches for actions by one term
+	 * 
+	 * @param term
+	 * @param pageable pagination information
+	 * @return term the term to base search on it
+	 */
+	@GetMapping(value = "/search/{term}")
+	public MappingJacksonValue searchActions(@PathVariable(value = "term") String term, Pageable pageable) {
+		Page<Action> actionList = actionService.simpleSearch(term, pageable);
+		/** Filtering data to send **/
+		// Filter the action object
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAll();
+		// Add filters to filter provider
+		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter);
+		// Create the mapping object and set the filters to the mapping
+		MappingJacksonValue actionMapping = new MappingJacksonValue(actionList);
+		actionMapping.setFilters(filters);
+		return actionMapping;
+	}
+
 }

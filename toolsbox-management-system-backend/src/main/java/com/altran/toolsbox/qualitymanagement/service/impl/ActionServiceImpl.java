@@ -169,4 +169,9 @@ public class ActionServiceImpl implements ActionService {
 		actionRepository.deleteById(id);
 	}
 
+	@Override
+	public Page<Action> simpleSearch(String term, Pageable pageable) {
+		return actionRepository.simpleSearch(term, pageable);
+	}
+
 }

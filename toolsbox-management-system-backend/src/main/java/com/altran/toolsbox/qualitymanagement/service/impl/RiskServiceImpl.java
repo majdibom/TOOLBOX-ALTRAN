@@ -233,4 +233,9 @@ public class RiskServiceImpl implements RiskService {
 		return riskRepository.findByRiskPilote(responsable, pageable);
 	}
 
+	@Override
+	public Page<Risk> simpleSearch(String term, Pageable pageable) {
+		return riskRepository.simpleSearch(term, pageable);
+	}
+
 }

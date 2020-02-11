@@ -24,6 +24,8 @@ public interface RiskService {
 	
 	Page<Risk> findByRiskPilote(String username, Pageable pageable);
 
+	Page<Risk> simpleSearch(String term, Pageable pageable);
+
 	Risk findById(Long id);
 
 	Risk create(Risk risk);

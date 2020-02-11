@@ -24,6 +24,8 @@ public interface ActionService {
 	List<Action> findByGap(Long id);
 
 	Page<Action> findByResponsibleAction(String username, Pageable pageable);
+	
+	Page<Action> simpleSearch(String term, Pageable pageable);
 
 	Action create(Action action);
 

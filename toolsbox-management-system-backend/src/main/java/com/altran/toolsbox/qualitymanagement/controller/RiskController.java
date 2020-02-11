@@ -19,6 +19,15 @@ import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_NOT_EXIST
 import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_NOT_UPDATED;
 import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_UPDATED;
 import static com.altran.toolsbox.util.constant.FilterConstants.ACTION_FILTER;
+import static com.altran.toolsbox.util.constant.ColumnConstants.RISKNATURE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.DETECTIONDATE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.CLOSUREDATE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.RISKSTATUS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.PROBABILITY;
+import static com.altran.toolsbox.util.constant.ColumnConstants.SEVERITY;
+import static com.altran.toolsbox.util.constant.ColumnConstants.EXPOSURE;
+
+
 
 import java.util.NoSuchElementException;
 
@@ -268,4 +277,25 @@ public class RiskController {
 		risksMapping.setFilters(filters);
 		return risksMapping;
 	}
+	/**
+	 * Searches for actions by one term
+	 * 
+	 * @param term
+	 * @param pageable pagination information
+	 * @return term the term to base search on it
+	 */
+	@GetMapping(value = "/search/{term}")
+	public MappingJacksonValue searchRisks(@PathVariable(value = "term") String term, Pageable pageable) {
+		Page<Risk> riskList = riskService.simpleSearch(term, pageable);
+		/** Filtering data to send **/
+		// Filter the activity object
+		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID,RISKNATURE,PROBABILITY,SEVERITY,EXPOSURE,RISKSTATUS,DETECTIONDATE,CLOSUREDATE);
+		// Add filters to filter provider
+		FilterProvider filters = new SimpleFilterProvider().addFilter(RISK_FILTER, riskFilter);
+		// Create the mapping object and set the filters to the mapping
+		MappingJacksonValue riskMapping = new MappingJacksonValue(riskList);
+		riskMapping.setFilters(filters);
+		return riskMapping;
+	}
+
 }
