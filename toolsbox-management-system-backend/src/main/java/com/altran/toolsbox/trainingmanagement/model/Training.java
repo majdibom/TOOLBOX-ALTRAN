@@ -1,4 +1,5 @@
 package com.altran.toolsbox.trainingmanagement.model;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -17,55 +18,102 @@ import com.altran.toolsbox.usermanagement.model.Activity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import static com.altran.toolsbox.util.constant.FilterConstants.TRAINING_FILTER;
 
+/**
+ * Represents training organized in the company
+ * 
+ * @author Majdi.BEN.OTHMEN
+ * @version 1.0
+ */
 @Entity
-@Table(name = "TRAININGS")
+@Table(name = "TRAINING")
 @JsonFilter(TRAINING_FILTER)
 public class Training implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * The ID of this Training. This ID is generated automatically.
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
+	/**
+	 * The trainer of this Training.
+	 */
 	@Column
 	private String trainer;
 
+	/**
+	 * The status of this Training.
+	 */
 	@Column
 	private String status;
 
+	/**
+	 * The duration by day of this Training.
+	 */
 	@Column
-	private int dayNumber;
+	private int duration;
 
+	/**
+	 * The day/man cost of this Training.
+	 */
 	@Column
 	private int dayManCost;
 
+	/**
+	 * The financial cost of this Training.
+	 */
 	@Column
 	private int financialCost;
 
+	/**
+	 * The schedule date of this Training.
+	 */
 	@Column
-	private Date schedualDate;
+	private Date scheduleDate;
 
+	/**
+	 * The real date of this Training.
+	 */
 	@Column
 	private Date realDate;
 
+	/**
+	 * The activity of this Training.
+	 * 
+	 * @see Activity
+	 */
 	@ManyToMany
 	private Set<Activity> activity;
 
+	/**
+	 * List of needs of this Training.
+	 * 
+	 * @see Need
+	 */
 	@OneToMany(mappedBy = "training", fetch = FetchType.EAGER)
 	private Set<Need> need;
 
+	/**
+	 * List of organisms of this Training.
+	 * 
+	 * @see Organism
+	 */
 	@OneToMany(mappedBy = "training", fetch = FetchType.EAGER)
 	private Set<Organism> organisms;
 
-	public Training() {
-		super();
-	}
+	/****** Getters and setters *****/
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -85,14 +133,6 @@ public class Training implements Serializable {
 		this.status = status;
 	}
 
-	public int getDayNumber() {
-		return dayNumber;
-	}
-
-	public void setDayNumber(int dayNumber) {
-		this.dayNumber = dayNumber;
-	}
-
 	public int getDayManCost() {
 		return dayManCost;
 	}
@@ -109,12 +149,20 @@ public class Training implements Serializable {
 		this.financialCost = financialCost;
 	}
 
-	public Date getSchedualDate() {
-		return schedualDate;
+	public int getDuration() {
+		return duration;
 	}
 
-	public void setSchedualDate(Date schedualDate) {
-		this.schedualDate = schedualDate;
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public Date getScheduleDate() {
+		return scheduleDate;
+	}
+
+	public void setScheduleDate(Date scheduleDate) {
+		this.scheduleDate = scheduleDate;
 	}
 
 	public Date getRealDate() {

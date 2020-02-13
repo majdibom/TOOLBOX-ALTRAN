@@ -37,7 +37,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 /**
  * Represents Rest controller of role
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  *
  */

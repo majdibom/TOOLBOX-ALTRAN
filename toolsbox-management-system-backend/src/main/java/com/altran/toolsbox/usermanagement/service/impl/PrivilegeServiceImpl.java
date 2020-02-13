@@ -12,7 +12,7 @@ import com.altran.toolsbox.usermanagement.service.PrivilegeService;
 /**
  * Represents implementation of privilege service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Service

@@ -62,7 +62,8 @@ public class ActionController {
 	/**
 	 * Constructor of ActionController
 	 * 
-	 * @param actionService the service of action
+	 * @param actionService
+	 *            the service of action
 	 */
 	@Autowired
 	public ActionController(ActionService actionService) {
@@ -72,7 +73,8 @@ public class ActionController {
 	/**
 	 * Changes valid object response object for sending data
 	 * 
-	 * @param validResponse generic response with action as object.
+	 * @param validResponse
+	 *            generic response with action as object.
 	 */
 	@Autowired
 	public void setObjectResponse(GenericResponse<Action> objectResponse) {
@@ -82,7 +84,8 @@ public class ActionController {
 	/**
 	 * Changes message response object for sending message
 	 * 
-	 * @param messageResponse generic response with string as object.
+	 * @param messageResponse
+	 *            generic response with string as object.
 	 */
 	@Autowired
 	public void setMessageResponse(GenericResponse<String> messageResponse) {
@@ -111,7 +114,8 @@ public class ActionController {
 	/**
 	 * Gets the list of all actions by page
 	 * 
-	 * @param pageable pagination information
+	 * @param pageable
+	 *            pagination information
 	 * @return list of all actions by page
 	 */
 	@GetMapping
@@ -133,7 +137,8 @@ public class ActionController {
 	/**
 	 * Gets the list of all actions by there gap
 	 * 
-	 * @param pageable pagination information
+	 * @param pageable
+	 *            pagination information
 	 * @return list of all actions by page
 	 */
 	@GetMapping(value = "/gap/{id}")
@@ -152,8 +157,10 @@ public class ActionController {
 	/**
 	 * Gets the list of all actions of one responsible
 	 * 
-	 * @param username userName of the responsible
-	 * @param pageable pagination information
+	 * @param username
+	 *            userName of the responsible
+	 * @param pageable
+	 *            pagination information
 	 * @return list of all actions of the responsible
 	 */
 	@GetMapping(value = "/responsible/{username}")
@@ -175,7 +182,8 @@ public class ActionController {
 	 * Handles NoSuchElementException if no element is present with such ID and any
 	 * other exception
 	 * 
-	 * @param id the id of the action
+	 * @param id
+	 *            the id of the action
 	 * @return ResponseEntity: the object or the error to display when getting
 	 *         action by id with HttpStatus status code
 	 */
@@ -188,8 +196,7 @@ public class ActionController {
 			/** Filtering data to send **/
 			// Filter the action object
 			SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAll();
-			SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.serializeAllExcept(EMAIL, USERNAME, PASSW,
-					ROLES, ACTIVITY, AUDITS, ACTIONS);
+			SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
 			SimpleBeanPropertyFilter gapFilter = SimpleBeanPropertyFilter.serializeAllExcept(JUSTIFICATION,
 					IMPROVEMENTCLUE, IDENTIFIEDCAUSES, ACTIONS, AUDITREPORT);
 			SimpleBeanPropertyFilter processFilter = SimpleBeanPropertyFilter.serializeAll();
@@ -218,7 +225,8 @@ public class ActionController {
 	 * Handles EntityExistsException if there is already existing entity with such
 	 * ID and any other exception
 	 * 
-	 * @param action the action to create
+	 * @param action
+	 *            the action to create
 	 * @return ResponseEntity: the message or the error to display after creating
 	 *         action with HttpStatus status code
 	 */
@@ -247,8 +255,10 @@ public class ActionController {
 	 * Handles EntityNotFoundException if there is no entity with such ID and any
 	 * other exception
 	 * 
-	 * @param action the new action object with the new values
-	 * @param id     the id of the action
+	 * @param action
+	 *            the new action object with the new values
+	 * @param id
+	 *            the id of the action
 	 * @return ResponseEntity: the message or the error to display after updating
 	 *         action with HttpStatus status code
 	 */
@@ -282,7 +292,8 @@ public class ActionController {
 	 * Handles EntityNotFoundException if there is no entity with such ID, exception
 	 * if this action is used and any other exception
 	 * 
-	 * @param id the of the deleted action
+	 * @param id
+	 *            the of the deleted action
 	 * @return ResponseEntity: the message or the error to display after deleting
 	 *         action with HttpStatus status code
 	 */
@@ -303,11 +314,13 @@ public class ActionController {
 			return ResponseEntity.status(HttpStatus.IM_USED).body(messageResponse);
 		}
 	}
+
 	/**
 	 * Searches for actions by one term
 	 * 
 	 * @param term
-	 * @param pageable pagination information
+	 * @param pageable
+	 *            pagination information
 	 * @return term the term to base search on it
 	 */
 	@GetMapping(value = "/search/{term}")
@@ -316,8 +329,9 @@ public class ActionController {
 		/** Filtering data to send **/
 		// Filter the action object
 		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAll();
+		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
 		// Add filters to filter provider
-		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter);
+		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter).addFilter(USER_FILTER, userFilter);
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue actionMapping = new MappingJacksonValue(actionList);
 		actionMapping.setFilters(filters);

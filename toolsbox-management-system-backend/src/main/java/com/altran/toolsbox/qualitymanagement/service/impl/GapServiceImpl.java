@@ -1,7 +1,5 @@
 package com.altran.toolsbox.qualitymanagement.service.impl;
 
-import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -18,6 +16,9 @@ import com.altran.toolsbox.qualitymanagement.model.Gap;
 import com.altran.toolsbox.qualitymanagement.repository.GapRepository;
 import com.altran.toolsbox.qualitymanagement.service.AuditReportService;
 import com.altran.toolsbox.qualitymanagement.service.GapService;
+
+import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 
 /**
  * Represents implementation of gap service
@@ -91,7 +92,7 @@ public class GapServiceImpl implements GapService {
 	@Override
 	public Gap create(Gap gap) {
 		if (gap.getId() != null && gapRepository.existsById(gap.getId())) {
-			throw new EntityExistsException("There is already existing entity with such ID in the database.");
+			throw new EntityExistsException(ENTITY_EXIST);
 		}
 		return gapRepository.save(gap);
 	}
@@ -107,7 +108,7 @@ public class GapServiceImpl implements GapService {
 	@Override
 	public Gap update(Gap gap, Long id) {
 		if (id != null && !gapRepository.existsById(id)) {
-			throw new EntityNotFoundException("\"There is no entity with such ID in the database.");
+			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		gap.setId(id);
 		return gapRepository.save(gap);
@@ -122,7 +123,7 @@ public class GapServiceImpl implements GapService {
 	@Override
 	public void delete(Long id) {
 		if (id != null && !gapRepository.existsById(id)) {
-			throw new EntityNotFoundException("\"There is no entity with such ID in the database.");
+			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		gapRepository.deleteById(id);
 	}

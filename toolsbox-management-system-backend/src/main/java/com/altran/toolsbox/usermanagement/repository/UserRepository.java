@@ -12,7 +12,7 @@ import com.altran.toolsbox.usermanagement.model.User;
 /**
  * Represents repository of user
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Repository

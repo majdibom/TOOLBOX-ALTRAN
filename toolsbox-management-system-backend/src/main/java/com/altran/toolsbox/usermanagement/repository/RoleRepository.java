@@ -15,7 +15,7 @@ import com.altran.toolsbox.usermanagement.model.Role;
 /**
  * Represents repository of role
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Repository

@@ -1,4 +1,5 @@
 package com.altran.toolsbox.trainingmanagement.model;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -15,45 +16,78 @@ import javax.persistence.Table;
 import static com.altran.toolsbox.util.constant.FilterConstants.ORGANISM_FILTER;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+
+/**
+ * Represents organism of the training
+ * 
+ * @author Majdi.BEN.OTHMEN
+ * @version 1.0
+ */
 @Entity
 @Table(name = "ORGANISMS")
 @JsonFilter(ORGANISM_FILTER)
 public class Organism implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * The ID of this Organism. This ID is generated automatically.
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
+	/**
+	 * The name of this Organism.
+	 */
 	@Column
 	private String name;
 
+	/**
+	 * The cost of the training by this organism.
+	 */
 	@Column
 	private int cost;
 
+	/**
+	 * The availability of CV for this organism.
+	 */
 	@Column
 	private boolean cvAvailability;
 
+	/**
+	 * The planning of the training by this organism.
+	 */
 	@Column
 	private String planning;
 
+	/**
+	 * Training organized by this organism.
+	 * 
+	 * @see Training
+	 */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "training_id")
 	private Training training;
 
+	/**
+	 * List of trainers of this organism.
+	 * 
+	 * @see Trainer
+	 */
 	@OneToMany(mappedBy = "organism", fetch = FetchType.EAGER)
 	private Set<Trainer> trainer;
 
-	public Organism() {
-		super();
-	}
+	/****** Getters and setters *****/
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

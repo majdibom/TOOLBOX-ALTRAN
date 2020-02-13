@@ -15,33 +15,51 @@ import static com.altran.toolsbox.util.constant.FilterConstants.TRAINER_FILTER;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
+/**
+ * Represents trainer of the training
+ * 
+ * @author Majdi.BEN.OTHMEN
+ * @version 1.0
+ */
 @Entity
 @Table(name = "TRAINERS")
 @JsonFilter(TRAINER_FILTER)
 public class Trainer implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * The ID of this Trainer. This ID is generated automatically.
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
+	/**
+	 * The name of this Trainer.
+	 */
 	@Column
 	private String name;
 
+	/**
+	 * The organism of this Trainer.
+	 * 
+	 * @see Organism
+	 */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "organism_id")
 	private Organism organism;
 
-	public Trainer() {
-		super();
-	}
+	/****** Getters and setters *****/
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

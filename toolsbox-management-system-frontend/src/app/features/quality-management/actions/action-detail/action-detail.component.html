@@ -1,13 +1,13 @@
 <div class="title">
-  <h3>{{'Détails de l action' | translate}}</h3>
+  <h3>{{'Détails de l action : #' | translate}}{{action?.id}}</h3>
 </div>
 <div class="content">
-  <div class="container">
+  
     <div class="row">
       <div class="col-lg-4">
         <div class="profile-card-4 z-depth-3">
           <!-- action generale information section -->
-          <div class="card">
+          <div class="card " >
             <div class="card-body text-center bg-altran rounded-top">
               <h6 class="text-light">{{'Responsable' | translate}} :</h6>
               <h5 class="mb-1 text-white">
@@ -83,7 +83,7 @@
       </div>
 
       <div class="col-lg-8">
-        <div class="card z-depth-3">
+        <div class="card  z-depth-3">
           <div class="card-body">
             <ul class="nav nav-pills nav-pills-primary nav-justified">
               <!-- Details menu -->
@@ -136,3 +136,4 @@
         </div>
       </div>
     </div>
+  </div>

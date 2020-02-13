@@ -1,7 +1,5 @@
 package com.altran.toolsbox.qualitymanagement.service.impl;
 
-import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -19,6 +17,9 @@ import com.altran.toolsbox.qualitymanagement.repository.AuditRepository;
 import com.altran.toolsbox.qualitymanagement.service.AuditService;
 import com.altran.toolsbox.usermanagement.model.User;
 import com.altran.toolsbox.usermanagement.service.UserService;
+
+import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 
 @Service
 public class AuditServiceImpl implements AuditService {
@@ -133,7 +134,7 @@ public class AuditServiceImpl implements AuditService {
 	@Override
 	public Audit create(Audit audit) {
 		if (audit.getId() != null && auditRepository.existsById(audit.getId())) {
-			throw new EntityExistsException("There is already existing entity with such ID in the database.");
+			throw new EntityExistsException(ENTITY_EXIST);
 		}
 		return auditRepository.save(audit);
 	}
@@ -149,7 +150,7 @@ public class AuditServiceImpl implements AuditService {
 	@Override
 	public Audit update(Audit audit, Long id) {
 		if (id != null && !auditRepository.existsById(id)) {
-			throw new EntityNotFoundException("\"There is no entity with such ID in the database.");
+			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		audit.setId(id);
 		return auditRepository.save(audit);
@@ -164,7 +165,7 @@ public class AuditServiceImpl implements AuditService {
 	@Override
 	public void delete(Long id) {
 		if (id != null && !auditRepository.existsById(id)) {
-			throw new EntityNotFoundException("\"There is no entity with such ID in the database.");
+			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		auditRepository.deleteById(id);
 	}

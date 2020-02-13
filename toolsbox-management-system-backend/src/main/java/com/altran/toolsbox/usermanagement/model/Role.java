@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 /**
  * Represents roles of users
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Entity

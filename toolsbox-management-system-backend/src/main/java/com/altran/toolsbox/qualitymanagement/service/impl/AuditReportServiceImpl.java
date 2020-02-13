@@ -1,7 +1,5 @@
 package com.altran.toolsbox.qualitymanagement.service.impl;
 
-import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
-
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -22,6 +20,9 @@ import com.altran.toolsbox.qualitymanagement.service.AuditReportService;
 import com.altran.toolsbox.qualitymanagement.service.GapService;
 import com.altran.toolsbox.usermanagement.model.User;
 import com.altran.toolsbox.usermanagement.service.UserService;
+
+import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 
 /**
  * Represents implementation of audit report service
@@ -102,7 +103,7 @@ public class AuditReportServiceImpl implements AuditReportService {
 	@Override
 	public AuditReport create(AuditReport auditReport) {
 		if (auditReport.getId() != null && auditReportRepository.existsById(auditReport.getId())) {
-			throw new EntityExistsException("There is already existing entity with such ID in the database.");
+			throw new EntityExistsException(ENTITY_EXIST);
 		}
 		// Get gap list of the created report
 		Set<Gap> gaps = auditReport.getGaps();
@@ -131,7 +132,7 @@ public class AuditReportServiceImpl implements AuditReportService {
 	@Override
 	public AuditReport update(AuditReport auditReport, Long id) {
 		if (id != null && !auditReportRepository.existsById(id)) {
-			throw new EntityNotFoundException("\"There is no entity with such ID in the database.");
+			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		auditReport.setId(id);
 		return auditReportRepository.save(auditReport);
@@ -151,7 +152,7 @@ public class AuditReportServiceImpl implements AuditReportService {
 	@Override
 	public void delete(Long id) {
 		if (id != null && !auditReportRepository.existsById(id)) {
-			throw new EntityNotFoundException("\"There is no entity with such ID in the database.");
+			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		auditReportRepository.deleteById(id);
 	}

@@ -1,16 +1,17 @@
 <div class="title">
-  <h3>{{'Détails de l action' | translate}}</h3>
+  <h3>{{'Détails du Risque : #' | translate}}{{risk?.id}}</h3>
 </div>
 <div class="content">
-  <div class="container">
+  
     <div class="row">
       <div class="col-lg-4">
         <div class="profile-card-4 z-depth-3">
           <!-- action generale information section -->
           <div class="card">
             <div class="card-body text-center bg-altran rounded-top">
-              <h6 class="text-light">{{'Risk' | translate}} :{{risk?.id}}</h6>
-              
+              <h6 class="text-light">{{'Pilote de risque ' | translate}} :</h6>
+              <h5 class="mb-1 text-white">
+                {{risk?.riskPilote?.firstName}}&nbsp;{{risk?.riskPilote?.lastName}}</h5>
             </div>
             <div class="card-body">
               <ul class="list-group shadow-none">
@@ -19,7 +20,7 @@
                     <i class="fa fa-cog" aria-hidden="true"></i>
                   </div>
                   <div class="list-details">
-                    <span>{{'probability' | translate}}: </span>{{risk?.probability}}
+                    <span>{{'Probability' | translate}}: </span><span>{{risk?.probability}}</span>
                   </div>
                 </li>
                 <li class="list-group-item">
@@ -38,8 +39,17 @@
                   </div>
                   <div class="list-details">
                     <span>{{'Severity' | translate}}: </span>{{risk?.severity}}
-                    
-
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="list-icon">
+                    <i class="fa fa-arrows-v" aria-hidden="true"></i>
+                  </div>
+                  <div class="list-details">
+                    <span>{{'Exposure' | translate}}: </span>
+                    <span *ngIf="risk?.exposure == 'Low'" class="badge badge-secondary">{{risk?.exposure}}</span>
+                    <span *ngIf="risk?.exposure == 'Normal'" class="badge badge-info">{{risk?.exposure}}</span>
+                    <span *ngIf="risk?.exposure == 'High'" class="badge badge-warning">{{risk?.exposure}}</span>
                   </div>
                 </li>
                 <li class="list-group-item">
@@ -47,15 +57,10 @@
                     <i class="fa fa-percent" aria-hidden="true"></i>
                   </div>
                   <div class="list-details">
-                    <span>{{'Exposure' | translate}}: </span>{{risk?.exposure}} 
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="list-icon">
-                    <i class="fa fa-percent" aria-hidden="true"></i>
-                  </div>
-                  <div class="list-details">
-                    <span>{{'Risk Priority' | translate}}: </span>{{risk?.riskPriority}} 
+                    <span>{{'Risk Priority' | translate}}: </span>
+                    <span *ngIf="risk?.riskPriority == 'Low'" class="badge badge-secondary">{{risk?.riskPriority}}</span>
+                    <span *ngIf="risk?.riskPriority == 'Normal'" class="badge badge-info">{{risk?.riskPriority}}</span>
+                    <span *ngIf="risk?.riskPriority == 'High'" class="badge badge-warning">{{risk?.riskPriority}}</span>
                   </div>
                 </li>
                 <li class="list-group-item">
@@ -109,17 +114,46 @@
                 <div class="tab-pane" id="quizzes">
                   <div class="row">
                     <div class="col-lg-12">
-                      <div>
-                        <h5> <strong>{{'Pilote de risque ' | translate}} :</strong>{{risk?.riskPilote?.firstName}}&nbsp;{{risk?.riskPilote?.lastName}}</h5>
-                      </div>
                     <div class="col-lg-12">
                       <h5><strong>{{'impact :' | translate}}</strong>{{risk?.impact}}</h5>
                     </div>
                     <div class="col-lg-12">
                       <h5><strong>{{'Identification des facteurs  +/- :' | translate}}</strong>{{risk?.factorsIdentif}}</h5>
                     </div>
-                    <div class="col-lg-12">
-                      <h5><strong>{{'actions:' | translate}}</strong>{{risk?.action?.description}}</h5>
+                   <!-- Actions list Table -->
+                    <div class="table-responsive-lg">
+                      <h5><strong>{{'Actions'| translate}}</strong></h5>
+                      <table class="table table-bordered table-striped table-hover">
+                        <thead class="row-border hover">
+                          <tr>
+                            <th style="width: 2%;">{{'#' | translate}}</th>
+                            <th style="width: 25%;">{{'Description' | translate}}</th>
+                            <th style="width: 20%;" class="text-center">{{'Actions' | translate}}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let action of risk?.actions | paginate: { itemsPerPage: item, currentPage: p, totalItems: total }">
+                            <td>{{action.id}}</td>
+                            <td>{{action.description}}</td>
+
+                            <td class="text-center">
+                              <button type="button" class="btn btn-detail" title="Afficher les details de cette action" data-toggle="modal"
+                                data-target="#detailsmodal" (click)="openDetails(action.id)"><i
+                                  class="fa fa-align-justify"></i></button>&nbsp;
+                              &nbsp;
+                              <button type="button" class="btn btn-danger btn-circle" title="Supprimer cette action"
+                                (click)="deleteActions(action.id)"><i class="fa fa-remove"></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- No data in table message-->
+                      <div *ngIf="risk?.actions?.length==0">
+                        <div class="nodata-box">
+                          <div class="nodata-text" id="no-data-available">{{'Aucune donnée trouvée.' | translate}}</div>
+                        </div>
+                      </div>
+                    
                     </div>
                   </div>
                 </div>

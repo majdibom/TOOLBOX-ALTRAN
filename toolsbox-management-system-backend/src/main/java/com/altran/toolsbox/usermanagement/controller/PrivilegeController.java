@@ -13,7 +13,7 @@ import com.altran.toolsbox.usermanagement.service.PrivilegeService;
 /**
  * Represents Rest controller of privilege
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  *
  */

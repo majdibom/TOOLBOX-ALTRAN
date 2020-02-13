@@ -7,7 +7,7 @@ import com.altran.toolsbox.usermanagement.model.Privilege;
 /**
  * Represents the interface of privilege service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 public interface PrivilegeService {

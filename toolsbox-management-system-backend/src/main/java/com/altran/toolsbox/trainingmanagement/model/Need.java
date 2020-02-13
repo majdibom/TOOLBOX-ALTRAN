@@ -17,54 +17,95 @@ import static com.altran.toolsbox.util.constant.FilterConstants.NEED_FILTER;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
+/**
+ * Represents needs for training
+ * 
+ * @author Majdi.BEN.OTHMEN
+ * @version 1.0
+ */
 @Entity
 @Table(name = "NEEDS")
 @JsonFilter(NEED_FILTER)
 public class Need implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * The ID of this Need. This ID is generated automatically.
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
+	/**
+	 * The object of this Need.
+	 */
 	@Column(nullable = false)
 	private String object;
 
+	/**
+	 * The type of this Need.
+	 */
 	@Column(nullable = false)
 	private String type;
 
+	/**
+	 * The objective of this Need.
+	 */
 	@Column
-	private String objectif;
+	private String objective;
 
+	/**
+	 * The required of this Need.
+	 */
 	@Column
 	private String required;
 
+	/**
+	 * The total number of participants.
+	 */
 	@Column
-	private int nbrOfParticipants;
+	private int totalParticipants;
 
+	/**
+	 * The category of this Need.
+	 */
 	@Column
 	private String category;
 
+	/**
+	 * The validation of this Need.
+	 */
 	@Column
 	private String validation;
 
+	/**
+	 * List of participants in the training of this Need.
+	 * 
+	 * @see Participant
+	 */
 	@ManyToMany
 	private Set<Participant> participants;
 
+	/**
+	 * The training of this Need.
+	 * 
+	 * @see Training
+	 */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "training_id")
 	private Training training;
-	
-	public Need() {
-		super();
-	}
 
-	public int getId() {
+	/****** Getters and setters *****/
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -84,12 +125,12 @@ public class Need implements Serializable {
 		this.type = type;
 	}
 
-	public String getObjectif() {
-		return objectif;
+	public String getObjective() {
+		return objective;
 	}
 
-	public void setObjectif(String objectif) {
-		this.objectif = objectif;
+	public void setObjective(String objective) {
+		this.objective = objective;
 	}
 
 	public String getRequired() {
@@ -100,12 +141,12 @@ public class Need implements Serializable {
 		this.required = required;
 	}
 
-	public int getNbrOfParticipants() {
-		return nbrOfParticipants;
+	public int getTotalParticipants() {
+		return totalParticipants;
 	}
 
-	public void setNbrOfParticipants(int nbrOfParticipants) {
-		this.nbrOfParticipants = nbrOfParticipants;
+	public void setTotalParticipants(int totalParticipants) {
+		this.totalParticipants = totalParticipants;
 	}
 
 	public String getCategory() {

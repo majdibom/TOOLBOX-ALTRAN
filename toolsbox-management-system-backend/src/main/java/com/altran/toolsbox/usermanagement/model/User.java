@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 /**
  * Represents users of application
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Entity

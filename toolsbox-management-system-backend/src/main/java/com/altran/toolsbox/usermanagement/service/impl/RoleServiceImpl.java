@@ -19,11 +19,12 @@ import com.altran.toolsbox.usermanagement.repository.RoleRepository;
 import com.altran.toolsbox.usermanagement.service.RoleService;
 
 import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 
 /**
  * Represents implementation of role service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Service
@@ -117,7 +118,7 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Role create(Role role) {
 		if (role.getId() != null && roleRepository.existsById(role.getId())) {
-			throw new EntityExistsException(NO_ENTITY_DB);
+			throw new EntityExistsException(ENTITY_EXIST);
 		}
 		return roleRepository.save(role);
 	}

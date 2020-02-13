@@ -10,7 +10,7 @@ import com.altran.toolsbox.usermanagement.model.Activity;
 /**
  * Represents the interface of activity service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 public interface ActivityService {

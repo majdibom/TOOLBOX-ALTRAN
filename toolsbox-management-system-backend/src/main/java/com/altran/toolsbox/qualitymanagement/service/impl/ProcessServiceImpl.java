@@ -1,7 +1,5 @@
 package com.altran.toolsbox.qualitymanagement.service.impl;
 
-import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -12,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.altran.toolsbox.qualitymanagement.model.Process;
 import com.altran.toolsbox.qualitymanagement.repository.ProcessRepository;
 import com.altran.toolsbox.qualitymanagement.service.ProcessService;
+
+import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
 
 /**
  * Represents implementation of process service

@@ -11,6 +11,8 @@ import com.altran.toolsbox.qualitymanagement.model.Project;
 import com.altran.toolsbox.qualitymanagement.repository.ProjectRepository;
 import com.altran.toolsbox.qualitymanagement.service.ProjectService;
 
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
+
 /**
  * Represents implementation of project service
  * 
@@ -53,7 +55,7 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public Project create(Project project) {
 		if (project.getId() != null && projectRepository.existsById(project.getId())) {
-			throw new EntityExistsException("There is already existing entity with such ID in the database.");
+			throw new EntityExistsException(ENTITY_EXIST);
 		}
 		return projectRepository.save(project);
 	}

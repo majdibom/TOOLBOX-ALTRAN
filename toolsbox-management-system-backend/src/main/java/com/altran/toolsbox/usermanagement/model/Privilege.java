@@ -12,7 +12,7 @@ import javax.persistence.Table;
 /**
  * Represents privileges to attribute to users of the application by his role
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Entity

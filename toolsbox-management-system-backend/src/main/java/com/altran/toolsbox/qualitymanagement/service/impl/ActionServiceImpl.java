@@ -1,7 +1,9 @@
 package com.altran.toolsbox.qualitymanagement.service.impl;
 
 import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -133,7 +135,7 @@ public class ActionServiceImpl implements ActionService {
 	@Override
 	public Action create(Action action) {
 		if (action.getId() != null && actionRepository.existsById(action.getId())) {
-			throw new EntityExistsException("There is already existing entity with such ID in the database.");
+			throw new EntityExistsException(ENTITY_EXIST);
 		}
 		return actionRepository.save(action);
 	}
@@ -149,9 +151,18 @@ public class ActionServiceImpl implements ActionService {
 	@Override
 	public Action update(Action action, Long id) {
 		if (id != null && !actionRepository.existsById(id)) {
-			throw new EntityNotFoundException("\"There is no entity with such ID in the database.");
+			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		action.setId(id);
+
+		// get the same create date as the old action(Fix null problem)
+		Action oldAction = findById(id);
+		Date createdDate = oldAction.getCreatedAt();
+		action.setCreatedAt(createdDate);
+		// get the same createdBy as the old action(Fix null problem)
+		User createdBy = oldAction.getCreatedBy();
+		action.setCreatedBy(createdBy);
+
 		return actionRepository.save(action);
 	}
 
@@ -164,7 +175,7 @@ public class ActionServiceImpl implements ActionService {
 	@Override
 	public void delete(Long id) {
 		if (id != null && !actionRepository.existsById(id)) {
-			throw new EntityNotFoundException("\"There is no entity with such ID in the database.");
+			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		actionRepository.deleteById(id);
 	}

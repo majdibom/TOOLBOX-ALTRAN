@@ -11,6 +11,7 @@
         </div>
         <div class="modal-body">
             <!-- Probability field -->
+        <div class="form-row">
             <div class="form-group  col-md-6">
               <label for="probability" class="required">{{'Probabilité' | translate}}</label>
               <select id="probability" (change)="parseValue($event.target.value)" name="probability" class="form-control"
@@ -18,7 +19,7 @@
                 <option *ngFor="let Probability of listOfProbability" [value]="Probability">{{Probability}}</option>
               </select>
             </div>
-          <div class="form-row">
+          
             <!-- Severity field -->
             <div class="form-group  col-md-6">
               <label for="severity" class="required">{{'Severité' | translate}}</label>
@@ -27,7 +28,7 @@
                 <option *ngFor="let Severity of listOfSeverity" [value]="Severity">{{Severity}}</option>
               </select>
             </div>
-          </div>
+          
          <!-- Risk Nature field -->
          <div class="form-group  col-md-6">
           <label for="riskNature" class="required">{{'Nature de risque' | translate}}</label>
@@ -52,7 +53,7 @@
             <option *ngFor="let user of listOfUsers" [ngValue]="user">{{user.firstName}} {{user.lastName}}</option>
           </select>
         </div>
-  
+      
       <!-- Status field -->
       <div class="form-group  col-md-6">
         <label for="riskStatus" class="required">{{'Status' | translate}}</label>
@@ -70,6 +71,7 @@
         <option *ngFor="let RiskStrategy of listOfRiskStrategy" [value]="RiskStrategy">{{RiskStrategy}}</option>
       </select>
     </div>
+  
     </div>
     <div class="form-row">
       <!-- detectionDate field -->
@@ -98,6 +100,7 @@
       <textarea class="form-control" id="factorsIdentif-add" name="factorsIdentif" [(ngModel)]="riskToEdit.factorsIdentif" rows="2"
         required> </textarea>
     </div>
+  </div>
         <div class="modal-footer">
           <!-- Close button -->
           <button type="button" id="exit-update-risk" name="exit-update-risk" class="btn btn-secondary"

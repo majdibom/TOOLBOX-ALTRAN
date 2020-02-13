@@ -10,7 +10,7 @@ import com.altran.toolsbox.usermanagement.model.Role;
 /**
  * Represents the interface of role service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 public interface RoleService {

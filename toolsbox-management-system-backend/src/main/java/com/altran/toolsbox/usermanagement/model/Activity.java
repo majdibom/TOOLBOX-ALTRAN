@@ -15,9 +15,9 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import static com.altran.toolsbox.util.constant.FilterConstants.ACTIVITY_FILTER;
 
 /**
- * Represents activities of the company
+ * Represents activity of the company
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Entity

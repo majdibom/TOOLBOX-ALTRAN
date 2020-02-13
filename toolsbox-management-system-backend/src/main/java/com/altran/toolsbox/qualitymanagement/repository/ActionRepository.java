@@ -26,7 +26,7 @@ public interface ActionRepository extends JpaRepository<Action, Long> {
 
 	List<Action> findByGap(Gap gap);
 	
-	@Query("SELECT t FROM Action t where LOWER (t.responsibleAction) LIKE CONCAT('%', LOWER ( :term ), '%')  OR LOWER (t.description) LIKE CONCAT('%', LOWER ( :term ), '%') ")
+	@Query("SELECT t FROM Action t where LOWER (t.description) LIKE CONCAT('%', LOWER ( :term ), '%') ")
 	public Page<Action> simpleSearch(@Param("term") String term, Pageable pageable);
 
 }

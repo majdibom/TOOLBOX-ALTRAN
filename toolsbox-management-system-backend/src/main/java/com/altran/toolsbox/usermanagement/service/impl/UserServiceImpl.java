@@ -34,11 +34,12 @@ import com.altran.toolsbox.usermanagement.service.RoleService;
 import com.altran.toolsbox.usermanagement.service.UserService;
 
 import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 
 /**
  * Represents implementation of user service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Service
@@ -174,14 +175,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public User create(User user) {
 
 		if (user.getId() != null && userRepository.existsById(user.getId())) {
-			throw new EntityExistsException(NO_ENTITY_DB);
+			throw new EntityExistsException(ENTITY_EXIST);
 		}
 		// generate password automatically
 		user.setUsername(user.getFirstName());
 		user.setPassword(user.getFirstName());
 		// encrypt password
-		String oldpsd = user.getPassword();
-		String password = bcryptEncoder.encode(oldpsd);
+		String oldpsw = user.getPassword();
+		String password = bcryptEncoder.encode(oldpsw);
 		// Encode password
 		user.setPassword(password);
 		// set activated to true when the user created

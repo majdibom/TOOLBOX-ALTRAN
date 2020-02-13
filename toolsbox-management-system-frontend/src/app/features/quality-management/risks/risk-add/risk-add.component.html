@@ -43,7 +43,7 @@
               </select>
             </div>
             <!-- Risk Priority field -->
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label for="riskPriority" class="required">{{'Priorité de risque' | translate}}</label>
               <select id="riskPriority-add" name="riskPriority" class="form-control" [(ngModel)]="riskToAdd.Priority"
                 required>
@@ -54,7 +54,7 @@
             </div>
               <!-- Risk responsible field -->
           <div class="form-group col-md-3">
-            <label for="riskPilote" class="required">{{'responsable de risque' | translate}}</label>
+            <label for="riskPilote" class="required">{{'Pilote de risque' | translate}}</label>
             <select id="riskPilote-add" name="titleriskPilote" class="form-control" [(ngModel)]="actionToAdd.riskPilote"
               required>
               <option *ngFor="let user of listOfUsers" [ngValue]="user">{{user.firstName}} {{user.lastName}}</option>
@@ -62,7 +62,7 @@
           </div>
         
             <!-- Status field -->
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label for="riskStatus" class="required">{{'Risk Statut' | translate}}</label>
               <select id="riskStatus-add" name="riskStatus" class="form-control" [(ngModel)]="riskToAdd.riskStatus"
                 required>
@@ -72,7 +72,6 @@
               </select>
             </div>
           </div>
-
           <div class="form-row">
             <!-- detectionDate field -->
             <div class="form-group col-md-6">
@@ -236,7 +235,7 @@
                             [ngStyle]="{'color':'red'}"></i></td>
                       </div>-->
                       <div class="col-9">
-                        <td><span *ngIf="!action.editMode" id="cause" name="cause">{{action.description}</span></td>
+                        <td><span *ngIf="!action.editMode" id="description" name="description">{{action.description}</span></td>
                         <form *ngIf="action.editMode">
                           <div class="input-group mb-3">
                             <div class="input-group-prepend">

@@ -16,6 +16,7 @@ public final class ResponseConstants {
 	public static final String OBJECT = "object";
 	// Exceptions messages
 	public static final String NO_ENTITY_DB = "\"There is no entity with such ID in the database.";
+	public static final String ENTITY_EXIST = "There is already existing entity with such ID in the database.";
 
 	/**
 	 * User Management

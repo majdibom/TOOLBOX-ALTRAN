@@ -27,8 +27,6 @@ import static com.altran.toolsbox.util.constant.ColumnConstants.PROBABILITY;
 import static com.altran.toolsbox.util.constant.ColumnConstants.SEVERITY;
 import static com.altran.toolsbox.util.constant.ColumnConstants.EXPOSURE;
 
-
-
 import java.util.NoSuchElementException;
 
 import javax.persistence.EntityExistsException;
@@ -258,6 +256,7 @@ public class RiskController {
 			return ResponseEntity.status(HttpStatus.IM_USED).body(messageResponse);
 		}
 	}
+
 	/**
 	 * Gets the list of all risks of one responsible
 	 * 
@@ -277,6 +276,7 @@ public class RiskController {
 		risksMapping.setFilters(filters);
 		return risksMapping;
 	}
+
 	/**
 	 * Searches for actions by one term
 	 * 
@@ -289,7 +289,8 @@ public class RiskController {
 		Page<Risk> riskList = riskService.simpleSearch(term, pageable);
 		/** Filtering data to send **/
 		// Filter the activity object
-		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID,RISKNATURE,PROBABILITY,SEVERITY,EXPOSURE,RISKSTATUS,DETECTIONDATE,CLOSUREDATE);
+		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, RISKNATURE, PROBABILITY,
+				SEVERITY, EXPOSURE, RISKSTATUS, DETECTIONDATE, CLOSUREDATE);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(RISK_FILTER, riskFilter);
 		// Create the mapping object and set the filters to the mapping

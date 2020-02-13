@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { GenericService } from '@services/generic.service';
 import { Risk } from '@models/risk';
 import { ActivatedRoute } from '@angular/router';
+import { PageClient } from '@models/page-client';
+import { Router } from '@angular/router';
+import { Action } from '@models/action';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-risk-detail',
@@ -13,16 +17,70 @@ export class RiskDetailComponent implements OnInit {
  idRisk: number;
  // Initial risk detail
  risk: Risk = new Risk();
-  constructor(private route: ActivatedRoute, private genericService: GenericService) { }
+
+  constructor(private route: ActivatedRoute, private genericService: GenericService,private router: Router) { }
 
   ngOnInit() {
     this.getRisk();
+    this.reloadData();
   }
-  /** Get action detail */
+   /** Reload data after every action */
+   reloadData() {
+  }
+  /** Get Risk detail */
   getRisk() {
     this.idRisk = this.route.snapshot.params.id;
     this.genericService.getGenericById('/risks', this.idRisk).subscribe(data => {
       this.risk = data.value;
     });
   }
+   /** Open action detail component */
+   openDetails(id: number) {
+    this.router.navigate(['quality-management/actions/action-detail', id]);
+  }
+   /** Delete Action */
+   deleteActions(id: number) {
+    swal({
+      title: 'Vous êtes Sur ?',
+      text: 'Voulez vous vraiment supprimer cette action',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non'
+    }).then((result) => {
+      if (result.dismiss !== swal.DismissReason.cancel && result.dismiss !== swal.DismissReason.backdrop) {
+        this.genericService.deleteGeneric('/actions', id)
+          .subscribe(data => {
+            if (data.error === false) {
+              this.ngOnInit();
+              swal({
+                position: 'top-end',
+                type: 'success',
+                title: data.value,
+                showConfirmButton: false,
+                timer: 1500
+              });
+              // Pagination control while deleting an object in a page who contain one element
+              if (this.total % this.item === 1) {
+                this.selectedPage = this.selectedPage - 1;
+              }
+              this.reloadData();
+            } else {
+              swal({
+                title: 'Erreur!',
+                text: data.value,
+                type: 'error',
+                confirmButtonText: 'Ok'
+              });
+            }
+          });
+      }
+    });
+  }
+  // Pagination params
+  pageClient: PageClient = new PageClient();
+  total: number;
+  selectedPage = 0;
+  item = 5;
+  searchInput: String = '';
 }

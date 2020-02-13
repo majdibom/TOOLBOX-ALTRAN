@@ -14,7 +14,7 @@ import com.altran.toolsbox.usermanagement.model.Activity;
 /**
  * Represents repository of activity
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Repository

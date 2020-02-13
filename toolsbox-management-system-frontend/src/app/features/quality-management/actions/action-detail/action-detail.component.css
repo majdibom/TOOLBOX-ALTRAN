@@ -382,7 +382,7 @@
     box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(117, 128, 138, .5);
 }
 .card .tab-content{
-	padding: 1rem 0 0 0;
+    padding: 1rem 0 0 0;
 }
 .z-depth-3 {
     -webkit-box-shadow: 0 11px 7px 0 rgba(0,0,0,0.19),0 13px 25px 0 rgba(0,0,0,0.3);
@@ -398,3 +398,7 @@
     font-family:Verdana, Geneva, sans-serif	 ;
     color: #242a33;
   }
+ /*.card1{
+    margin-left: -310px
+    max-width: 380px;
+  }*/

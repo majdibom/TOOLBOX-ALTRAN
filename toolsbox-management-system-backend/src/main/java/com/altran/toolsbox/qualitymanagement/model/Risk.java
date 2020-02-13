@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +20,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import com.altran.toolsbox.usermanagement.model.User;
 import com.fasterxml.jackson.annotation.JsonFilter;
@@ -75,7 +81,7 @@ public class Risk implements Serializable {
 	 * @see User
 	 */
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "risk_pilote")
 	private User riskPilote;
 
 	/**
@@ -135,6 +141,31 @@ public class Risk implements Serializable {
 	 */
 	@OneToMany
 	private List<Action> mitigationApproach;
+	
+	/**
+	 * The creator of this Action.
+	 * 
+	 * @see User
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "created_by", nullable = false, foreignKey = @ForeignKey(name = "FK_CREATED_BY"))
+	private User createdBy;
+	
+	/**
+	 * The created date of this Action.
+	 */
+	@Column
+	@CreatedDate
+	@JsonFormat(pattern = "dd-MM-yyy HH:mm:ss")
+	private Date createdAt;
+
+	/**
+	 * The last modified date of this Action.
+	 */
+	@Column
+	@LastModifiedDate
+	@JsonFormat(pattern = "dd-MM-yyy HH:mm:ss")
+	private Date updatedAt;
 
 	/****** Getters and setters *****/
 
@@ -268,6 +299,30 @@ public class Risk implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public User getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 }

@@ -44,7 +44,7 @@ import static com.altran.toolsbox.util.constant.FilterConstants.ACTION_FILTER;
 /**
  * Represents Rest controller of user
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  *
  */

@@ -1,9 +1,9 @@
 package com.altran.toolsbox.qualitymanagement.service.impl;
 
-import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
 import static com.altran.toolsbox.util.constant.ColumnConstants.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -26,6 +26,9 @@ import com.altran.toolsbox.qualitymanagement.service.ActionService;
 import com.altran.toolsbox.qualitymanagement.service.RiskService;
 import com.altran.toolsbox.usermanagement.model.User;
 import com.altran.toolsbox.usermanagement.service.UserService;
+
+import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 
 /**
  * Represents implementation of activity service
@@ -108,7 +111,7 @@ public class RiskServiceImpl implements RiskService {
 	@Override
 	public Risk create(Risk risk) {
 		if (risk.getId() != null && riskRepository.existsById(risk.getId())) {
-			throw new EntityExistsException("There is already existing entity with such ID in the database.");
+			throw new EntityExistsException(ENTITY_EXIST);
 		}
 		// Calculate the exposure for the created risk
 		risk.setExposure(calculeExposure(risk.getProbability(), risk.getSeverity()));
@@ -140,9 +143,18 @@ public class RiskServiceImpl implements RiskService {
 	@Override
 	public Risk update(Risk risk, Long id) {
 		if (id != null && !riskRepository.existsById(id)) {
-			throw new EntityNotFoundException("\"There is no entity with such ID in the database.");
+			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		risk.setId(id);
+
+		// get the same create date as the old action(Fix null problem)
+		Risk oldRisk = findById(id);
+		Date createdDate = oldRisk.getCreatedAt();
+		risk.setCreatedAt(createdDate);
+		// get the same createdBy as the old action(Fix null problem)
+		User createdBy = oldRisk.getCreatedBy();
+		risk.setCreatedBy(createdBy);
+
 		return riskRepository.save(risk);
 	}
 
@@ -155,7 +167,7 @@ public class RiskServiceImpl implements RiskService {
 	@Override
 	public void delete(Long id) {
 		if (id != null && !riskRepository.existsById(id)) {
-			throw new EntityNotFoundException("\"There is no entity with such ID in the database.");
+			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		riskRepository.deleteById(id);
 	}

@@ -8,7 +8,7 @@ import com.altran.toolsbox.usermanagement.model.Privilege;
 /**
  * Represents repository of privilege
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Repository

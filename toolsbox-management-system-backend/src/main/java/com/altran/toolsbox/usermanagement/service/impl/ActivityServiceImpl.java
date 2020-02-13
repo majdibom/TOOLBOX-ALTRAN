@@ -17,11 +17,12 @@ import com.altran.toolsbox.usermanagement.repository.ActivityRepository;
 import com.altran.toolsbox.usermanagement.service.ActivityService;
 
 import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 
 /**
  * Represents implementation of activity service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Service
@@ -97,7 +98,7 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public Activity create(Activity activity) {
 		if (activity.getId() != null && activityRepository.existsById(activity.getId())) {
-			throw new EntityExistsException("There is already existing entity with such ID in the database.");
+			throw new EntityExistsException(ENTITY_EXIST);
 		}
 		return activityRepository.save(activity);
 	}
@@ -113,7 +114,7 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public Activity update(Activity activity, Long id) {
 		if (id != null && !activityRepository.existsById(id)) {
-			throw new EntityNotFoundException("\"There is no entity with such ID in the database.");
+			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		activity.setId(id);
 		return activityRepository.save(activity);
@@ -128,7 +129,7 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public void delete(Long id) {
 		if (id != null && !activityRepository.existsById(id)) {
-			throw new EntityNotFoundException("\"There is no entity with such ID in the database.");
+			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		activityRepository.deleteById(id);
 	}
