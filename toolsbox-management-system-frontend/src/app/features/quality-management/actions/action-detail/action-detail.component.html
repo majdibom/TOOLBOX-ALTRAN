@@ -88,46 +88,54 @@
             <ul class="nav nav-pills nav-pills-primary nav-justified">
               <!-- Details menu -->
               <li class="nav-item">
-                <a href="javascript:void();" data-target="#detail" data-toggle="pill" class="nav-link active show"><i
-                    class="icon-user"></i> <span class="hidden-xs">{{'Détails généraux' | translate}}</span></a>
+                <div class="card-body text-center bg-altran rounded-top">
+                  <h6 class="text-light">{{'Créé par' | translate}}:</h6>
+                  <h5 class="text-white">
+                    {{action?.createdBy?.firstName}}&nbsp;{{action?.createdBy?.lastName}}</h5>
+                </div>
               </li>
-              <!-- Remarks menu 
               <li class="nav-item">
-                <a href="javascript:void();" data-target="#quizzes" data-toggle="pill" class="nav-link"><i
-                    class="icon-envelope-open"></i> <span
-                    class="hidden-xs">{{'Remarques et notes' | translate}}</span></a>
+                <div class="card-body text-center bg-altran rounded-top">
+                  <h6 class="text-light">{{'Date de création' | translate}}:</h6>
+                  <h5 class="text-light" style="font-size: 20px">{{action?.createdAt |
+                    date:'dd/MM/yyyy'}}</h5>
+                </div>
               </li>
-              -->
+              <li class="nav-item">
+                <div class="card-body text-center bg-altran rounded-top">
+                  <h6 class="text-light">{{'Date de mise à jour' | translate}}:</h6>
+                  <h5 class="text-light" style="font-size: 20px">{{action?.updatedAt |
+                    date:'dd/MM/yyyy'}}</h5>
+                </div>
+              </li>
+
             </ul>
             <div class="tab-content p-3">
               <!-- Details section -->
               <div class="tab-pane active show" id="detail">
                 <h5 class="mb-3"></h5>
                 <div class="row">
-                  <div class="col-md-6">
-                    <h6 class="font-weight-bold">{{'Origine' | translate}}</h6>
-                    <p>
-                      {{action?.origin}}
-                    </p>
-                    <h6 class="font-weight-bold">{{'Description' | translate}}</h6>
-                    <p>
-                      {{action?.description}}
-                    </p>
-                    <h6 class="font-weight-bold">{{'Comments' | translate}}</h6>
-                    <p>
-                      {{action?.comments}}
-                    </p>
-                    <h6 class="font-weight-bold">{{'Effectiveness measurement criterion' | translate}}</h6>
-                    <p>
-                      {{action?.effMeasCriterion}}
-                    </p>
-                  </div>
-                  <div class="col-md-6">
-                    {{action?.processImpacts.title}}
-                    <h6 class="font-weight-bold">{{'Processus impacté' | translate}}</h6>
-                    <span *ngFor="let process of action?.processImpacts">
-                      <span class="badge badge-dark badge-pill">{{process.title}}</span>&nbsp;
-                    </span>
+                  <div class="col-md-12">
+                    <ul class="list-group list-group-flush">
+                      <li  class="list-group-item">
+                    <h6><strong>{{'Origine :' | translate}}</strong>&nbsp;&nbsp;{{action?.origin}}</h6>
+                      </li>
+                      <li  class="list-group-item">
+                        <h6><strong>{{'Description :' | translate}}</strong>&nbsp;&nbsp;{{action?.description}}</h6>
+                  </li>
+                    <li  class="list-group-item">
+                      <h6><strong>{{'Comments :' | translate}}</strong>&nbsp;&nbsp;{{action?.comments}}</h6>
+                  </li>
+                    <li  class="list-group-item">
+                      <h6><strong>{{'Effectiveness measurement criterion :' | translate}}</strong>&nbsp;&nbsp;{{action?.effMeasCriterion}}</h6>
+                  </li>
+                
+                <li  class="list-group-item">
+                  <h6><strong>{{'Processus impacté :' | translate}}</strong>&nbsp;&nbsp;<span *ngFor="let process of action?.processImpacts">
+                    <span class="badge badge-dark badge-pill">{{process.title}}</span>&nbsp;
+                  </span></h6>
+              </li>
+                    </ul>
                   </div>
                 </div>
               </div>

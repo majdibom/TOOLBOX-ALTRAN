@@ -27,6 +27,8 @@ export class Risk {
     actions: Array<Action> = [];
     contingencyPlan: Array<Action> = [];
     mitigationApproach: Array<Action> = [];
-
+    createdBy: User;
+    createdAt: Date;
+    updatedAt: Date;
     constructor() { }
 }
