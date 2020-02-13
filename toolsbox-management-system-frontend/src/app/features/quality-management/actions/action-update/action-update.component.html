@@ -44,10 +44,10 @@
             
             <!-- Risk responsible field -->
         <div class="form-group  col-md-6">
-          <label for="responsibleAction" class="required">{{'responsable d Action' | translate}}</label>
-          <select id="responsibleAction" (change)="parseValue($event.target.value)" name="responsibleAction" class="form-control"
-            [(ngModel)]="actionToEdit.responsibleAction" required>
-            <option *ngFor="let user of listOfUsers" [ngValue]="user">{{user.firstName}} {{user.lastName}}</option>
+          <label for="responsibleAction-edit" class="required">{{'responsable d action' | translate}}</label>
+          <select id="responsibleAction-edit" (change)="parseValue($event.target.value)" name="responsibleAction" class="form-control"
+            [(ngModel)]="actionToEdit.responsibleAction.id" required>
+            <option *ngFor="let user of listOfUsers" [ngValue]="user.id">{{user.firstName}} {{user.lastName}}</option>
           </select>
         </div>
           <!-- Action origin field -->
@@ -93,7 +93,7 @@
           </div>
           <!-- Effectiveness measurement criterion field -->
           <div class="form-group">
-            <label for="effMeasCriterion">{{'Effectiveness measurement criterion' | translate}}</label>
+            <label for="effMeasCriterion">{{'Critère de mesure de l efficacité' | translate}}</label>
             <textarea rows="2" id="effMeasCriterion-update" name="effMeasCriterion" class="form-control"
               [(ngModel)]="actionToEdit.effMeasCriterion"></textarea>
           </div>

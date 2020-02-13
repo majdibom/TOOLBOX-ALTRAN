@@ -1,7 +1,30 @@
-INSERT INTO public.activities (id, title, description) VALUES (1, 'Automobile', 'Département automobile');
-INSERT INTO public.activities (id, title, description) VALUES (2, 'Media', 'Département media');
-INSERT INTO public.activities (id, title, description) VALUES (3, 'Aéronautique', 'Département aéronautique');
-INSERT INTO public.activities (id, title, description) VALUES (4, 'Securité', 'Département sécurité');
+
+INSERT INTO public.activities (id, description, title) VALUES (1, 'Département automobile', 'Automobile');
+INSERT INTO public.activities (id, description, title) VALUES (2, 'Département media', 'Media');
+INSERT INTO public.activities (id, description, title) VALUES (3, 'Département aéronautique', 'Aéronautique');
+INSERT INTO public.activities (id, description, title) VALUES (4, 'Département sécurité', 'Securité');
+
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (2, true, 'Nasr', NULL, 'ayada.hassine@altran.com', 'Ayada', 'Hassine', '$2a$10$8Efud5JLfRBK.b0KnAiX4uE.GI6KD9jotN0us2bcaeTbTTsvoMkX6', '75142146', 'a', 1);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (3, true, 'Manzah', NULL, 'ines.jebri@altran.com', 'Ines', 'Jebri', '$2a$10$zfjDW7sIJfdmAUtvN9lMee5adV7ZqqG/MgoEqsQJ4Oia6iGLuSkOC', '74589312', 'g', 1);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (4, true, 'Manzah', NULL, 'mariam.djait@altran.com', 'Mariam', 'Djait', '$2a$10$zDvCpVgZ4OZOsdEw.peB4uymkDj3kmZ0uK8ZJVf7yoQKPxw18I0C2', '74589312', 'b', 3);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (12, true, 'Manzah', NULL, 'yassine.khalki@altran.com', 'Yassine', 'Khalki', '$2a$10$Jn3lkpDQa7Lrt.7C3e8VBOU03PoO4Y6e7kj0wEBOAErFoZVhMZceu', '74589312', 'k', 1);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (14, true, 'Manzah', NULL, 'mohamedamine.babay@altran.com', 'Mohamed Amine', 'Babay', '$2a$10$mmIdPe4DTG7NZ4QCVuRyRO3LbIWQ7xoVGlImpMzMG6Q2tOEX2qbrK', '74589312', 'm', 1);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (15, true, 'Manzah', NULL, 'ramla.mathlouthhi@altran.com', 'Ramla', 'Mathlouthi', '$2a$10$3zMDJO1ipsr9SD7iaRU5B.EmwifRYGMhpdddb/R3yr/MClsrXgMhK', '74589312', 'n', 1);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (13, true, 'Manzah', '1995-02-11 00:00:00', 'imen.jemai@altran.com', 'Imen', 'Jemai', '$2a$10$yiWUNvS3ooHNNfcS4IuzjuU8nYXUKhG6fmFqDtF2RbTSPhbJo1WkW', '74589312', 'l', 1);
+
+INSERT INTO public.roles (id, description, title) VALUES (1, 'Role administrateur', 'Admin');
+INSERT INTO public.roles (id, description, title) VALUES (2, 'Role auditeur', 'Auditeur');
+INSERT INTO public.roles (id, description, title) VALUES (3, 'Role audite', 'Audite');
+INSERT INTO public.roles (id, description, title) VALUES (4, 'Role responsable qualité', 'Responsable Qualité');
+INSERT INTO public.roles (id, description, title) VALUES (5, 'Role responsable activité', 'Responsable Activité');
+INSERT INTO public.roles (id, description, title) VALUES (6, 'Role membre d équipe qualité', 'Membre Equipe Qualité');
+INSERT INTO public.roles (id, description, title) VALUES (7, 'Role responsable plan audit', 'Responsable Plan Audit');
+INSERT INTO public.roles (id, description, title) VALUES (8, 'Role pilote process', 'Pilote Process');
+INSERT INTO public.roles (id, description, title) VALUES (9, 'Role management operationnel', 'Management Operationnel');
+INSERT INTO public.roles (id, description, title) VALUES (10, 'Role référence ECME', 'Référence ECME');
+INSERT INTO public.roles (id, description, title) VALUES (11, 'Role membre activité', 'Membre activité');
+INSERT INTO public.roles (id, description, title) VALUES (12, 'Role responsable action', 'Responsable Action');
+INSERT INTO public.roles (id, description, title) VALUES (13, 'Role responsable systéme management', 'Responsable Systéme Management');
 
 INSERT INTO public.privileges (id, category, title) VALUES (1, 'MENU', 'SHOW_ESPACE_ADMIN');
 INSERT INTO public.privileges (id, category, title) VALUES (2, 'MENU', 'SHOW_ESPACE_QUALITY');
@@ -34,66 +57,65 @@ INSERT INTO public.privileges (id, category, title) VALUES (62, 'AUDIT_REPORT', 
 INSERT INTO public.privileges (id, category, title) VALUES (63, 'AUDIT_REPORT', 'VALIDATE_AUDIT_REPORT');
 INSERT INTO public.privileges (id, category, title) VALUES (64, 'AUDIT_REPORT', 'DELETE_AUDIT_REPORT');
 
-INSERT INTO public.roles (id, title, description) VALUES (1, 'Admin','Role administrateur');
-INSERT INTO public.roles (id, title, description) VALUES (2, 'Auditeur','Role auditeur');
-INSERT INTO public.roles (id, title, description) VALUES (3, 'Audite','Role audite');
-INSERT INTO public.roles (id, title, description) VALUES (4, 'Responsable Qualité','Role responsable qualité');
-INSERT INTO public.roles (id, title, description) VALUES (5, 'Responsable Activité','Role responsable activité');
-INSERT INTO public.roles (id, title, description) VALUES (6, 'Membre Equipe Qualité','Role membre d équipe qualité');
-INSERT INTO public.roles (id, title, description) VALUES (7, 'Responsable Plan Audit','Role responsable plan audit');
-INSERT INTO public.roles (id, title, description) VALUES (8, 'Pilote Process','Role pilote process');
-INSERT INTO public.roles (id, title, description) VALUES (9, 'Management Operationnel','Role management operationnel');
-INSERT INTO public.roles (id, title, description) VALUES (10, 'Référence ECME','Role référence ECME');
-INSERT INTO public.roles (id, title, description) VALUES (11, 'Membre activité','Role membre activité');
-INSERT INTO public.roles (id, title, description) VALUES (12, 'Responsable Action','Role responsable action');
-INSERT INTO public.roles (id, title, description) VALUES (13, 'Responsable Systéme Management','Role responsable systéme management');
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 2);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 3);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 100);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 20);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 21);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 23);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 30);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 50);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 51);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 30);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 31);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 32);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 33);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 2);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 3);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 100);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 2);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 3);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 10);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 21);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 20);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 22);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (4, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (4, 2);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (4, 3);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (4, 100);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (5, 20);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (6, 20);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (7, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (7, 2);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (7, 3);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (7, 20);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (8, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (9, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (9, 2);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (12, 23);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (12, 20);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (12, 21);
 
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (1, 1);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (1, 2);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (1, 3);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (1, 100);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (1, 20);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (1, 21);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (1, 23);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (1, 30);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (1, 50);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (1, 51);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (2, 30);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (2, 31);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (2, 32);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (2, 33);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (2, 1);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (2, 2);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (2, 3);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (2, 100);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (3, 1);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (3, 2);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (3, 3);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (3,10);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (3, 21);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (3, 20);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (3, 22);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (4, 1);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (4, 2);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (4, 3);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (4, 100);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (5, 20);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (6, 20);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (7, 1);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (7, 2);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (7, 3);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (7, 20);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (8, 1);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (9, 1);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (9, 2);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (12, 23);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (12, 20);
-INSERT INTO public.roles_privileges(role_id, privileges_id) VALUES (12, 21);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (2, 2);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (2, 4);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (4, 4);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (4, 2);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (3, 6);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (12, 11);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (13, 11);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (14, 11);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (15, 11);
+
+
 
 INSERT INTO public.delivery_model (id, title) VALUES (1, 'ADM1');
 INSERT INTO public.delivery_model (id, title) VALUES (2, 'ADM2');
 INSERT INTO public.delivery_model (id, title) VALUES (3, 'ADM3');
 INSERT INTO public.delivery_model (id, title) VALUES (4, 'ADM4');
+
 
 INSERT INTO public.process (id, title) VALUES (1, 'BDM');
 INSERT INTO public.process (id, title) VALUES (2, 'PPR');
@@ -107,25 +129,14 @@ INSERT INTO public.process (id, title) VALUES (9, 'ACH');
 INSERT INTO public.process (id, title) VALUES (10, 'GRH');
 INSERT INTO public.process (id, title) VALUES (11, 'IT');
 
-INSERT INTO public.users (id, first_name, last_name, address,phone_number, email, password,  username, activity_id, activated) VALUES (1, 'ahmed','elayeb','Sousse',21248145, 'elayebahmed1@gmail.com', '$2a$10$8sUz2ZV9x.b39EWXmcmXZuY3lTV9P1otyzKta2lYTTfm9yNEES2D6', 'nautorios', 1, true);
-INSERT INTO public.users (id, first_name, last_name, address,phone_number, email, password,  username, activity_id, activated) VALUES (2,'Ayada','Hassine','Nasr',75142146, 'ayada.hassine@altran.com', '$2a$10$8Efud5JLfRBK.b0KnAiX4uE.GI6KD9jotN0us2bcaeTbTTsvoMkX6',  'a', 1, true);
-INSERT INTO public.users (id, first_name, last_name, address,phone_number, email, password,  username, activity_id, activated) VALUES (3,'Ines', 'Jebri','Manzah',74589312,'ines.jebri@altran.com', '$2a$10$zfjDW7sIJfdmAUtvN9lMee5adV7ZqqG/MgoEqsQJ4Oia6iGLuSkOC', 'g', 1, true);
-INSERT INTO public.users (id, first_name, last_name, address,phone_number, email, password,  username, activity_id, activated) VALUES (4, 'Mariam','Djait', 'Manzah',74589312,'mariam.djait@altran.com', '$2a$10$zDvCpVgZ4OZOsdEw.peB4uymkDj3kmZ0uK8ZJVf7yoQKPxw18I0C2',  'b', 3, true);
-INSERT INTO public.users (id, first_name, last_name, address,phone_number, email, password,  username, activity_id, activated) VALUES (12, 'Yassine', 'Khalki', 'Manzah',74589312,'yassine.khalki@altran.com', '$2a$10$Jn3lkpDQa7Lrt.7C3e8VBOU03PoO4Y6e7kj0wEBOAErFoZVhMZceu', 'k', 1, true);
-INSERT INTO public.users (id, first_name, last_name, address,phone_number, email, password,  username, activity_id, activated) VALUES (13,'Imen', 'Jemai', 'Manzah',74589312,'imen.jemai@altran.com', '$2a$10$yiWUNvS3ooHNNfcS4IuzjuU8nYXUKhG6fmFqDtF2RbTSPhbJo1WkW',  'l', 1, true);
-INSERT INTO public.users (id, first_name, last_name, address,phone_number, email, password,  username, activity_id, activated) VALUES (14,'Mohamed Amine','Babay', 'Manzah',74589312,'mohamedamine.babay@altran.com',  '$2a$10$mmIdPe4DTG7NZ4QCVuRyRO3LbIWQ7xoVGlImpMzMG6Q2tOEX2qbrK', 'm', 1, true);
-INSERT INTO public.users (id, first_name, last_name, address,phone_number, email, password,  username, activity_id, activated) VALUES (15,'Ramla','Mathlouthi', 'Manzah',74589312,'ramla.mathlouthhi@altran.com',  '$2a$10$3zMDJO1ipsr9SD7iaRU5B.EmwifRYGMhpdddb/R3yr/MClsrXgMhK', 'n', 1, true);
 
-INSERT INTO public.users_roles (user_id, roles_id) VALUES (1, 1);
-INSERT INTO public.users_roles (user_id, roles_id) VALUES (2, 2);
-INSERT INTO public.users_roles (user_id, roles_id) VALUES (2, 4);
-INSERT INTO public.users_roles (user_id, roles_id) VALUES (4, 4);
-INSERT INTO public.users_roles (user_id, roles_id) VALUES (4, 2);
-INSERT INTO public.users_roles (user_id, roles_id) VALUES (3, 6);
-INSERT INTO public.users_roles (user_id, roles_id) VALUES (12, 11);
-INSERT INTO public.users_roles (user_id, roles_id) VALUES (13, 11);
-INSERT INTO public.users_roles (user_id, roles_id) VALUES (14, 11);
-INSERT INTO public.users_roles (user_id, roles_id) VALUES (15, 11);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (1, 'CONTI_Auto-Code', 1, 2);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (2, 'Rapsody', 2, 2);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (3, 'BSCU', 3, 2);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (4, 'MALI', 4, 3);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (5, 'X4_EBC_ACU', 3, 4);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (6, 'CONTI_Safety', 1, 2);
+
 
 INSERT INTO public.week (id, number) VALUES (1, 1);
 INSERT INTO public.week (id, number) VALUES (2, 2);
@@ -180,48 +191,51 @@ INSERT INTO public.week (id, number) VALUES (50, 50);
 INSERT INTO public.week (id, number) VALUES (51, 51);
 INSERT INTO public.week (id, number) VALUES (52, 52);
 
-INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (1, 'CONTI_Auto-Code', 1, 2);
-INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (2, 'Rapsody', 2, 2);
-INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (3, 'BSCU', 3, 2);
-INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (4, 'MALI', 4, 3);
-INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (5, 'X4_EBC_ACU', 3, 4);
-INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (6, 'CONTI_Safety', 1, 2);
 
-INSERT INTO public.audits (id,reference, audit_theme, duration, issues, risks, accompanying_auditor_id, primary_auditor_id, process_id, project_id, week_id) VALUES (1,'REF20154', 'aaa', 2, 'aaa', 'aaaaa', 14, 2, NULL, 4, 2);
-
-INSERT INTO public.audits_audited(audits_id, audited_id)VALUES (1, 14);
-INSERT INTO public.audits_audited(audits_id, audited_id)VALUES (1, 3);
-INSERT INTO public.audits_audited(audits_id, audited_id)VALUES (1, 2);
-INSERT INTO public.audits_audited(audits_id, audited_id)VALUES (1, 4);
-
-INSERT INTO public.audits_process_impacts(audit_id, process_impacts_id)VALUES (1, 7);
-INSERT INTO public.audits_process_impacts(audit_id, process_impacts_id)VALUES (1, 10);
-INSERT INTO public.audits_process_impacts(audit_id, process_impacts_id)VALUES (1, 9);
+INSERT INTO public.audits (id, audit_theme, duration, issues, reference, risks, accompanying_auditor_id, primary_auditor_id, process_id, project_id, week_id) VALUES (1, 'aaa', 2, 'aaa', 'REF20154', 'aaaaa', 14, 2, NULL, 4, 2);
 
 
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (7, 'Closed', 'Il faut ajouter plus qu une actions !
+Il faut ajouter plus qu une actions !
+', '2020-02-12 00:00:00', 'description', '0025-08-12 00:00:00', NULL, '0029-08-12 00:00:00', '0009-08-12 00:00:00', 'Risk', 'High', '0016-08-12 00:00:00', 'Protection', '2020-02-12 00:00:00', '0027-08-13 00:00:00', 2, NULL, 15);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (5, 'Open', 'CommentairesCommentairesCommentairesCommentairesCommentaires', '2020-02-12 00:00:00', 'Identification des facteurs +/-', '0033-07-12 00:00:00', 'Effectiveness measurement criterion', '0033-07-12 00:00:00', '0033-07-12 00:00:00', 'Risk', 'Nomral', '0033-07-12 00:00:00', 'Protection', '2020-02-12 00:00:00', '0033-07-12 00:00:00', 2, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (11, 'Delayed', 'Effectiveness measurement criterionEffectiveness measurement criterionEffectiveness measurement criterionEffectiveness measurement criterion', '2020-02-12 00:00:00', 'Il faut ajouter plus qu une actions !
+Il faut ajouter plus qu une actions !
+', '0016-08-12 00:00:00', 'Effectiveness measurement criterion', '0020-08-12 00:00:00', '0017-08-12 00:00:00', 'Risk', 'Nomral', '0019-08-13 00:00:00', 'Amélioration', '2020-02-12 00:00:00', '0018-08-13 00:00:00', 2, NULL, 2);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (9, 'Cancelled', 'Effectiveness measurement criterionEffectiveness measurement criterionEffectiveness measurement criterionEffectiveness measurement criterionEffectiveness measurement criterion', '2020-02-12 00:00:00', 'Effectiveness measurement criterionEffectiveness measurement criterion', '0030-08-13 00:00:00', NULL, '0017-08-12 00:00:00', '0020-08-12 00:00:00', 'Risk', 'High', '0032-08-12 00:00:00', 'Protection', '2020-02-12 00:00:00', '0026-08-13 00:00:00', 2, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (15, 'Blocked', 'Effectiveness measurement criterionEffectiveness measurement criterion', '2020-02-12 00:00:00', 'description', '2020-02-13 00:00:00', 'Effectiveness measurement criterion', '2020-02-27 00:00:00', '2020-02-12 00:00:00', 'Risk', 'Nomral', '2020-02-28 00:00:00', 'Amélioration', '2020-02-12 00:00:00', '2020-02-14 00:00:00', 2, NULL, 4);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (13, 'Done', 'Il faut ajouter plus qu une actions !
+Il faut ajouter plus qu une actions !
+', '2020-02-12 00:00:00', 'Il faut ajouter plus qu une actions !
+', '0016-08-12 00:00:00', 'Effectiveness measurement criterion', '0026-08-13 00:00:00', '0017-08-12 00:00:00', 'Risk', 'Nomral', '0020-08-12 00:00:00', 'Protection', '2020-02-12 00:00:00', '0019-08-13 00:00:00', 2, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (17, 'Delayed', 'descriptiondescriptiondescription', '2020-02-12 00:00:00', 'description', '2020-02-18 00:00:00', 'actionssss', NULL, '2020-02-05 00:00:00', 'Audit', 'Nomral', '2020-02-20 00:00:00', 'Amélioration', '2020-02-12 00:00:00', '2020-02-22 00:00:00', 2, NULL, 4);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (16, 'Done', 'Effectiveness measurement criterionEffectiveness measurement criterion', '2020-02-12 00:00:00', 'Effectiveness measurement criterion', '2020-02-21 00:00:00', 'Effectiveness measurement criterion', '2020-02-27 00:00:00', '2020-02-11 00:00:00', 'Audit', 'High', '2020-02-21 00:00:00', 'Transfert', '2020-02-12 00:00:00', '2020-02-18 00:00:00', 2, NULL, 15);
 
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (53, NULL, NULL, 'High', 'Very_Likely', 'Crisis', 'kahbfajuyg osdoih ughzikfbk', 'Open');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (51, '2019-08-09 10:16:56', '2019-08-09 10:16:56', 'Medium', 'Unlikely', 'Crisis', 'kahbfajkfbk', 'Open');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (12, '2019-08-24 01:00:00', '2019-08-17 01:00:00', NULL, 'Very_Likely', 'Serious_Problem', 'zertyop', 'Open');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (11, '2019-08-07 01:00:00', '2019-08-07 01:00:00', NULL, 'Very_Likely', 'Worrying_Situation', NULL, 'Open');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (13, '2019-09-01 01:00:00', '2019-08-09 01:00:00', NULL, 'Almost_Sure', 'Serious_Problem', 'xcdvbnuio', 'Open');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (45, NULL, NULL, 'High', 'Almost_Sure', 'Crisis', 'kahbfajkfbk', 'Open');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (44, NULL, NULL, 'High', 'Almost_Sure', 'Crisis', 'kahbfajkfbk', 'Open');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (47, NULL, NULL, 'High', 'Likely', 'Crisis', 'kahbfajkfbk', 'Open');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (46, NULL, NULL, 'High', 'Almost_Sure', 'Crisis', 'kahbfajkfbk', 'Open');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (49, NULL, NULL, 'Medium', 'Unlikely', 'Crisis', 'kahbfajkfbk', 'Open');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (48, NULL, NULL, 'Medium', 'Unlikely', 'Crisis', 'kahbfajkfbk', 'Open');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (15, '2019-08-04 01:00:00', '2019-08-04 01:00:00', NULL, 'Very_Likely', 'Worrying_Situation', 'holddd ', 'On_Hold');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (16, '2019-08-22 01:00:00', '2019-08-09 01:00:00', 'Medium', 'Very_Likely', 'Serious_Problem', 'xxxx', 'Canseled');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (20, '2019-08-29 01:00:00', '2019-08-29 01:00:00', 'Low', 'Unlikely', 'Significant_Problem', 'string', 'Open');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (22, '2019-08-08 01:00:00', '2019-08-07 01:00:00', 'Low', 'Likely', 'Significant_Problem', 'nn', 'On_Hold');
-INSERT INTO public.risk (id, closure_date, detection_date, exposure, probability, severity, strategy, risk_status) VALUES (24, '2019-08-07 01:00:00', '2019-08-17 01:00:00', 'Medium', 'Likely', 'Worrying_Situation', 'aa', 'Closed');
 
-INSERT INTO public.actions (id, Description, effMesCriterion, openDate, dueDate, updatedDueDate, effMesDate, realisationDate, comments, origin, priority,action_status, type_action, gap_id, user_id) VALUES (1, 'Audite interne pour le projet MALI', 'effectivness criterion', '2019-06-01 01:00:00', '2019-06-01 01:00:00','2019-06-01 01:00:00', '2019-06-01 01:00:00','2019-06-01 01:00:00', 'Audite notes', 'Audit','Low', 'Open', 'Corrective', NULL, 2);
-INSERT INTO public.actions (id, Description, effMesCriterion, openDate, dueDate, updatedDueDate, effMesDate, realisationDate, comments, origin, priority,action_status, type_action, gap_id, user_id) VALUES (2, risque interne pour le projet MALI', 'effectivness criterion', '2019-06-01 01:00:00', '2019-06-01 01:00:00','2019-06-01 01:00:00', '2019-06-01 01:00:00','2019-06-01 01:00:00', 'Audite notes', 'Risk','Low', 'Open', 'Corrective', NULL, 3);
-INSERT INTO public.actions (id, Description, effMesCriterion, openDate, dueDate, updatedDueDate, effMesDate, realisationDate, comments, origin, priority,action_status, type_action, gap_id, user_id) VALUES (3, 'Audite interne pour le projet MALI', 'effectivness criterion', '2019-06-01 01:00:00', '2019-06-01 01:00:00','2019-06-01 01:00:00', '2019-06-01 01:00:00','2019-06-01 01:00:00', 'Audite notes', 'Audit','Low', 'Open', 'Corrective', NULL, 4);
 
-INSERT INTO public.actions_process_impacts (action_id, process_impacts_id) VALUES (1, 2);
-INSERT INTO public.actions_process_impacts (action_id, process_impacts_id) VALUES (1, 3);
-INSERT INTO public.actions_process_impacts (action_id, process_impacts_id) VALUES (1, 4);
-INSERT INTO public.actions_process_impacts (action_id, process_impacts_id) VALUES (1, 5);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (1, 14);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (1, 3);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (1, 2);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (1, 4);
+
+
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (1, 7);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (1, 10);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (1, 9);
+
+
+INSERT INTO public.risk (id, closure_date, detection_date, exposure, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, created_at, updated_at, risk_pilote, created_by) VALUES (6, '2020-02-18 00:00:00', '2020-02-14 00:00:00', 'Low', 'Identification des facteurs +/-', 'ImpactImpact', 'Likely', 'Opportunity', 'Nomral', 'Closed', 'Eradication', 'Significant_Problem', '2020-02-12 00:00:00', '2020-02-12 00:00:00', 14, 2);
+INSERT INTO public.risk (id, closure_date, detection_date, exposure, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, created_at, updated_at, risk_pilote, created_by) VALUES (1, '2019-09-01 01:00:00', '2019-10-19 01:00:00', 'High', 'Identification des facteurs +/-Identification des facteurs +/-', 'testtesttest', 'Very_Likely', 'Opportunity', 'Low', 'Open', 'Acceptation', 'Crisis', '2020-02-12 00:00:00', '2020-02-12 00:00:00', 14, 2);
+INSERT INTO public.risk (id, closure_date, detection_date, exposure, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, created_at, updated_at, risk_pilote, created_by) VALUES (10, '2020-02-24 00:00:00', '2020-02-22 00:00:00', 'Medium', 'Identification des facteurs +/-Identification des facteurs +/-Identification des facteurs +/-', 'Effectiveness measurement criterion', 'Likely', 'Opportunity', 'Nomral', 'Open', 'Eradication', 'Serious_Problem', '2020-02-12 00:00:00', '2020-02-12 00:00:00', 14, 2);
+INSERT INTO public.risk (id, closure_date, detection_date, exposure, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, created_at, updated_at, risk_pilote, created_by) VALUES (8, '2020-08-09 01:00:00', '2020-02-14 00:00:00', 'High', 'Identification des facteurs +/-', 'Impact', 'Very_Likely', 'Risk', 'Nomral', 'Open', 'Eradication', 'Worrying_Situation', '2020-02-12 00:00:00', '2020-02-12 00:00:00', 14, 2);
+INSERT INTO public.risk (id, closure_date, detection_date, exposure, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, created_at, updated_at, risk_pilote, created_by) VALUES (14, '2020-02-16 00:00:00', '2020-02-19 00:00:00', 'Medium', 'ActionStatusActionStatusActionStatus', 'ActionStatusActionStatus', 'Likely', 'Opportunity', 'Nomral', 'Closed', 'Eradication', 'Worrying_Situation', '2020-02-12 00:00:00', '2020-02-12 00:00:00', 14, 2);
+INSERT INTO public.risk (id, closure_date, detection_date, exposure, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, created_at, updated_at, risk_pilote, created_by) VALUES (12, '2020-02-19 00:00:00', '2020-02-27 00:00:00', 'High', 'Identification des facteurs +/-', 'actionStatus', 'Almost_Sure', 'Opportunity', 'Nomral', 'Closed', 'Eradication', 'Worrying_Situation', '2020-02-12 00:00:00', '2020-02-12 00:00:00', 14, 2);
+
+
+INSERT INTO public.risk_actions (risk_id, actions_id) VALUES (6, 5);
+INSERT INTO public.risk_actions (risk_id, actions_id) VALUES (8, 7);
+INSERT INTO public.risk_actions (risk_id, actions_id) VALUES (10, 9);
+INSERT INTO public.risk_actions (risk_id, actions_id) VALUES (12, 11);
+INSERT INTO public.risk_actions (risk_id, actions_id) VALUES (14, 13);
+
+

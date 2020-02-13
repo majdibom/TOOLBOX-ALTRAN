@@ -1,3 +1,71 @@
+<div id="accordion">
+  <div class="card border-secondary">
+      <div class="card-header border-secondary" id="info">
+          <!-- Advanced Search Section -->
+          <div class="row">
+              <div class="col-12">
+                  <button id="advanced-search-quiz-btn" type="button" class="btn btn-light btn-sm" data-toggle="collapse"
+                      data-target="#collapseInfo"><i class="fa fa-chevron-down" aria-hidden="true"></i> <strong>
+                          {{'Recherche avancée' | translate}}</strong></button>
+              </div>
+          </div>
+      </div>
+      <div id="collapseInfo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+              <div class="row">
+                  <!-- Natures List -->
+                  <div class="col-6">
+                      <i class="fa fa-align-center"></i>&nbsp;
+                      <label>{{'Nature:' | translate}}</label>
+                      <ng-multiselect-dropdown id="natures-multiselect-dropdown" class="form-select"
+                          [placeholder]="'Natures'" [data]="dropdownListNatures" [(ngModel)]="selectedNatures"
+                          [settings]="dropdownSettingsNatures" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                      </ng-multiselect-dropdown>
+                  </div>
+                  <!-- Probabilities List -->
+                  <div class="col-6">
+                      <i class="fa fa-sliders"></i>&nbsp;
+                      <label>{{'propabilité:' | translate}}</label>
+                      <ng-multiselect-dropdown id="probabilities-multiselect-dropdown" class="form-select" [placeholder]="'Probabilités'"
+                          [data]="dropdownListProbabilities" [(ngModel)]="selectedProbabilities" [settings]="dropdownSettingsProbabilities"
+                          (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                      </ng-multiselect-dropdown>
+                  </div>
+              </div>
+              <br>
+              <div class="row">
+                  <!-- Exposures List -->
+                  <div class="col-6">
+                      <i class="fa fa-users"></i>&nbsp;
+                      <label>{{'Exposure:' | translate}}</label>
+                      <ng-multiselect-dropdown id="exposure-multiselect-dropdown" class="form-select" [placeholder]="'Exposures'"
+                          [data]="dropdownListExposures" [(ngModel)]="selectedExposures" [settings]="dropdownSettingsExposures"
+                          (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                      </ng-multiselect-dropdown>
+                  </div>
+                  <!-- Status List -->
+                  <div class="col-6">
+                      <i class="fa fa-building"></i>&nbsp;
+                      <label>{{'Statut:' | translate}}</label>
+                      <ng-multiselect-dropdown id="status-multiselect-dropdown" class="form-select" [placeholder]="'Statut'"
+                          [data]="dropdownListStatus" [(ngModel)]="selectedStatus" [settings]="dropdownSettingsStatus"
+                          (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                      </ng-multiselect-dropdown>
+                  </div>
+              </div>
+              <!-- Advanced search button -->
+              <div class="btn-search float-right">
+                  <button id="search-risk-btn" type="button" class="btn btn-warning btn-adv-search" title="Filtrer"
+                      (click)="advancedSearch(selectedNatures,selectedProbabilities,selectedExposures,selectedStatus)"
+                      >
+                      <i class="fa fa-search"></i> {{'Chercher' | translate}}
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
 <div class="row">
   <!-- Number of elements select form -->
   <div class=" col-md-8">
@@ -31,13 +99,13 @@
     <thead class="row-border hover">
       <tr>
         <th style="width: 7%;">{{'#' | translate}}</th>
-        <th style="width: 7%;">{{'Probability' | translate}}</th>
-        <th style="width: 10%;">{{'Severity' | translate}}</th>
-        <th style="width: 7%;">{{'Exposure' | translate}}</th>
-        <th style="width: 7%;">{{'risk Status' | translate}}</th>
+        <th style="width: 7%;">{{'Probabilité' | translate}}</th>
+        <th style="width: 10%;">{{'gravité' | translate}}</th>
+        <th style="width: 7%;">{{'Exposition' | translate}}</th>
+        <th style="width: 7%;">{{'Statut' | translate}}</th>
         <th style="width: 10%;" class="text-center">{{'Date de detection'  | translate}}</th>
         <th style="width: 10%;" class="text-center">{{'Date de fermeture'  | translate}}</th>
-        <th style="width: 10%;" class="text-center">{{'risk Nature' | translate}}</th>
+        <th style="width: 10%;" class="text-center">{{'Nature' | translate}}</th>
         <th style="width: 15%;" class="text-center">{{'Actions' | translate}}</th>
       </tr>
     </thead>
@@ -46,8 +114,13 @@
         <td>{{risk.id}}</td>
         <td>{{risk.probability}}</td>
         <td>{{risk.severity}}</td>
-        <td>{{risk.exposure}}</td>
-        <td>{{risk.riskStatus}}</td>
+        <td>
+          <span *ngIf="risk?.exposure == 'Low'" class="badge badge-secondary" style="font-size: medium;" >{{risk?.exposure}}</span>
+          <span *ngIf="risk?.exposure == 'Medium'" class="badge badge-info" style="font-size: medium;">{{risk?.exposure}}</span>
+          <span *ngIf="risk?.exposure == 'High'" class="badge badge-warning" style="font-size: medium;">{{risk?.exposure}}</span></td>
+        <td>
+          <span *ngIf="risk?.riskStatus == 'Open'" class="badge badge-success" style="font-size: medium;">{{risk?.riskStatus}}</span>
+          <span *ngIf="risk?.riskStatus == 'Closed'" class="badge badge-danger" style="font-size: medium;">{{risk?.riskStatus}}</span></td>
         <td>{{risk.detectionDate}}</td>
         <td>{{risk.closureDate}}</td>
         <td>{{risk.riskNature}}</td>

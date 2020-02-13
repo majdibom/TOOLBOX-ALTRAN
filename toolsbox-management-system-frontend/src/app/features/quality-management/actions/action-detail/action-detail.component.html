@@ -20,7 +20,7 @@
                     <i class="fa fa-cog" aria-hidden="true"></i>
                   </div>
                   <div class="list-details">
-                    <span>{{'Type' | translate}}: </span>{{action?.typeAction}}
+                    <span style="font-size: medium;">{{'Type' | translate}}: </span>&nbsp;&nbsp;<span style="font-size: medium;">{{action?.typeAction}}</span>
                   </div>
                 </li>
                 <li class="list-group-item">
@@ -28,21 +28,24 @@
                     <i class="fa fa-thumb-tack"></i>
                   </div>
                   <div class="list-details">
-                    <span>{{'Action Statut' | translate}}: </span>{{action?.actionStatus}}
-                   <!-- <span *ngIf="action?.ActionStatus == 'Open'" class="badge badge-success">{{action?.ActionStatus}}</span>
-                    <span *ngIf="action?.ActionStatus == 'Closed'" class="badge badge-danger">{{action?.ActionStatus}}</span>-->
+                    <span style="font-size: medium;">{{'Statut' | translate}}: </span>&nbsp;&nbsp;
+                    <span *ngIf="action?.actionStatus == 'Open'" class="badge badge-primary"style="font-size: medium;">{{action?.actionStatus}}</span>
+                    <span *ngIf="action?.actionStatus == 'Closed'" class="badge badge-dark" style="font-size: medium;">{{action?.actionStatus}}</span>
+                    <span *ngIf="action?.actionStatus == 'Done'" class="badge badge-success" style="font-size: medium;">{{action?.actionStatus}}</span>
+                    <span *ngIf="action?.actionStatus == 'Blocked'" class="badge badge-danger" style="font-size: medium;">{{action?.actionStatus}}</span>
+                    <span *ngIf="action?.actionStatus == 'Delayed'" class="badge badge-warning" style="font-size: medium;">{{action?.actionStatus}}</span>
+                    <span *ngIf="action?.actionStatus == 'Cancelled'" class="badge badge-secondary" style="font-size: medium;">{{action?.actionStatus}}</span>
                   </div>
                 </li>
                 <li class="list-group-item">
                   <div class="list-icon">
-                    <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                    <i class="fa fa-line-chart" aria-hidden="true"></i>
                   </div>
                   <div class="list-details">
-                    <span>{{'Priority' | translate}}: </span>{{action?.priority}}
-                   <!-- <span *ngIf="action?.priority == 'Low'" class="badge badge-secondary">{{action?.priority}}</span>
-                    <span *ngIf="action?.priority == 'Normal'" class="badge badge-info">{{action?.priority}}</span>
-                    <span *ngIf="action?.priority == 'High'" class="badge badge-warning">{{action?.priority}}</span>-->
-
+                    <span style="font-size: medium;">{{'Priorité' | translate}}: </span>&nbsp;&nbsp;
+                    <span *ngIf="action?.priority == 'Low'" class="badge badge-secondary" style="font-size: medium;">{{action?.priority}}</span>
+                    <span *ngIf="action?.priority == 'Nomral'" class="badge badge-info" style="font-size: medium;">{{action?.priority}}</span>
+                    <span *ngIf="action?.priority == 'High'" class="badge badge-warning" style="font-size: medium;">{{action?.priority}}</span>
                   </div>
                 </li>
               </ul>
@@ -118,22 +121,22 @@
                   <div class="col-md-12">
                     <ul class="list-group list-group-flush">
                       <li  class="list-group-item">
-                    <h6><strong>{{'Origine :' | translate}}</strong>&nbsp;&nbsp;{{action?.origin}}</h6>
+                    <h5><strong>{{'Origine :' | translate}}</strong>&nbsp;&nbsp;{{action?.origin}}</h5>
                       </li>
                       <li  class="list-group-item">
-                        <h6><strong>{{'Description :' | translate}}</strong>&nbsp;&nbsp;{{action?.description}}</h6>
+                        <h5><strong>{{'Description :' | translate}}</strong>&nbsp;&nbsp;{{action?.description}}</h5>
                   </li>
                     <li  class="list-group-item">
-                      <h6><strong>{{'Comments :' | translate}}</strong>&nbsp;&nbsp;{{action?.comments}}</h6>
+                      <h5><strong>{{'Commentaires :' | translate}}</strong>&nbsp;&nbsp;{{action?.comments}}</h5>
                   </li>
                     <li  class="list-group-item">
-                      <h6><strong>{{'Effectiveness measurement criterion :' | translate}}</strong>&nbsp;&nbsp;{{action?.effMeasCriterion}}</h6>
+                      <h5><strong>{{'Critère de mesure de l efficacité :' | translate}}</strong>&nbsp;&nbsp;{{action?.effMeasCriterion}}</h5>
                   </li>
                 
                 <li  class="list-group-item">
-                  <h6><strong>{{'Processus impacté :' | translate}}</strong>&nbsp;&nbsp;<span *ngFor="let process of action?.processImpacts">
+                  <h5><strong>{{'Processus impacté :' | translate}}</strong>&nbsp;&nbsp;<span *ngFor="let process of action?.processImpacts">
                     <span class="badge badge-dark badge-pill">{{process.title}}</span>&nbsp;
-                  </span></h6>
+                  </span></h5>
               </li>
                     </ul>
                   </div>

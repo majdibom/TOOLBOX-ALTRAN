@@ -20,7 +20,7 @@
                     <i class="fa fa-cog" aria-hidden="true"></i>
                   </div>
                   <div class="list-details">
-                    <span>{{'Probability' | translate}}: </span><span>{{risk?.probability}}</span>
+                    <span style="font-size: medium;">{{'Probabilité' | translate}}: </span>&nbsp;&nbsp;<span style="font-size: medium;">{{risk?.probability}}</span>
                   </div>
                 </li>
                 <li class="list-group-item">
@@ -28,9 +28,9 @@
                     <i class="fa fa-thumb-tack"></i>
                   </div>
                   <div class="list-details">
-                    <span>{{'Statut' | translate}}: </span>
-                    <span *ngIf="risk?.riskStatus == 'Open'" class="badge badge-success">{{risk?.riskStatus}}</span>
-                    <span *ngIf="risk?.riskStatus == 'Closed'" class="badge badge-danger">{{risk?.riskStatus}}</span>
+                    <span style="font-size: medium;">{{'Statut' | translate}}: </span>&nbsp;&nbsp;
+                    <span *ngIf="risk?.riskStatus == 'Open'" class="badge badge-success" style="font-size: medium;">{{risk?.riskStatus}}</span>
+                    <span *ngIf="risk?.riskStatus == 'Closed'" class="badge badge-danger" style="font-size: medium;">{{risk?.riskStatus}}</span>
                   </div>
                 </li>
                 <li class="list-group-item">
@@ -38,7 +38,7 @@
                     <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
                   </div>
                   <div class="list-details">
-                    <span>{{'Severity' | translate}}: </span>{{risk?.severity}}
+                    <span style="font-size: medium;">{{'gravité' | translate}}: </span>&nbsp;&nbsp;<span style="font-size: medium;">{{risk?.severity}}</span>
                   </div>
                 </li>
                 <li class="list-group-item">
@@ -46,29 +46,29 @@
                     <i class="fa fa-arrows-v" aria-hidden="true"></i>
                   </div>
                   <div class="list-details">
-                    <span>{{'Exposure' | translate}}: </span>
-                    <span *ngIf="risk?.exposure == 'Low'" class="badge badge-secondary">{{risk?.exposure}}</span>
-                    <span *ngIf="risk?.exposure == 'Normal'" class="badge badge-info">{{risk?.exposure}}</span>
-                    <span *ngIf="risk?.exposure == 'High'" class="badge badge-warning">{{risk?.exposure}}</span>
+                    <span style="font-size: medium;">{{'Exposition' | translate}}: </span>&nbsp;&nbsp;
+                    <span *ngIf="risk?.exposure == 'Low'" class="badge badge-secondary" style="font-size: medium;">{{risk?.exposure}}</span>
+                    <span *ngIf="risk?.exposure == 'Medium'" class="badge badge-info" style="font-size: medium;">{{risk?.exposure}}</span>
+                    <span *ngIf="risk?.exposure == 'High'" class="badge badge-warning" style="font-size: medium;">{{risk?.exposure}}</span>
                   </div>
                 </li>
                 <li class="list-group-item">
                   <div class="list-icon">
-                    <i class="fa fa-percent" aria-hidden="true"></i>
+                    <i class="fa fa-line-chart" aria-hidden="true"></i>
                   </div>
                   <div class="list-details">
-                    <span>{{'Risk Priority' | translate}}: </span>
-                    <span *ngIf="risk?.riskPriority == 'Low'" class="badge badge-secondary">{{risk?.riskPriority}}</span>
-                    <span *ngIf="risk?.riskPriority == 'Normal'" class="badge badge-info">{{risk?.riskPriority}}</span>
-                    <span *ngIf="risk?.riskPriority == 'High'" class="badge badge-warning">{{risk?.riskPriority}}</span>
+                    <span style="font-size: medium;">{{'Priorité' | translate}}: </span>&nbsp;&nbsp;
+                    <span *ngIf="risk?.riskPriority == 'Low'" class="badge badge-secondary" style="font-size: medium;">{{risk?.riskPriority}}</span>
+                    <span *ngIf="risk?.riskPriority == 'Nomral'" class="badge badge-info"style="font-size: medium;">{{risk?.riskPriority}}</span>
+                    <span *ngIf="risk?.riskPriority == 'High'" class="badge badge-warning"style="font-size: medium;">{{risk?.riskPriority}}</span>
                   </div>
                 </li>
                 <li class="list-group-item">
                   <div class="list-icon">
-                    <i class="fa fa-percent" aria-hidden="true"></i>
+                    <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
                   </div>
                   <div class="list-details">
-                    <span>{{'Risk Strategy' | translate}}: </span>{{risk?.riskStrategy}} 
+                    <span style="font-size: medium;">{{'Stratégie' | translate}}: </span>&nbsp;&nbsp;<span style="font-size: medium;">{{risk?.riskStrategy}} </span>
                   </div>
                 </li>
               </ul>

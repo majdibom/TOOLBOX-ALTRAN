@@ -34,7 +34,7 @@
             </div>
             <!-- Risk Nature field -->
             <div class="form-group col-md-4">
-              <label for="riskNature" class="required">{{'Nature de risque' | translate}}</label>
+              <label for="riskNature" class="required">{{'Nature du risque' | translate}}</label>
               <select id="riskNature-add" name="RiskNature" class="form-control" [(ngModel)]="riskToAdd.riskNature"
                 required>
                 <option *ngFor="let riskNature of riskNatureEnum" [value]="riskNature">
@@ -44,7 +44,7 @@
             </div>
             <!-- Risk Priority field -->
             <div class="form-group col-md-3">
-              <label for="riskPriority" class="required">{{'Priorité de risque' | translate}}</label>
+              <label for="riskPriority" class="required">{{'Priorité du risque' | translate}}</label>
               <select id="riskPriority-add" name="riskPriority" class="form-control" [(ngModel)]="riskToAdd.Priority"
                 required>
                 <option *ngFor="let riskPriority of riskPriorityEnum" [value]="riskPriority">
@@ -54,7 +54,7 @@
             </div>
               <!-- Risk responsible field -->
           <div class="form-group col-md-3">
-            <label for="riskPilote" class="required">{{'Pilote de risque' | translate}}</label>
+            <label for="riskPilote" class="required">{{'Pilote du risque' | translate}}</label>
             <select id="riskPilote-add" name="titleriskPilote" class="form-control" [(ngModel)]="actionToAdd.riskPilote"
               required>
               <option *ngFor="let user of listOfUsers" [ngValue]="user">{{user.firstName}} {{user.lastName}}</option>
@@ -63,7 +63,7 @@
         
             <!-- Status field -->
             <div class="form-group col-md-3">
-              <label for="riskStatus" class="required">{{'Risk Statut' | translate}}</label>
+              <label for="riskStatus" class="required">{{'Statut du risque' | translate}}</label>
               <select id="riskStatus-add" name="riskStatus" class="form-control" [(ngModel)]="riskToAdd.riskStatus"
                 required>
                 <option *ngFor="let riskStatus of riskStatusEnum" [value]="riskStatus">
@@ -117,7 +117,7 @@
           </div>
           <!-- effMeasCriterion field -->
           <div class="form-group">
-            <label for="effMeasCriterion" class="required">{{'Effectiveness measurement criterion' | translate}}</label>
+            <label for="effMeasCriterion" class="required">{{'Critère de mesure de l efficacité' | translate}}</label>
             <textarea class="form-control" id="effMeasCriterion-add" name="effMeasCriterion" [(ngModel)]="actionToAdd.effMeasCriterion" rows="2"
               required> </textarea>
           </div>
@@ -156,7 +156,7 @@
             <div class="form-row">
              <!-- responsibleAction field -->
           <div class="form-group col-md-3">
-              <label for="responsibleAction" class="required">{{'responsible d Action' | translate}}</label>
+              <label for="responsibleAction-add" class="required">{{'responsible d Action' | translate}}</label>
               <select id="responsibleAction-add" name="titleresponsibleAction" class="form-control" [(ngModel)]="actionToAdd.responsibleAction"
                 required>
                 <option *ngFor="let user of listOfUsers" [ngValue]="user">{{user.firstName}} {{user.lastName}}</option>

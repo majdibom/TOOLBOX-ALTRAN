@@ -49,8 +49,8 @@
         <div class="form-group  col-md-6">
           <label for="riskPilote" class="required">{{'Pilote de risque' | translate}}</label>
           <select id="riskPilote" (change)="parseValue($event.target.value)" name="riskPilote" class="form-control"
-            [(ngModel)]="riskToEdit.riskPilote" required>
-            <option *ngFor="let user of listOfUsers" [ngValue]="user">{{user.firstName}} {{user.lastName}}</option>
+            [(ngModel)]="riskToEdit.riskPilote.id" required>
+            <option *ngFor="let user of listOfUsers" [ngValue]="user.id">{{user.firstName}} {{user.lastName}}</option>
           </select>
         </div>
       
@@ -77,13 +77,13 @@
       <!-- detectionDate field -->
       <div class="form-group col-md-6">
         <label for="detectionDate" class="required">{{'Date de detection' | translate}}</label>
-        <input type="date" class="form-control" id="detectionDate-add" name="detectionDate"
+        <input type="date" class="form-control" id="detectionDate-edit" name="detectionDate"
           [(ngModel)]="riskToEdit.detectionDate" required>
       </div>
       <!-- closureDate field -->
       <div class="form-group col-md-6">
         <label for="closureDate" class="required">{{'Date de fermeture' | translate}}</label>
-        <input type="date" class="form-control" id="closureDate-add" name="closureDate"
+        <input type="date" class="form-control" id="closureDate-edit" name="closureDate"
           [(ngModel)]="riskToEdit.closureDate" required>
       </div>
     </div>
@@ -97,7 +97,7 @@
     <!-- Identoffactors field -->
     <div class="form-group">
       <label for="factorsIdentif" class="required">{{'Identification des facteurs  +/-' | translate}}</label>
-      <textarea class="form-control" id="factorsIdentif-add" name="factorsIdentif" [(ngModel)]="riskToEdit.factorsIdentif" rows="2"
+      <textarea class="form-control" id="factorsIdentif-edit" name="factorsIdentif" [(ngModel)]="riskToEdit.factorsIdentif" rows="2"
         required> </textarea>
     </div>
   </div>

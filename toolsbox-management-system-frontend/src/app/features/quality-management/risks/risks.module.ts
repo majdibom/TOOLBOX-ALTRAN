@@ -11,6 +11,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { RiskAddComponent } from './risk-add/risk-add.component';
+import { NgbTooltipModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 @NgModule({
   declarations: [RiskComponent, RiskDetailComponent, RiskListComponent, RiskUpdateComponent, RiskAddComponent],
@@ -19,6 +22,8 @@ import { RiskAddComponent } from './risk-add/risk-add.component';
     RisksRoutingModule,
     NgxPaginationModule,
     FormsModule,
+    NgMultiSelectDropDownModule,
+    NgbModule,
     TranslateModule,
     ListboxModule
   ]

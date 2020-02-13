@@ -94,3 +94,15 @@
     white-space: nowrap;
     text-align: center;
   }
+
+ /* Advanced Search button */
+.btn-adv-search {
+  border-radius:23px;
+  margin-bottom: 10px;
+}
+
+/* Advanced Search div */
+.btn-search {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

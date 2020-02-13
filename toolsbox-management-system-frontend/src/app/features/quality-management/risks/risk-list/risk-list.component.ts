@@ -4,6 +4,10 @@ import { PageClient } from '@models/page-client';
 import { GenericService } from '@services/generic.service';
 import { Router } from '@angular/router';
 import { Risk } from '@models/risk';
+import { RiskStatusLabel, RiskStatus } from '@models/risk-status';
+import { RiskNatureLabel, RiskNature } from '@models/risk-nature';
+import { ExposureLabel, Exposure } from '@models/exposure';
+import { ProbabilityLabel, Probability } from '@models/probability';
 
 @Component({
   selector: 'app-risk-list',
@@ -25,11 +29,99 @@ export class RiskListComponent implements OnInit {
   item = 5;
   searchInput: String = '';
 
+  // Nature enum Label
+  public riskNatureLabel = RiskNatureLabel;
+  public riskNatureEnum = Object.values(RiskNature);
+  // Probability enum Label
+  public riskProbabilityLabel = ProbabilityLabel;
+  public riskProbabilityEnum = Object.values(Probability);
+  // Exposure enum Label
+  public riskExposureLabel = ExposureLabel;
+  public riskExposureEnum = Object.values(Exposure);
+  // Status enum Label
+  public riskStatusLabel = RiskStatusLabel;
+  public riskStatusEnum = Object.values(RiskStatus);
+
+  // Advanced search Dropdown lists
+  dropdownListNatures = [];
+  dropdownListProbabilities = [];
+  dropdownListExposures = [];
+  dropdownListStatus = [];
+  dropdownSettingsNatures = {};
+  dropdownSettingsProbabilities = {};
+  dropdownSettingsExposures = {};
+  dropdownSettingsStatus = {};
+
+  // For advanced search
+  selectedNature: any = [];
+  selectedProbabilities: any = [];
+  selectedExposures: any = [];
+  selectedStatus: any = [];
+
+
   constructor(private genericService: GenericService, private router: Router) { }
 
   ngOnInit() {
     this.listRisks = [];
     this.reloadData();
+
+    // Advanced search dropdown initialisation
+    this.dropdownSettingsNatures = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'title',
+      selectAllText: 'Selectionner tout',
+      unSelectAllText: 'Déselectionner tout',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
+    this.dropdownSettingsProbabilities = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'title',
+      selectAllText: 'Selectionner tout',
+      unSelectAllText: 'Déselectionner tout',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
+    this.dropdownSettingsExposures = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'title',
+      selectAllText: 'Selectionner tout',
+      unSelectAllText: 'Déselectionner tout',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
+    this.dropdownSettingsStatus = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'title',
+      selectAllText: 'Selectionner tout',
+      unSelectAllText: 'Déselectionner tout',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
+
+    this.dropdownListNatures = [];
+    this.riskNatureEnum.map(element => {
+    this.dropdownListNatures.push({ id: element, title: element });
+    });
+
+    this.dropdownListProbabilities = [];
+    this.riskProbabilityEnum.map(element => {
+    this.dropdownListProbabilities.push({ id: element, title: element });
+    });
+
+    this.dropdownListExposures = [];
+    this.riskExposureEnum.map(element => {
+    this.dropdownListExposures.push({ id: element, title: element });
+    });
+
+    this.selectedStatus = [];
+    this.riskStatusEnum.map(element => {
+    this.dropdownListStatus.push({ id: element, title: element });
+    });
   }
 
 
@@ -138,4 +230,30 @@ export class RiskListComponent implements OnInit {
       this.getRisks();
     }
   }
+
+    /** Advanced search risk with filter */
+    advancedSearch(selectedNatures: any, selectedProbabilities: any, selectedExposures: any, selectedStatus: any) {
+      const filter = {
+        natures: selectedNatures == null ? null : selectedNatures,
+        probabilities: selectedProbabilities == null ? null : selectedProbabilities,
+        exposures: selectedExposures == null ? null : selectedExposures,
+        status: selectedStatus == null ? null : selectedStatus,
+      };
+
+      this.genericService.getGenericPageByFilter('/risks/advanced-search', this.selectedPage, this.item, filter)
+        .subscribe(
+          data => {
+            this.listRisks = data.content;
+            this.pageClient = new PageClient();
+            this.pageClient = data;
+            this.total = this.pageClient.totalElements;
+        }
+      );
+
+    }
+
+    /** NgPrime Advanced Search method to solve no method found erreur */
+    onItemSelect(item: any) { }
+    onSelectAll(items: any) { }
+
 }
