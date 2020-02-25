@@ -11,6 +11,8 @@ import { PriorityLabel, Priority } from '@models/priority';
 import { TypeActionLabel, TypeAction } from '@models/type-action';
 import { OriginLabel, Origin } from '@models/origin';
 import { RiskNatureLabel, RiskNature } from '@models/risk-nature';
+import { RiskAction } from '@models/risk-Action';
+import { RiskStrategyLabel, RiskStrategy } from '@models/risk-strategy';
 
 
 
@@ -50,15 +52,15 @@ export class RiskAddComponent implements OnInit {
   // Risk Status enum Label
   public riskStatusLabel = RiskStatusLabel;
   public riskStatusEnum = Object.values(RiskStatus);
- // Risk Nature enum Label
- public riskNatureLabel = RiskNatureLabel;
- public riskNatureEnum = Object.values(RiskNature);
-  // Risk Priority enum Label
-  public riskPriorityLabel = PriorityLabel;
-  public riskPriorityEnum = Object.values(Priority);
-   // Action Status enum Label
-   public ActionstatusLabel = ActionstatusLabel;
-   public ActionStatusEnum = Object.values(ActionStatus);
+  // Risk Nature enum Label
+  public riskNatureLabel = RiskNatureLabel;
+  public riskNatureEnum = Object.values(RiskNature);
+  // Risk Strategy enum Label
+  public riskStrategyLabel = RiskStrategyLabel;
+  public riskStrategyEnum = Object.values(RiskStrategy);
+  // Action Status enum Label
+  public ActionstatusLabel = ActionstatusLabel;
+  public ActionStatusEnum = Object.values(ActionStatus);
 
   // Action to create in risk form
   actionToAdd: Action = new Action();
@@ -66,6 +68,8 @@ export class RiskAddComponent implements OnInit {
   // Propostion to edit in risk form
   actionToEdit: Action = new Action();
 
+  // Action to create in risk form
+  riskActiontoAdd: RiskAction = new RiskAction();
 
   constructor(private genericService: GenericService) { }
 
@@ -111,7 +115,7 @@ export class RiskAddComponent implements OnInit {
 
   /**Add action */
   addAction(description: any, effMeasCriterion: any, openDate: any, dueDate: any,
-    updatedDueDate: any, effMeasDate: any, realizationDate: any,  responsibleAction: any, ActionStatus: any, priority: any, typeAction: any, origin: any, comments: any, createdBy: any, createdAt: any, updatedAt: any) {
+    updatedDueDate: any, effMeasDate: any, realizationDate: any, responsibleAction: any, ActionStatus: any, priority: any, typeAction: any, origin: any, comments: any) {
     const action = {
       description: description,
       effMeasCriterion: effMeasCriterion,
@@ -125,29 +129,19 @@ export class RiskAddComponent implements OnInit {
       responsibleAction: responsibleAction,
       typeAction: typeAction,
       origin: origin,
-      comments: comments,
-      createdBy:createdBy,
-      createdAt:createdAt,
-      updatedAt:updatedAt
+      comments: comments
     };
-    this.riskToAdd.actions.push(action);
+    this.riskActiontoAdd = new RiskAction();
+    this.riskActiontoAdd.action = action;
+    this.riskToAdd.actions.push(this.riskActiontoAdd);
     this.actionToAdd = new Action();
 
   }
 
-  /**Edit action */
-  editAction(action: any) {
-    action.editMode = false;
-    this.actionToEdit = new Action();
-    this.actionToEdit.description = action.description;
-    const index = this.riskToAdd.actions.indexOf(action);
-    this.riskToAdd.actions.splice(index, 1, this.actionToEdit);
-  }
-
   /**Delete action */
-  deleteAction(action: any) {
+  deleteAction(riskAction: any) {
     this.riskToAdd.actions.forEach((element, index) => {
-      if (action.description === element.description) {
+      if (riskAction.action.description === element.action.description) {
         this.riskToAdd.actions.splice(index, 1);
       }
     });

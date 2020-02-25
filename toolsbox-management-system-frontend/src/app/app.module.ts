@@ -17,11 +17,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import ngx-translate and the http loader
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { Routes, RouterModule } from "@angular/router";
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
-
+const appRoutes: Routes = [
+  { path: "", component: AuthenticationComponent }
+]
 @NgModule({
   declarations: [
     AppComponent, AuthenticationComponent, AuthenticationAlertComponent, NotFoundComponent
@@ -31,6 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     HttpModule,
     SharedModule,
+    RouterModule.forRoot(appRoutes),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

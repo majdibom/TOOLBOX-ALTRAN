@@ -3,9 +3,8 @@ package com.altran.toolsbox.qualitymanagement.model;
 import static com.altran.toolsbox.util.constant.FilterConstants.RISK_FILTER;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -97,6 +97,11 @@ public class Risk implements Serializable {
 	private Exposure exposure;
 
 	/**
+	 * The Exposure value (probability * severity) of this risk.
+	 */
+	private int exposureValue;
+
+	/**
 	 * The status of this risk.
 	 */
 	@Enumerated(EnumType.STRING)
@@ -125,32 +130,34 @@ public class Risk implements Serializable {
 	private String factorsIdentif;
 
 	/**
-	 * The list of actions corresponding to this risk.
+	 * The list of actions of this Risk
+	 * 
+	 * @see RiskAction
 	 */
-	@OneToMany
-	private List<Action> actions = new ArrayList<>();
-
+	@OneToMany(mappedBy = "risk")
+	private Set<RiskAction> actions;
 	/**
 	 * The list of contingency Plan corresponding to this risk.
 	 */
 	@OneToMany
-	private List<Action> contingencyPlan;
+	private Set<Action> contingencyPlan;
 
 	/**
 	 * The list of mitigation Approach corresponding to this risk.
 	 */
 	@OneToMany
-	private List<Action> mitigationApproach;
-	
+	private Set<Action> mitigationApproach;
+
 	/**
 	 * The creator of this Action.
 	 * 
 	 * @see User
 	 */
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "created_by", nullable = false, foreignKey = @ForeignKey(name = "FK_CREATED_BY"))
+	@CreatedBy
+	@JoinColumn(name = "created_by", nullable = true, foreignKey = @ForeignKey(name = "FK_CREATED_BY"))
 	private User createdBy;
-	
+
 	/**
 	 * The created date of this Action.
 	 */
@@ -233,6 +240,14 @@ public class Risk implements Serializable {
 		this.exposure = exposure;
 	}
 
+	public int getExposureValue() {
+		return exposureValue;
+	}
+
+	public void setExposureValue(int exposureValue) {
+		this.exposureValue = exposureValue;
+	}
+
 	public RiskStatus getRiskStatus() {
 		return riskStatus;
 	}
@@ -273,27 +288,27 @@ public class Risk implements Serializable {
 		this.factorsIdentif = factorsIdentif;
 	}
 
-	public List<Action> getActions() {
+	public Set<RiskAction> getActions() {
 		return actions;
 	}
 
-	public void setActions(List<Action> actions) {
+	public void setActions(Set<RiskAction> actions) {
 		this.actions = actions;
 	}
 
-	public List<Action> getContingencyPlan() {
+	public Set<Action> getContingencyPlan() {
 		return contingencyPlan;
 	}
 
-	public void setContingencyPlan(List<Action> contingencyPlan) {
+	public void setContingencyPlan(Set<Action> contingencyPlan) {
 		this.contingencyPlan = contingencyPlan;
 	}
 
-	public List<Action> getMitigationApproach() {
+	public Set<Action> getMitigationApproach() {
 		return mitigationApproach;
 	}
 
-	public void setMitigationApproach(List<Action> mitigationApproach) {
+	public void setMitigationApproach(Set<Action> mitigationApproach) {
 		this.mitigationApproach = mitigationApproach;
 	}
 

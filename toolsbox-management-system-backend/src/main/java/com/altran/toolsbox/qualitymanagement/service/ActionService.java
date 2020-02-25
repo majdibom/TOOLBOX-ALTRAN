@@ -31,5 +31,5 @@ public interface ActionService {
 
 	Action update(Action action, Long id);
 
-	void delete(Long id);
+	Boolean delete(Long id);
 }

@@ -46,16 +46,16 @@
               <input type="date" class="form-control" id="realizationDate-add" name="realizationDate-add"
                 [(ngModel)]="actionToAdd.realizationDate" required>
             </div>
-             <!-- effMaesDate field -->
+             <!-- effMeasDate field -->
              <div class="form-group col-md-6">
-              <label for="effMaesDate-add" class="required">{{'Date de mesure de l efficacité' | translate}}</label>
-              <input type="date" class="form-control" id="effMaesDate-add" name="effMaesDate-add"
-                [(ngModel)]="actionToAdd.effMaesDate" required>
+              <label for="effMeasDate-add" class="required">{{'Date de mesure de l efficacité' | translate}}</label>
+              <input type="date" class="form-control" id="effMeasDate-add" name="effMeasDate-add"
+                [(ngModel)]="actionToAdd.effMeasDate" required>
             </div>
             </div>
-            <div class="form-row">
+          <div class="form-row">
              <!-- responsibleAction field -->
-          <div class="form-group col-md-6">
+            <div class="form-group col-md-6">
               <label for="responsibleAction-add" class="required">{{'responsible d Action' | translate}}</label>
               <select id="responsibleAction-add" name="titleresponsibleAction" class="form-control" [(ngModel)]="actionToAdd.responsibleAction"
                 required>
@@ -85,27 +85,27 @@
                   </select>
                 </div>
                
-           <!-- typeAction field -->
-           <div class="form-group col-md-6">
-              <label for="typeAction-add" class="required">{{'type d Action' | translate}}</label>
-              <select id="typeAction-add" name="typeAction-add" class="form-control" [(ngModel)]="actionToAdd.typeAction"
-                required>
-                <option *ngFor="let typeAction of typeActionEnum" [value]="typeAction">
-                  {{typeActionLabel[typeAction]}}
-                </option>
-              </select>
+              <!-- typeAction field -->
+              <div class="form-group col-md-6">
+                  <label for="typeAction-add" class="required">{{'type d Action' | translate}}</label>
+                  <select id="typeAction-add" name="typeAction-add" class="form-control" [(ngModel)]="actionToAdd.typeAction"
+                    required>
+                    <option *ngFor="let typeAction of typeActionEnum" [value]="typeAction">
+                      {{typeActionLabel[typeAction]}}
+                    </option>
+                  </select>
+              </div>
+              <!-- origin field -->
+            <div class="form-group col-md-6">
+                <label for="origin-add" class="required">{{'Origine' | translate}}</label>
+                <select id="origin-add" name="origin-add" class="form-control" [(ngModel)]="actionToAdd.origin"
+                  required>
+                  <option *ngFor="let origin of OriginEnum" [value]="origin">
+                    {{OriginLabel[origin]}}
+                  </option>
+                </select>
+              </div>
             </div>
-            <!-- origin field -->
-           <div class="form-group col-md-6">
-              <label for="origin-add" class="required">{{'Origine' | translate}}</label>
-              <select id="origin-add" name="origin-add" class="form-control" [(ngModel)]="actionToAdd.origin"
-                required>
-                <option *ngFor="let origin of OriginEnum" [value]="origin">
-                  {{OriginLabel[origin]}}
-                </option>
-              </select>
-            </div>
-          </div>
 
           <!-- Comments field -->
           <div class="form-group">
@@ -113,8 +113,8 @@
             <textarea class="form-control" id="comments-add" name="comments-add" [(ngModel)]="actionToAdd.comments" rows="2"
               required> </textarea>
           </div>
-        </form>
-      </div>
+      </form>
+    </div>
       <div class="modal-footer">
         <!-- Close button -->
         <button type="button" id="exit-add-action" class="btn btn-secondary" data-dismiss="modal" (click)="emptyObject()">{{'Fermer'

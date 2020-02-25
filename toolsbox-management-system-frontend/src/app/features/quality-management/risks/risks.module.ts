@@ -11,12 +11,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { RiskAddComponent } from './risk-add/risk-add.component';
-import { NgbTooltipModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AddActionsComponent } from './add-actions/add-actions.component';
 
 
 @NgModule({
-  declarations: [RiskComponent, RiskDetailComponent, RiskListComponent, RiskUpdateComponent, RiskAddComponent],
+  declarations: [RiskComponent, RiskDetailComponent, RiskListComponent, RiskUpdateComponent, RiskAddComponent, AddActionsComponent],
   imports: [
     CommonModule,
     RisksRoutingModule,

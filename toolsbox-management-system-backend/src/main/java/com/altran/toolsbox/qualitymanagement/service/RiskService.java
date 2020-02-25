@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.altran.toolsbox.qualitymanagement.model.Exposure;
-import com.altran.toolsbox.qualitymanagement.model.Probability;
 import com.altran.toolsbox.qualitymanagement.model.Risk;
-import com.altran.toolsbox.qualitymanagement.model.Severity;
+import com.altran.toolsbox.qualitymanagement.model.RiskActionId;
 
 /**
  * Represents the interface of risk service
@@ -21,7 +19,7 @@ public interface RiskService {
 	List<Risk> findAll();
 
 	Page<Risk> findAllByPage(Pageable pageable);
-	
+
 	Page<Risk> findByRiskPilote(String username, Pageable pageable);
 
 	Page<Risk> simpleSearch(String term, Pageable pageable);
@@ -34,6 +32,8 @@ public interface RiskService {
 
 	void delete(Long id);
 
-	Exposure calculeExposure(Probability probability, Severity severity);
+	void deleteActionFromRisk(RiskActionId riskActionId);
+
+	Risk calculeExposure(Risk risk);
 
 }

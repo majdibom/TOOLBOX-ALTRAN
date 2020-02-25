@@ -1,12 +1,20 @@
 package com.altran.toolsbox.qualitymanagement.service.impl;
 
-import static com.altran.toolsbox.util.constant.ColumnConstants.*;
+import static com.altran.toolsbox.util.constant.ColumnConstants.Faible;
+import static com.altran.toolsbox.util.constant.ColumnConstants.Important;
+import static com.altran.toolsbox.util.constant.ColumnConstants.Mineur;
+import static com.altran.toolsbox.util.constant.ColumnConstants.Moyen;
+import static com.altran.toolsbox.util.constant.ColumnConstants.Moyenne;
+import static com.altran.toolsbox.util.constant.ColumnConstants.Presque_sur;
+import static com.altran.toolsbox.util.constant.ColumnConstants.Très_probable;
+import static com.altran.toolsbox.util.constant.ColumnConstants.Trés_Important;
+import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
@@ -20,15 +28,16 @@ import com.altran.toolsbox.qualitymanagement.model.Action;
 import com.altran.toolsbox.qualitymanagement.model.Exposure;
 import com.altran.toolsbox.qualitymanagement.model.Probability;
 import com.altran.toolsbox.qualitymanagement.model.Risk;
+import com.altran.toolsbox.qualitymanagement.model.RiskAction;
+import com.altran.toolsbox.qualitymanagement.model.RiskActionId;
+import com.altran.toolsbox.qualitymanagement.model.RiskStatus;
 import com.altran.toolsbox.qualitymanagement.model.Severity;
 import com.altran.toolsbox.qualitymanagement.repository.RiskRepository;
 import com.altran.toolsbox.qualitymanagement.service.ActionService;
+import com.altran.toolsbox.qualitymanagement.service.RiskActionService;
 import com.altran.toolsbox.qualitymanagement.service.RiskService;
 import com.altran.toolsbox.usermanagement.model.User;
 import com.altran.toolsbox.usermanagement.service.UserService;
-
-import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 
 /**
  * Represents implementation of activity service
@@ -42,12 +51,16 @@ public class RiskServiceImpl implements RiskService {
 	private final RiskRepository riskRepository;
 
 	private UserService userService;
+
 	private ActionService actionService;
+
+	private RiskActionService riskActionService;
 
 	/**
 	 * Constructor of RiskServiceImpl
 	 * 
-	 * @param riskRepository the repository of risk
+	 * @param riskRepository
+	 *            the repository of risk
 	 */
 	@Autowired
 	public RiskServiceImpl(RiskRepository riskRepository) {
@@ -57,11 +70,23 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Changes action service.
 	 * 
-	 * @param actionService action service.
+	 * @param actionService
+	 *            action service.
 	 */
 	@Autowired
 	public void setActionService(ActionService actionService) {
 		this.actionService = actionService;
+	}
+
+	/**
+	 * Changes risk action service.
+	 * 
+	 * @param riskActionService
+	 *            risk action service.
+	 */
+	@Autowired
+	public void setRiskActionService(RiskActionService riskActionService) {
+		this.riskActionService = riskActionService;
 	}
 
 	/**
@@ -86,9 +111,11 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * gets one risk by his id
 	 * 
-	 * @param id the id of the risk
+	 * @param id
+	 *            the id of the risk
 	 * @return risk object with the same id
-	 * @throws NoSuchElementException if no element is present with such ID
+	 * @throws NoSuchElementException
+	 *             if no element is present with such ID
 	 */
 	@Override
 	public Risk findById(Long id) {
@@ -103,42 +130,51 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Creates a new risk
 	 * 
-	 * @param risk the risk to create
+	 * @param risk
+	 *            the risk to create
 	 * @return the created risk
-	 * @throws EntityExistsException if there is already existing entity with such
-	 *                               ID
+	 * @throws EntityExistsException
+	 *             if there is already existing entity with such ID
 	 */
 	@Override
 	public Risk create(Risk risk) {
-		if (risk.getId() != null && riskRepository.existsById(risk.getId())) {
-			throw new EntityExistsException(ENTITY_EXIST);
-		}
-		// Calculate the exposure for the created risk
-		risk.setExposure(calculeExposure(risk.getProbability(), risk.getSeverity()));
-		// Get action list of the created risk
-		List<Action> actions = risk.getActions();
-		// Empty action list in created risk
-		risk.setActions(new ArrayList<Action>());
-		// new action list to assign to the created risk
-		List<Action> createdActions = new ArrayList<>();
-		// Save every action in database and add it to created action list
-		for (Action action : actions) {
-			Action createdAction = actionService.create(action);
-			createdActions.add(createdAction);
-		}
-		// Assign the new action list to the created risk
-		risk.setActions(createdActions);
 
-		return riskRepository.save(risk);
+		/*
+		 * if (risk.getId() != null && riskRepository.existsById(risk.getId())) { throw
+		 * new EntityExistsException(ENTITY_EXIST); }
+		 */
+		// Calculate the exposure for the created risk
+		risk = calculeExposure(risk);
+		// New risk has "Open" status
+		risk.setRiskStatus(RiskStatus.Open);
+		// Create the risk
+		Risk createdRisk = riskRepository.save(risk);
+		try {
+			Set<RiskAction> riskActions = risk.getActions();
+			// Save every action in database and add it to created action list
+			for (RiskAction riskAction : riskActions) {
+				Action createdAction = actionService.create(riskAction.getAction());
+				riskAction.setAction(createdAction);
+				riskAction.setRisk(createdRisk);
+				riskActionService.create(riskAction);
+			}
+		} catch (NullPointerException e) {
+
+		}
+
+		return createdRisk;
 	}
 
 	/**
 	 * Updates one risk
 	 * 
-	 * @param id   the id of the risk
-	 * @param risk the new risk object with the new values
+	 * @param id
+	 *            the id of the risk
+	 * @param risk
+	 *            the new risk object with the new values
 	 * @return the updated risk
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public Risk update(Risk risk, Long id) {
@@ -146,7 +182,8 @@ public class RiskServiceImpl implements RiskService {
 			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		risk.setId(id);
-
+		// Calculate the exposure for the created risk
+		risk = calculeExposure(risk);
 		// get the same create date as the old action(Fix null problem)
 		Risk oldRisk = findById(id);
 		Date createdDate = oldRisk.getCreatedAt();
@@ -161,8 +198,10 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Deletes one risk
 	 * 
-	 * @param id the of the deleted risk
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param id
+	 *            the of the deleted risk
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public void delete(Long id) {
@@ -173,62 +212,120 @@ public class RiskServiceImpl implements RiskService {
 	}
 
 	/**
+	 * Deletes one action From Risk
+	 * 
+	 * @param the
+	 *            id of the deleted action
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
+	 */
+	@Override
+	public void deleteActionFromRisk(RiskActionId riskActionId) {
+		if (riskActionId == null) {
+			throw new EntityNotFoundException(NO_ENTITY_DB);
+		}
+		riskActionService.delete(riskActionId);
+	}
+
+	/**
 	 * Calculate the exposure (probability * severity)
 	 * 
-	 * @param probability the probability of the risk
-	 * @param severity    the severity of the risk
+	 * @param probability
+	 *            the probability of the risk
+	 * @param severity
+	 *            the severity of the risk
 	 * @return the exposure of the risk
 	 */
 	@Override
-	public Exposure calculeExposure(Probability probability, Severity severity) {
+	public Risk calculeExposure(Risk risk) {
+		Probability probability = risk.getProbability();
+		Severity severity = risk.getSeverity();
 
 		switch (probability.name()) {
-		case (UNLIKELY):
+		case (Faible):
 			switch (severity.name()) {
-			case (SIGNIFICANT_PROBLEM):
-			case (SERIOUS_PROBLEM):
-			case (WORRYING_SITUATION):
-				return Exposure.Low;
-			case (CRISIS):
-				return Exposure.Medium;
+			case (Mineur):
+				risk.setExposure(Exposure.Acceptable);
+				risk.setExposureValue(1);
+				break;
+			case (Moyen):
+				risk.setExposure(Exposure.Acceptable);
+				risk.setExposureValue(2);
+				break;
+			case (Important):
+				risk.setExposure(Exposure.Acceptable);
+				risk.setExposureValue(3);
+				break;
+			case (Trés_Important):
+				risk.setExposure(Exposure.A_surveiller);
+				risk.setExposureValue(4);
+				break;
 			default:
 				break;
 			}
 			break;
-		case (LIKELY):
+		case (Moyenne):
 			switch (severity.name()) {
-			case (SIGNIFICANT_PROBLEM):
-				return Exposure.Low;
-			case (SERIOUS_PROBLEM):
-			case (WORRYING_SITUATION):
-				return Exposure.Medium;
-			case (CRISIS):
-				return Exposure.High;
+			case (Mineur):
+				risk.setExposure(Exposure.Acceptable);
+				risk.setExposureValue(2);
+				break;
+			case (Moyen):
+				risk.setExposure(Exposure.A_surveiller);
+				risk.setExposureValue(4);
+				break;
+			case (Important):
+				risk.setExposure(Exposure.A_surveiller);
+				risk.setExposureValue(6);
+				break;
+			case (Trés_Important):
+				risk.setExposure(Exposure.Trés_critique);
+				risk.setExposureValue(8);
+				break;
 			default:
 				break;
 			}
 			break;
-		case (VERY_LIKELY):
+		case (Très_probable):
 			switch (severity.name()) {
-			case (SIGNIFICANT_PROBLEM):
-				return Exposure.Low;
-			case (SERIOUS_PROBLEM):
-				return Exposure.Medium;
-			case (CRISIS):
-			case (WORRYING_SITUATION):
-				return Exposure.High;
+			case (Mineur):
+				risk.setExposure(Exposure.Acceptable);
+				risk.setExposureValue(3);
+				break;
+			case (Moyen):
+				risk.setExposure(Exposure.A_surveiller);
+				risk.setExposureValue(6);
+				break;
+			case (Important):
+				risk.setExposure(Exposure.Trés_critique);
+				risk.setExposureValue(9);
+				break;
+			case (Trés_Important):
+				risk.setExposure(Exposure.Trés_critique);
+				risk.setExposureValue(12);
+				break;
 			default:
 				break;
 			}
 			break;
-		case (ALMOST_SURE):
+		case (Presque_sur):
 			switch (severity.name()) {
-			case (SIGNIFICANT_PROBLEM):
-				return Exposure.Medium;
-			case (SERIOUS_PROBLEM):
-			case (CRISIS):
-			case (WORRYING_SITUATION):
-				return Exposure.High;
+			case (Mineur):
+				risk.setExposure(Exposure.A_surveiller);
+				risk.setExposureValue(4);
+				break;
+			case (Moyen):
+				risk.setExposure(Exposure.Trés_critique);
+				risk.setExposureValue(8);
+				break;
+			case (Important):
+				risk.setExposure(Exposure.Trés_critique);
+				risk.setExposureValue(12);
+				break;
+			case (Trés_Important):
+				risk.setExposure(Exposure.Trés_critique);
+				risk.setExposureValue(16);
+				break;
 			default:
 				break;
 			}
@@ -236,7 +333,7 @@ public class RiskServiceImpl implements RiskService {
 		default:
 			break;
 		}
-		return Exposure.Low;
+		return risk;
 	}
 
 	@Override

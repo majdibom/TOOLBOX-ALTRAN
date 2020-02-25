@@ -1,14 +1,32 @@
 package com.altran.toolsbox.qualitymanagement.controller;
 
+import static com.altran.toolsbox.util.constant.ColumnConstants.ACTIONS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.CLOSUREDATE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.CONTINGENCYPLAN;
+import static com.altran.toolsbox.util.constant.ColumnConstants.CREATEDAT;
+import static com.altran.toolsbox.util.constant.ColumnConstants.CREATEDBY;
+import static com.altran.toolsbox.util.constant.ColumnConstants.DESCRIPTION;
+import static com.altran.toolsbox.util.constant.ColumnConstants.DETECTIONDATE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.EXPOSURE;
 import static com.altran.toolsbox.util.constant.ColumnConstants.FIRSTNAME;
 import static com.altran.toolsbox.util.constant.ColumnConstants.ID;
 import static com.altran.toolsbox.util.constant.ColumnConstants.LASTNAME;
-import static com.altran.toolsbox.util.constant.ColumnConstants.DESCRIPTION;
-import static com.altran.toolsbox.util.constant.ColumnConstants.CONTINGENCYPLAN;
 import static com.altran.toolsbox.util.constant.ColumnConstants.MITIGATIONAPPROACH;
+import static com.altran.toolsbox.util.constant.ColumnConstants.PROBABILITY;
+import static com.altran.toolsbox.util.constant.ColumnConstants.RISKNATURE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.RISKSTATUS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.SEVERITY;
 import static com.altran.toolsbox.util.constant.ColumnConstants.TYPEACTION;
+import static com.altran.toolsbox.util.constant.ColumnConstants.UPDATEDAT;
+import static com.altran.toolsbox.util.constant.ColumnConstants.ACTION;
+import static com.altran.toolsbox.util.constant.ColumnConstants.EXPOSUREVALUE;
+import static com.altran.toolsbox.util.constant.FilterConstants.ACTION_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.RISK_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.USER_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.RISKACTION_FILTER;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_DELETED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_DELETED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_EXIST;
 import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_CREATED;
 import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_DELETED;
 import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_EXIST;
@@ -18,20 +36,11 @@ import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_NOT_DELET
 import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_NOT_EXIST;
 import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_NOT_UPDATED;
 import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_UPDATED;
-import static com.altran.toolsbox.util.constant.FilterConstants.ACTION_FILTER;
-import static com.altran.toolsbox.util.constant.ColumnConstants.RISKNATURE;
-import static com.altran.toolsbox.util.constant.ColumnConstants.DETECTIONDATE;
-import static com.altran.toolsbox.util.constant.ColumnConstants.CLOSUREDATE;
-import static com.altran.toolsbox.util.constant.ColumnConstants.RISKSTATUS;
-import static com.altran.toolsbox.util.constant.ColumnConstants.PROBABILITY;
-import static com.altran.toolsbox.util.constant.ColumnConstants.SEVERITY;
-import static com.altran.toolsbox.util.constant.ColumnConstants.EXPOSURE;
 
 import java.util.NoSuchElementException;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -49,6 +58,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.altran.toolsbox.qualitymanagement.model.Risk;
+import com.altran.toolsbox.qualitymanagement.model.RiskActionId;
 import com.altran.toolsbox.qualitymanagement.service.RiskService;
 import com.altran.toolsbox.util.GenericResponse;
 import com.altran.toolsbox.util.Translator;
@@ -76,7 +86,8 @@ public class RiskController {
 	/**
 	 * Constructor of RiskController
 	 * 
-	 * @param riskService the service interface of risk
+	 * @param riskService
+	 *            the service interface of risk
 	 */
 	@Autowired
 	public RiskController(RiskService riskService) {
@@ -86,7 +97,8 @@ public class RiskController {
 	/**
 	 * Changes valid object response object for sending data
 	 * 
-	 * @param validResponse generic response with risk as object.
+	 * @param validResponse
+	 *            generic response with risk as object.
 	 */
 	@Autowired
 	public void setObjectResponse(GenericResponse<Risk> objectResponse) {
@@ -96,7 +108,8 @@ public class RiskController {
 	/**
 	 * Changes message response object for sending message
 	 * 
-	 * @param messageResponse generic response with string as object.
+	 * @param messageResponse
+	 *            generic response with string as object.
 	 */
 	@Autowired
 	public void setMessageResponse(GenericResponse<String> messageResponse) {
@@ -106,7 +119,8 @@ public class RiskController {
 	/**
 	 * Gets the list of all Risks by page
 	 * 
-	 * @param pageable pagination information
+	 * @param pageable
+	 *            pagination information
 	 * @return list of all Risks by page
 	 */
 	@GetMapping
@@ -114,8 +128,8 @@ public class RiskController {
 		Page<Risk> riskList = riskService.findAllByPage(pageable);
 		/** Filtering data to send **/
 		// Filter the action object
-		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.serializeAllExcept(CONTINGENCYPLAN,
-				MITIGATIONAPPROACH);
+		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.serializeAllExcept(ACTIONS, CREATEDAT, CREATEDBY,
+				UPDATEDAT, CONTINGENCYPLAN, MITIGATIONAPPROACH);
 		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
 		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, DESCRIPTION);
 		// Add filters to filter provider
@@ -133,7 +147,8 @@ public class RiskController {
 	 * Handles NoSuchElementException if no element is present with such ID and any
 	 * other exception
 	 * 
-	 * @param id : the id of the risk
+	 * @param id
+	 *            : the id of the risk
 	 * @return ResponseEntity: the object or the error to display when getting risk
 	 *         by id with HttpStatus status code
 	 */
@@ -150,6 +165,7 @@ public class RiskController {
 			filterProvider.addFilter(RISK_FILTER, SimpleBeanPropertyFilter.serializeAll());
 			filterProvider.addFilter(USER_FILTER, SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME));
 			filterProvider.addFilter(ACTION_FILTER, SimpleBeanPropertyFilter.filterOutAllExcept(ID, DESCRIPTION));
+			filterProvider.addFilter(RISKACTION_FILTER, SimpleBeanPropertyFilter.filterOutAllExcept(ID, ACTION));
 			// Create the mapping object and set the filters to the mapping
 			MappingJacksonValue actionMapping = new MappingJacksonValue(objectResponse);
 			actionMapping.setFilters(filterProvider);
@@ -171,7 +187,8 @@ public class RiskController {
 	 * Handles EntityExistsException if there is already existing entity with such
 	 * ID and any other exception
 	 * 
-	 * @param risk the risk to create
+	 * @param risk
+	 *            the risk to create
 	 * @return ResponseEntity: the message or the error to display after creating
 	 *         risk with HttpStatus status code
 	 */
@@ -187,6 +204,7 @@ public class RiskController {
 			messageResponse.setValue(Translator.toLocale(RISK_EXIST));
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(messageResponse);
 		} catch (Exception e) {
+			System.err.println(e);
 			messageResponse.setError(true);
 			messageResponse.setValue(Translator.toLocale(RISK_NOT_CREATED));
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageResponse);
@@ -199,14 +217,16 @@ public class RiskController {
 	 * Handles EntityNotFoundException if there is no entity with such ID and any
 	 * other exception
 	 * 
-	 * @param risk the new risk object with the new values
-	 * @param id   the id of the risk
+	 * @param risk
+	 *            the new risk object with the new values
+	 * @param id
+	 *            the id of the risk
 	 * @return ResponseEntity: the message or the error to display after updating
 	 *         risk with HttpStatus status code
 	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<GenericResponse<String>> updateRisk(@PathVariable(value = "id") Long id,
-			@Valid @RequestBody Risk risk) {
+			@RequestBody Risk risk) {
 
 		if (id == null) {
 			messageResponse.setError(true);
@@ -235,7 +255,8 @@ public class RiskController {
 	 * Handles EntityNotFoundException if there is no entity with such ID, exception
 	 * if this risk is used and any other exception
 	 * 
-	 * @param id the of the deleted risk
+	 * @param id
+	 *            the of the deleted risk
 	 * @return ResponseEntity: the message or the error to display after deleting
 	 *         risk with HttpStatus status code
 	 */
@@ -258,10 +279,43 @@ public class RiskController {
 	}
 
 	/**
+	 * Delete one action from Risk
+	 * 
+	 * Handles EntityNotFoundException if there is no entity with such ID, exception
+	 * if this action is used and any other exception
+	 * 
+	 * @param id
+	 *            the of the deleted action
+	 * @param riskd
+	 *            the risk object with the action to delete
+	 * @return ResponseEntity: the message or the error to display after deleting
+	 *         action with HttpStatus status code
+	 */
+	@DeleteMapping("/delete-action")
+	public ResponseEntity<GenericResponse<String>> deleteActionFromRisk(@RequestBody RiskActionId riskActionId) {
+		try {
+			riskService.deleteActionFromRisk(riskActionId);
+			messageResponse.setError(false);
+			messageResponse.setValue(Translator.toLocale(ACTION_DELETED));
+			return ResponseEntity.status(HttpStatus.OK).body(messageResponse);
+		} catch (EntityNotFoundException e) {
+			messageResponse.setError(true);
+			messageResponse.setValue(Translator.toLocale(ACTION_NOT_EXIST));
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageResponse);
+		} catch (Exception e) {
+			messageResponse.setError(true);
+			messageResponse.setValue(Translator.toLocale(ACTION_NOT_DELETED));
+			return ResponseEntity.status(HttpStatus.IM_USED).body(messageResponse);
+		}
+	}
+
+	/**
 	 * Gets the list of all risks of one responsible
 	 * 
-	 * @param username userName of the responsible
-	 * @param pageable pagination information
+	 * @param username
+	 *            userName of the responsible
+	 * @param pageable
+	 *            pagination information
 	 * @return list of all risks of the responsible
 	 */
 	@GetMapping(value = "/responsible/{username}")
@@ -281,7 +335,8 @@ public class RiskController {
 	 * Searches for actions by one term
 	 * 
 	 * @param term
-	 * @param pageable pagination information
+	 * @param pageable
+	 *            pagination information
 	 * @return term the term to base search on it
 	 */
 	@GetMapping(value = "/search/{term}")
@@ -290,7 +345,7 @@ public class RiskController {
 		/** Filtering data to send **/
 		// Filter the activity object
 		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, RISKNATURE, PROBABILITY,
-				SEVERITY, EXPOSURE, RISKSTATUS, DETECTIONDATE, CLOSUREDATE);
+				SEVERITY, EXPOSURE, RISKSTATUS, DETECTIONDATE, CLOSUREDATE,EXPOSUREVALUE);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(RISK_FILTER, riskFilter);
 		// Create the mapping object and set the filters to the mapping

@@ -8,13 +8,15 @@ import { RiskNature } from './risk-nature';
 import { Priority } from './priority';
 import { RiskStrategy } from './risk-strategy';
 import { User } from './user';
+import { RiskAction } from './risk-Action';
 
 export class Risk {
 
-    id: number;
+    id?: number;
     probability: Probability;
     severity: Severity;
     exposure: Exposure;
+    exposureValue: number;
     riskNature: RiskNature;
     riskPriority: Priority;
     riskStrategy: RiskStrategy;
@@ -24,7 +26,7 @@ export class Risk {
     closureDate: Date;
     impact: String;
     factorsIdentif: String;
-    actions: Array<Action> = [];
+    actions: Array<RiskAction> = [];
     contingencyPlan: Array<Action> = [];
     mitigationApproach: Array<Action> = [];
     createdBy: User;

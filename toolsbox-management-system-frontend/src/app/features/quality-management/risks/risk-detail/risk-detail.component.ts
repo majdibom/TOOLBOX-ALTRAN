@@ -4,8 +4,8 @@ import { Risk } from '@models/risk';
 import { ActivatedRoute } from '@angular/router';
 import { PageClient } from '@models/page-client';
 import { Router } from '@angular/router';
-import { Action } from '@models/action';
 import swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-risk-detail',
@@ -13,20 +13,24 @@ import swal from 'sweetalert2';
   styleUrls: ['./risk-detail.component.css']
 })
 export class RiskDetailComponent implements OnInit {
- // Initial risk id
- idRisk: number;
- // Initial risk detail
- risk: Risk = new Risk();
+  // Initial risk id
+  idRisk: number;
+  // Initial risk detail
+  risk: Risk = new Risk();
+  // Risk to edit
+  editRisk: Risk = new Risk();
 
-  constructor(private route: ActivatedRoute, private genericService: GenericService,private router: Router) { }
+  constructor(private route: ActivatedRoute, private genericService: GenericService, private router: Router) { }
 
   ngOnInit() {
-    this.getRisk();
     this.reloadData();
   }
-   /** Reload data after every action */
-   reloadData() {
+
+  /** Reload data after every action */
+  reloadData() {
+    this.getRisk();
   }
+
   /** Get Risk detail */
   getRisk() {
     this.idRisk = this.route.snapshot.params.id;
@@ -34,12 +38,23 @@ export class RiskDetailComponent implements OnInit {
       this.risk = data.value;
     });
   }
-   /** Open action detail component */
-   openDetails(id: number) {
+
+  /** Open action detail component */
+  openDetails(id: number) {
     this.router.navigate(['quality-management/actions/action-detail', id]);
   }
-   /** Delete Action */
-   deleteActions(id: number) {
+
+  /** Open action detail component */
+  openActionsListModal(idRisk: number) {
+    this.genericService.getGenericById('/risks', idRisk).subscribe(data => {
+      if (data.error === false) {
+        this.editRisk = data.value;
+      }
+    });
+  }
+
+  /** Delete Action */
+  deleteActionsFromRisk(body: any) {
     swal({
       title: 'Vous êtes Sur ?',
       text: 'Voulez vous vraiment supprimer cette action',
@@ -49,7 +64,7 @@ export class RiskDetailComponent implements OnInit {
       cancelButtonText: 'Non'
     }).then((result) => {
       if (result.dismiss !== swal.DismissReason.cancel && result.dismiss !== swal.DismissReason.backdrop) {
-        this.genericService.deleteGeneric('/actions', id)
+        this.genericService.deleteWithBody('/risks/delete-action', { body: body })
           .subscribe(data => {
             if (data.error === false) {
               this.ngOnInit();
@@ -83,4 +98,5 @@ export class RiskDetailComponent implements OnInit {
   selectedPage = 0;
   item = 5;
   searchInput: String = '';
+
 }

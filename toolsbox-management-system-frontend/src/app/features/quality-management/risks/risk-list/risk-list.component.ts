@@ -105,22 +105,22 @@ export class RiskListComponent implements OnInit {
 
     this.dropdownListNatures = [];
     this.riskNatureEnum.map(element => {
-    this.dropdownListNatures.push({ id: element, title: element });
+      this.dropdownListNatures.push({ id: element, title: element });
     });
 
     this.dropdownListProbabilities = [];
     this.riskProbabilityEnum.map(element => {
-    this.dropdownListProbabilities.push({ id: element, title: element });
+      this.dropdownListProbabilities.push({ id: element, title: element });
     });
 
     this.dropdownListExposures = [];
     this.riskExposureEnum.map(element => {
-    this.dropdownListExposures.push({ id: element, title: element });
+      this.dropdownListExposures.push({ id: element, title: element });
     });
 
     this.selectedStatus = [];
     this.riskStatusEnum.map(element => {
-    this.dropdownListStatus.push({ id: element, title: element });
+      this.dropdownListStatus.push({ id: element, title: element });
     });
   }
 
@@ -231,29 +231,29 @@ export class RiskListComponent implements OnInit {
     }
   }
 
-    /** Advanced search risk with filter */
-    advancedSearch(selectedNatures: any, selectedProbabilities: any, selectedExposures: any, selectedStatus: any) {
-      const filter = {
-        natures: selectedNatures == null ? null : selectedNatures,
-        probabilities: selectedProbabilities == null ? null : selectedProbabilities,
-        exposures: selectedExposures == null ? null : selectedExposures,
-        status: selectedStatus == null ? null : selectedStatus,
-      };
+  /** Advanced search risk with filter */
+  advancedSearch(selectedNatures: any, selectedProbabilities: any, selectedExposures: any, selectedStatus: any) {
+    const filter = {
+      natures: selectedNatures == null ? null : selectedNatures,
+      probabilities: selectedProbabilities == null ? null : selectedProbabilities,
+      exposures: selectedExposures == null ? null : selectedExposures,
+      status: selectedStatus == null ? null : selectedStatus,
+    };
 
-      this.genericService.getGenericPageByFilter('/risks/advanced-search', this.selectedPage, this.item, filter)
-        .subscribe(
-          data => {
-            this.listRisks = data.content;
-            this.pageClient = new PageClient();
-            this.pageClient = data;
-            this.total = this.pageClient.totalElements;
+    this.genericService.getGenericPageByFilter('/risks/advanced-search', this.selectedPage, this.item, filter)
+      .subscribe(
+        data => {
+          this.listRisks = data.content;
+          this.pageClient = new PageClient();
+          this.pageClient = data;
+          this.total = this.pageClient.totalElements;
         }
       );
 
-    }
+  }
 
-    /** NgPrime Advanced Search method to solve no method found erreur */
-    onItemSelect(item: any) { }
-    onSelectAll(items: any) { }
+  /** NgPrime Advanced Search method to solve no method found erreur */
+  onItemSelect(item: any) { }
+  onSelectAll(items: any) { }
 
 }

@@ -24,9 +24,6 @@ export class Action {
     priority: Priority;
     typeAction: TypeAction;
     origin: Origin;
-    createdBy: User;
-    createdAt: Date;
-    updatedAt: Date;
-    
+
     constructor() { }
 }

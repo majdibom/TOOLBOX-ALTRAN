@@ -26,6 +26,8 @@ public final class FilterConstants {
 	public static final String GAP_FILTER = "GapFilter";
 	public static final String ACTION_FILTER = "ActionFilter";
 	public static final String RISK_FILTER = "RiskFilter";
+	public static final String RISKACTION_FILTER = "RiskActionFilter";
+
 
 	/**
 	 * Training Management

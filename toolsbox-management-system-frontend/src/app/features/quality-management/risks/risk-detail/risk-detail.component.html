@@ -2,146 +2,164 @@
   <h3>{{'Détails du Risque : #' | translate}}{{risk?.id}}</h3>
 </div>
 <div class="content">
-  
-    <div class="row">
-      <div class="col-lg-4">
-        <div class="profile-card-4 z-depth-3">
-          <!-- action generale information section -->
-          <div class="card">
-            <div class="card-body text-center bg-altran rounded-top">
-              <h6 class="text-light">{{'Pilote de risque ' | translate}} :</h6>
-              <h5 class="mb-1 text-white">
-                {{risk?.riskPilote?.firstName}}&nbsp;{{risk?.riskPilote?.lastName}}</h5>
-            </div>
-            <div class="card-body">
-              <ul class="list-group shadow-none">
-                <li class="list-group-item">
-                  <div class="list-icon">
-                    <i class="fa fa-cog" aria-hidden="true"></i>
-                  </div>
-                  <div class="list-details">
-                    <span style="font-size: medium;">{{'Probabilité' | translate}}: </span>&nbsp;&nbsp;<span style="font-size: medium;">{{risk?.probability}}</span>
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="list-icon">
-                    <i class="fa fa-thumb-tack"></i>
-                  </div>
-                  <div class="list-details">
-                    <span style="font-size: medium;">{{'Statut' | translate}}: </span>&nbsp;&nbsp;
-                    <span *ngIf="risk?.riskStatus == 'Open'" class="badge badge-success" style="font-size: medium;">{{risk?.riskStatus}}</span>
-                    <span *ngIf="risk?.riskStatus == 'Closed'" class="badge badge-danger" style="font-size: medium;">{{risk?.riskStatus}}</span>
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="list-icon">
-                    <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
-                  </div>
-                  <div class="list-details">
-                    <span style="font-size: medium;">{{'gravité' | translate}}: </span>&nbsp;&nbsp;<span style="font-size: medium;">{{risk?.severity}}</span>
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="list-icon">
-                    <i class="fa fa-arrows-v" aria-hidden="true"></i>
-                  </div>
-                  <div class="list-details">
-                    <span style="font-size: medium;">{{'Exposition' | translate}}: </span>&nbsp;&nbsp;
-                    <span *ngIf="risk?.exposure == 'Low'" class="badge badge-secondary" style="font-size: medium;">{{risk?.exposure}}</span>
-                    <span *ngIf="risk?.exposure == 'Medium'" class="badge badge-info" style="font-size: medium;">{{risk?.exposure}}</span>
-                    <span *ngIf="risk?.exposure == 'High'" class="badge badge-warning" style="font-size: medium;">{{risk?.exposure}}</span>
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="list-icon">
-                    <i class="fa fa-line-chart" aria-hidden="true"></i>
-                  </div>
-                  <div class="list-details">
-                    <span style="font-size: medium;">{{'Priorité' | translate}}: </span>&nbsp;&nbsp;
-                    <span *ngIf="risk?.riskPriority == 'Low'" class="badge badge-secondary" style="font-size: medium;">{{risk?.riskPriority}}</span>
-                    <span *ngIf="risk?.riskPriority == 'Nomral'" class="badge badge-info"style="font-size: medium;">{{risk?.riskPriority}}</span>
-                    <span *ngIf="risk?.riskPriority == 'High'" class="badge badge-warning"style="font-size: medium;">{{risk?.riskPriority}}</span>
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="list-icon">
-                    <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-                  </div>
-                  <div class="list-details">
-                    <span style="font-size: medium;">{{'Stratégie' | translate}}: </span>&nbsp;&nbsp;<span style="font-size: medium;">{{risk?.riskStrategy}} </span>
-                  </div>
-                </li>
-              </ul>
-              <div class="row text-center mt-4">
-                <div class="col p-2">
-                  <h4 class="mb-1 line-height-5" style="font-size: 20px">{{risk?.detectionDate |
+
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="profile-card-4 z-depth-3">
+        <!-- action generale information section -->
+        <div class="card">
+          <div class="card-body text-center bg-altran rounded-top">
+            <h6 class="text-light">{{'Pilote de risque ' | translate}} :</h6>
+            <h5 class="mb-1 text-white">
+              {{risk?.riskPilote?.firstName}}&nbsp;{{risk?.riskPilote?.lastName}}</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group shadow-none">
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Probabilité' | translate}}: </span>&nbsp;&nbsp;<span
+                    style="font-size: medium;">{{risk?.probability}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-thumb-tack"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Statut' | translate}}: </span>&nbsp;&nbsp;
+                  <span *ngIf="risk?.riskStatus == 'Open'" class="badge badge-success"
+                    style="font-size: medium;">{{risk?.riskStatus}}</span>
+                  <span *ngIf="risk?.riskStatus == 'Closed'" class="badge badge-danger"
+                    style="font-size: medium;">{{risk?.riskStatus}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Gravité' | translate}}: </span>&nbsp;&nbsp;<span
+                    style="font-size: medium;">{{risk?.severity}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-arrows-v" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Criticité' | translate}}: </span>&nbsp;&nbsp;
+                  <span *ngIf="risk?.exposure == 'Acceptable'" class="badge badge-secondary"
+                    style="font-size: medium;">{{risk?.exposure}}</span>
+                  <span *ngIf="risk?.exposure == 'A_surveiller'" class="badge badge-info"
+                    style="font-size: medium;">{{risk?.exposure}}</span>
+                  <span *ngIf="risk?.exposure == 'Trés_critique'" class="badge badge-warning"
+                    style="font-size: medium;">{{risk?.exposure}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-line-chart" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Priorité' | translate}}: </span>&nbsp;&nbsp;
+                  <span *ngIf="risk?.riskPriority == 'Low'" class="badge badge-secondary"
+                    style="font-size: medium;">{{risk?.riskPriority}}</span>
+                  <span *ngIf="risk?.riskPriority == 'Nomral'" class="badge badge-info"
+                    style="font-size: medium;">{{risk?.riskPriority}}</span>
+                  <span *ngIf="risk?.riskPriority == 'High'" class="badge badge-warning"
+                    style="font-size: medium;">{{risk?.riskPriority}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Stratégie' | translate}}: </span>&nbsp;&nbsp;<span
+                    style="font-size: medium;">{{risk?.riskStrategy}} </span>
+                </div>
+              </li>
+            </ul>
+            <div class="row text-center mt-4">
+              <div class="col p-2">
+                <h4 class="mb-1 line-height-5" style="font-size: 20px">{{risk?.detectionDate |
                                             date:'dd/MM/yyyy'}}</h4>
-                  <small class="mb-0 font-weight-bold">{{'Date d identification' | translate}}</small>
-                </div>
-                <div class="col p-2">
-                  <h4 class="mb-1 line-height-5" style="font-size: 20px">{{risk?.closureDate |
+                <small class="mb-0 font-weight-bold">{{'Date de detection' | translate}}</small>
+              </div>
+              <div class="col p-2">
+                <h4 class="mb-1 line-height-5" style="font-size: 20px">{{risk?.closureDate |
                                         date:'dd/MM/yyyy'}}</h4>
-                  <small class="mb-0 font-weight-bold">{{'Date de fermeture' | translate}}</small>
-                </div>
+                <small class="mb-0 font-weight-bold">{{'Date de fermeture' | translate}}</small>
               </div>
             </div>
-
           </div>
+
         </div>
       </div>
+    </div>
 
-      <div class="col-lg-8">
-        <div class="card z-depth-3">
-          <div class="card-body">
-            <ul class="nav nav-pills nav-pills-primary nav-justified">
-              <!-- Details menu -->
-              <li class="nav-item">
-                <div class="card-body text-center bg-altran rounded-top">
-                  <h6 class="text-light">{{'Créé par' | translate}}:</h6>
-                  <h5 class="text-white">
-                    {{risk?.createdBy?.firstName}}&nbsp;{{risk?.createdBy?.lastName}}</h5>
-                </div>
-              </li>
-              <li class="nav-item">
-                <div class="card-body text-center bg-altran rounded-top">
-                  <h6 class="text-light">{{'Date de création' | translate}}:</h6>
-                  <h5 class="text-light" style="font-size: 20px">{{risk?.createdAt |
+    <div class="col-lg-8">
+      <div class="card z-depth-3">
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pills-primary nav-justified">
+            <!-- Details menu -->
+            <li class="nav-item">
+              <div class="card-body text-center bg-altran rounded-top">
+                <h6 class="text-light">{{'Créé par' | translate}}:</h6>
+                <h5 class="text-white">
+                  {{risk?.createdBy?.firstName}}&nbsp;{{risk?.createdBy?.lastName}}</h5>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="card-body text-center bg-altran rounded-top">
+                <h6 class="text-light">{{'Date de création' | translate}}:</h6>
+                <h5 class="text-light" style="font-size: 20px">{{risk?.createdAt |
                     date:'dd/MM/yyyy'}}</h5>
-                </div>
-              </li>
-              <li class="nav-item">
-                <div class="card-body text-center bg-altran rounded-top">
-                  <h6 class="text-light">{{'Date de mise à jour' | translate}}:</h6>
-                  <h5 class="text-light" style="font-size: 20px">{{risk?.updatedAt |
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="card-body text-center bg-altran rounded-top">
+                <h6 class="text-light">{{'Date de mise à jour' | translate}}:</h6>
+                <h5 class="text-light" style="font-size: 20px">{{risk?.updatedAt |
                     date:'dd/MM/yyyy'}}</h5>
-                </div>
-              </li>
+              </div>
+            </li>
 
-            </ul>
-            <div class="tab-content p-3">
-              <!-- Details section -->
-              <div class="tab-pane active show" id="detail">
-                <h5 class="mb-3"></h5>
+          </ul>
+          <div class="tab-content p-3">
+            <!-- Details section -->
+            <div class="tab-pane active show" id="detail">
+              <h5 class="mb-3"></h5>
+              <div class="row">
+
+
+              </div>
+              <!-- Interviews information section -->
+              <div class="tab-pane" id="quizzes">
                 <div class="row">
-                 
-              
-                </div>
-                <!-- Interviews information section -->
-                <div class="tab-pane" id="quizzes">
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <ul class="list-group list-group-flush">
-                    <li  class="list-group-item">
-                      <h5><strong>{{'Impact :' | translate}}</strong>&nbsp;&nbsp;{{risk?.impact}}</h5>
-                    </li>
-                    <li  class="list-group-item">
-                      <h5><strong>{{'Identification des facteurs  +/- :' | translate}}</strong>&nbsp;&nbsp;{{risk?.factorsIdentif}}</h5>
-                    </li>
-                    <li  class="list-group-item">
-                      <h5><strong>{{'Actions :'| translate}}</strong></h5>
-                    </li>
-                  </ul>
-                   <!-- Actions list Table -->
+                  <div class="col-lg-12">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        <h5><strong>{{'Impact :' | translate}}</strong>&nbsp;&nbsp;{{risk?.impact}}</h5>
+                      </li>
+                      <li class="list-group-item">
+                        <h5>
+                          <strong>{{'Identification des facteurs  +/- :' | translate}}</strong>&nbsp;&nbsp;{{risk?.factorsIdentif}}
+                        </h5>
+                      </li>
+                      <li class="list-group-item">
+                        <h5><strong>{{'Actions :'| translate}}</strong>
+                          <button type="button" id="add-risk-btn" class="btn btn-primary btn-add"
+                            title="Afficher les actions" data-toggle="modal" data-target="#addActionsModal"
+                            (click)="openActionsListModal(risk?.id)" style="float:right;">
+                            <i class="fa fa-plus-circle fa-lg"></i>&nbsp;Add Actions</button></h5>
+
+                      </li>
+                    </ul>
+                    <!-- Actions list Table -->
                     <div class="table-responsive-lg">
                       <table class="table table-bordered table-striped table-hover">
                         <thead class="row-border hover">
@@ -152,17 +170,19 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let action of risk?.actions | paginate: { itemsPerPage: item, currentPage: p, totalItems: total }">
-                            <td>{{action.id}}</td>
-                            <td>{{action.description}}</td>
+                          <tr
+                            *ngFor="let action of risk?.actions | paginate: { itemsPerPage: item, currentPage: p, totalItems: total }">
+                            <td>{{action.action.id}} </td>
+                            <td>{{action.action.description}}</td>
 
                             <td class="text-center">
-                              <button type="button" class="btn btn-detail" title="Afficher les details de cette action" data-toggle="modal"
-                                data-target="#detailsmodal" (click)="openDetails(action.id)"><i
+                              <button type="button" class="btn btn-detail" title="Afficher les details de cette action"
+                                data-toggle="modal" data-target="#detailsmodal"
+                                (click)="openDetails(action.action.id)"><i
                                   class="fa fa-align-justify"></i></button>&nbsp;
                               &nbsp;
                               <button type="button" class="btn btn-danger btn-circle" title="Supprimer cette action"
-                                (click)="deleteActions(action.id)"><i class="fa fa-remove"></i></button>
+                                (click)="deleteActionsFromRisk(action.id)"><i class="fa fa-remove"></i></button>
                             </td>
                           </tr>
                         </tbody>
@@ -173,7 +193,7 @@
                           <div class="nodata-text" id="no-data-available">{{'Aucune donnée trouvée.' | translate}}</div>
                         </div>
                       </div>
-                    
+
                     </div>
                   </div>
                 </div>
@@ -183,3 +203,5 @@
         </div>
       </div>
     </div>
+    <!-- Actions Table -->
+    <app-add-actions [riskToEdit]="editRisk" (reloadEvent)="reloadData()"></app-add-actions>

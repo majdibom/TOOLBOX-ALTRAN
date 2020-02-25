@@ -1,0 +1,369 @@
+
+
+INSERT INTO public.activities (id, description, title) VALUES (1, 'Département automobile', 'Automobile');
+INSERT INTO public.activities (id, description, title) VALUES (2, 'Département media', 'Media');
+INSERT INTO public.activities (id, description, title) VALUES (3, 'Département aéronautique', 'Aéronautique');
+INSERT INTO public.activities (id, description, title) VALUES (4, 'Département sécurité', 'Securité');
+
+
+
+INSERT INTO public.delivery_model (id, title) VALUES (1, 'ADM1');
+INSERT INTO public.delivery_model (id, title) VALUES (2, 'ADM2');
+INSERT INTO public.delivery_model (id, title) VALUES (3, 'ADM3');
+INSERT INTO public.delivery_model (id, title) VALUES (4, 'ADM4');
+
+
+
+
+INSERT INTO public.process (id, title) VALUES (1, 'BDM');
+INSERT INTO public.process (id, title) VALUES (2, 'PPR');
+INSERT INTO public.process (id, title) VALUES (3, 'GPR');
+INSERT INTO public.process (id, title) VALUES (4, 'RPR');
+INSERT INTO public.process (id, title) VALUES (5, 'AQP');
+INSERT INTO public.process (id, title) VALUES (6, 'AQS');
+INSERT INTO public.process (id, title) VALUES (7, 'AQD');
+INSERT INTO public.process (id, title) VALUES (8, 'PAT');
+INSERT INTO public.process (id, title) VALUES (9, 'ACH');
+INSERT INTO public.process (id, title) VALUES (10, 'GRH');
+INSERT INTO public.process (id, title) VALUES (11, 'IT');
+
+
+
+
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (1, 'CONTI_Auto-Code', 1, 2);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (2, 'Rapsody', 2, 2);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (3, 'BSCU', 3, 2);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (4, 'MALI', 4, 3);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (5, 'X4_EBC_ACU', 3, 4);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (6, 'CONTI_Safety', 1, 2);
+
+
+
+
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (2, true, 'Nasr', NULL, 'ayada.hassine@altran.com', 'Ayada', 'Hassine', '$2a$10$8Efud5JLfRBK.b0KnAiX4uE.GI6KD9jotN0us2bcaeTbTTsvoMkX6', '75142146', 'a', 1);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (3, true, 'Manzah', NULL, 'ines.jebri@altran.com', 'Ines', 'Jebri', '$2a$10$zfjDW7sIJfdmAUtvN9lMee5adV7ZqqG/MgoEqsQJ4Oia6iGLuSkOC', '74589312', 'g', 1);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (4, true, 'Manzah', NULL, 'mariam.djait@altran.com', 'Mariam', 'Djait', '$2a$10$zDvCpVgZ4OZOsdEw.peB4uymkDj3kmZ0uK8ZJVf7yoQKPxw18I0C2', '74589312', 'b', 3);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (12, true, 'Manzah', NULL, 'yassine.khalki@altran.com', 'Yassine', 'Khalki', '$2a$10$Jn3lkpDQa7Lrt.7C3e8VBOU03PoO4Y6e7kj0wEBOAErFoZVhMZceu', '74589312', 'k', 1);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (14, true, 'Manzah', NULL, 'mohamedamine.babay@altran.com', 'Mohamed Amine', 'Babay', '$2a$10$mmIdPe4DTG7NZ4QCVuRyRO3LbIWQ7xoVGlImpMzMG6Q2tOEX2qbrK', '74589312', 'm', 1);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (15, true, 'Manzah', NULL, 'ramla.mathlouthhi@altran.com', 'Ramla', 'Mathlouthi', '$2a$10$3zMDJO1ipsr9SD7iaRU5B.EmwifRYGMhpdddb/R3yr/MClsrXgMhK', '74589312', 'n', 1);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (13, true, 'Manzah', '1995-02-11 00:00:00', 'imen.jemai@altran.com', 'Imen', 'Jemai', '$2a$10$yiWUNvS3ooHNNfcS4IuzjuU8nYXUKhG6fmFqDtF2RbTSPhbJo1WkW', '74589312', 'l', 1);
+INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (39, true, 'Korba', '1995-07-10 00:00:00', 'b.othman.majdi@gmail.com', 'Majdi', 'Ben Othmen', '$2a$10$/4.e3CVXrggr4VDuvkVsg.Q7lgXHQKcjQWFsBmu.YImA9m2OZTYZ2', '50692140', 'Majdi', 3);
+
+
+
+INSERT INTO public.week (id, number) VALUES (1, 1);
+INSERT INTO public.week (id, number) VALUES (2, 2);
+INSERT INTO public.week (id, number) VALUES (3, 3);
+INSERT INTO public.week (id, number) VALUES (4, 4);
+INSERT INTO public.week (id, number) VALUES (5, 5);
+INSERT INTO public.week (id, number) VALUES (6, 6);
+INSERT INTO public.week (id, number) VALUES (7, 7);
+INSERT INTO public.week (id, number) VALUES (8, 8);
+INSERT INTO public.week (id, number) VALUES (9, 9);
+INSERT INTO public.week (id, number) VALUES (10, 10);
+INSERT INTO public.week (id, number) VALUES (11, 11);
+INSERT INTO public.week (id, number) VALUES (12, 12);
+INSERT INTO public.week (id, number) VALUES (13, 13);
+INSERT INTO public.week (id, number) VALUES (14, 14);
+INSERT INTO public.week (id, number) VALUES (15, 15);
+INSERT INTO public.week (id, number) VALUES (16, 16);
+INSERT INTO public.week (id, number) VALUES (17, 17);
+INSERT INTO public.week (id, number) VALUES (18, 18);
+INSERT INTO public.week (id, number) VALUES (19, 19);
+INSERT INTO public.week (id, number) VALUES (20, 20);
+INSERT INTO public.week (id, number) VALUES (21, 21);
+INSERT INTO public.week (id, number) VALUES (22, 22);
+INSERT INTO public.week (id, number) VALUES (23, 23);
+INSERT INTO public.week (id, number) VALUES (24, 24);
+INSERT INTO public.week (id, number) VALUES (25, 25);
+INSERT INTO public.week (id, number) VALUES (26, 26);
+INSERT INTO public.week (id, number) VALUES (27, 27);
+INSERT INTO public.week (id, number) VALUES (28, 28);
+INSERT INTO public.week (id, number) VALUES (29, 29);
+INSERT INTO public.week (id, number) VALUES (30, 30);
+INSERT INTO public.week (id, number) VALUES (31, 31);
+INSERT INTO public.week (id, number) VALUES (32, 32);
+INSERT INTO public.week (id, number) VALUES (33, 33);
+INSERT INTO public.week (id, number) VALUES (34, 34);
+INSERT INTO public.week (id, number) VALUES (35, 35);
+INSERT INTO public.week (id, number) VALUES (36, 36);
+INSERT INTO public.week (id, number) VALUES (37, 37);
+INSERT INTO public.week (id, number) VALUES (38, 38);
+INSERT INTO public.week (id, number) VALUES (39, 39);
+INSERT INTO public.week (id, number) VALUES (40, 40);
+INSERT INTO public.week (id, number) VALUES (41, 41);
+INSERT INTO public.week (id, number) VALUES (42, 42);
+INSERT INTO public.week (id, number) VALUES (43, 43);
+INSERT INTO public.week (id, number) VALUES (44, 44);
+INSERT INTO public.week (id, number) VALUES (45, 45);
+INSERT INTO public.week (id, number) VALUES (46, 46);
+INSERT INTO public.week (id, number) VALUES (47, 47);
+INSERT INTO public.week (id, number) VALUES (48, 48);
+INSERT INTO public.week (id, number) VALUES (49, 49);
+INSERT INTO public.week (id, number) VALUES (50, 50);
+INSERT INTO public.week (id, number) VALUES (51, 51);
+INSERT INTO public.week (id, number) VALUES (52, 52);
+
+
+INSERT INTO public.audits (id, audit_theme, duration, issues, reference, risks, accompanying_auditor_id, primary_auditor_id, process_id, project_id, week_id) VALUES (1, 'aaa', 2, 'aaa', 'REF20154', 'aaaaa', 14, 2, NULL, 4, 2);
+
+
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (11, 'Delayed', 'Effectiveness measurement criterionEffectiveness measurement criterionEffectiveness measurement criterionEffectiveness measurement criterion', '2020-02-12 00:00:00', 'Il faut ajouter plus qu une actions !
+Il faut ajouter plus qu une actions !
+', '0016-08-12 00:00:00', 'Effectiveness measurement criterion', '0020-08-12 00:00:00', '0017-08-12 00:00:00', 'Risk', 'Nomral', '0019-08-13 00:00:00', 'Amélioration', '2020-02-12 00:00:00', '0018-08-13 00:00:00', NULL, NULL, 2);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (13, 'Done', 'Il faut ajouter plus qu une actions !
+Il faut ajouter plus qu une actions !
+', '2020-02-12 00:00:00', 'Il faut ajouter plus qu une actions !
+', '0016-08-12 00:00:00', 'Effectiveness measurement criterion', '0026-08-13 00:00:00', '0017-08-12 00:00:00', 'Risk', 'Nomral', '0020-08-12 00:00:00', 'Protection', '2020-02-12 00:00:00', '0019-08-13 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (17, 'Delayed', 'descriptiondescriptiondescription', '2020-02-12 00:00:00', 'description', '2020-02-18 00:00:00', 'actionssss', NULL, '2020-02-05 00:00:00', 'Audit', 'Nomral', '2020-02-20 00:00:00', 'Amélioration', '2020-02-12 00:00:00', '2020-02-22 00:00:00', NULL, NULL, 4);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (16, 'Done', 'Effectiveness measurement criterionEffectiveness measurement criterion', '2020-02-12 00:00:00', 'Effectiveness measurement criterion', '2020-02-21 00:00:00', 'Effectiveness measurement criterion', '2020-02-27 00:00:00', '2020-02-11 00:00:00', 'Audit', 'High', '2020-02-21 00:00:00', 'Transfert', '2020-02-12 00:00:00', '2020-02-18 00:00:00', NULL, NULL, 15);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (30, 'Closed', 'description', NULL, 'description', '2020-02-19 00:00:00', 'description', NULL, '2020-01-30 00:00:00', 'Audit', 'Nomral', '2020-02-24 00:00:00', 'Protection', NULL, '2020-02-22 00:00:00', NULL, NULL, 4);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (31, 'Done', 'Critère de mesure de l efficacité', NULL, 'description', '2020-02-05 00:00:00', 'Critère de mesure de l efficacité', NULL, '2020-02-06 00:00:00', 'Risk', 'High', '2020-02-25 00:00:00', 'Préventive', NULL, '2020-02-21 00:00:00', NULL, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (33, 'Blocked', 'Preuve de clôture : "Colonne B" du fichier demande d''achats.
+Preuve d''efficacité :  Aucune commande non conforme depuis septembre 2018', NULL, 'Assurer une présélections des fournisseurs et des évaluations périodiques.', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Risk', 'Nomral', NULL, 'Amélioration', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (34, 'Delayed', 'Critère de mesure de l efficacité', NULL, 'description', '2020-02-19 00:00:00', NULL, NULL, '2020-02-18 00:00:00', 'Risk', 'Nomral', NULL, 'Protection', NULL, '2020-02-13 00:00:00', NULL, NULL, 3);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (35, 'Open', 'description', NULL, 'description', '2020-02-10 00:00:00', 'description', NULL, '2020-02-11 00:00:00', 'Risk', 'Nomral', '2020-02-25 00:00:00', 'Protection', NULL, '2020-02-27 00:00:00', NULL, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (37, 'Blocked', 'Preuve de clôture : "Colonne B" du fichier demande d''achats.
+Preuve d''efficacité :  Aucune commande non conforme depuis septembre 2018', NULL, 'Assurer une présélections des fournisseurs et des évaluations périodiques.', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Risk', 'Nomral', NULL, 'Amélioration', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (38, 'Open', 'description', NULL, 'description', '2020-02-10 00:00:00', 'description', NULL, '2020-02-11 00:00:00', 'Risk', 'Nomral', '2020-02-25 00:00:00', 'Protection', NULL, '2020-02-27 00:00:00', NULL, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (2, 'Open', 'CommentairesCommentairesCommentairesCommentairesCommentaires', '2020-02-12 00:00:00', 'Identification des facteurs +/-', '0033-07-12 00:00:00', 'Effectiveness measurement criterion', '0033-07-12 00:00:00', '0033-07-12 00:00:00', 'Risk', 'Nomral', '0033-07-12 00:00:00', 'Protection', '2020-02-12 00:00:00', '0033-07-12 00:00:00', NULL, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (14, 'Delayed', 'Effectiveness measurement criterionEffectiveness measurement criterionEffectiveness measurement criterionEffectiveness measurement criterion', '2020-02-12 00:00:00', 'Il faut ajouter plus qu une actions !
+Il faut ajouter plus qu une actions !
+', '0016-08-12 00:00:00', 'Effectiveness measurement criterion', '0020-08-12 00:00:00', '0017-08-12 00:00:00', 'Risk', 'Nomral', '0019-08-13 00:00:00', 'Amélioration', '2020-02-12 00:00:00', '0018-08-13 00:00:00', NULL, NULL, 2);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (15, 'Done', 'Il faut ajouter plus qu une actions !
+Il faut ajouter plus qu une actions !
+', '2020-02-12 00:00:00', 'Il faut ajouter plus qu une actions !
+', '0016-08-12 00:00:00', 'Effectiveness measurement criterion', '0026-08-13 00:00:00', '0017-08-12 00:00:00', 'Risk', 'Nomral', '0020-08-12 00:00:00', 'Protection', '2020-02-12 00:00:00', '0019-08-13 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (18, 'Delayed', 'descriptiondescriptiondescription', '2020-02-12 00:00:00', 'description', '2020-02-18 00:00:00', 'actionssss', NULL, '2020-02-05 00:00:00', 'Audit', 'Nomral', '2020-02-20 00:00:00', 'Amélioration', '2020-02-12 00:00:00', '2020-02-22 00:00:00', NULL, NULL, 4);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (19, 'Done', 'Effectiveness measurement criterionEffectiveness measurement criterion', '2020-02-12 00:00:00', 'Effectiveness measurement criterion', '2020-02-21 00:00:00', 'Effectiveness measurement criterion', '2020-02-27 00:00:00', '2020-02-11 00:00:00', 'Audit', 'High', '2020-02-21 00:00:00', 'Transfert', '2020-02-12 00:00:00', '2020-02-18 00:00:00', NULL, NULL, 15);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (21, 'Closed', 'description', NULL, 'description', '2020-02-19 00:00:00', 'description', NULL, '2020-01-30 00:00:00', 'Audit', 'Nomral', '2020-02-24 00:00:00', 'Protection', NULL, '2020-02-22 00:00:00', NULL, NULL, 4);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (22, 'Done', 'Critère de mesure de l efficacité', NULL, 'description', '2020-02-05 00:00:00', 'Critère de mesure de l efficacité', NULL, '2020-02-06 00:00:00', 'Risk', 'High', '2020-02-25 00:00:00', 'Préventive', NULL, '2020-02-21 00:00:00', NULL, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (23, 'Blocked', 'Preuve de clôture : "Colonne B" du fichier demande d''achats.
+Preuve d''efficacité :  Aucune commande non conforme depuis septembre 2018', NULL, 'Assurer une présélections des fournisseurs et des évaluations périodiques.', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Risk', 'Nomral', NULL, 'Amélioration', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (24, 'Delayed', 'Critère de mesure de l efficacité', NULL, 'description', '2020-02-19 00:00:00', NULL, NULL, '2020-02-18 00:00:00', 'Risk', 'Nomral', NULL, 'Protection', NULL, '2020-02-13 00:00:00', NULL, NULL, 3);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (25, 'Open', 'description', NULL, 'description', '2020-02-10 00:00:00', 'description', NULL, '2020-02-11 00:00:00', 'Risk', 'Nomral', '2020-02-25 00:00:00', 'Protection', NULL, '2020-02-27 00:00:00', NULL, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (62, 'Open', '222222', NULL, '22222', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Audit', 'Low', NULL, 'Préventive', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (36, 'Done', NULL, NULL, 'test', '2020-02-10 00:00:00', NULL, NULL, '2020-02-11 00:00:00', 'Risk', 'Nomral', '2020-02-25 00:00:00', 'Protection', NULL, '2020-02-27 00:00:00', NULL, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (5, 'Open', 'CommentairesCommentairesCommentairesCommentairesCommentaires', '2020-02-12 00:00:00', 'Identification des facteurs +/-', '0033-07-12 00:00:00', 'Effectiveness measurement criterion', '0033-07-12 00:00:00', '0033-07-12 00:00:00', 'Risk', 'Nomral', '0033-07-12 00:00:00', 'Protection', '2020-02-12 00:00:00', '0033-07-12 00:00:00', NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (42, 'Blocked', 'Preuve de clôture : "Colonne B" du fichier demande d''achats.
+Preuve d''efficacité :  Aucune commande non conforme depuis septembre 2018', NULL, 'Assurer une présélections des fournisseurs et des évaluations périodiques.', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Risk', 'Nomral', NULL, 'Amélioration', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (26, 'Open', 'description', NULL, 'description', '2020-02-10 00:00:00', 'description', NULL, '2020-02-11 00:00:00', 'Risk', 'Nomral', '2020-02-25 00:00:00', 'Protection', NULL, '2020-02-27 00:00:00', NULL, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (55, 'Open', 'CommentairesCommentairesCommentairesCommentairesCommentaires', '2020-02-12 00:00:00', 'Identification des facteurs +/-', '0033-07-12 00:00:00', 'Effectiveness measurement criterion', '0033-07-12 00:00:00', '0033-07-12 00:00:00', 'Risk', 'Nomral', '0033-07-12 00:00:00', 'Protection', '2020-02-12 00:00:00', '0033-07-12 00:00:00', NULL, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (51, 'Delayed', 'Effectiveness measurement criterionEffectiveness measurement criterionEffectiveness measurement criterionEffectiveness measurement criterion', '2020-02-12 00:00:00', 'Il faut ajouter plus qu une actions !
+Il faut ajouter plus qu une actions !
+', '0016-08-12 00:00:00', 'Effectiveness measurement criterion', '0020-08-12 00:00:00', '0017-08-12 00:00:00', 'Risk', 'Nomral', '0019-08-13 00:00:00', 'Amélioration', '2020-02-12 00:00:00', '0018-08-13 00:00:00', NULL, NULL, 2);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (53, 'Done', 'Il faut ajouter plus qu une actions !
+Il faut ajouter plus qu une actions !
+', '2020-02-12 00:00:00', 'Il faut ajouter plus qu une actions !
+', '0016-08-12 00:00:00', 'Effectiveness measurement criterion', '0026-08-13 00:00:00', '0017-08-12 00:00:00', 'Risk', 'Nomral', '0020-08-12 00:00:00', 'Protection', '2020-02-12 00:00:00', '0019-08-13 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (57, 'Delayed', 'descriptiondescriptiondescription', '2020-02-12 00:00:00', 'description', '2020-02-18 00:00:00', 'actionssss', NULL, '2020-02-05 00:00:00', 'Audit', 'Nomral', '2020-02-20 00:00:00', 'Amélioration', '2020-02-12 00:00:00', '2020-02-22 00:00:00', NULL, NULL, 4);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (46, 'Done', 'Effectiveness measurement criterionEffectiveness measurement criterion', '2020-02-12 00:00:00', 'Effectiveness measurement criterion', '2020-02-21 00:00:00', 'Effectiveness measurement criterion', '2020-02-27 00:00:00', '2020-02-11 00:00:00', 'Audit', 'High', '2020-02-21 00:00:00', 'Transfert', '2020-02-12 00:00:00', '2020-02-18 00:00:00', NULL, NULL, 15);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (50, 'Closed', 'description', NULL, 'description', '2020-02-19 00:00:00', 'description', NULL, '2020-01-30 00:00:00', 'Audit', 'Nomral', '2020-02-24 00:00:00', 'Protection', NULL, '2020-02-22 00:00:00', NULL, NULL, 4);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (41, 'Done', 'Critère de mesure de l efficacité', NULL, 'description', '2020-02-05 00:00:00', 'Critère de mesure de l efficacité', NULL, '2020-02-06 00:00:00', 'Risk', 'High', '2020-02-25 00:00:00', 'Préventive', NULL, '2020-02-21 00:00:00', NULL, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (43, 'Blocked', 'Preuve de clôture : "Colonne B" du fichier demande d''achats.
+Preuve d''efficacité :  Aucune commande non conforme depuis septembre 2018', NULL, 'Assurer une présélections des fournisseurs et des évaluations périodiques.', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Risk', 'Nomral', NULL, 'Amélioration', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (44, 'Delayed', 'Critère de mesure de l efficacité', NULL, 'description', '2020-02-19 00:00:00', NULL, NULL, '2020-02-18 00:00:00', 'Risk', 'Nomral', NULL, 'Protection', NULL, '2020-02-13 00:00:00', NULL, NULL, 3);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (45, 'Open', 'description', NULL, 'description', '2020-02-10 00:00:00', 'description', NULL, '2020-02-11 00:00:00', 'Risk', 'Nomral', '2020-02-25 00:00:00', 'Protection', NULL, '2020-02-27 00:00:00', NULL, NULL, 14);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (47, 'Blocked', 'Preuve de clôture : "Colonne B" du fichier demande d''achats.
+Preuve d''efficacité :  Aucune commande non conforme depuis septembre 2018', NULL, 'Identification des facteurs +/-', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Risk', 'Nomral', NULL, 'Amélioration', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (49, 'Blocked', 'Preuve de clôture : "Colonne B" du fichier demande d''achats.
+Preuve d''efficacité :  Aucune commande non conforme depuis septembre 2018', NULL, 'Identification des facteurs +/-', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Risk', 'Nomral', NULL, 'Amélioration', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (52, 'Open', '111111', NULL, '111111', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Audit', 'Low', NULL, 'Préventive', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (54, 'Open', '222222', NULL, '22222', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Audit', 'Low', NULL, 'Préventive', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (56, 'Open', '222222', NULL, '22222', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Audit', 'Low', NULL, 'Préventive', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (58, 'Open', '222222', NULL, '22222', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Audit', 'Low', NULL, 'Préventive', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (60, 'Open', '222222', NULL, '22222', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Audit', 'Low', NULL, 'Préventive', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (64, 'Open', '222222', NULL, '22222', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Audit', 'Low', NULL, 'Préventive', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (66, 'Open', '222222', NULL, '22222', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Audit', 'Low', NULL, 'Préventive', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (68, 'Open', '33333', NULL, '33333', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Audit', 'Low', NULL, 'Préventive', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (71, 'Open', '4444', NULL, '4444', '2020-02-12 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Audit', 'Low', NULL, 'Préventive', NULL, '2020-02-27 00:00:00', NULL, NULL, 12);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (75, 'Closed', 'Critère de mesure de l efficacité', NULL, 'description', '2020-02-21 00:00:00', NULL, NULL, '2020-02-17 00:00:00', 'Risk', 'Nomral', NULL, 'Protection', NULL, '2020-02-22 00:00:00', NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (77, 'Closed', 'Critère de mesure de l efficacité', NULL, 'description', '2020-02-20 00:00:00', 'Critère de mesure de l efficacité', '2020-02-20 00:00:00', '2020-02-12 00:00:00', 'Risk', 'Nomral', '2020-02-18 00:00:00', 'Amélioration', NULL, '2020-02-25 00:00:00', NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (79, 'Done', 'Critère de mesure de l efficacité', NULL, 'description', '2020-02-20 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Audit', 'Low', NULL, 'Préventive', NULL, '2020-02-18 00:00:00', NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (81, 'Blocked', 'Critère de mesure de l efficacité', NULL, 'description', '2020-02-21 00:00:00', NULL, NULL, '2020-02-06 00:00:00', 'Risk', 'Nomral', NULL, 'Protection', NULL, '2020-02-28 00:00:00', NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (83, 'Closed', 'Critère de mesure de l efficacité', NULL, 'descriptiondescription', '2020-02-13 00:00:00', NULL, NULL, '2020-02-06 00:00:00', 'Audit', 'Nomral', NULL, 'Préventive', NULL, '2020-02-19 00:00:00', NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (84, 'Open', 'Critère de mesure de l efficacité', NULL, 'description', '2020-02-19 00:00:00', 'Critère de mesure de l efficacité', NULL, '2020-02-04 00:00:00', 'Risk', 'Nomral', '2020-02-29 00:00:00', 'Protection', NULL, '2020-02-21 00:00:00', NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (86, 'Open', 'Critère de mesure de l efficacité', NULL, 'description', '2020-02-13 00:00:00', NULL, NULL, '2020-02-19 00:00:00', 'Audit', 'Nomral', NULL, 'Préventive', NULL, '2020-02-21 00:00:00', NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (87, 'Delayed', NULL, NULL, 'Il faut ajouter plus qu une actions !
+Il faut ajouter plus qu une actions !
+', '0016-08-12 00:00:00', NULL, '0020-08-12 00:00:00', '0017-08-12 00:00:00', 'Risk', 'Nomral', '0019-08-13 00:00:00', 'Amélioration', NULL, '0018-08-13 00:00:00', NULL, NULL, 2);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (88, 'Open', 'testtesttesttesttest', NULL, 'test', '2020-02-13 00:00:00', 'testtesttest', '2020-02-29 00:00:00', '2020-02-05 00:00:00', 'Risk', 'Nomral', '2020-02-28 00:00:00', 'Préventive', NULL, '2020-02-20 00:00:00', NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, comments, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action) VALUES (92, 'Blocked', 'ImpactImpactImpactImpactImpactImpactImpactImpactImpactImpactImpactImpactImpactImpactImpact', NULL, 'ImpactImpactImpactImpactImpact', '2020-02-20 00:00:00', NULL, NULL, '2020-02-13 00:00:00', 'Risk', 'High', NULL, 'Protection', NULL, '2020-02-27 00:00:00', NULL, NULL, 39);
+
+
+
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (1, 14);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (1, 3);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (1, 2);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (1, 4);
+
+
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (1, 7);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (1, 10);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (1, 9);
+
+
+
+
+INSERT INTO public.privileges (id, category, title) VALUES (1, 'MENU', 'SHOW_ESPACE_ADMIN');
+INSERT INTO public.privileges (id, category, title) VALUES (2, 'MENU', 'SHOW_ESPACE_QUALITY');
+INSERT INTO public.privileges (id, category, title) VALUES (3, 'MENU', 'SHOW_ESPACE_TRAINING');
+INSERT INTO public.privileges (id, category, title) VALUES (100, 'ALL', 'ALL_ACTIVITIES');
+INSERT INTO public.privileges (id, category, title) VALUES (10, 'ACTIVITY', 'SHOW_ACTIVITY');
+INSERT INTO public.privileges (id, category, title) VALUES (11, 'ACTIVITY', 'CREATE_ACTIVITY');
+INSERT INTO public.privileges (id, category, title) VALUES (12, 'ACTIVITY', 'UPDATE_ACTIVITY');
+INSERT INTO public.privileges (id, category, title) VALUES (13, 'ACTIVITY', 'DELETE_ACTIVITY');
+INSERT INTO public.privileges (id, category, title) VALUES (20, 'ROLE', 'SHOW_ROLE');
+INSERT INTO public.privileges (id, category, title) VALUES (21, 'ROLE', 'CREATE_ROLE');
+INSERT INTO public.privileges (id, category, title) VALUES (22, 'ROLE', 'UPDATE_ROLE');
+INSERT INTO public.privileges (id, category, title) VALUES (23, 'ROLE', 'DELETE_ROLE');
+INSERT INTO public.privileges (id, category, title) VALUES (30, 'USER', 'SHOW_USER');
+INSERT INTO public.privileges (id, category, title) VALUES (31, 'USER', 'UPDATE_USER');
+INSERT INTO public.privileges (id, category, title) VALUES (32, 'USER', 'CREATE_USER');
+INSERT INTO public.privileges (id, category, title) VALUES (33, 'USER', 'DELETE_USER');
+INSERT INTO public.privileges (id, category, title) VALUES (41, 'ACTION', 'SHOW_ACTION');
+INSERT INTO public.privileges (id, category, title) VALUES (42, 'ACTION', 'UPDATE_ACTION');
+INSERT INTO public.privileges (id, category, title) VALUES (43, 'ACTION', 'DELETE_ACTION');
+INSERT INTO public.privileges (id, category, title) VALUES (45, 'GAP', 'UPDATE_GAP');
+INSERT INTO public.privileges (id, category, title) VALUES (46, 'GAP', 'DELETE_GAP');
+INSERT INTO public.privileges (id, category, title) VALUES (50, 'AUDIT', 'SHOW_AUDIT');
+INSERT INTO public.privileges (id, category, title) VALUES (51, 'AUDIT', 'CREATE_AUDIT');
+INSERT INTO public.privileges (id, category, title) VALUES (52, 'AUDIT', 'UPDATE_AUDIT');
+INSERT INTO public.privileges (id, category, title) VALUES (53, 'AUDIT', 'DELETE_AUDIT');
+INSERT INTO public.privileges (id, category, title) VALUES (60, 'AUDIT_REPORT', 'SHOW_AUDIT_REPORT');
+INSERT INTO public.privileges (id, category, title) VALUES (61, 'AUDIT_REPORT', 'CREATE_AUDIT_REPORT');
+INSERT INTO public.privileges (id, category, title) VALUES (62, 'AUDIT_REPORT', 'UPDATE_AUDIT_REPORT');
+INSERT INTO public.privileges (id, category, title) VALUES (63, 'AUDIT_REPORT', 'VALIDATE_AUDIT_REPORT');
+INSERT INTO public.privileges (id, category, title) VALUES (64, 'AUDIT_REPORT', 'DELETE_AUDIT_REPORT');
+
+
+
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (41, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, 'Identification des facteurs +/-', 'ImpactImpact', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (48, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, 'Identification des facteurs +/-', 'ImpactImpact', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (50, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, 'Identification des facteurs +/-', 'ImpactImpact', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (53, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, '111111', '1111', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (55, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, '111111', '1111', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (57, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, '111111', '1111', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (59, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, '111111', '1111', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (61, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, '111111', '1111', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (63, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, '111111', '1111', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (65, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, '111111', '1111', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (67, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, '111111', '1111', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (69, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, '33333', '333333', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (70, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, '444', '4444', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (72, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, '444', '4444', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (73, '2020-02-18 00:00:00', NULL, '2020-02-14 00:00:00', 'Trés_critique', 16, '444', '4444', 'Presque_sur', 'Risk', 'Nomral', 'Open', 'Eradication', 'Trés_Important', NULL, NULL, 14);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (74, '2020-02-22 00:00:00', NULL, '2020-02-20 00:00:00', 'A_surveiller', 4, 'Identification des facteurs +/-', 'Impact', 'Moyenne', 'Opportunity', NULL, 'Open', NULL, 'Moyen', NULL, NULL, NULL);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (76, '2020-02-25 00:00:00', NULL, '2020-02-13 00:00:00', 'A_surveiller', 6, 'Identification des facteurs +/-', 'Impact', 'Moyenne', 'Opportunity', NULL, 'Open', 'Acceptation', 'Important', NULL, NULL, 39);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (78, '2020-02-21 00:00:00', NULL, '2020-02-12 00:00:00', 'A_surveiller', 6, 'Identification des facteurs +/-', 'Impact', 'Très_probable', 'Risk', NULL, 'Open', 'Réduction', 'Moyen', NULL, NULL, 39);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (80, '2020-02-25 00:00:00', NULL, '2020-02-22 00:00:00', 'Acceptable', 3, 'Identification des facteurs +/-', 'Impact', 'Très_probable', 'Opportunity', NULL, 'Open', 'Eradication', 'Mineur', NULL, NULL, 39);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (82, '2020-02-19 00:00:00', NULL, '2020-02-21 00:00:00', 'A_surveiller', 6, 'Identification des facteurs +/-', 'Impact', 'Très_probable', 'Opportunity', 'Nomral', 'Open', 'Eradication', 'Moyen', NULL, NULL, 39);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (85, '2020-02-20 00:00:00', NULL, '2020-02-28 00:00:00', 'A_surveiller', 4, 'Identification des facteurs +/-', 'Impact', 'Moyenne', 'Opportunity', 'Nomral', 'Open', 'Eradication', 'Moyen', NULL, NULL, 39);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (89, '2020-02-18 00:00:00', NULL, '2020-02-15 00:00:00', 'A_surveiller', 6, 'testtesttesttesttesttest', 'testtest', 'Très_probable', 'Opportunity', 'Nomral', 'Open', 'Acceptation', 'Moyen', NULL, NULL, 39);
+INSERT INTO public.risk (id, closure_date, created_at, detection_date, exposure, exposure_value, factors_identif, impact, probability, risk_nature, risk_priority, risk_status, risk_strategy, severity, updated_at, created_by, risk_pilote) VALUES (91, '2020-02-24 00:00:00', NULL, '2020-02-13 00:00:00', 'A_surveiller', 6, 'ImpactImpactImpact', 'ImpactImpact', 'Très_probable', 'Opportunity', 'Nomral', 'Open', 'Eradication', 'Moyen', NULL, NULL, 13);
+
+
+
+
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (71, 70);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (75, 74);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (77, 76);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (79, 78);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (81, 80);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (83, 82);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (13, 48);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (11, 48);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (11, 41);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (16, 41);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (30, 41);
+
+
+
+INSERT INTO public.roles (id, description, title) VALUES (1, 'Role administrateur', 'Admin');
+INSERT INTO public.roles (id, description, title) VALUES (2, 'Role auditeur', 'Auditeur');
+INSERT INTO public.roles (id, description, title) VALUES (3, 'Role audite', 'Audite');
+INSERT INTO public.roles (id, description, title) VALUES (4, 'Role responsable qualité', 'Responsable Qualité');
+INSERT INTO public.roles (id, description, title) VALUES (5, 'Role responsable activité', 'Responsable Activité');
+INSERT INTO public.roles (id, description, title) VALUES (6, 'Role membre d équipe qualité', 'Membre Equipe Qualité');
+INSERT INTO public.roles (id, description, title) VALUES (7, 'Role responsable plan audit', 'Responsable Plan Audit');
+INSERT INTO public.roles (id, description, title) VALUES (8, 'Role pilote process', 'Pilote Process');
+INSERT INTO public.roles (id, description, title) VALUES (9, 'Role management operationnel', 'Management Operationnel');
+INSERT INTO public.roles (id, description, title) VALUES (10, 'Role référence ECME', 'Référence ECME');
+INSERT INTO public.roles (id, description, title) VALUES (11, 'Role membre activité', 'Membre activité');
+INSERT INTO public.roles (id, description, title) VALUES (12, 'Role responsable action', 'Responsable Action');
+INSERT INTO public.roles (id, description, title) VALUES (13, 'Role responsable systéme management', 'Responsable Systéme Management');
+
+
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 2);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 3);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 100);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 20);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 21);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 23);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 30);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 50);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 51);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 30);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 31);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 32);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 33);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 2);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 3);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (2, 100);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 2);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 3);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 10);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 21);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 20);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (3, 22);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (4, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (4, 2);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (4, 3);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (4, 100);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (5, 20);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (6, 20);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (7, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (7, 2);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (7, 3);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (7, 20);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (8, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (9, 1);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (9, 2);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (12, 23);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (12, 20);
+INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (12, 21);
+
+
+
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (2, 2);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (2, 4);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (4, 4);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (4, 2);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (3, 6);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (12, 11);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (13, 11);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (14, 11);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (15, 11);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 2);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 5);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 4);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 3);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 9);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 6);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 11);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 10);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 7);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 13);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 1);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 12);
+INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 8);
+
+
+SELECT pg_catalog.setval('public.audits_id_seq', 1, false);
+
+
+SELECT pg_catalog.setval('public.hibernate_sequence', 98, true);
+

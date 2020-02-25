@@ -18,14 +18,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import com.altran.toolsbox.usermanagement.model.User;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 /**
  * Represents Actions
@@ -155,16 +159,17 @@ public class Action implements Serializable {
 	 */
 	@Enumerated(EnumType.STRING)
 	private Origin origin;
-	
+
 	/**
 	 * The creator of this Action.
 	 * 
 	 * @see User
 	 */
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "created_by", nullable = false, foreignKey = @ForeignKey(name = "FK_CREATED_BY"))
+	@CreatedBy
+	@JoinColumn(name = "created_by", nullable = true, foreignKey = @ForeignKey(name = "FK_CREATED_BY"))
 	private User createdBy;
-	
+
 	/**
 	 * The created date of this Action.
 	 */
@@ -180,7 +185,16 @@ public class Action implements Serializable {
 	@LastModifiedDate
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date updatedAt;
-	
+
+	/**
+	 * The risk who this action belong to. Indicate the association class between
+	 * risk and action.
+	 * 
+	 * @see RiskAction
+	 */
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@OneToMany(mappedBy = "action")
+	private Set<RiskAction> risks;
 
 	/****** Getters and setters *****/
 
@@ -339,6 +353,13 @@ public class Action implements Serializable {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+
+	public Set<RiskAction> getRisks() {
+		return risks;
+	}
+
+	public void setRisks(Set<RiskAction> risks) {
+		this.risks = risks;
+	}
 
 }

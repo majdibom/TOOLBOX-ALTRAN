@@ -1,13 +1,13 @@
 export enum Exposure {
 
-    Low= 'Low',
-    Nomral= 'Nomral',
-    High= 'High'
+    Acceptable = 'Acceptable',
+    A_surveiller = 'A_surveiller',
+    Trés_critique = 'Trés_critique'
 
 }
 export const ExposureLabel: Record<Exposure, string> = {
-    [Exposure.Low]: 'Low',
-    [Exposure.Nomral]: 'Medium',
-    [Exposure.High]: 'High'
+    [Exposure.Acceptable]: 'Acceptable',
+    [Exposure.A_surveiller]: 'A surveiller',
+    [Exposure.Trés_critique]: 'Trés critique'
 };
 

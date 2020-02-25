@@ -494,3 +494,8 @@
     white-space: nowrap;
     text-align: center;
   }
+  /* Add button */
+.btn-add {
+    background: #007EAF;
+    border-radius:23px;
+  }

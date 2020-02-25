@@ -1,7 +1,7 @@
 package com.altran.toolsbox.qualitymanagement.service.impl;
 
-import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
 import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
+import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +20,7 @@ import com.altran.toolsbox.qualitymanagement.model.Action;
 import com.altran.toolsbox.qualitymanagement.repository.ActionRepository;
 import com.altran.toolsbox.qualitymanagement.service.ActionService;
 import com.altran.toolsbox.qualitymanagement.service.GapService;
+import com.altran.toolsbox.qualitymanagement.service.RiskActionService;
 import com.altran.toolsbox.usermanagement.model.User;
 import com.altran.toolsbox.usermanagement.service.UserService;
 
@@ -32,10 +33,13 @@ public class ActionServiceImpl implements ActionService {
 
 	private GapService gapService;
 
+	private RiskActionService riskActionService;
+
 	/**
 	 * Constructor of ActionServiceImp
 	 * 
-	 * @param actionRepository the repository of action
+	 * @param actionRepository
+	 *            the repository of action
 	 * 
 	 */
 	@Autowired
@@ -47,7 +51,8 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Changes gap service.
 	 * 
-	 * @param gapService gap service.
+	 * @param gapService
+	 *            gap service.
 	 */
 	@Autowired
 	public void setGapService(GapService gapService) {
@@ -55,9 +60,21 @@ public class ActionServiceImpl implements ActionService {
 	}
 
 	/**
+	 * Changes risk action service.
+	 * 
+	 * @param riskActionService
+	 *            risk action service.
+	 */
+	@Autowired
+	public void setRiskActionService(RiskActionService riskActionService) {
+		this.riskActionService = riskActionService;
+	}
+
+	/**
 	 * Changes user service.
 	 * 
-	 * @param userService user service.
+	 * @param userService
+	 *            user service.
 	 */
 	@Autowired
 	public void setUserService(UserService userService) {
@@ -87,7 +104,8 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Gets the list of all actions by defined gap
 	 * 
-	 * @param id the id of the gap
+	 * @param id
+	 *            the id of the gap
 	 * @return list of all actions with the input gap
 	 */
 	@Override
@@ -98,7 +116,8 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Gets the list of all actions by there responsible manager
 	 * 
-	 * @param username the userName of the responsible
+	 * @param username
+	 *            the userName of the responsible
 	 * @return list of all actions with the input responsible
 	 */
 	@Override
@@ -110,9 +129,11 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * gets one action by his id
 	 * 
-	 * @param id the id of the action
+	 * @param id
+	 *            the id of the action
 	 * @return action object with the same id
-	 * @throws NoSuchElementException if no element is present with such ID
+	 * @throws NoSuchElementException
+	 *             if no element is present with such ID
 	 */
 	@Override
 	public Action findById(Long id) {
@@ -127,10 +148,11 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Creates a new action
 	 * 
-	 * @param action the action to create
+	 * @param action
+	 *            the action to create
 	 * @return the created action
-	 * @throws EntityExistsException if there is already existing entity with such
-	 *                               ID
+	 * @throws EntityExistsException
+	 *             if there is already existing entity with such ID
 	 */
 	@Override
 	public Action create(Action action) {
@@ -143,10 +165,13 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Updates one action
 	 * 
-	 * @param id     the id of the action
-	 * @param action the new action object with the new values
+	 * @param id
+	 *            the id of the action
+	 * @param action
+	 *            the new action object with the new values
 	 * @return the updated action
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public Action update(Action action, Long id) {
@@ -169,15 +194,24 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Deletes one action
 	 * 
-	 * @param id the of the deleted action
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param id
+	 *            the of the deleted action
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
-	public void delete(Long id) {
+	public Boolean delete(Long id) {
 		if (id != null && !actionRepository.existsById(id)) {
 			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
-		actionRepository.deleteById(id);
+		if (riskActionService.existActionInRisks(this.findById(id))) {
+			// delete action
+			actionRepository.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	@Override

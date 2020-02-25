@@ -102,9 +102,12 @@ public class ActionController {
 		List<Action> actionList = actionService.findAll();
 		/** Filtering data to send **/
 		// Filter the action object
-		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAll();
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAllExcept(COMMENTS, EFFMEASCRITERION,
+				PROCESSIMPACTS, GAP, CREATEDBY, CREATEDAT, UPDATEDAT);
+		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, PROBABILITY, RISKNATURE);
 		// Add filters to filter provider
-		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter);
+		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter)
+				.addFilter(RISK_FILTER, riskFilter);
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue actionsMapping = new MappingJacksonValue(actionList);
 		actionsMapping.setFilters(filters);
@@ -123,11 +126,13 @@ public class ActionController {
 		Page<Action> actionList = actionService.findAllByPage(pageable);
 		/** Filtering data to send **/
 		// Filter the action object
-		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAll();
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAllExcept(COMMENTS, EFFMEASCRITERION,
+				PROCESSIMPACTS, GAP, CREATEDBY, CREATEDAT, UPDATEDAT);
 		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
+		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter)
-				.addFilter(USER_FILTER, userFilter);
+				.addFilter(USER_FILTER, userFilter).addFilter(RISK_FILTER, riskFilter);
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue actionsMapping = new MappingJacksonValue(actionList);
 		actionsMapping.setFilters(filters);
@@ -168,8 +173,10 @@ public class ActionController {
 		Page<Action> actionList = actionService.findByResponsibleAction(username, pageable);
 		// Filter the action object
 		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAll();
+		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID);
 		// Add filters to filter provider
-		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter);
+		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter)
+				.addFilter(RISK_FILTER, riskFilter);
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue actionsMapping = new MappingJacksonValue(actionList);
 		actionsMapping.setFilters(filters);
@@ -199,11 +206,12 @@ public class ActionController {
 			SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
 			SimpleBeanPropertyFilter gapFilter = SimpleBeanPropertyFilter.serializeAllExcept(JUSTIFICATION,
 					IMPROVEMENTCLUE, IDENTIFIEDCAUSES, ACTIONS, AUDITREPORT);
+			SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID);
 			SimpleBeanPropertyFilter processFilter = SimpleBeanPropertyFilter.serializeAll();
 			// Add filters to filter provider
 			FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter)
 					.addFilter(USER_FILTER, userFilter).addFilter(GAP_FILTER, gapFilter)
-					.addFilter(PROCESS_FILTER, processFilter);
+					.addFilter(PROCESS_FILTER, processFilter).addFilter(RISK_FILTER, riskFilter);
 			// Create the mapping object and set the filters to the mapping
 			MappingJacksonValue actionMapping = new MappingJacksonValue(objectResponse);
 			actionMapping.setFilters(filters);
@@ -233,7 +241,6 @@ public class ActionController {
 	@PostMapping
 	public ResponseEntity<GenericResponse<String>> createAction(@RequestBody Action action) {
 		try {
-
 			actionService.create(action);
 			messageResponse.setError(false);
 			messageResponse.setValue(Translator.toLocale(ACTION_CREATED));
@@ -331,7 +338,8 @@ public class ActionController {
 		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAll();
 		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
 		// Add filters to filter provider
-		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter).addFilter(USER_FILTER, userFilter);
+		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter)
+				.addFilter(USER_FILTER, userFilter);
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue actionMapping = new MappingJacksonValue(actionList);
 		actionMapping.setFilters(filters);

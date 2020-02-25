@@ -49,7 +49,7 @@ public final class ColumnConstants {
 	// Action
 	public static final String IDENTIFICATIONDATE = "identificationDate";
 	public static final String OPENDATE = "openDate";
-	public static final String EFFMESCRITERION = "effMesCriterion";
+	public static final String EFFMEASCRITERION = "effMeasCriterion";
 	public static final String PERFORMANCECRITERIA = "performanceCriteria";
 	public static final String EFFICIENCYCRITERIA = "efficiencyCriteria";
 	public static final String DUEDATE = "dueDate";
@@ -99,41 +99,43 @@ public final class ColumnConstants {
 	// Week
 	public static final String NUMBER = "number";
 	// Action Status
-	public static final String OPEN ="OPEN" ;
-	public static final String DONE ="DONE";
-	public static final String BLOCKED ="BLOCKED";
-	public static final String DELAYED ="DELAYED" ;
-	public static final String CANCELLED ="CANCELLED";
-	public static final String CLOSED ="CLOSED";
+	public static final String OPEN = "OPEN";
+	public static final String DONE = "DONE";
+	public static final String BLOCKED = "BLOCKED";
+	public static final String DELAYED = "DELAYED";
+	public static final String CANCELLED = "CANCELLED";
+	public static final String CLOSED = "CLOSED";
 	// Risk
-	public static final String PROBABILITY ="probability" ;
-	public static final String SEVERITY ="severity";
-	public static final String EXPOSURE ="exposure";
-	public static final String RISKSTATUS ="riskStatus" ;
-	public static final String DETECTIONDATE ="detectionDate";
-	public static final String CLOSUREDATE ="closureDate";
-	public static final String RISKSTRATEGY ="riskStrategy";
-	public static final String ACTION ="Action" ;
-	public static final String CONTINGENCYPLAN ="contingencyPlan";
-	public static final String MITIGATIONAPPROACH ="mitigationApproach";
-	public static final String RISKNATURE ="riskNature";
-	public static final String RISKPRIORITY ="riskPriority";
-	public static final String RISKPILOTE ="riskPilote";
-	public static final String IMPACT ="impact";
-	public static final String IDENTOFFACTORS ="Identoffactors";
+	public static final String PROBABILITY = "probability";
+	public static final String SEVERITY = "severity";
+	public static final String EXPOSURE = "exposure";
+	public static final String RISKSTATUS = "riskStatus";
+	public static final String DETECTIONDATE = "detectionDate";
+	public static final String CLOSUREDATE = "closureDate";
+	public static final String RISKSTRATEGY = "riskStrategy";
+	public static final String ACTION = "Action";
+	public static final String CONTINGENCYPLAN = "contingencyPlan";
+	public static final String MITIGATIONAPPROACH = "mitigationApproach";
+	public static final String RISKNATURE = "riskNature";
+	public static final String RISKPRIORITY = "riskPriority";
+	public static final String RISKPILOTE = "riskPilote";
+	public static final String IMPACT = "impact";
+	public static final String IDENTOFFACTORS = "Identoffactors";
+	public static final String EXPOSUREVALUE = "exposureValue";
+
 
 	// Probability
-	public static final String UNLIKELY ="Unlikely" ;
-	public static final String LIKELY ="Likely";
-	public static final String VERY_LIKELY ="Very_Likely";
-	public static final String ALMOST_SURE ="Almost_Sure" ;
-	
+	public static final String Faible = "Faible";
+	public static final String Moyenne = "Moyenne";
+	public static final String Très_probable = "Très_probable";
+	public static final String Presque_sur = "Presque_sur";
+
 	// Severity
-	public static final String SIGNIFICANT_PROBLEM ="Significant_Problem" ;
-	public static final String SERIOUS_PROBLEM ="Serious_Problem";
-	public static final String WORRYING_SITUATION ="Worrying_Situation";
-	public static final String CRISIS ="Crisis" ;
-	
+	public static final String Mineur = "Mineur";
+	public static final String Moyen = "Moyen";
+	public static final String Important = "Important";
+	public static final String Trés_Important = "Trés_Important";
+
 	/**
 	 * Training Management
 	 */
@@ -154,5 +156,6 @@ public final class ColumnConstants {
 	public static final String ROLEMEMBREACTIVITE = "MEMBRE_ACTIVITE";
 	public static final String ROLERESPONSABLEACTION = "RESPONSABLE_ACTION";
 	public static final String ROLERESPONSABLESYSTEMEMANAGEMENT = "RESPONSABLE_SYSTEME_MANAGEMENT";
+	
 
 }

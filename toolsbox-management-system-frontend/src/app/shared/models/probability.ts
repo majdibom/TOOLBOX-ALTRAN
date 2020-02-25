@@ -1,15 +1,15 @@
 export enum Probability {
 
-    Unlikely = 'Unlikely',
-    Likely = 'Likely',
-    Very_Likely = 'Very_Likely',
-    Almost_Sure = 'Almost_Sure'
+    Faible = 'Faible',
+    Moyenne = 'Moyenne',
+    Très_probable = 'Très_probable',
+    Presque_sur = 'Presque_sur'
 
 }
 
 export const ProbabilityLabel: Record<Probability, string> = {
-    [Probability.Unlikely]: 'Unlikely',
-    [Probability.Likely]: 'Likely',
-    [Probability.Very_Likely]: 'Very Likely',
-    [Probability.Almost_Sure]: 'Almost Sure',
+    [Probability.Faible]: 'Faible',
+    [Probability.Moyenne]: 'Moyenne',
+    [Probability.Très_probable]: 'Très probable',
+    [Probability.Presque_sur]: 'Presque sur',
 };
