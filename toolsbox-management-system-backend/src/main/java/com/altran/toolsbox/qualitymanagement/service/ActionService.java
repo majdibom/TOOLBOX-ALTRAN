@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.altran.toolsbox.qualitymanagement.model.Action;
+import com.altran.toolsbox.qualitymanagement.model.searchfilter.ActionFilter;
 
 /**
  * Represents the interface of action service
@@ -24,7 +25,7 @@ public interface ActionService {
 	List<Action> findByGap(Long id);
 
 	Page<Action> findByResponsibleAction(String username, Pageable pageable);
-	
+
 	Page<Action> simpleSearch(String term, Pageable pageable);
 
 	Action create(Action action);
@@ -32,4 +33,7 @@ public interface ActionService {
 	Action update(Action action, Long id);
 
 	Boolean delete(Long id);
+
+	Page<Action> advancedSearch(ActionFilter actionFilter, Pageable pageable);
+
 }

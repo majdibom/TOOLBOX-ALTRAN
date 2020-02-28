@@ -24,7 +24,7 @@
           </div>
           <!-- Probabilities List -->
           <div class="col-6">
-            <i class="fa fa-sliders"></i>&nbsp;
+            <i class="fa fa-cog"></i>&nbsp;
             <label>{{'propabilité:' | translate}}</label>
             <ng-multiselect-dropdown id="probabilities-multiselect-dropdown" class="form-select"
               [placeholder]="'Probabilités'" [data]="dropdownListProbabilities" [(ngModel)]="selectedProbabilities"
@@ -37,16 +37,16 @@
         <div class="row">
           <!-- Exposures List -->
           <div class="col-6">
-            <i class="fa fa-users"></i>&nbsp;
-            <label>{{'Exposure:' | translate}}</label>
-            <ng-multiselect-dropdown id="exposure-multiselect-dropdown" class="form-select" [placeholder]="'Exposures'"
+            <i class="fa fa-arrows-v"></i>&nbsp;
+            <label>{{'Criticité:' | translate}}</label>
+            <ng-multiselect-dropdown id="exposures-multiselect-dropdown" class="form-select" [placeholder]="'Criticité'"
               [data]="dropdownListExposures" [(ngModel)]="selectedExposures" [settings]="dropdownSettingsExposures"
               (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
           </div>
           <!-- Status List -->
           <div class="col-6">
-            <i class="fa fa-building"></i>&nbsp;
+            <i class="fa fa-thumb-tack"></i>&nbsp;
             <label>{{'Statut:' | translate}}</label>
             <ng-multiselect-dropdown id="status-multiselect-dropdown" class="form-select" [placeholder]="'Statut'"
               [data]="dropdownListStatus" [(ngModel)]="selectedStatus" [settings]="dropdownSettingsStatus"

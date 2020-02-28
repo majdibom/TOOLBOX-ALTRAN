@@ -14,10 +14,11 @@ import { RiskAddComponent } from './risk-add/risk-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AddActionsComponent } from './add-actions/add-actions.component';
+import { RiskHelpComponent } from './risk-help/risk-help.component';
 
 
 @NgModule({
-  declarations: [RiskComponent, RiskDetailComponent, RiskListComponent, RiskUpdateComponent, RiskAddComponent, AddActionsComponent],
+  declarations: [RiskComponent, RiskDetailComponent, RiskListComponent, RiskUpdateComponent, RiskAddComponent, AddActionsComponent, RiskHelpComponent],
   imports: [
     CommonModule,
     RisksRoutingModule,

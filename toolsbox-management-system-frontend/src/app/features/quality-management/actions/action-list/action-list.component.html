@@ -1,3 +1,70 @@
+<div id="accordion">
+  <div class="card border-secondary">
+    <div class="card-header border-secondary" id="info">
+      <!-- Advanced Search Section -->
+      <div class="row">
+        <div class="col-12">
+          <button id="advanced-search-quiz-btn" type="button" class="btn btn-light btn-sm" data-toggle="collapse"
+            data-target="#collapseInfo"><i class="fa fa-chevron-down" aria-hidden="true"></i> <strong>
+              {{'Recherche avancée' | translate}}</strong></button>
+        </div>
+      </div>
+    </div>
+    <div id="collapseInfo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <div class="row">
+          <!-- status List -->
+          <div class="col-6">
+            <i class="fa fa-align-center"></i>&nbsp;
+            <label>{{'Status:' | translate}}</label>
+            <ng-multiselect-dropdown id="status-multiselect-dropdown" class="form-select" [placeholder]="'Status'"
+              [data]="dropdownListStatus" [(ngModel)]="selectedStatus" [settings]="dropdownSettingsStatus"
+              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div>
+          <!-- types List -->
+          <div class="col-6">
+            <i class="fa fa-sliders"></i>&nbsp;
+            <label>{{'Types:' | translate}}</label>
+            <ng-multiselect-dropdown id="types-multiselect-dropdown" class="form-select"
+              [placeholder]="'Types'" [data]="dropdownListTypes" [(ngModel)]="selectedTypes"
+              [settings]="dropdownSettingsTypes" (onSelect)="onItemSelect($event)"
+              (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <!-- Priorities List -->
+          <!-- <div class="col-6">
+            <i class="fa fa-users"></i>&nbsp;
+            <label>{{'Priorités:' | translate}}</label>
+            <ng-multiselect-dropdown id="priorities-multiselect-dropdown" class="form-select" [placeholder]="'Prioritiés'"
+              [data]="dropdownListPriorities" [(ngModel)]="selectedPriorities" [settings]="dropdownSettingsPriorities"
+              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div> -->
+          <!-- Status List -->
+          <div class="col-6">
+            <i class="fa fa-building"></i>&nbsp;
+            <label>{{'Origines:' | translate}}</label>
+            <ng-multiselect-dropdown id="origins-multiselect-dropdown" class="form-select" [placeholder]="'Origines'"
+              [data]="dropdownListOrigins" [(ngModel)]="selectedOrigins" [settings]="dropdownSettingsOrigins"
+              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
+        <!-- Advanced search button -->
+        <div class="btn-search float-right">
+          <button id="search-action-btn" type="button" class="btn btn-warning btn-adv-search" title="Filtrer"
+            (click)="advancedSearch(selectedStatus,selectedTypes,selectedPriorities,selectedOrigins)">
+            <i class="fa fa-search"></i> {{'Chercher' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row">
   <!-- Number of elements select form -->
   <div class=" col-md-8">
@@ -46,12 +113,18 @@
       <tr *ngFor="let action of listActions | paginate: { itemsPerPage: item, currentPage: p, totalItems: total }">
         <td>{{action.id}}</td>
         <td>{{action.typeAction}}</td>
-        <td style="text-align: center;"><span *ngIf="action?.actionStatus == 'Open'" class="badge badge-primary"style="font-size: medium;" >{{action?.actionStatus}}</span>
-          <span *ngIf="action?.actionStatus == 'Closed'" class="badge badge-dark" style="font-size: medium;">{{action?.actionStatus}}</span>
-          <span *ngIf="action?.actionStatus == 'Done'" class="badge badge-success" style="font-size: medium;">{{action?.actionStatus}}</span>
-          <span *ngIf="action?.actionStatus == 'Blocked'" class="badge badge-danger" style="font-size: medium;">{{action?.actionStatus}}</span>
-          <span *ngIf="action?.actionStatus == 'Delayed'" class="badge badge-warning" style="font-size: medium;">{{action?.actionStatus}}</span>
-          <span *ngIf="action?.actionStatus == 'Cancelled'" class="badge badge-secondary" style="font-size: medium;">{{action?.actionStatus}}</span></td>
+        <td style="text-align: center;"><span *ngIf="action?.actionStatus == 'Open'" class="badge badge-primary"
+            style="font-size: medium;">{{action?.actionStatus}}</span>
+          <span *ngIf="action?.actionStatus == 'Closed'" class="badge badge-dark"
+            style="font-size: medium;">{{action?.actionStatus}}</span>
+          <span *ngIf="action?.actionStatus == 'Done'" class="badge badge-success"
+            style="font-size: medium;">{{action?.actionStatus}}</span>
+          <span *ngIf="action?.actionStatus == 'Blocked'" class="badge badge-danger"
+            style="font-size: medium;">{{action?.actionStatus}}</span>
+          <span *ngIf="action?.actionStatus == 'Delayed'" class="badge badge-warning"
+            style="font-size: medium;">{{action?.actionStatus}}</span>
+          <span *ngIf="action?.actionStatus == 'Cancelled'" class="badge badge-secondary"
+            style="font-size: medium;">{{action?.actionStatus}}</span></td>
         <td>{{action.responsibleAction?.firstName}} {{action.responsibleAction?.lastName}}</td>
         <td>{{action.origin}}</td>
         <td>{{action.openDate | date:'dd/MM/yyyy'}}</td>

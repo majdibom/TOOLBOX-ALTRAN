@@ -9,6 +9,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ActionAddComponent } from './action-add/action-add.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ListboxModule } from 'primeng/listbox';
 
 @NgModule({
   declarations: [ActionComponent, ActionListComponent, ActionUpdateComponent, ActionDetailComponent,ActionAddComponent],
@@ -17,7 +20,10 @@ import { ActionAddComponent } from './action-add/action-add.component';
     ActionsRoutingModule,
     NgxPaginationModule,
     FormsModule,
-    TranslateModule
+    TranslateModule,
+    NgMultiSelectDropDownModule,
+    NgbModule,
+    ListboxModule
   ]
 })
 export class ActionsModule { }

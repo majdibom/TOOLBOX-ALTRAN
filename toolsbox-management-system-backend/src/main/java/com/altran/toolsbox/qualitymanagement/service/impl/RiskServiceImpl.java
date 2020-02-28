@@ -30,8 +30,10 @@ import com.altran.toolsbox.qualitymanagement.model.Probability;
 import com.altran.toolsbox.qualitymanagement.model.Risk;
 import com.altran.toolsbox.qualitymanagement.model.RiskAction;
 import com.altran.toolsbox.qualitymanagement.model.RiskActionId;
+import com.altran.toolsbox.qualitymanagement.model.RiskNature;
 import com.altran.toolsbox.qualitymanagement.model.RiskStatus;
 import com.altran.toolsbox.qualitymanagement.model.Severity;
+import com.altran.toolsbox.qualitymanagement.model.searchfilter.RiskFilter;
 import com.altran.toolsbox.qualitymanagement.repository.RiskRepository;
 import com.altran.toolsbox.qualitymanagement.service.ActionService;
 import com.altran.toolsbox.qualitymanagement.service.RiskActionService;
@@ -338,13 +340,46 @@ public class RiskServiceImpl implements RiskService {
 
 	@Override
 	public Page<Risk> findByRiskPilote(String username, Pageable pageable) {
-		User responsable = userService.findByUsername(username);
+		User responsable = userService.findByUsername(username).get();
 		return riskRepository.findByRiskPilote(responsable, pageable);
 	}
 
 	@Override
 	public Page<Risk> simpleSearch(String term, Pageable pageable) {
 		return riskRepository.simpleSearch(term, pageable);
+	}
+
+	/**
+	 * Searches for risks by multiple terms
+	 *
+	 * @param riskFilter
+	 *            risk filter object with list of advanced search criteria
+	 * @param pagination
+	 *            information
+	 */
+	@Override
+	public Page<Risk> advancedSearch(RiskFilter riskFilter, Pageable pageable) {
+		// Set probabilities null if the list is empty
+		Set<Probability> probabilities = riskFilter.getProbabilities();
+		if (probabilities.isEmpty()) {
+			probabilities = null;
+		}
+		// Set riskNatures null if the list is empty
+		Set<RiskNature> riskNatures = riskFilter.getRiskNatures();
+		if (riskNatures.isEmpty()) {
+			riskNatures = null;
+		}
+		// Set priorities null if the list is empty
+		Set<Exposure> exposures = riskFilter.getExposures();
+		if (exposures.isEmpty()) {
+			exposures = null;
+		}
+		// Set riskStrategies null if the list is empty
+		Set<RiskStatus> status = riskFilter.getStatus();
+		if (status.isEmpty()) {
+			status = null;
+		}
+		return riskRepository.advancedSearch(probabilities, riskNatures, exposures, status, pageable);
 	}
 
 }

@@ -26,18 +26,6 @@
               </li>
               <li class="list-group-item">
                 <div class="list-icon">
-                  <i class="fa fa-thumb-tack"></i>
-                </div>
-                <div class="list-details">
-                  <span style="font-size: medium;">{{'Statut' | translate}}: </span>&nbsp;&nbsp;
-                  <span *ngIf="risk?.riskStatus == 'Open'" class="badge badge-success"
-                    style="font-size: medium;">{{risk?.riskStatus}}</span>
-                  <span *ngIf="risk?.riskStatus == 'Closed'" class="badge badge-danger"
-                    style="font-size: medium;">{{risk?.riskStatus}}</span>
-                </div>
-              </li>
-              <li class="list-group-item">
-                <div class="list-icon">
                   <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
                 </div>
                 <div class="list-details">
@@ -59,6 +47,26 @@
                     style="font-size: medium;">{{risk?.exposure}}</span>
                 </div>
               </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-thumb-tack"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Statut' | translate}}: </span>&nbsp;&nbsp;
+                  <span *ngIf="risk?.riskStatus == 'Open'" class="badge badge-success"
+                    style="font-size: medium;">{{risk?.riskStatus}}</span>
+                  <span *ngIf="risk?.riskStatus == 'Closed'" class="badge badge-danger"
+                    style="font-size: medium;">{{risk?.riskStatus}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Nature' | translate}}: </span>&nbsp;&nbsp;<span
+                    style="font-size: medium;">{{risk?.riskNature}}</span>
+                </div>
               <li class="list-group-item">
                 <div class="list-icon">
                   <i class="fa fa-line-chart" aria-hidden="true"></i>

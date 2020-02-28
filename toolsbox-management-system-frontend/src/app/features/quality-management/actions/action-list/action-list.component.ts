@@ -4,6 +4,10 @@ import { GenericService } from '@services/generic.service';
 import swal from 'sweetalert2';
 import { Action } from '@models/action';
 import { Router } from '@angular/router';
+import { OriginLabel, Origin } from '@models/origin';
+import { TypeActionLabel, TypeAction } from '@models/type-action';
+import { PriorityLabel, Priority } from '@models/priority';
+import { ActionstatusLabel, ActionStatus } from '@models/action-Status';
 
 @Component({
   selector: 'app-action-list',
@@ -25,11 +29,100 @@ export class ActionListComponent implements OnInit {
   item = 5;
   searchInput: String = '';
 
+  // Origin enum Label
+  public OriginLabel = OriginLabel;
+  public OriginEnum = Object.values(Origin);
+  // typeAction enum Label
+  public typeActionLabel = TypeActionLabel;
+  public typeActionEnum = Object.values(TypeAction);
+
+  // Priority enum Label
+  public priorityLabel = PriorityLabel;
+  public priorityEnum = Object.values(Priority);
+
+  // Action Status enum Label
+  public ActionstatusLabel = ActionstatusLabel;
+  public ActionStatusEnum = Object.values(ActionStatus);
+
+  // Advanced search Dropdown lists
+  dropdownListStatus = [];
+  dropdownListTypes = [];
+  dropdownListPriorities = [];
+  dropdownListOrigins = [];
+  dropdownSettingsStatus = {};
+  dropdownSettingsTypes = {};
+  dropdownSettingsPriorities = {};
+  dropdownSettingsOrigins = {};
+
+  // For advanced search
+  selectedStatus: any = [];
+  selectedTypes: any = [];
+  selectedPriorities: any = [];
+  selectedOrigins: any = [];
+
   constructor(private genericService: GenericService, private router: Router) { }
 
   ngOnInit() {
     this.listActions = [];
     this.reloadData();
+
+    // Advanced search dropdown initialisation
+    this.dropdownSettingsStatus = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'title',
+      selectAllText: 'Selectionner tout',
+      unSelectAllText: 'Déselectionner tout',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
+    this.dropdownSettingsTypes = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'title',
+      selectAllText: 'Selectionner tout',
+      unSelectAllText: 'Déselectionner tout',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
+    this.dropdownSettingsPriorities = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'title',
+      selectAllText: 'Selectionner tout',
+      unSelectAllText: 'Déselectionner tout',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
+    this.dropdownSettingsOrigins = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'title',
+      selectAllText: 'Selectionner tout',
+      unSelectAllText: 'Déselectionner tout',
+      itemsShowLimit: 5,
+      allowSearchFilter: true
+    };
+
+    this.dropdownListStatus = [];
+    this.ActionStatusEnum.map(element => {
+      this.dropdownListStatus.push({ id: element, title: element });
+    });
+
+    this.dropdownListTypes = [];
+    this.typeActionEnum.map(element => {
+      this.dropdownListTypes.push({ id: element, title: element });
+    });
+
+    this.dropdownListPriorities = [];
+    this.priorityEnum.map(element => {
+      this.dropdownListPriorities.push({ id: element, title: element });
+    });
+
+    this.selectedOrigins = [];
+    this.OriginEnum.map(element => {
+      this.dropdownListOrigins.push({ id: element, title: element });
+    });
   }
 
 
@@ -138,4 +231,29 @@ export class ActionListComponent implements OnInit {
       this.getActions();
     }
   }
+  /** Advanced search risk with filter */
+  advancedSearch(selectedStatus: any, selectedTypes: any, selectedPriorities: any, selectedOrigins: any) {
+    const filter = {
+      status: selectedStatus == null ? null : selectedStatus,
+      types: selectedTypes == null ? null : selectedTypes,
+      priorities: selectedPriorities == null ? null : selectedPriorities,
+      origins: selectedOrigins == null ? null : selectedOrigins,
+    };
+
+    this.genericService.getGenericPageByFilter('/actions/advanced-search', this.selectedPage, this.item, filter)
+      .subscribe(
+        data => {
+          this.listActions = data.content;
+          this.pageClient = new PageClient();
+          this.pageClient = data;
+          this.total = this.pageClient.totalElements;
+        }
+      );
+
+  }
+
+  /** NgPrime Advanced Search method to solve no method found erreur */
+  onItemSelect(item: any) { }
+  onSelectAll(items: any) { }
+
 }

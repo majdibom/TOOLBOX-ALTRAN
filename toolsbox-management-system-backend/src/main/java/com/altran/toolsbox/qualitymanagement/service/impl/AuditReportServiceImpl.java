@@ -42,7 +42,8 @@ public class AuditReportServiceImpl implements AuditReportService {
 	/**
 	 * Constructor of AuditReportServiceImp
 	 * 
-	 * @param auditReportRepository the repository of audit report
+	 * @param auditReportRepository
+	 *            the repository of audit report
 	 */
 	@Autowired
 	public AuditReportServiceImpl(AuditReportRepository auditReportRepository) {
@@ -53,7 +54,8 @@ public class AuditReportServiceImpl implements AuditReportService {
 	/**
 	 * Changes action service.
 	 * 
-	 * @param actionService action service.
+	 * @param actionService
+	 *            action service.
 	 */
 	@Autowired
 	public void setUserService(UserService userService) {
@@ -63,7 +65,8 @@ public class AuditReportServiceImpl implements AuditReportService {
 	/**
 	 * Changes gap service.
 	 * 
-	 * @param gapServiceImp gap service.
+	 * @param gapServiceImp
+	 *            gap service.
 	 */
 	@Autowired
 	public void setGapService(GapService gapService) {
@@ -73,12 +76,13 @@ public class AuditReportServiceImpl implements AuditReportService {
 	/**
 	 * Gets the list of all audit report by their responsible
 	 * 
-	 * @param username audit responsible userName
+	 * @param username
+	 *            audit responsible userName
 	 * @return list of all audit report by their responsible
 	 */
 	@Override
 	public Page<AuditReport> findByResponsableAudit(String username, Pageable pageable) {
-		User responsableAudite = userService.findByUsername(username);
+		User responsableAudite = userService.findByUsername(username).get();
 		return auditReportRepository.findByAuditor(responsableAudite, pageable);
 	}
 
@@ -95,10 +99,11 @@ public class AuditReportServiceImpl implements AuditReportService {
 	/**
 	 * Creates a new risk
 	 * 
-	 * @param risk the risk to create
+	 * @param risk
+	 *            the risk to create
 	 * @return the created risk
-	 * @throws EntityExistsException if there is already existing entity with such
-	 *                               ID
+	 * @throws EntityExistsException
+	 *             if there is already existing entity with such ID
 	 */
 	@Override
 	public AuditReport create(AuditReport auditReport) {
@@ -124,10 +129,13 @@ public class AuditReportServiceImpl implements AuditReportService {
 	/**
 	 * Updates one audit report
 	 * 
-	 * @param id          the id of the audit report
-	 * @param auditReport the new audit report object with the new values
+	 * @param id
+	 *            the id of the audit report
+	 * @param auditReport
+	 *            the new audit report object with the new values
 	 * @return the updated audit report
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public AuditReport update(AuditReport auditReport, Long id) {
@@ -146,8 +154,10 @@ public class AuditReportServiceImpl implements AuditReportService {
 	/**
 	 * Deletes one audit report
 	 * 
-	 * @param id the of the deleted audit report
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param id
+	 *            the of the deleted audit report
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public void delete(Long id) {

@@ -234,7 +234,7 @@ export class RiskListComponent implements OnInit {
   /** Advanced search risk with filter */
   advancedSearch(selectedNatures: any, selectedProbabilities: any, selectedExposures: any, selectedStatus: any) {
     const filter = {
-      natures: selectedNatures == null ? null : selectedNatures,
+      riskNatures: selectedNatures == null ? null : selectedNatures,
       probabilities: selectedProbabilities == null ? null : selectedProbabilities,
       exposures: selectedExposures == null ? null : selectedExposures,
       status: selectedStatus == null ? null : selectedStatus,

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.altran.toolsbox.qualitymanagement.model.Risk;
 import com.altran.toolsbox.qualitymanagement.model.RiskActionId;
+import com.altran.toolsbox.qualitymanagement.model.searchfilter.RiskFilter;
 
 /**
  * Represents the interface of risk service
@@ -35,5 +36,7 @@ public interface RiskService {
 	void deleteActionFromRisk(RiskActionId riskActionId);
 
 	Risk calculeExposure(Risk risk);
+
+	Page<Risk> advancedSearch(RiskFilter riskFilter, Pageable pageable);
 
 }

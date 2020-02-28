@@ -1,0 +1,172 @@
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content test">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Evaluation des risques' | translate}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Les risques sont évalués en fonction de leur probabilité d'occurrence et de leur impact potentiel sur le
+          processus.
+          Les opportunités sont évaluées selon leur faisabilité et Impact sur le processus
+          Chaque risque /opportunité identifié sera classé en fonction de sa criticité, calculé comme suit:<br>
+          <span class="test2">C= P*G</span><br>
+          Tel que:<br>
+          <span style="font-weight: bold;">- Probabilité/faisabilité (P) est classée comme suit:</span></p>
+        <!-- Probability Table -->
+        <div class="table-responsive-lg">
+          <table class="table table-bordered table-striped table-hover"
+            style="height: 144px; width: 581px; text-align: center;">
+            <tbody>
+              <tr style="height: 50px;">
+                <td style="width: 55px; height: 50px;">1&nbsp;</td>
+                <td style="width: 98px; height: 50px;">Faible</td>
+                <td style="width: 427px; height: 50px;">&nbsp;Ce risque semble que dans les hypoth&egrave;ses les plus
+                  pessimistes/ N&eacute;cessite un budget financier important ou une r&eacute;organisation
+                  g&eacute;n&eacute;rale</td>
+              </tr>
+              <tr style="height: 50px;">
+                <td style="width: 55px; height: 49px;">2</td>
+                <td style="width: 98px; height: 49px;">Moyenne</td>
+                <td style="width: 427px; height: 49px;">&nbsp;Ce risque a autant de chances d'apparaitre que de ne pas
+                  apparaitre/ N&eacute;cessite l'effort de quelques personnes ou&nbsp; fonctions pour la prise en compte
+                  de cette opportunit&eacute; avec un budget financier moyen</td>
+              </tr>
+              <tr style="height: 50px;">
+                <td style="width: 55px; height: 48px;">3&nbsp;</td>
+                <td style="width: 98px; height: 48px;">Tr&egrave;s probable</td>
+                <td style="width: 427px; height: 48px;">&nbsp;Seules les hypoth&egrave;ses les plus optimistes ne
+                  pr&eacute;voient pas l'apparition du risque/ N&eacute;cessite l'effort de quelques personnes ou
+                  fonctions pour la prise en compte de cette opportunit&eacute; avec un budget en temps</td>
+              </tr>
+              <tr style="height: 50px;">
+                <td style="width: 55px; height: 37px;">4&nbsp;</td>
+                <td style="width: 98px; height: 37px;">Presque sur</td>
+                <td style="width: 427px; height: 37px;">&nbsp;L'apparition du risque est quasi certaine/
+                  N&eacute;cessite peu d'effort pour l'exploitation de cette opportunit&eacute;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-weight: bold;">- Gravité/Impact (G) est l'évaluation est classé comme suit:</p>
+        <!-- Probability Table -->
+        <div class="table-responsive-lg">
+          <table class="table table-bordered table-striped table-hover"
+            style="height: 144px; width: 581px; text-align: center;">
+            <tbody>
+              <tr style="height: 50px;">
+                <td style="width: 55px; height: 50px;">1&nbsp;</td>
+                <td style="width: 98px; height: 50px;">Faible</td>
+                <td style="width: 427px; height: 50px;">Probl&egrave;me notable/ Peu d'impact sur les r&eacute;sultats
+                  et donc l'atteinte des objectifs des processus</td>
+              </tr>
+              <tr style="height: 50px;">
+                <td style="width: 55px; height: 49px;">2</td>
+                <td style="width: 98px; height: 49px;">Moyen</td>
+                <td style="width: 427px; height: 49px;">Probl&egrave;me s&eacute;rieux/ Impact &agrave; moyen ou long
+                  terme sur l'atteinte de quelques objectifs et r&eacute;sultats des processus</td>
+              </tr>
+              <tr style="height: 50px;">
+                <td style="width: 55px; height: 48px;">3&nbsp;</td>
+                <td style="width: 98px; height: 48px;">Important</td>
+                <td style="width: 427px; height: 48px;">Situation pr&eacute;occupante/ Impact &agrave; moyen ou long
+                  terme sur l'atteinte de tous les objectifs et les r&eacute;sultats des processus</td>
+              </tr>
+              <tr style="height: 50px;">
+                <td style="width: 55px; height: 37px;">4&nbsp;</td>
+                <td style="width: 98px; height: 37px;">Tr&egrave;s probable</td>
+                <td style="width: 427px; height: 37px;">Situation de crise/ Impact imm&eacute;diat sur l'atteinte de
+                  tous les objectifs et les r&eacute;sultats des processus</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Par la suite, <strong>matrice de Criticité (C)</strong> se présente comme suit :</p>
+        <div class="table-responsive-lg test3">
+          <table style="width: 192px; height: 170px; text-align: center;">
+            <tbody class="table table-bordered table-striped table-hover">
+              <tr>
+                <td class="Jaune" style="width: 40px;">&nbsp;4</td>
+                <td class="Rouge" style="width: 40px;">&nbsp;8</td>
+                <td class="Rouge" style="width: 40px;">&nbsp;12</td>
+                <td class="Rouge" style="width: 40px;">&nbsp;16</td>
+              </tr>
+              <tr>
+                <td class="Vert" style="width: 40px;">&nbsp;3</td>
+                <td class="Jaune" style="width: 40px;">&nbsp;6</td>
+                <td class="Rouge" style="width: 40px;">&nbsp;9</td>
+                <td class="Rouge" style="width: 40px;">&nbsp;12</td>
+              </tr>
+              <tr>
+                <td class="Vert" style="width: 40px;">&nbsp;2</td>
+                <td class="Jaune" style="width: 40px;">&nbsp;4</td>
+                <td class="Jaune" style="width: 40px;">&nbsp;6</td>
+                <td class="Rouge" style="width: 40px;">&nbsp;8</td>
+              </tr>
+              <tr>
+                <td class="Vert" style="width: 40px;">&nbsp;1</td>
+                <td class="Vert" style="width: 40px;">&nbsp;2</td>
+                <td class="Vert" style="width: 40px;">&nbsp;3</td>
+                <td class="Jaune" style="width: 40px;">&nbsp;4</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>&nbsp;
+        <div>
+          <h4>&#9658;&nbsp;&nbsp; Probabilité/Faisabilité</h4>
+          <h4>&#9650;&nbsp;&nbsp;Gravité/Impacts</h4>
+        </div>&nbsp;
+        <p>Selon leur criticité, les risques sont classés <strong>en trois catégories:</strong> </p>
+        <div class="container bootstrap snippet">
+          <table style="height: 34px;" width="566">
+            <tbody class="table table-bordered table-striped table-hover">
+              <tr>
+                <th class="Vert" style="width: 188px;">&nbsp;Acceptable =1 &agrave; 3</th>
+                <th class="Jaune" style="width: 188px;">&nbsp;Asurveiller = 4 &agrave; 6</th>
+                <th class="Rouge" style="width: 189px;">Tr&eacute;s critique = 8 &agrave; 16&nbsp;</th>
+              </tr>
+              <tr>
+                <td style="width: 188px;">&nbsp;Cloture autoris&eacute;e / Exploitation &agrave; long terme</td>
+                <td style="width: 188px;">&nbsp;Traitement obligatoire / Exploitation &agrave; moyen terme</td>
+                <td style="width: 189px;">&nbsp;Plan de secours obligatoire / Exploitation imm&eacute;diate</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>&nbsp;
+        <div class="card">
+          <div class="card-body">
+            <h5>Evaluation de l'impact du facteur du risque:</h5>
+            <p style="line-height: 2em;">Cela consiste à évaluer les impacts du facteur de risque sur la base de l'approche RISC. qui considère
+              l'impact du risque sur les 4 domaines suivants :<br>
+              - <strong>Retard:</strong> retard dans le calendrier de livraison du produit du travail comme convenu avec
+              le client;<br>
+              - <strong>Inadéquation:</strong> la non-conformité du produit du travail au CDC client.<br>
+              - <strong>InSatisfaction:</strong> la non-conformité du produit du travail aux attentes ou les besoins
+              explicites et/ou
+              subjectif exprimés par le client.<br>
+              -<strong>SurCoût:</strong> Le coût de réalisation est au-dessus du budget prévisionnel (non lié a une
+              expansion du périmètre
+              d’intervention demandé initialement par le client)
+              c’est-à-dire à quel(s) Risque(s) (Retard, Inadéquation, Insatisfaction ou Surcoût) il confronte plus
+              particulièrement le Projet – sous la forme binaire (existe ou n’existe pas);<br>
+              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i><strong>Note</strong> : Si l'impact est évalué comme positif,
+              il est identifié comme une opportunité qui doit être axé sur les
+              résultats.
+            </p>
+          </div>
+        </div>&nbsp;&nbsp;
+        <div class="card text-right">
+          <div class="card-footer text-muted">
+            <p>{{'Copyright © 2019 ALTRAN Tunisie. Tous les droits sont réservés.' | translate}}</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- Close button -->
+          <button type="button" id="exit-help" class="btn btn-secondary" data-dismiss="modal" (click)="emptyObject()">{{'Fermer'
+      | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>

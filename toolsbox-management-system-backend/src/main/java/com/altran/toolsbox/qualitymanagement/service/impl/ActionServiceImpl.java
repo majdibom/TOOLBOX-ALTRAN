@@ -3,13 +3,14 @@ package com.altran.toolsbox.qualitymanagement.service.impl;
 import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
 
-import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.altran.toolsbox.qualitymanagement.model.Action;
+import com.altran.toolsbox.qualitymanagement.model.ActionStatus;
+import com.altran.toolsbox.qualitymanagement.model.Origin;
+import com.altran.toolsbox.qualitymanagement.model.Priority;
+import com.altran.toolsbox.qualitymanagement.model.TypeAction;
+import com.altran.toolsbox.qualitymanagement.model.searchfilter.ActionFilter;
 import com.altran.toolsbox.qualitymanagement.repository.ActionRepository;
 import com.altran.toolsbox.qualitymanagement.service.ActionService;
 import com.altran.toolsbox.qualitymanagement.service.GapService;
@@ -25,6 +31,7 @@ import com.altran.toolsbox.usermanagement.model.User;
 import com.altran.toolsbox.usermanagement.service.UserService;
 
 @Service
+@Transactional
 public class ActionServiceImpl implements ActionService {
 
 	private final ActionRepository actionRepository;
@@ -122,7 +129,7 @@ public class ActionServiceImpl implements ActionService {
 	 */
 	@Override
 	public Page<Action> findByResponsibleAction(String username, Pageable pageable) {
-		User responsable = userService.findByUsername(username);
+		User responsable = userService.findByUsername(username).get();
 		return actionRepository.findByResponsibleAction(responsable, pageable);
 	}
 
@@ -175,18 +182,23 @@ public class ActionServiceImpl implements ActionService {
 	 */
 	@Override
 	public Action update(Action action, Long id) {
+		System.err.println("update 1");
+
 		if (id != null && !actionRepository.existsById(id)) {
+			System.err.println("update err ");
+
 			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		action.setId(id);
+		System.err.println("update final");
 
-		// get the same create date as the old action(Fix null problem)
-		Action oldAction = findById(id);
-		Date createdDate = oldAction.getCreatedAt();
-		action.setCreatedAt(createdDate);
-		// get the same createdBy as the old action(Fix null problem)
-		User createdBy = oldAction.getCreatedBy();
-		action.setCreatedBy(createdBy);
+		/*
+		 * // get the same create date as the old action(Fix null problem) Action
+		 * oldAction = findById(id); Date createdDate = oldAction.getCreatedAt();
+		 * action.setCreatedAt(createdDate); // get the same createdBy as the old
+		 * action(Fix null problem) User createdBy = oldAction.getCreatedBy();
+		 * action.setCreatedBy(createdBy);
+		 */
 
 		return actionRepository.save(action);
 	}
@@ -217,6 +229,39 @@ public class ActionServiceImpl implements ActionService {
 	@Override
 	public Page<Action> simpleSearch(String term, Pageable pageable) {
 		return actionRepository.simpleSearch(term, pageable);
+	}
+
+	/**
+	 * Searches for actions by multiple terms
+	 *
+	 * @param actionFilter
+	 *            action filter object with list of advanced search criteria
+	 * @param pagination
+	 *            information
+	 */
+	@Override
+	public Page<Action> advancedSearch(ActionFilter actionFilter, Pageable pageable) {
+		// Set probabilities null if the list is empty
+		Set<ActionStatus> status = actionFilter.getStatus();
+		if (status.isEmpty()) {
+			status = null;
+		}
+		// Set riskNatures null if the list is empty
+		Set<Priority> priorities = actionFilter.getPriorities();
+		if (priorities.isEmpty()) {
+			priorities = null;
+		}
+		// Set priorities null if the list is empty
+		Set<TypeAction> types = actionFilter.getTypes();
+		if (types.isEmpty()) {
+			types = null;
+		}
+		// Set riskStrategies null if the list is empty
+		Set<Origin> origins = actionFilter.getOrigins();
+		if (origins.isEmpty()) {
+			origins = null;
+		}
+		return actionRepository.advancedSearch(status, priorities, types, origins, pageable);
 	}
 
 }

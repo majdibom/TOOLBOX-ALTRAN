@@ -1,5 +1,8 @@
 package com.altran.toolsbox.usermanagement.service.impl;
 
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
+import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,6 +16,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,9 +37,6 @@ import com.altran.toolsbox.usermanagement.repository.UserRepository;
 import com.altran.toolsbox.usermanagement.service.RoleService;
 import com.altran.toolsbox.usermanagement.service.UserService;
 
-import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
-
 /**
  * Represents implementation of user service
  * 
@@ -43,6 +44,7 @@ import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
  * @version 1.0
  */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
 
 	private final UserRepository userRepository;
@@ -54,7 +56,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	/**
 	 * Constructor of UserServiceImpl
 	 * 
-	 * @param userRepository the repository of user
+	 * @param userRepository
+	 *            the repository of user
 	 * 
 	 */
 	@Autowired
@@ -65,7 +68,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	/**
 	 * Changes role service.
 	 * 
-	 * @param roleService role service.
+	 * @param roleService
+	 *            role service.
 	 */
 	@Autowired
 	public void setRoleService(RoleService roleService) {
@@ -75,7 +79,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	/**
 	 * Changes bcryptEncoder.
 	 * 
-	 * @param bcryptEncoder BCryptPasswordEncoder object.
+	 * @param bcryptEncoder
+	 *            BCryptPasswordEncoder object.
 	 */
 	@Autowired
 	public void setBcryptEncoder(BCryptPasswordEncoder bcryptEncoder) {
@@ -129,15 +134,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	/**
 	 * Gets one user by his userName
 	 * 
-	 * @param userName the userName of the user
+	 * @param userName
+	 *            the userName of the user
 	 * @return user object with the same userName
-	 * @throws UsernameNotFoundException if there is no user with such userName
+	 * @throws UsernameNotFoundException
+	 *             if there is no user with such userName
 	 */
 	@Override
-	public User findByUsername(String username) {
+	public Optional<User> findByUsername(String username) {
+		System.err.println("findByUsername");
+
 		Optional<User> user = userRepository.findByUsername(username);
 		if (user.isPresent())
-			return user.get();
+			return user;
 		else {
 			throw new NoSuchElementException(NO_ENTITY_DB);
 		}
@@ -146,9 +155,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	/**
 	 * Gets one user by his id
 	 * 
-	 * @param id the id of the user
+	 * @param id
+	 *            the id of the user
 	 * @return user object with the same id
-	 * @throws NoSuchElementException if no element is present with such ID
+	 * @throws NoSuchElementException
+	 *             if no element is present with such ID
 	 */
 	@Override
 	public User findById(Long id) {
@@ -163,13 +174,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	/**
 	 * Creates a new user
 	 * 
-	 * @param user the user to create
+	 * @param user
+	 *            the user to create
 	 * @return the created user
 	 * @throws IOException
 	 * @throws MessagingException
 	 * @throws AddressException
-	 * @throws EntityExistsException if there is already existing entity with such
-	 *                               ID
+	 * @throws EntityExistsException
+	 *             if there is already existing entity with such ID
 	 */
 	@Override
 	public User create(User user) {
@@ -194,11 +206,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	/**
 	 * Updates one user
 	 * 
-	 * @param id   the id of the updated user
-	 * @param user the new user object with the new values
+	 * @param id
+	 *            the id of the updated user
+	 * @param user
+	 *            the new user object with the new values
 	 * @return the updated user
-	 * @throws EntityNotFoundException if there is no entity with such ID in the
-	 *                                 database
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID in the database
 	 */
 	@Override
 	public User update(User user, Long id) {
@@ -214,8 +228,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	/**
 	 * Deletes one user
 	 * 
-	 * @param id the id of the deleted user
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param id
+	 *            the id of the deleted user
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public void delete(Long id) {
@@ -228,7 +244,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	/**
 	 * Changes account state of a user
 	 * 
-	 * @param id the of the updated user
+	 * @param id
+	 *            the of the updated user
 	 * @return the updated user
 	 */
 	@Override
@@ -259,13 +276,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	/**
 	 * Gets authenticated user
 	 * 
-	 * @param Authentication object
+	 * @param Authentication
+	 *            object
 	 * @return authenticated user
 	 */
 	public User getAuthenticatedUser(Authentication auth) {
 		org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) auth
 				.getPrincipal();
-		return findByUsername(principal.getUsername());
+		return findByUsername(principal.getUsername()).get();
 	}
 
 	/**

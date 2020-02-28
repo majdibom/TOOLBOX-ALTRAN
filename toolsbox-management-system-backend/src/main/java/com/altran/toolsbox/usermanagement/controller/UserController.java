@@ -40,7 +40,6 @@ import static com.altran.toolsbox.util.constant.FilterConstants.ACTIVITY_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.AUDIT_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.ACTION_FILTER;
 
-
 /**
  * Represents Rest controller of user
  * 
@@ -215,7 +214,8 @@ public class UserController {
 			// Add filters to filter provider
 			FilterProvider filters = new SimpleFilterProvider().addFilter(USER_FILTER, userFilter)
 					.addFilter(ROLE_FILTER, roleFilter).addFilter(ACTIVITY_FILTER, activityFilter)
-					.addFilter(AUDIT_FILTER, auditFilter).addFilter(ACTION_FILTER, actionFilter);;
+					.addFilter(AUDIT_FILTER, auditFilter).addFilter(ACTION_FILTER, actionFilter);
+			;
 			// Create the mapping object and set the filters to the mapping
 			MappingJacksonValue userMapping = new MappingJacksonValue(objectResponse);
 			userMapping.setFilters(filters);
@@ -247,7 +247,7 @@ public class UserController {
 		try {
 			// Set the response with user object and error as false
 			objectResponse.setError(false);
-			objectResponse.setValue(userService.findByUsername(userName));
+			objectResponse.setValue(userService.findByUsername(userName).get());
 			/** Filtering data to send **/
 			// Filter the user object
 			SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME,

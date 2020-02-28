@@ -1,5 +1,6 @@
 package com.altran.toolsbox.qualitymanagement.controller;
 
+import static com.altran.toolsbox.util.constant.ColumnConstants.ACTION;
 import static com.altran.toolsbox.util.constant.ColumnConstants.ACTIONS;
 import static com.altran.toolsbox.util.constant.ColumnConstants.CLOSUREDATE;
 import static com.altran.toolsbox.util.constant.ColumnConstants.CONTINGENCYPLAN;
@@ -8,6 +9,7 @@ import static com.altran.toolsbox.util.constant.ColumnConstants.CREATEDBY;
 import static com.altran.toolsbox.util.constant.ColumnConstants.DESCRIPTION;
 import static com.altran.toolsbox.util.constant.ColumnConstants.DETECTIONDATE;
 import static com.altran.toolsbox.util.constant.ColumnConstants.EXPOSURE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.EXPOSUREVALUE;
 import static com.altran.toolsbox.util.constant.ColumnConstants.FIRSTNAME;
 import static com.altran.toolsbox.util.constant.ColumnConstants.ID;
 import static com.altran.toolsbox.util.constant.ColumnConstants.LASTNAME;
@@ -18,12 +20,10 @@ import static com.altran.toolsbox.util.constant.ColumnConstants.RISKSTATUS;
 import static com.altran.toolsbox.util.constant.ColumnConstants.SEVERITY;
 import static com.altran.toolsbox.util.constant.ColumnConstants.TYPEACTION;
 import static com.altran.toolsbox.util.constant.ColumnConstants.UPDATEDAT;
-import static com.altran.toolsbox.util.constant.ColumnConstants.ACTION;
-import static com.altran.toolsbox.util.constant.ColumnConstants.EXPOSUREVALUE;
 import static com.altran.toolsbox.util.constant.FilterConstants.ACTION_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.RISKACTION_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.RISK_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.USER_FILTER;
-import static com.altran.toolsbox.util.constant.FilterConstants.RISKACTION_FILTER;
 import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_DELETED;
 import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_DELETED;
 import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_EXIST;
@@ -41,6 +41,7 @@ import java.util.NoSuchElementException;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -59,6 +60,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.altran.toolsbox.qualitymanagement.model.Risk;
 import com.altran.toolsbox.qualitymanagement.model.RiskActionId;
+import com.altran.toolsbox.qualitymanagement.model.searchfilter.RiskFilter;
 import com.altran.toolsbox.qualitymanagement.service.RiskService;
 import com.altran.toolsbox.util.GenericResponse;
 import com.altran.toolsbox.util.Translator;
@@ -345,7 +347,7 @@ public class RiskController {
 		/** Filtering data to send **/
 		// Filter the activity object
 		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, RISKNATURE, PROBABILITY,
-				SEVERITY, EXPOSURE, RISKSTATUS, DETECTIONDATE, CLOSUREDATE,EXPOSUREVALUE);
+				SEVERITY, EXPOSURE, RISKSTATUS, DETECTIONDATE, CLOSUREDATE, EXPOSUREVALUE);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(RISK_FILTER, riskFilter);
 		// Create the mapping object and set the filters to the mapping
@@ -354,4 +356,29 @@ public class RiskController {
 		return riskMapping;
 	}
 
+	/**
+	 * Searches for risks by multiple terms
+	 *
+	 * @param riskSearch
+	 *            riskFilter object with all terms for search
+	 * @param pagination
+	 *            information
+	 * @return list of risks contains the input terms by page
+	 */
+	@PostMapping(value = "/advanced-search")
+	public MappingJacksonValue advancedSearch(@Valid @RequestBody RiskFilter riskSearch, Pageable pageable) {
+		Page<Risk> riskList = riskService.advancedSearch(riskSearch, pageable);
+		/** Filtering data to send **/
+		// Filter the action object
+		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.serializeAllExcept(ACTIONS, CONTINGENCYPLAN,
+				MITIGATIONAPPROACH);
+		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
+		// Add filters to filter provider
+		FilterProvider filters = new SimpleFilterProvider().addFilter(RISK_FILTER, riskFilter).addFilter(USER_FILTER,
+				userFilter);
+		// Create the mapping object and set the filters to the mapping
+		MappingJacksonValue riskMapping = new MappingJacksonValue(riskList);
+		riskMapping.setFilters(filters);
+		return riskMapping;
+	}
 }

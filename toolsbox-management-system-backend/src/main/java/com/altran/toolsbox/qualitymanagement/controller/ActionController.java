@@ -1,5 +1,44 @@
 package com.altran.toolsbox.qualitymanagement.controller;
 
+import static com.altran.toolsbox.util.constant.ColumnConstants.ACTIONS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITREPORT;
+import static com.altran.toolsbox.util.constant.ColumnConstants.COMMENTS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.CREATEDAT;
+import static com.altran.toolsbox.util.constant.ColumnConstants.CREATEDBY;
+import static com.altran.toolsbox.util.constant.ColumnConstants.EFFMEASCRITERION;
+import static com.altran.toolsbox.util.constant.ColumnConstants.FIRSTNAME;
+import static com.altran.toolsbox.util.constant.ColumnConstants.GAP;
+import static com.altran.toolsbox.util.constant.ColumnConstants.ID;
+import static com.altran.toolsbox.util.constant.ColumnConstants.IDENTIFIEDCAUSES;
+import static com.altran.toolsbox.util.constant.ColumnConstants.IMPROVEMENTCLUE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.JUSTIFICATION;
+import static com.altran.toolsbox.util.constant.ColumnConstants.LASTNAME;
+import static com.altran.toolsbox.util.constant.ColumnConstants.PROBABILITY;
+import static com.altran.toolsbox.util.constant.ColumnConstants.PROCESSIMPACTS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.RISKNATURE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.UPDATEDAT;
+import static com.altran.toolsbox.util.constant.FilterConstants.ACTION_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.GAP_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.PROCESS_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.RISK_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.USER_FILTER;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_CREATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_DELETED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_EXIST;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_FIND_ERROR;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_CREATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_DELETED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_EXIST;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_UPDATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_UPDATED;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,28 +55,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.altran.toolsbox.qualitymanagement.model.Action;
+import com.altran.toolsbox.qualitymanagement.model.searchfilter.ActionFilter;
 import com.altran.toolsbox.qualitymanagement.service.ActionService;
 import com.altran.toolsbox.util.GenericResponse;
 import com.altran.toolsbox.util.Translator;
-
-import static com.altran.toolsbox.util.constant.ColumnConstants.*;
-import static com.altran.toolsbox.util.constant.FilterConstants.*;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_DELETED;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_FIND_ERROR;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_DELETED;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_EXIST;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_UPDATED;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_UPDATED;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_CREATED;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_EXIST;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_CREATED;
-
-import java.util.List;
-import java.util.NoSuchElementException;
-
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
-
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
@@ -275,18 +296,22 @@ public class ActionController {
 		if (id == null) {
 			messageResponse.setError(true);
 			messageResponse.setValue(Translator.toLocale(ACTION_NOT_EXIST));
+			System.err.println("position 1");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageResponse);
 		}
 		try {
 			actionService.update(action, id);
 			messageResponse.setError(false);
 			messageResponse.setValue(Translator.toLocale(ACTION_UPDATED));
+			System.err.println("position 2");
 			return ResponseEntity.status(HttpStatus.CREATED).body(messageResponse);
 		} catch (EntityNotFoundException e) {
 			messageResponse.setError(true);
 			messageResponse.setValue(Translator.toLocale(ACTION_NOT_EXIST));
+			System.err.println("position 3" + e.getMessage());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageResponse);
 		} catch (Exception e) {
+			System.err.println("errrrrrrrr" + e.getMessage());
 			messageResponse.setError(true);
 			messageResponse.setValue(Translator.toLocale(ACTION_NOT_UPDATED));
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageResponse);
@@ -346,4 +371,28 @@ public class ActionController {
 		return actionMapping;
 	}
 
+	/**
+	 * Searches for actions by multiple terms
+	 *
+	 * @param actionSearch
+	 *            actionFilter object with all terms for search
+	 * @param pagination
+	 *            information
+	 * @return list of actions contains the input terms by page
+	 */
+	@PostMapping(value = "/advanced-search")
+	public MappingJacksonValue advancedSearch(@Valid @RequestBody ActionFilter actionSearch, Pageable pageable) {
+		Page<Action> actionList = actionService.advancedSearch(actionSearch, pageable);
+		/** Filtering data to send **/
+		// Filter the action object
+		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAll();
+		// Add filters to filter provider
+		FilterProvider filters = new SimpleFilterProvider().addFilter(USER_FILTER, userFilter).addFilter(ACTION_FILTER,
+				actionFilter);
+		// Create the mapping object and set the filters to the mapping
+		MappingJacksonValue actionMapping = new MappingJacksonValue(actionList);
+		actionMapping.setFilters(filters);
+		return actionMapping;
+	}
 }

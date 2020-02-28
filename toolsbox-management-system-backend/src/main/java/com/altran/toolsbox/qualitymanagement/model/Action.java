@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -23,7 +24,9 @@ import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.altran.toolsbox.usermanagement.model.User;
 import com.fasterxml.jackson.annotation.JsonFilter;
@@ -40,6 +43,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 @Entity
 @Table(name = "ACTIONS")
 @JsonFilter(ACTION_FILTER)
+@EntityListeners(AuditingEntityListener.class)
 public class Action implements Serializable {
 
 	/**
@@ -170,6 +174,15 @@ public class Action implements Serializable {
 	@JoinColumn(name = "created_by", nullable = true, foreignKey = @ForeignKey(name = "FK_CREATED_BY"))
 	private User createdBy;
 
+	/**
+	 * The creator of this Action.
+	 * 
+	 * @see User
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
+	@LastModifiedBy 
+	@JoinColumn(name = "Last_Modified_By ", nullable = true, foreignKey = @ForeignKey(name = "FK_LAST_MODIFIED_BY "))
+	private User lastModifiedBy ;
 	/**
 	 * The created date of this Action.
 	 */

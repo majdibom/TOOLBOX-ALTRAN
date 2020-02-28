@@ -31,7 +31,8 @@ public class AuditServiceImpl implements AuditService {
 	/**
 	 * Constructor of AuditServiceImp
 	 * 
-	 * @param auditRepository the repository of audit
+	 * @param auditRepository
+	 *            the repository of audit
 	 * 
 	 */
 	@Autowired
@@ -42,7 +43,8 @@ public class AuditServiceImpl implements AuditService {
 	/**
 	 * Changes user service.
 	 * 
-	 * @param userService user service.
+	 * @param userService
+	 *            user service.
 	 */
 	@Autowired
 	public void setUserService(UserService userService) {
@@ -72,12 +74,13 @@ public class AuditServiceImpl implements AuditService {
 	/**
 	 * Gets the list of all audits of the principal auditor
 	 * 
-	 * @param username the principal auditor's user name.
+	 * @param username
+	 *            the principal auditor's user name.
 	 * @return list of all audits of the principal auditor
 	 */
 	@Override
 	public Page<Audit> findByPrimaryAuditor(String username, Pageable pageable) {
-		User auditor = userService.findByUsername(username);
+		User auditor = userService.findByUsername(username).get();
 		return auditRepository.findByPrimaryAuditor(auditor, pageable);
 
 	}
@@ -85,33 +88,37 @@ public class AuditServiceImpl implements AuditService {
 	/**
 	 * Gets the list of all audits of the accompanying auditor
 	 * 
-	 * @param username the accompanying auditor's user name.
+	 * @param username
+	 *            the accompanying auditor's user name.
 	 * @return list of all audits of the accompanying auditor
 	 */
 	@Override
 	public Page<Audit> findByAccompanyingAuditor(String username, Pageable pageable) {
-		User auditor = userService.findByUsername(username);
+		User auditor = userService.findByUsername(username).get();
 		return auditRepository.findByAccompanyingAuditor(auditor, pageable);
 	}
 
 	/**
 	 * Gets the list of all audits of the audited
 	 * 
-	 * @param username the audited's user name.
+	 * @param username
+	 *            the audited's user name.
 	 * @return list of all audits of the audited
 	 */
 	@Override
 	public Page<Audit> findByAudited(String username, Pageable pageable) {
-		User audited = userService.findByUsername(username);
+		User audited = userService.findByUsername(username).get();
 		return auditRepository.findByAudited(audited, pageable);
 	}
 
 	/**
 	 * gets one audit by his id
 	 * 
-	 * @param id the id of the audit
+	 * @param id
+	 *            the id of the audit
 	 * @return audit object with the same id
-	 * @throws NoSuchElementException if no element is present with such ID
+	 * @throws NoSuchElementException
+	 *             if no element is present with such ID
 	 */
 	@Override
 	public Audit findById(Long id) {
@@ -126,10 +133,11 @@ public class AuditServiceImpl implements AuditService {
 	/**
 	 * Creates a new audit
 	 * 
-	 * @param audit the audit to create
+	 * @param audit
+	 *            the audit to create
 	 * @return the created audit
-	 * @throws EntityExistsException if there is already existing entity with such
-	 *                               ID
+	 * @throws EntityExistsException
+	 *             if there is already existing entity with such ID
 	 */
 	@Override
 	public Audit create(Audit audit) {
@@ -142,10 +150,13 @@ public class AuditServiceImpl implements AuditService {
 	/**
 	 * Updates one audit
 	 * 
-	 * @param id    the id of the audit
-	 * @param audit the new audit object with the new values
+	 * @param id
+	 *            the id of the audit
+	 * @param audit
+	 *            the new audit object with the new values
 	 * @return the updated audit
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public Audit update(Audit audit, Long id) {
@@ -159,8 +170,10 @@ public class AuditServiceImpl implements AuditService {
 	/**
 	 * Deletes one action
 	 * 
-	 * @param id the of the deleted action
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param id
+	 *            the of the deleted action
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public void delete(Long id) {
