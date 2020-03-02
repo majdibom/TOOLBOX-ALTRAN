@@ -5,6 +5,7 @@ import { TypeAction } from './type-action';
 import { Origin } from './origin';
 import { Process } from './process';
 import { Gap } from './gap';
+import { Comment } from './comment';
 
 export class Action {
 
@@ -16,7 +17,7 @@ export class Action {
     updatedDueDate: Date;
     effMeasDate: Date;
     realizationDate: Date;
-    comments: string;
+    comments: Comment;
     responsibleAction: User;
     processImpacts?: Array<Process> = [];
     gap?: Gap;
@@ -24,6 +25,7 @@ export class Action {
     priority: Priority;
     typeAction: TypeAction;
     origin: Origin;
+    
 
     constructor() { }
 }

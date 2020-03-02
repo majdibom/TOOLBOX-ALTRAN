@@ -22,7 +22,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -101,12 +100,6 @@ public class Action implements Serializable {
 	private Date realizationDate;
 
 	/**
-	 * comments about this action
-	 */
-	@Column(columnDefinition = "text")
-	private String comments;
-
-	/**
 	 * The responsible of this action
 	 * 
 	 * @see User
@@ -165,14 +158,14 @@ public class Action implements Serializable {
 	private Origin origin;
 
 	/**
-	 * The creator of this Action.
+	 * The risk who this action belong to. Indicate the association class between
+	 * risk and action.
 	 * 
-	 * @see User
+	 * @see RiskAction
 	 */
-	@ManyToOne(fetch = FetchType.EAGER)
-	@CreatedBy
-	@JoinColumn(name = "created_by", nullable = true, foreignKey = @ForeignKey(name = "FK_CREATED_BY"))
-	private User createdBy;
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@OneToMany(mappedBy = "action")
+	private Set<RiskAction> risks;
 
 	/**
 	 * The creator of this Action.
@@ -180,9 +173,19 @@ public class Action implements Serializable {
 	 * @see User
 	 */
 	@ManyToOne(fetch = FetchType.EAGER)
-	@LastModifiedBy 
+	@JoinColumn(name = "created_by", nullable = true, foreignKey = @ForeignKey(name = "FK_CREATED_BY"))
+	private User createdBy;
+
+	/**
+	 * The last user modified this Action.
+	 * 
+	 * @see User
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
+	@LastModifiedBy
 	@JoinColumn(name = "Last_Modified_By ", nullable = true, foreignKey = @ForeignKey(name = "FK_LAST_MODIFIED_BY "))
-	private User lastModifiedBy ;
+	private User lastModifiedBy;
+
 	/**
 	 * The created date of this Action.
 	 */
@@ -200,14 +203,47 @@ public class Action implements Serializable {
 	private Date updatedAt;
 
 	/**
-	 * The risk who this action belong to. Indicate the association class between
-	 * risk and action.
+	 * The comments of this Action
 	 * 
-	 * @see RiskAction
+	 * @see Comment
 	 */
-	@JsonProperty(access = Access.WRITE_ONLY)
-	@OneToMany(mappedBy = "action")
-	private Set<RiskAction> risks;
+	@OneToMany(fetch = FetchType.EAGER)
+	private Set<Comment> comments;
+
+	
+
+	public Action() {
+		super();
+	}
+
+	public Action(Long id, String description, String effMeasCriterion, Date openDate, Date dueDate,
+			Date updatedDueDate, Date effMeasDate, Date realizationDate, User responsibleAction,
+			Set<Process> processImpacts, Gap gap, ActionStatus actionStatus, Priority priority, TypeAction typeAction,
+			Origin origin, Set<RiskAction> risks, User createdBy, User lastModifiedBy, Date createdAt, Date updatedAt,
+			Set<Comment> comments) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.effMeasCriterion = effMeasCriterion;
+		this.openDate = openDate;
+		this.dueDate = dueDate;
+		this.updatedDueDate = updatedDueDate;
+		this.effMeasDate = effMeasDate;
+		this.realizationDate = realizationDate;
+		this.responsibleAction = responsibleAction;
+		this.processImpacts = processImpacts;
+		this.gap = gap;
+		this.actionStatus = actionStatus;
+		this.priority = priority;
+		this.typeAction = typeAction;
+		this.origin = origin;
+		this.risks = risks;
+		this.createdBy = createdBy;
+		this.lastModifiedBy = lastModifiedBy;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.comments = comments;
+	}
 
 	/****** Getters and setters *****/
 
@@ -273,14 +309,6 @@ public class Action implements Serializable {
 
 	public void setRealizationDate(Date realizationDate) {
 		this.realizationDate = realizationDate;
-	}
-
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
 	}
 
 	public User getResponsibleAction() {
@@ -373,6 +401,22 @@ public class Action implements Serializable {
 
 	public void setRisks(Set<RiskAction> risks) {
 		this.risks = risks;
+	}
+
+	public User getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+
+	public void setLastModifiedBy(User lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
+	}
+
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
 	}
 
 }

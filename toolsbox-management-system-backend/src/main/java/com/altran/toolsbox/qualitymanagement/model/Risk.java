@@ -21,8 +21,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -157,7 +157,6 @@ public class Risk implements Serializable {
 	 * @see User
 	 */
 	@ManyToOne(fetch = FetchType.EAGER)
-	@CreatedBy
 	@JoinColumn(name = "created_by", nullable = true, foreignKey = @ForeignKey(name = "FK_CREATED_BY"))
 	private User createdBy;
 
@@ -170,12 +169,30 @@ public class Risk implements Serializable {
 	private Date createdAt;
 
 	/**
+	 * The last user modified this Action.
+	 * 
+	 * @see User
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
+	@LastModifiedBy
+	@JoinColumn(name = "Last_Modified_By ", nullable = true, foreignKey = @ForeignKey(name = "FK_LAST_MODIFIED_BY "))
+	private User lastModifiedBy;
+
+	/**
 	 * The last modified date of this Action.
 	 */
 	@Column
 	@LastModifiedDate
 	@JsonFormat(pattern = "dd-MM-yyy HH:mm:ss")
 	private Date updatedAt;
+
+	/**
+	 * The comments of this Risk
+	 * 
+	 * @see Comment
+	 */
+	@OneToMany(fetch = FetchType.EAGER)
+	private Set<Comment> comments;
 
 	/****** Getters and setters *****/
 
@@ -341,6 +358,22 @@ public class Risk implements Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public User getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+
+	public void setLastModifiedBy(User lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
+	}
+
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
 	}
 
 }

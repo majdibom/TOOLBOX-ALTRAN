@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.altran.toolsbox.qualitymanagement.model.Action;
+import com.altran.toolsbox.qualitymanagement.model.Comment;
 import com.altran.toolsbox.qualitymanagement.model.searchfilter.ActionFilter;
 
 /**
@@ -35,5 +36,9 @@ public interface ActionService {
 	Boolean delete(Long id);
 
 	Page<Action> advancedSearch(ActionFilter actionFilter, Pageable pageable);
+
+	Comment addComment(Long id, Comment comment);
+
+	void deleteComment(Long id, Comment comment);
 
 }

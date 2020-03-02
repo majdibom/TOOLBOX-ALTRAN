@@ -31,6 +31,12 @@ import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_DEL
 import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_EXIST;
 import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_NOT_UPDATED;
 import static com.altran.toolsbox.util.constant.ResponseConstants.ACTION_UPDATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.COMMENT_CREATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.COMMENT_DELETED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.COMMENT_EXIST;
+import static com.altran.toolsbox.util.constant.ResponseConstants.COMMENT_NOT_CREATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.COMMENT_NOT_DELETED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.COMMENT_NOT_EXIST;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -45,6 +51,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,8 +63,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.altran.toolsbox.qualitymanagement.model.Action;
+import com.altran.toolsbox.qualitymanagement.model.Comment;
 import com.altran.toolsbox.qualitymanagement.model.searchfilter.ActionFilter;
 import com.altran.toolsbox.qualitymanagement.service.ActionService;
+import com.altran.toolsbox.usermanagement.model.User;
+import com.altran.toolsbox.usermanagement.service.UserService;
 import com.altran.toolsbox.util.GenericResponse;
 import com.altran.toolsbox.util.Translator;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
@@ -76,6 +87,8 @@ public class ActionController {
 
 	private final ActionService actionService;
 
+	private UserService userService;
+
 	private GenericResponse<Action> objectResponse;
 
 	private GenericResponse<String> messageResponse;
@@ -89,6 +102,11 @@ public class ActionController {
 	@Autowired
 	public ActionController(ActionService actionService) {
 		this.actionService = actionService;
+	}
+
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 	/**
@@ -262,6 +280,12 @@ public class ActionController {
 	@PostMapping
 	public ResponseEntity<GenericResponse<String>> createAction(@RequestBody Action action) {
 		try {
+			// Get connected user
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String currentPrincipalName = authentication.getName();
+			User user = userService.findByUsername(currentPrincipalName).get();
+			// add connected user to comment
+			action.setCreatedBy(user);
 			actionService.create(action);
 			messageResponse.setError(false);
 			messageResponse.setValue(Translator.toLocale(ACTION_CREATED));
@@ -394,5 +418,76 @@ public class ActionController {
 		MappingJacksonValue actionMapping = new MappingJacksonValue(actionList);
 		actionMapping.setFilters(filters);
 		return actionMapping;
+	}
+
+	/**
+	 * Add a new comment to action
+	 * 
+	 * Handles EntityExistsException if there is already existing entity with such
+	 * ID and any other exception
+	 * 
+	 * @param id
+	 *            the id of the action
+	 * @param comment
+	 *            the comment to add
+	 * @return ResponseEntity: the message or the error to display after creating
+	 *         action with HttpStatus status code
+	 */
+	@PutMapping(value = "/comments/{id}")
+	public ResponseEntity<GenericResponse<String>> addComment(@PathVariable(value = "id") Long id,
+			@RequestBody Comment comment) {
+		try {
+			// Get connected user
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String currentPrincipalName = authentication.getName();
+			User user = userService.findByUsername(currentPrincipalName).get();
+			// add connected user to comment
+			comment.setCreatedBy(user);
+			actionService.addComment(id, comment);
+			messageResponse.setError(false);
+			messageResponse.setValue(Translator.toLocale(COMMENT_CREATED));
+			return ResponseEntity.status(HttpStatus.CREATED).body(messageResponse);
+		} catch (EntityExistsException e) {
+			messageResponse.setError(true);
+			messageResponse.setValue(Translator.toLocale(COMMENT_EXIST));
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(messageResponse);
+		} catch (Exception e) {
+			messageResponse.setError(true);
+			messageResponse.setValue(Translator.toLocale(COMMENT_NOT_CREATED));
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageResponse);
+		}
+	}
+
+	/**
+	 * Deletes one comment from action
+	 * 
+	 * Handles EntityNotFoundException if there is no entity with such ID, exception
+	 * if this action is used and any other exception
+	 * 
+	 * @param id
+	 *            the of the action
+	 * @param comment
+	 *            the comment to delete
+	 * @return ResponseEntity: the message or the error to display after deleting
+	 *         action with HttpStatus status code
+	 */
+	@DeleteMapping(value = "/comments/{id}")
+	public ResponseEntity<GenericResponse<String>> deleteComment(@PathVariable(value = "id") Long id,
+			@RequestBody Comment comment) {
+		try {
+
+			actionService.deleteComment(id, comment);
+			messageResponse.setError(false);
+			messageResponse.setValue(Translator.toLocale(COMMENT_DELETED));
+			return ResponseEntity.status(HttpStatus.OK).body(messageResponse);
+		} catch (EntityNotFoundException e) {
+			messageResponse.setError(true);
+			messageResponse.setValue(Translator.toLocale(COMMENT_NOT_EXIST));
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(messageResponse);
+		} catch (Exception e) {
+			messageResponse.setError(true);
+			messageResponse.setValue(Translator.toLocale(COMMENT_NOT_DELETED));
+			return ResponseEntity.status(HttpStatus.IM_USED).body(messageResponse);
+		}
 	}
 }

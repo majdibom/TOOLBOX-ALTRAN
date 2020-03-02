@@ -2,144 +2,206 @@
   <h3>{{'Détails de l action : #' | translate}}{{action?.id}}</h3>
 </div>
 <div class="content">
-  
-    <div class="row">
-      <div class="col-lg-4">
-        <div class="profile-card-4 z-depth-3">
-          <!-- action generale information section -->
-          <div class="card " >
-            <div class="card-body text-center bg-altran rounded-top">
-              <h6 class="text-light">{{'Responsable' | translate}} :</h6>
-              <h5 class="mb-1 text-white">
-                {{action?.responsibleAction?.firstName}}&nbsp;{{action?.responsibleAction?.lastName}}</h5>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="profile-card-4 z-depth-3">
+        <!-- action generale information section -->
+        <div class="card ">
+          <div class="card-body text-center bg-altran rounded-top">
+            <h6 class="text-light">{{'Responsable' | translate}} :</h6>
+            <h5 class="mb-1 text-white">
+              {{action?.responsibleAction?.firstName}}&nbsp;{{action?.responsibleAction?.lastName}}</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group shadow-none">
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Type' | translate}}: </span>&nbsp;&nbsp;<span
+                    style="font-size: medium;">{{action?.typeAction}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-thumb-tack"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Statut' | translate}}: </span>&nbsp;&nbsp;
+                  <span *ngIf="action?.actionStatus == 'Open'" class="badge badge-primary"
+                    style="font-size: medium;">{{action?.actionStatus}}</span>
+                  <span *ngIf="action?.actionStatus == 'Closed'" class="badge badge-dark"
+                    style="font-size: medium;">{{action?.actionStatus}}</span>
+                  <span *ngIf="action?.actionStatus == 'Done'" class="badge badge-success"
+                    style="font-size: medium;">{{action?.actionStatus}}</span>
+                  <span *ngIf="action?.actionStatus == 'Blocked'" class="badge badge-danger"
+                    style="font-size: medium;">{{action?.actionStatus}}</span>
+                  <span *ngIf="action?.actionStatus == 'Delayed'" class="badge badge-warning"
+                    style="font-size: medium;">{{action?.actionStatus}}</span>
+                  <span *ngIf="action?.actionStatus == 'Cancelled'" class="badge badge-secondary"
+                    style="font-size: medium;">{{action?.actionStatus}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-line-chart" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Priorité' | translate}}: </span>&nbsp;&nbsp;
+                  <span *ngIf="action?.priority == 'Low'" class="badge badge-secondary"
+                    style="font-size: medium;">{{action?.priority}}</span>
+                  <span *ngIf="action?.priority == 'Nomral'" class="badge badge-info"
+                    style="font-size: medium;">{{action?.priority}}</span>
+                  <span *ngIf="action?.priority == 'High'" class="badge badge-warning"
+                    style="font-size: medium;">{{action?.priority}}</span>
+                </div>
+              </li>
+            </ul>
+            <div class="row text-center mt-4">
+              <div class="col p-2">
+                <h4 class="mb-1 line-height-5" style="font-size: 20px">{{action?.openDate |
+                                            date:'dd/MM/yyyy'}}</h4>
+                <small class="mb-0 font-weight-bold">{{'Date d identification' | translate}}</small>
+              </div>
+              <div class="col p-2">
+                <h4 class="mb-1 line-height-5" style="font-size: 20px">{{action?.dueDate |
+                                        date:'dd/MM/yyyy'}}</h4>
+                <small class="mb-0 font-weight-bold">{{'Date d échéance' | translate}}</small>
+              </div>
             </div>
-            <div class="card-body">
-              <ul class="list-group shadow-none">
-                <li class="list-group-item">
-                  <div class="list-icon">
-                    <i class="fa fa-cog" aria-hidden="true"></i>
-                  </div>
-                  <div class="list-details">
-                    <span style="font-size: medium;">{{'Type' | translate}}: </span>&nbsp;&nbsp;<span style="font-size: medium;">{{action?.typeAction}}</span>
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="list-icon">
-                    <i class="fa fa-thumb-tack"></i>
-                  </div>
-                  <div class="list-details">
-                    <span style="font-size: medium;">{{'Statut' | translate}}: </span>&nbsp;&nbsp;
-                    <span *ngIf="action?.actionStatus == 'Open'" class="badge badge-primary"style="font-size: medium;">{{action?.actionStatus}}</span>
-                    <span *ngIf="action?.actionStatus == 'Closed'" class="badge badge-dark" style="font-size: medium;">{{action?.actionStatus}}</span>
-                    <span *ngIf="action?.actionStatus == 'Done'" class="badge badge-success" style="font-size: medium;">{{action?.actionStatus}}</span>
-                    <span *ngIf="action?.actionStatus == 'Blocked'" class="badge badge-danger" style="font-size: medium;">{{action?.actionStatus}}</span>
-                    <span *ngIf="action?.actionStatus == 'Delayed'" class="badge badge-warning" style="font-size: medium;">{{action?.actionStatus}}</span>
-                    <span *ngIf="action?.actionStatus == 'Cancelled'" class="badge badge-secondary" style="font-size: medium;">{{action?.actionStatus}}</span>
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="list-icon">
-                    <i class="fa fa-line-chart" aria-hidden="true"></i>
-                  </div>
-                  <div class="list-details">
-                    <span style="font-size: medium;">{{'Priorité' | translate}}: </span>&nbsp;&nbsp;
-                    <span *ngIf="action?.priority == 'Low'" class="badge badge-secondary" style="font-size: medium;">{{action?.priority}}</span>
-                    <span *ngIf="action?.priority == 'Nomral'" class="badge badge-info" style="font-size: medium;">{{action?.priority}}</span>
-                    <span *ngIf="action?.priority == 'High'" class="badge badge-warning" style="font-size: medium;">{{action?.priority}}</span>
-                  </div>
-                </li>
-              </ul>
-              <div class="row text-center mt-4">
-                <div class="col p-2">
-                  <h4 class="mb-1 line-height-5" style="font-size: 20px">{{action?.openDate |
+            <div class="row text-center mt-4">
+              <div class="col p-2">
+                <h4 class="mb-1 line-height-5" style="font-size: 20px">{{action?.updatedDueDate |
                                             date:'dd/MM/yyyy'}}</h4>
-                  <small class="mb-0 font-weight-bold">{{'Date d identification' | translate}}</small>
-                </div>
-                <div class="col p-2">
-                  <h4 class="mb-1 line-height-5" style="font-size: 20px">{{action?.dueDate |
-                                        date:'dd/MM/yyyy'}}</h4>
-                  <small class="mb-0 font-weight-bold">{{'Date d échéance' | translate}}</small>
-                </div>
+                <small class="mb-0 font-weight-bold">{{'Date d échéance mise à jour' | translate}}</small>
               </div>
-              <div class="row text-center mt-4">
-                <div class="col p-2">
-                  <h4 class="mb-1 line-height-5" style="font-size: 20px">{{action?.updatedDueDate |
-                                            date:'dd/MM/yyyy'}}</h4>
-                  <small class="mb-0 font-weight-bold">{{'Date d échéance mise à jour' | translate}}</small>
-                </div>
-                <div class="col p-2">
-                  <h4 class="mb-1 line-height-5" style="font-size: 20px">{{action?.effMeasDate |
+              <div class="col p-2">
+                <h4 class="mb-1 line-height-5" style="font-size: 20px">{{action?.effMeasDate |
                                         date:'dd/MM/yyyy'}}</h4>
-                  <small class="mb-0 font-weight-bold">{{'Date de mesure de l efficacité' | translate}}</small>
-                </div>
+                <small class="mb-0 font-weight-bold">{{'Date de mesure de l efficacité' | translate}}</small>
               </div>
-              <div class="row text-center mt-4">
-                <div class="col p-2">
-                  <h4 class="mb-1 line-height-5" style="font-size: 20px">{{action?.realizationDate |
+            </div>
+            <div class="row text-center mt-4">
+              <div class="col p-2">
+                <h4 class="mb-1 line-height-5" style="font-size: 20px">{{action?.realizationDate |
                                             date:'dd/MM/yyyy'}}</h4>
-                  <small class="mb-0 font-weight-bold">{{'Date de réalisation' | translate}}</small>
-                </div>
+                <small class="mb-0 font-weight-bold">{{'Date de réalisation' | translate}}</small>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="col-lg-8">
-        <div class="card  z-depth-3">
-          <div class="card-body">
-            <ul class="nav nav-pills nav-pills-primary nav-justified">
-              <!-- Details menu -->
-              <li class="nav-item">
-                <div class="card-body text-center bg-altran rounded-top">
-                  <h6 class="text-light">{{'Créé par' | translate}}:</h6>
-                  <h5 class="text-white">
-                    {{action?.createdBy?.firstName}}&nbsp;{{action?.createdBy?.lastName}}</h5>
-                </div>
-              </li>
-              <li class="nav-item">
-                <div class="card-body text-center bg-altran rounded-top">
-                  <h6 class="text-light">{{'Date de création' | translate}}:</h6>
-                  <h5 class="text-light" style="font-size: 20px">{{action?.createdAt |
+    <div class="col-lg-8">
+      <div class="card  z-depth-3">
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pills-primary nav-justified">
+            <!-- Details menu -->
+            <li class="nav-item">
+              <div class="card-body text-center bg-altran rounded-top">
+                <h6 class="text-light">{{'Créé par' | translate}}:</h6>
+                <h5 class="text-white">
+                  {{action?.createdBy?.firstName}}&nbsp;{{action?.createdBy?.lastName}}</h5>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="card-body text-center bg-altran rounded-top">
+                <h6 class="text-light">{{'Date de création' | translate}}:</h6>
+                <h5 class="text-light" style="font-size: 20px">{{action?.createdAt |
                     date:'dd/MM/yyyy'}}</h5>
-                </div>
-              </li>
-              <li class="nav-item">
-                <div class="card-body text-center bg-altran rounded-top">
-                  <h6 class="text-light">{{'Date de mise à jour' | translate}}:</h6>
-                  <h5 class="text-light" style="font-size: 20px">{{action?.updatedAt |
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="card-body text-center bg-altran rounded-top">
+                <h6 class="text-light">{{'Date de mise à jour' | translate}}:</h6>
+                <h5 class="text-light" style="font-size: 20px">{{action?.updatedAt |
                     date:'dd/MM/yyyy'}}</h5>
-                </div>
-              </li>
+              </div>
+            </li>
 
-            </ul>
-            <div class="tab-content p-3">
-              <!-- Details section -->
-              <div class="tab-pane active show" id="detail">
-                <h5 class="mb-3"></h5>
-                <div class="row">
-                  <div class="col-md-12">
-                    <ul class="list-group list-group-flush">
-                      <li  class="list-group-item">
-                    <h5><strong>{{'Origine' | translate}} :</strong>&nbsp;&nbsp;{{action?.origin}}</h5>
-                      </li>
-                      <li  class="list-group-item">
-                        <h5><strong>{{'Description' | translate}} :</strong>&nbsp;&nbsp;{{action?.description}}</h5>
-                  </li>
-                    <li  class="list-group-item">
-                      <h5><strong>{{'Commentaires' | translate}} :</strong>&nbsp;&nbsp;{{action?.comments}}</h5>
-                  </li>
-                    <li  class="list-group-item">
-                      <h5><strong>{{'Critère de mesure de l efficacité' | translate}} :</strong>&nbsp;&nbsp;{{action?.effMeasCriterion}}</h5>
-                  </li>
-                
-                <li  class="list-group-item">
-                  <h5><strong>{{'Processus impacté' | translate}} :</strong>&nbsp;&nbsp;<span *ngFor="let process of action?.processImpacts">
-                    <span class="badge badge-dark badge-pill">{{process.title}}</span>&nbsp;
-                  </span></h5>
-              </li>
-                    </ul>
-                  </div>
+          </ul>
+          <div class="tab-content p-3">
+            <!-- Details section -->
+            <div class="tab-pane active show" id="detail">
+              <h5 class="mb-3"></h5>
+              <div class="row">
+                <div class="col-md-12">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <h5><strong>{{'Origine' | translate}} :</strong>&nbsp;&nbsp;{{action?.origin}}</h5>
+                    </li>
+                    <li class="list-group-item">
+                      <h5><strong>{{'Description' | translate}} :</strong>&nbsp;&nbsp;{{action?.description}}</h5>
+
+                    <li class="list-group-item">
+                      <h5><strong>{{'Critère de mesure de l efficacité' | translate}}
+                          :</strong>&nbsp;&nbsp;{{action?.effMeasCriterion}}</h5>
+                    </li>
+
+                    <li class="list-group-item">
+                      <h5><strong>{{'Processus impacté' | translate}} :</strong>&nbsp;&nbsp;<span
+                          *ngFor="let process of action?.processImpacts">
+                          <span class="badge badge-dark badge-pill">{{process.title}}</span>&nbsp;
+                        </span></h5>
+                    </li>
+                    <li class="list-group-item">
+
+                      <div class="row">
+                        <div class="card card1 col-md-12">
+                          <div class="card-header ">
+                            <h5><strong>Commentaires :</strong></h5>
+                          </div>
+                          <div class="card-body">
+                            <form>
+                              <div class="row">
+                                <div class="col-lg-10">
+                                  <fieldset>
+                                    <div class="form-group">
+                                      <input type="text" class="form-control" id="message" name="message" placeholder="Your comment"
+                                        [(ngModel)]="commentToAdd.message">
+                                    </div>
+                                  </fieldset>
+                                </div>
+                                <div>
+                                  <button type="submit" class="btn btn-primary pull-right btn-add"
+                                    (click)="createComment()">Submit</button></div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>&nbsp;&nbsp;
+                      <!-- COMMENT  - START -->
+                      <!-- <div class="media">
+                        <div class="media-body">
+                          <h4 class="media-heading">
+                            {{action?.createdBy?.firstName}}&nbsp;{{action?.createdBy?.lastName}}</h4>
+                          <p>{{action?.comments}}</p>
+                          <ul class="list-unstyled list-inline media-detail pull-left">
+                            <li><i class="fa fa-calendar"></i>{{action?.createdAt}}</li>
+                          </ul>
+                        </div>
+                      </div> -->
+                      <div *ngFor="let comment of action?.comments">
+                        <div class="comment-wrap">
+                          <div class="comment-block">
+                            <p class="comment-text">{{comment?.message}}</p>
+                            <div class="bottom-comment">
+                              <div class="comment-date">{{comment?.createdAt}}</div>
+                              <ul class="comment-actions">
+                                <li class="complain">
+                                  {{comment?.createdBy?.firstName}}&nbsp;{{comment?.createdBy?.lastName}}</li>
+
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <h5><strong>{{'Commentaires' | translate}} :</strong>&nbsp;&nbsp;{{action?.comments}}</h5> -->
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -148,3 +210,4 @@
       </div>
     </div>
   </div>
+</div>

@@ -116,6 +116,13 @@ public final class ResponseConstants {
 	// Week
 	public static final String WEEK_NOT_EXIST = "week_not_exist";
 	public static final String WEEK_FIND_ERROR = "week_find_error";
+	// Comment
+	public static final String COMMENT_EXIST = "comment_exist";
+	public static final String COMMENT_NOT_EXIST = "comment_not_exist";
+	public static final String COMMENT_CREATED = "comment_created";
+	public static final String COMMENT_NOT_CREATED = "comment_not_created";
+	public static final String COMMENT_DELETED = "comment_deleted";
+	public static final String COMMENT_NOT_DELETED = "comment_not_deleted";
 
 	/**
 	 * Training Management

@@ -8,6 +8,7 @@ import static com.altran.toolsbox.util.constant.ColumnConstants.Moyenne;
 import static com.altran.toolsbox.util.constant.ColumnConstants.Presque_sur;
 import static com.altran.toolsbox.util.constant.ColumnConstants.Très_probable;
 import static com.altran.toolsbox.util.constant.ColumnConstants.Trés_Important;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
 
 import java.util.Date;
@@ -25,6 +26,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.altran.toolsbox.qualitymanagement.model.Action;
+import com.altran.toolsbox.qualitymanagement.model.Comment;
 import com.altran.toolsbox.qualitymanagement.model.Exposure;
 import com.altran.toolsbox.qualitymanagement.model.Probability;
 import com.altran.toolsbox.qualitymanagement.model.Risk;
@@ -36,6 +38,7 @@ import com.altran.toolsbox.qualitymanagement.model.Severity;
 import com.altran.toolsbox.qualitymanagement.model.searchfilter.RiskFilter;
 import com.altran.toolsbox.qualitymanagement.repository.RiskRepository;
 import com.altran.toolsbox.qualitymanagement.service.ActionService;
+import com.altran.toolsbox.qualitymanagement.service.CommentService;
 import com.altran.toolsbox.qualitymanagement.service.RiskActionService;
 import com.altran.toolsbox.qualitymanagement.service.RiskService;
 import com.altran.toolsbox.usermanagement.model.User;
@@ -58,11 +61,12 @@ public class RiskServiceImpl implements RiskService {
 
 	private RiskActionService riskActionService;
 
+	private CommentService commentService;
+
 	/**
 	 * Constructor of RiskServiceImpl
 	 * 
-	 * @param riskRepository
-	 *            the repository of risk
+	 * @param riskRepository the repository of risk
 	 */
 	@Autowired
 	public RiskServiceImpl(RiskRepository riskRepository) {
@@ -72,8 +76,7 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Changes action service.
 	 * 
-	 * @param actionService
-	 *            action service.
+	 * @param actionService action service.
 	 */
 	@Autowired
 	public void setActionService(ActionService actionService) {
@@ -83,12 +86,21 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Changes risk action service.
 	 * 
-	 * @param riskActionService
-	 *            risk action service.
+	 * @param riskActionService risk action service.
 	 */
 	@Autowired
 	public void setRiskActionService(RiskActionService riskActionService) {
 		this.riskActionService = riskActionService;
+	}
+
+	/**
+	 * Changes comment service.
+	 * 
+	 * @param commentService comment service.
+	 */
+	@Autowired
+	public void setcommentService(CommentService commentService) {
+		this.commentService = commentService;
 	}
 
 	/**
@@ -113,11 +125,9 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * gets one risk by his id
 	 * 
-	 * @param id
-	 *            the id of the risk
+	 * @param id the id of the risk
 	 * @return risk object with the same id
-	 * @throws NoSuchElementException
-	 *             if no element is present with such ID
+	 * @throws NoSuchElementException if no element is present with such ID
 	 */
 	@Override
 	public Risk findById(Long id) {
@@ -132,11 +142,10 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Creates a new risk
 	 * 
-	 * @param risk
-	 *            the risk to create
+	 * @param risk the risk to create
 	 * @return the created risk
-	 * @throws EntityExistsException
-	 *             if there is already existing entity with such ID
+	 * @throws EntityExistsException if there is already existing entity with such
+	 *                               ID
 	 */
 	@Override
 	public Risk create(Risk risk) {
@@ -170,13 +179,10 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Updates one risk
 	 * 
-	 * @param id
-	 *            the id of the risk
-	 * @param risk
-	 *            the new risk object with the new values
+	 * @param id   the id of the risk
+	 * @param risk the new risk object with the new values
 	 * @return the updated risk
-	 * @throws EntityNotFoundException
-	 *             if there is no entity with such ID
+	 * @throws EntityNotFoundException if there is no entity with such ID
 	 */
 	@Override
 	public Risk update(Risk risk, Long id) {
@@ -200,10 +206,8 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Deletes one risk
 	 * 
-	 * @param id
-	 *            the of the deleted risk
-	 * @throws EntityNotFoundException
-	 *             if there is no entity with such ID
+	 * @param id the of the deleted risk
+	 * @throws EntityNotFoundException if there is no entity with such ID
 	 */
 	@Override
 	public void delete(Long id) {
@@ -216,10 +220,8 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Deletes one action From Risk
 	 * 
-	 * @param the
-	 *            id of the deleted action
-	 * @throws EntityNotFoundException
-	 *             if there is no entity with such ID
+	 * @param the id of the deleted action
+	 * @throws EntityNotFoundException if there is no entity with such ID
 	 */
 	@Override
 	public void deleteActionFromRisk(RiskActionId riskActionId) {
@@ -232,10 +234,8 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Calculate the exposure (probability * severity)
 	 * 
-	 * @param probability
-	 *            the probability of the risk
-	 * @param severity
-	 *            the severity of the risk
+	 * @param probability the probability of the risk
+	 * @param severity    the severity of the risk
 	 * @return the exposure of the risk
 	 */
 	@Override
@@ -344,6 +344,13 @@ public class RiskServiceImpl implements RiskService {
 		return riskRepository.findByRiskPilote(responsable, pageable);
 	}
 
+	/**
+	 * Searches for risks by one term
+	 * 
+	 * @param term     the term to base search on it
+	 * @param pageable pagination information
+	 * @return list of risks contains the input term by page
+	 */
 	@Override
 	public Page<Risk> simpleSearch(String term, Pageable pageable) {
 		return riskRepository.simpleSearch(term, pageable);
@@ -352,10 +359,8 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Searches for risks by multiple terms
 	 *
-	 * @param riskFilter
-	 *            risk filter object with list of advanced search criteria
-	 * @param pagination
-	 *            information
+	 * @param riskFilter risk filter object with list of advanced search criteria
+	 * @param pagination information
 	 */
 	@Override
 	public Page<Risk> advancedSearch(RiskFilter riskFilter, Pageable pageable) {
@@ -380,6 +385,45 @@ public class RiskServiceImpl implements RiskService {
 			status = null;
 		}
 		return riskRepository.advancedSearch(probabilities, riskNatures, exposures, status, pageable);
+	}
+
+	/**
+	 * add comment to one risk
+	 * 
+	 * @param id      the id of risk
+	 * @param Comment the comment object
+	 * @throws EntityNotFoundException if there is no entity with such ID
+	 */
+	@Override
+	public Comment addComment(Long id, Comment comment) {
+		if (comment.getId() != null && commentService.existsById(comment.getId())) {
+			throw new EntityExistsException(ENTITY_EXIST);
+		}
+		Comment createdComment = commentService.create(comment);
+		Risk risk = findById(id);
+		risk.getComments().add(createdComment);
+		riskRepository.save(risk);
+		return createdComment;
+	}
+
+	/**
+	 * delete comment from action
+	 * 
+	 * @param Comment the comment object
+	 * @throws EntityNotFoundException if there is no entity with such ID
+	 */
+	@Override
+	public void deleteComment(Long id, Comment comment) {
+		if (id != null && !riskRepository.existsById(id)) {
+			throw new EntityNotFoundException(NO_ENTITY_DB);
+		}
+		if (comment.getId() != null && commentService.existsById(comment.getId())) {
+			throw new EntityExistsException(NO_ENTITY_DB);
+		}
+		Risk risk = findById(id);
+		risk.getComments().remove(comment);
+		riskRepository.save(risk);
+		commentService.delete(comment.getId());
 	}
 
 }

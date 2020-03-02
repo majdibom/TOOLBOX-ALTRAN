@@ -19,6 +19,7 @@ export class RiskDetailComponent implements OnInit {
   risk: Risk = new Risk();
   // Risk to edit
   editRisk: Risk = new Risk();
+  
 
   constructor(private route: ActivatedRoute, private genericService: GenericService, private router: Router) { }
 

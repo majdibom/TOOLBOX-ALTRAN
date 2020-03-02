@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.altran.toolsbox.qualitymanagement.model.Comment;
 import com.altran.toolsbox.qualitymanagement.model.Risk;
 import com.altran.toolsbox.qualitymanagement.model.RiskActionId;
 import com.altran.toolsbox.qualitymanagement.model.searchfilter.RiskFilter;
@@ -38,5 +39,9 @@ public interface RiskService {
 	Risk calculeExposure(Risk risk);
 
 	Page<Risk> advancedSearch(RiskFilter riskFilter, Pageable pageable);
+
+	Comment addComment(Long id, Comment comment);
+
+	void deleteComment(Long id, Comment comment);
 
 }

@@ -117,11 +117,11 @@
         <td>{{risk.probability}}</td>
         <td>{{risk.severity}}</td>
         <td style="text-align: center;">
-          <span *ngIf="risk?.exposure == 'Acceptable'" class="badge badge-secondary"
+          <span *ngIf="risk?.exposure == 'Acceptable'" class="badge badge-success"
             style="font-size: medium;">{{risk?.exposure}}</span>
-          <span *ngIf="risk?.exposure == 'A_surveiller'" class="badge badge-info"
+          <span *ngIf="risk?.exposure == 'A_surveiller'" class="badge badge-warning"
             style="font-size: medium;">{{risk?.exposure}}</span>
-          <span *ngIf="risk?.exposure == 'Trés_critique'" class="badge badge-warning"
+          <span *ngIf="risk?.exposure == 'Trés_critique'" class="badge badge-danger"
             style="font-size: medium;">{{risk?.exposure}}</span></td>
         <td style="text-align: center;">{{risk.exposureValue}}</td>
         <td style="text-align: center;">

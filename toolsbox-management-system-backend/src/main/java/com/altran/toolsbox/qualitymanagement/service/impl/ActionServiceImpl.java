@@ -19,12 +19,14 @@ import org.springframework.stereotype.Service;
 
 import com.altran.toolsbox.qualitymanagement.model.Action;
 import com.altran.toolsbox.qualitymanagement.model.ActionStatus;
+import com.altran.toolsbox.qualitymanagement.model.Comment;
 import com.altran.toolsbox.qualitymanagement.model.Origin;
 import com.altran.toolsbox.qualitymanagement.model.Priority;
 import com.altran.toolsbox.qualitymanagement.model.TypeAction;
 import com.altran.toolsbox.qualitymanagement.model.searchfilter.ActionFilter;
 import com.altran.toolsbox.qualitymanagement.repository.ActionRepository;
 import com.altran.toolsbox.qualitymanagement.service.ActionService;
+import com.altran.toolsbox.qualitymanagement.service.CommentService;
 import com.altran.toolsbox.qualitymanagement.service.GapService;
 import com.altran.toolsbox.qualitymanagement.service.RiskActionService;
 import com.altran.toolsbox.usermanagement.model.User;
@@ -42,11 +44,12 @@ public class ActionServiceImpl implements ActionService {
 
 	private RiskActionService riskActionService;
 
+	private CommentService commentService;
+
 	/**
 	 * Constructor of ActionServiceImp
 	 * 
-	 * @param actionRepository
-	 *            the repository of action
+	 * @param actionRepository the repository of action
 	 * 
 	 */
 	@Autowired
@@ -58,8 +61,7 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Changes gap service.
 	 * 
-	 * @param gapService
-	 *            gap service.
+	 * @param gapService gap service.
 	 */
 	@Autowired
 	public void setGapService(GapService gapService) {
@@ -69,8 +71,7 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Changes risk action service.
 	 * 
-	 * @param riskActionService
-	 *            risk action service.
+	 * @param riskActionService risk action service.
 	 */
 	@Autowired
 	public void setRiskActionService(RiskActionService riskActionService) {
@@ -80,12 +81,21 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Changes user service.
 	 * 
-	 * @param userService
-	 *            user service.
+	 * @param userService user service.
 	 */
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	/**
+	 * Changes comment service.
+	 * 
+	 * @param commentService comment service.
+	 */
+	@Autowired
+	public void setcommentService(CommentService commentService) {
+		this.commentService = commentService;
 	}
 
 	/**
@@ -111,8 +121,7 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Gets the list of all actions by defined gap
 	 * 
-	 * @param id
-	 *            the id of the gap
+	 * @param id the id of the gap
 	 * @return list of all actions with the input gap
 	 */
 	@Override
@@ -123,8 +132,7 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Gets the list of all actions by there responsible manager
 	 * 
-	 * @param username
-	 *            the userName of the responsible
+	 * @param username the userName of the responsible
 	 * @return list of all actions with the input responsible
 	 */
 	@Override
@@ -136,11 +144,9 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * gets one action by his id
 	 * 
-	 * @param id
-	 *            the id of the action
+	 * @param id the id of the action
 	 * @return action object with the same id
-	 * @throws NoSuchElementException
-	 *             if no element is present with such ID
+	 * @throws NoSuchElementException if no element is present with such ID
 	 */
 	@Override
 	public Action findById(Long id) {
@@ -155,11 +161,10 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Creates a new action
 	 * 
-	 * @param action
-	 *            the action to create
+	 * @param action the action to create
 	 * @return the created action
-	 * @throws EntityExistsException
-	 *             if there is already existing entity with such ID
+	 * @throws EntityExistsException if there is already existing entity with such
+	 *                               ID
 	 */
 	@Override
 	public Action create(Action action) {
@@ -172,13 +177,10 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Updates one action
 	 * 
-	 * @param id
-	 *            the id of the action
-	 * @param action
-	 *            the new action object with the new values
+	 * @param id     the id of the action
+	 * @param action the new action object with the new values
 	 * @return the updated action
-	 * @throws EntityNotFoundException
-	 *             if there is no entity with such ID
+	 * @throws EntityNotFoundException if there is no entity with such ID
 	 */
 	@Override
 	public Action update(Action action, Long id) {
@@ -206,10 +208,8 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Deletes one action
 	 * 
-	 * @param id
-	 *            the of the deleted action
-	 * @throws EntityNotFoundException
-	 *             if there is no entity with such ID
+	 * @param id the of the deleted action
+	 * @throws EntityNotFoundException if there is no entity with such ID
 	 */
 	@Override
 	public Boolean delete(Long id) {
@@ -226,6 +226,13 @@ public class ActionServiceImpl implements ActionService {
 
 	}
 
+	/**
+	 * Searches for actions by one term
+	 * 
+	 * @param term     the term to base search on it
+	 * @param pageable pagination information
+	 * @return list of actions contains the input term by page
+	 */
 	@Override
 	public Page<Action> simpleSearch(String term, Pageable pageable) {
 		return actionRepository.simpleSearch(term, pageable);
@@ -234,10 +241,9 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Searches for actions by multiple terms
 	 *
-	 * @param actionFilter
-	 *            action filter object with list of advanced search criteria
-	 * @param pagination
-	 *            information
+	 * @param actionFilter action filter object with list of advanced search
+	 *                     criteria
+	 * @param pagination   information
 	 */
 	@Override
 	public Page<Action> advancedSearch(ActionFilter actionFilter, Pageable pageable) {
@@ -262,6 +268,45 @@ public class ActionServiceImpl implements ActionService {
 			origins = null;
 		}
 		return actionRepository.advancedSearch(status, priorities, types, origins, pageable);
+	}
+
+	/**
+	 * add comment to one action
+	 * 
+	 * @param id      the id of action
+	 * @param Comment the comment object
+	 * @throws EntityNotFoundException if there is no entity with such ID
+	 */
+	@Override
+	public Comment addComment(Long id, Comment comment) {
+		if (comment.getId() != null && commentService.existsById(comment.getId())) {
+			throw new EntityExistsException(ENTITY_EXIST);
+		}
+		Comment createdComment = commentService.create(comment);
+		Action action = findById(id);
+		action.getComments().add(createdComment);
+		actionRepository.save(action);
+		return createdComment;
+	}
+
+	/**
+	 * delete comment from action
+	 * 
+	 * @param Comment the comment object
+	 * @throws EntityNotFoundException if there is no entity with such ID
+	 */
+	@Override
+	public void deleteComment(Long id, Comment comment) {
+		if (id != null && !actionRepository.existsById(id)) {
+			throw new EntityNotFoundException(NO_ENTITY_DB);
+		}
+		if (comment.getId() != null && commentService.existsById(comment.getId())) {
+			throw new EntityExistsException(NO_ENTITY_DB);
+		}
+		Action action = findById(id);
+		action.getComments().remove(comment);
+		actionRepository.save(action);
+		commentService.delete(comment.getId());
 	}
 
 }
