@@ -113,6 +113,7 @@ public class RiskController {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+
 	/**
 	 * Changes valid object response object for sending data
 	 * 
@@ -218,7 +219,7 @@ public class RiskController {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String currentPrincipalName = authentication.getName();
 			User user = userService.findByUsername(currentPrincipalName).get();
-			// add connected user to comment
+			// add connected user to risk
 			risk.setCreatedBy(user);
 			riskService.create(risk);
 			messageResponse.setError(false);
@@ -229,7 +230,6 @@ public class RiskController {
 			messageResponse.setValue(Translator.toLocale(RISK_EXIST));
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(messageResponse);
 		} catch (Exception e) {
-			System.err.println(e);
 			messageResponse.setError(true);
 			messageResponse.setValue(Translator.toLocale(RISK_NOT_CREATED));
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageResponse);

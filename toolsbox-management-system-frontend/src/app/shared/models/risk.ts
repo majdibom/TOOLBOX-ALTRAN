@@ -1,7 +1,6 @@
 
 import { Probability } from './probability';
 import { Severity } from './severity';
-import { Exposure } from './exposure';
 import { RiskStatus } from './risk-status';
 import { Action } from './action';
 import { RiskNature } from './risk-nature';
@@ -9,13 +8,14 @@ import { Priority } from './priority';
 import { RiskStrategy } from './risk-strategy';
 import { User } from './user';
 import { RiskAction } from './risk-Action';
+import { Exposures } from './exposures';
 
 export class Risk {
 
     id?: number;
     probability: Probability;
     severity: Severity;
-    exposure: Exposure;
+    exposures: Array<Exposures> = [];
     exposureValue: number;
     riskNature: RiskNature;
     riskPriority: Priority;

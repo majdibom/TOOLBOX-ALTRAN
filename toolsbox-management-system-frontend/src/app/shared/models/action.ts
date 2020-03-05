@@ -17,7 +17,6 @@ export class Action {
     updatedDueDate: Date;
     effMeasDate: Date;
     realizationDate: Date;
-    comments: Comment;
     responsibleAction: User;
     processImpacts?: Array<Process> = [];
     gap?: Gap;
@@ -25,7 +24,7 @@ export class Action {
     priority: Priority;
     typeAction: TypeAction;
     origin: Origin;
-    
+
 
     constructor() { }
 }

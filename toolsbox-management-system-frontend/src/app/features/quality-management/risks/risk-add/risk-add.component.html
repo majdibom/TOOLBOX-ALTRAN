@@ -104,7 +104,8 @@
             <!-- Action form -->
             <div class="card">
               <div class="card-header">
-                <h4 for="Actions" class="required" style="font-size: large;font-weight: bold;">{{'Actions :' | translate}}</h4>
+                <h4 for="Actions" class="required" style="font-size: large;font-weight: bold;">
+                  {{'Actions :' | translate}}</h4>
                 <!-- Number of action alert -->
                 <div class="alert alert-danger" *ngIf="riskToAdd.actions.length < 1" role="alert">
                   <div align-text="center">{{'Il faut ajouter plus qu une actions !' | translate}} </div>
@@ -216,17 +217,10 @@
                       </div>
                     </div>
 
-                    <!-- Comments field -->
-                    <div class="form-group">
-                      <label for="comments" class="required">{{'Commentaires' | translate}}</label>
-                      <textarea class="form-control" id="comments-add" name="comments"
-                        [(ngModel)]="actionToAdd.comments" rows="2" required> </textarea>
-                    </div>
-
                     <!-- Add Action button -->
                     <button id="add-action-btn" type="button" class="btn btn-secondary" data-toggle="modal"
                       (click)="addAction(actionToAdd.description, actionToAdd.effMeasCriterion, actionToAdd.openDate, actionToAdd.dueDate,
-                actionToAdd.updatedDueDate, actionToAdd.effMeasDate, actionToAdd.realizationDate, actionToAdd.responsibleAction, actionToAdd.ActionStatus, actionToAdd.priority, actionToAdd.typeAction, actionToAdd.origin, actionToAdd.comments)">
+                actionToAdd.updatedDueDate, actionToAdd.effMeasDate, actionToAdd.realizationDate, actionToAdd.responsibleAction, actionToAdd.ActionStatus, actionToAdd.priority, actionToAdd.typeAction, actionToAdd.origin)">
                       <i class="fa fa-plus"></i>
                     </button>
                     <!-- Action list section -->

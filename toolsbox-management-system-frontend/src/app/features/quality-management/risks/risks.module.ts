@@ -15,8 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AddActionsComponent } from './add-actions/add-actions.component';
 import { RiskHelpComponent } from './risk-help/risk-help.component';
-
-
+import {ChartModule} from 'primeng/chart';
 @NgModule({
   declarations: [RiskComponent, RiskDetailComponent, RiskListComponent, RiskUpdateComponent, RiskAddComponent, AddActionsComponent, RiskHelpComponent],
   imports: [
@@ -27,7 +26,8 @@ import { RiskHelpComponent } from './risk-help/risk-help.component';
     NgMultiSelectDropDownModule,
     NgbModule,
     TranslateModule,
-    ListboxModule
+    ListboxModule,
+    ChartModule
   ]
 })
 export class RisksModule { }

@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -207,43 +208,8 @@ public class Action implements Serializable {
 	 * 
 	 * @see Comment
 	 */
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private Set<Comment> comments;
-
-	
-
-	public Action() {
-		super();
-	}
-
-	public Action(Long id, String description, String effMeasCriterion, Date openDate, Date dueDate,
-			Date updatedDueDate, Date effMeasDate, Date realizationDate, User responsibleAction,
-			Set<Process> processImpacts, Gap gap, ActionStatus actionStatus, Priority priority, TypeAction typeAction,
-			Origin origin, Set<RiskAction> risks, User createdBy, User lastModifiedBy, Date createdAt, Date updatedAt,
-			Set<Comment> comments) {
-		super();
-		this.id = id;
-		this.description = description;
-		this.effMeasCriterion = effMeasCriterion;
-		this.openDate = openDate;
-		this.dueDate = dueDate;
-		this.updatedDueDate = updatedDueDate;
-		this.effMeasDate = effMeasDate;
-		this.realizationDate = realizationDate;
-		this.responsibleAction = responsibleAction;
-		this.processImpacts = processImpacts;
-		this.gap = gap;
-		this.actionStatus = actionStatus;
-		this.priority = priority;
-		this.typeAction = typeAction;
-		this.origin = origin;
-		this.risks = risks;
-		this.createdBy = createdBy;
-		this.lastModifiedBy = lastModifiedBy;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-		this.comments = comments;
-	}
 
 	/****** Getters and setters *****/
 

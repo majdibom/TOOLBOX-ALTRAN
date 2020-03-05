@@ -499,3 +499,9 @@
     background: #007EAF;
     border-radius:23px;
   }
+   /* Add button */
+.btn-add-add {
+    background: rgb(255, 255, 255);
+    border-radius:23px;
+  }
+  

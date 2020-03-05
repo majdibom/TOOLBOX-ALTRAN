@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Risk } from '@models/risk';
 import { RiskStatusLabel, RiskStatus } from '@models/risk-status';
 import { RiskNatureLabel, RiskNature } from '@models/risk-nature';
-import { ExposureLabel, Exposure } from '@models/exposure';
+import { ExposureTitle, ExposureTitleLabel } from '@models/exposure-title';
 import { ProbabilityLabel, Probability } from '@models/probability';
 
 @Component({
@@ -36,8 +36,8 @@ export class RiskListComponent implements OnInit {
   public riskProbabilityLabel = ProbabilityLabel;
   public riskProbabilityEnum = Object.values(Probability);
   // Exposure enum Label
-  public riskExposureLabel = ExposureLabel;
-  public riskExposureEnum = Object.values(Exposure);
+  public riskExposureTitleLabel = ExposureTitleLabel;
+  public riskExposureTitleEnum = Object.values(ExposureTitle);
   // Status enum Label
   public riskStatusLabel = RiskStatusLabel;
   public riskStatusEnum = Object.values(RiskStatus);
@@ -64,6 +64,7 @@ export class RiskListComponent implements OnInit {
   ngOnInit() {
     this.listRisks = [];
     this.reloadData();
+
 
     // Advanced search dropdown initialisation
     this.dropdownSettingsNatures = {
@@ -114,7 +115,7 @@ export class RiskListComponent implements OnInit {
     });
 
     this.dropdownListExposures = [];
-    this.riskExposureEnum.map(element => {
+    this.riskExposureTitleEnum.map(element => {
       this.dropdownListExposures.push({ id: element, title: element });
     });
 

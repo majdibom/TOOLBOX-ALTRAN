@@ -69,6 +69,8 @@ public class Comment implements Serializable {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createdAt;
 
+	/****** Getters and setters *****/
+
 	public Long getId() {
 		return id;
 	}
@@ -102,9 +104,4 @@ public class Comment implements Serializable {
 	}
 	
 	
-	/****** Getters and setters *****/
-
-	
-	
-
 }

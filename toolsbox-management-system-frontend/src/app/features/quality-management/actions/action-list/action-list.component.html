@@ -26,10 +26,9 @@
           <div class="col-6">
             <i class="fa fa-sliders"></i>&nbsp;
             <label>{{'Types:' | translate}}</label>
-            <ng-multiselect-dropdown id="types-multiselect-dropdown" class="form-select"
-              [placeholder]="'Types'" [data]="dropdownListTypes" [(ngModel)]="selectedTypes"
-              [settings]="dropdownSettingsTypes" (onSelect)="onItemSelect($event)"
-              (onSelectAll)="onSelectAll($event)">
+            <ng-multiselect-dropdown id="types-multiselect-dropdown" class="form-select" [placeholder]="'Types'"
+              [data]="dropdownListTypes" [(ngModel)]="selectedTypes" [settings]="dropdownSettingsTypes"
+              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
           </div>
         </div>
@@ -99,20 +98,25 @@
     <thead class="row-border hover">
       <tr>
         <th style="width: 2%;">{{'#' | translate}}</th>
-        <th style="width: 10%;">{{'Type' | translate}}</th>
-        <th style="width: 5%;" class="text-center">{{'Statut' | translate}}</th>
+        <th style="width: 25%;">{{'Description' | translate}}</th>
         <th style="width: 13%;">{{'Responsable' | translate}}</th>
         <th style="width: 10%;">{{'Origine' | translate}}</th>
+        <th style="width: 10%;">{{'Type' | translate}}</th>
         <th style="width: 10%;">{{'Date d ouverture' | translate}}</th>
         <th style="width: 12%;">{{'Date d échéance' | translate}}</th>
-        <th style="width: 25%;">{{'Description' | translate}}</th>
+        <th style="width: 5%;" class="text-center">{{'Statut' | translate}}</th>
         <th style="width: 20%;" class="text-center">{{'Actions' | translate}}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let action of listActions | paginate: { itemsPerPage: item, currentPage: p, totalItems: total }">
         <td>{{action.id}}</td>
+        <td>{{action.description}}</td>
+        <td>{{action.responsibleAction?.firstName}} {{action.responsibleAction?.lastName}}</td>
+        <td>{{action.origin}}</td>
         <td>{{action.typeAction}}</td>
+        <td>{{action.openDate | date:'dd/MM/yyyy'}}</td>
+        <td>{{action.dueDate  | date:'dd/MM/yyyy'}}</td>
         <td style="text-align: center;"><span *ngIf="action?.actionStatus == 'Open'" class="badge badge-primary"
             style="font-size: medium;">{{action?.actionStatus}}</span>
           <span *ngIf="action?.actionStatus == 'Closed'" class="badge badge-dark"
@@ -125,12 +129,6 @@
             style="font-size: medium;">{{action?.actionStatus}}</span>
           <span *ngIf="action?.actionStatus == 'Cancelled'" class="badge badge-secondary"
             style="font-size: medium;">{{action?.actionStatus}}</span></td>
-        <td>{{action.responsibleAction?.firstName}} {{action.responsibleAction?.lastName}}</td>
-        <td>{{action.origin}}</td>
-        <td>{{action.openDate | date:'dd/MM/yyyy'}}</td>
-        <td>{{action.dueDate  | date:'dd/MM/yyyy'}}</td>
-        <td>{{action.description}}</td>
-
         <td class="text-center">
           <button type="button" class="btn btn-detail" title="Afficher les details de cette action" data-toggle="modal"
             data-target="#detailsmodal" (click)="openDetails(action.id)"><i

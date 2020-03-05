@@ -11,7 +11,7 @@ import static com.altran.toolsbox.util.constant.ColumnConstants.Trés_Important;
 import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
 
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -28,6 +28,7 @@ import org.springframework.stereotype.Service;
 import com.altran.toolsbox.qualitymanagement.model.Action;
 import com.altran.toolsbox.qualitymanagement.model.Comment;
 import com.altran.toolsbox.qualitymanagement.model.Exposure;
+import com.altran.toolsbox.qualitymanagement.model.ExposureTitle;
 import com.altran.toolsbox.qualitymanagement.model.Probability;
 import com.altran.toolsbox.qualitymanagement.model.Risk;
 import com.altran.toolsbox.qualitymanagement.model.RiskAction;
@@ -39,6 +40,7 @@ import com.altran.toolsbox.qualitymanagement.model.searchfilter.RiskFilter;
 import com.altran.toolsbox.qualitymanagement.repository.RiskRepository;
 import com.altran.toolsbox.qualitymanagement.service.ActionService;
 import com.altran.toolsbox.qualitymanagement.service.CommentService;
+import com.altran.toolsbox.qualitymanagement.service.ExposureService;
 import com.altran.toolsbox.qualitymanagement.service.RiskActionService;
 import com.altran.toolsbox.qualitymanagement.service.RiskService;
 import com.altran.toolsbox.usermanagement.model.User;
@@ -63,10 +65,13 @@ public class RiskServiceImpl implements RiskService {
 
 	private CommentService commentService;
 
+	private ExposureService exposureService;
+
 	/**
 	 * Constructor of RiskServiceImpl
 	 * 
-	 * @param riskRepository the repository of risk
+	 * @param riskRepository
+	 *            the repository of risk
 	 */
 	@Autowired
 	public RiskServiceImpl(RiskRepository riskRepository) {
@@ -76,7 +81,8 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Changes action service.
 	 * 
-	 * @param actionService action service.
+	 * @param actionService
+	 *            action service.
 	 */
 	@Autowired
 	public void setActionService(ActionService actionService) {
@@ -86,7 +92,8 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Changes risk action service.
 	 * 
-	 * @param riskActionService risk action service.
+	 * @param riskActionService
+	 *            risk action service.
 	 */
 	@Autowired
 	public void setRiskActionService(RiskActionService riskActionService) {
@@ -96,11 +103,23 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Changes comment service.
 	 * 
-	 * @param commentService comment service.
+	 * @param commentService
+	 *            comment service.
 	 */
 	@Autowired
-	public void setcommentService(CommentService commentService) {
+	public void setCommentService(CommentService commentService) {
 		this.commentService = commentService;
+	}
+
+	/**
+	 * Changes exposure service.
+	 * 
+	 * @param exposureService
+	 *            exposure service.
+	 */
+	@Autowired
+	public void setExposureService(ExposureService exposureService) {
+		this.exposureService = exposureService;
 	}
 
 	/**
@@ -125,9 +144,11 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * gets one risk by his id
 	 * 
-	 * @param id the id of the risk
+	 * @param id
+	 *            the id of the risk
 	 * @return risk object with the same id
-	 * @throws NoSuchElementException if no element is present with such ID
+	 * @throws NoSuchElementException
+	 *             if no element is present with such ID
 	 */
 	@Override
 	public Risk findById(Long id) {
@@ -142,10 +163,11 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Creates a new risk
 	 * 
-	 * @param risk the risk to create
+	 * @param risk
+	 *            the risk to create
 	 * @return the created risk
-	 * @throws EntityExistsException if there is already existing entity with such
-	 *                               ID
+	 * @throws EntityExistsException
+	 *             if there is already existing entity with such ID
 	 */
 	@Override
 	public Risk create(Risk risk) {
@@ -155,7 +177,9 @@ public class RiskServiceImpl implements RiskService {
 		 * new EntityExistsException(ENTITY_EXIST); }
 		 */
 		// Calculate the exposure for the created risk
-		risk = calculeExposure(risk);
+		Set<Exposure> exposures = new HashSet<>();
+		exposures.add(calculeExposure(risk));
+		risk.setExposures(exposures);
 		// New risk has "Open" status
 		risk.setRiskStatus(RiskStatus.Open);
 		// Create the risk
@@ -164,7 +188,9 @@ public class RiskServiceImpl implements RiskService {
 			Set<RiskAction> riskActions = risk.getActions();
 			// Save every action in database and add it to created action list
 			for (RiskAction riskAction : riskActions) {
-				Action createdAction = actionService.create(riskAction.getAction());
+				Action createdAction = riskAction.getAction();
+				createdAction.setCreatedBy(createdRisk.getCreatedBy());
+				createdAction = actionService.create(riskAction.getAction());
 				riskAction.setAction(createdAction);
 				riskAction.setRisk(createdRisk);
 				riskActionService.create(riskAction);
@@ -179,35 +205,38 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Updates one risk
 	 * 
-	 * @param id   the id of the risk
-	 * @param risk the new risk object with the new values
+	 * @param id
+	 *            the id of the risk
+	 * @param risk
+	 *            the new risk object with the new values
 	 * @return the updated risk
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public Risk update(Risk risk, Long id) {
+		System.err.println("exposures");
+
 		if (id != null && !riskRepository.existsById(id)) {
 			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		risk.setId(id);
+		// Get the old risk to get his exposures
+		Risk oldrisk = findById(id);
 		// Calculate the exposure for the created risk
-		risk = calculeExposure(risk);
-		// get the same create date as the old action(Fix null problem)
-		Risk oldRisk = findById(id);
-		Date createdDate = oldRisk.getCreatedAt();
-		risk.setCreatedAt(createdDate);
-		// get the same createdBy as the old action(Fix null problem)
-		User createdBy = oldRisk.getCreatedBy();
-		risk.setCreatedBy(createdBy);
-
+		Set<Exposure> exposures = oldrisk.getExposures();
+		exposures.add(calculeExposure(risk));
+		risk.setExposures(exposures);
 		return riskRepository.save(risk);
 	}
 
 	/**
 	 * Deletes one risk
 	 * 
-	 * @param id the of the deleted risk
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param id
+	 *            the of the deleted risk
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public void delete(Long id) {
@@ -220,8 +249,10 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Deletes one action From Risk
 	 * 
-	 * @param the id of the deleted action
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param the
+	 *            id of the deleted action
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public void deleteActionFromRisk(RiskActionId riskActionId) {
@@ -234,33 +265,37 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Calculate the exposure (probability * severity)
 	 * 
-	 * @param probability the probability of the risk
-	 * @param severity    the severity of the risk
+	 * @param probability
+	 *            the probability of the risk
+	 * @param severity
+	 *            the severity of the risk
 	 * @return the exposure of the risk
 	 */
 	@Override
-	public Risk calculeExposure(Risk risk) {
+	public Exposure calculeExposure(Risk risk) {
 		Probability probability = risk.getProbability();
 		Severity severity = risk.getSeverity();
+
+		Exposure exposure = new Exposure();
 
 		switch (probability.name()) {
 		case (Faible):
 			switch (severity.name()) {
 			case (Mineur):
-				risk.setExposure(Exposure.Acceptable);
-				risk.setExposureValue(1);
+				exposure.setTitle(ExposureTitle.Acceptable);
+				exposure.setValue(1);
 				break;
 			case (Moyen):
-				risk.setExposure(Exposure.Acceptable);
-				risk.setExposureValue(2);
+				exposure.setTitle(ExposureTitle.Acceptable);
+				exposure.setValue(2);
 				break;
 			case (Important):
-				risk.setExposure(Exposure.Acceptable);
-				risk.setExposureValue(3);
+				exposure.setTitle(ExposureTitle.Acceptable);
+				exposure.setValue(3);
 				break;
 			case (Trés_Important):
-				risk.setExposure(Exposure.A_surveiller);
-				risk.setExposureValue(4);
+				exposure.setTitle(ExposureTitle.A_surveiller);
+				exposure.setValue(4);
 				break;
 			default:
 				break;
@@ -269,20 +304,20 @@ public class RiskServiceImpl implements RiskService {
 		case (Moyenne):
 			switch (severity.name()) {
 			case (Mineur):
-				risk.setExposure(Exposure.Acceptable);
-				risk.setExposureValue(2);
+				exposure.setTitle(ExposureTitle.Acceptable);
+				exposure.setValue(2);
 				break;
 			case (Moyen):
-				risk.setExposure(Exposure.A_surveiller);
-				risk.setExposureValue(4);
+				exposure.setTitle(ExposureTitle.A_surveiller);
+				exposure.setValue(4);
 				break;
 			case (Important):
-				risk.setExposure(Exposure.A_surveiller);
-				risk.setExposureValue(6);
+				exposure.setTitle(ExposureTitle.A_surveiller);
+				exposure.setValue(6);
 				break;
 			case (Trés_Important):
-				risk.setExposure(Exposure.Trés_critique);
-				risk.setExposureValue(8);
+				exposure.setTitle(ExposureTitle.Trés_critique);
+				exposure.setValue(8);
 				break;
 			default:
 				break;
@@ -291,20 +326,20 @@ public class RiskServiceImpl implements RiskService {
 		case (Très_probable):
 			switch (severity.name()) {
 			case (Mineur):
-				risk.setExposure(Exposure.Acceptable);
-				risk.setExposureValue(3);
+				exposure.setTitle(ExposureTitle.Acceptable);
+				exposure.setValue(3);
 				break;
 			case (Moyen):
-				risk.setExposure(Exposure.A_surveiller);
-				risk.setExposureValue(6);
+				exposure.setTitle(ExposureTitle.A_surveiller);
+				exposure.setValue(6);
 				break;
 			case (Important):
-				risk.setExposure(Exposure.Trés_critique);
-				risk.setExposureValue(9);
+				exposure.setTitle(ExposureTitle.Trés_critique);
+				exposure.setValue(9);
 				break;
 			case (Trés_Important):
-				risk.setExposure(Exposure.Trés_critique);
-				risk.setExposureValue(12);
+				exposure.setTitle(ExposureTitle.Trés_critique);
+				exposure.setValue(12);
 				break;
 			default:
 				break;
@@ -313,20 +348,20 @@ public class RiskServiceImpl implements RiskService {
 		case (Presque_sur):
 			switch (severity.name()) {
 			case (Mineur):
-				risk.setExposure(Exposure.A_surveiller);
-				risk.setExposureValue(4);
+				exposure.setTitle(ExposureTitle.A_surveiller);
+				exposure.setValue(4);
 				break;
 			case (Moyen):
-				risk.setExposure(Exposure.Trés_critique);
-				risk.setExposureValue(8);
+				exposure.setTitle(ExposureTitle.Trés_critique);
+				exposure.setValue(8);
 				break;
 			case (Important):
-				risk.setExposure(Exposure.Trés_critique);
-				risk.setExposureValue(12);
+				exposure.setTitle(ExposureTitle.Trés_critique);
+				exposure.setValue(12);
 				break;
 			case (Trés_Important):
-				risk.setExposure(Exposure.Trés_critique);
-				risk.setExposureValue(16);
+				exposure.setTitle(ExposureTitle.Trés_critique);
+				exposure.setValue(16);
 				break;
 			default:
 				break;
@@ -335,7 +370,8 @@ public class RiskServiceImpl implements RiskService {
 		default:
 			break;
 		}
-		return risk;
+		Exposure createdExposure = exposureService.create(exposure);
+		return createdExposure;
 	}
 
 	@Override
@@ -347,8 +383,10 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Searches for risks by one term
 	 * 
-	 * @param term     the term to base search on it
-	 * @param pageable pagination information
+	 * @param term
+	 *            the term to base search on it
+	 * @param pageable
+	 *            pagination information
 	 * @return list of risks contains the input term by page
 	 */
 	@Override
@@ -359,8 +397,10 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * Searches for risks by multiple terms
 	 *
-	 * @param riskFilter risk filter object with list of advanced search criteria
-	 * @param pagination information
+	 * @param riskFilter
+	 *            risk filter object with list of advanced search criteria
+	 * @param pagination
+	 *            information
 	 */
 	@Override
 	public Page<Risk> advancedSearch(RiskFilter riskFilter, Pageable pageable) {
@@ -384,15 +424,18 @@ public class RiskServiceImpl implements RiskService {
 		if (status.isEmpty()) {
 			status = null;
 		}
-		return riskRepository.advancedSearch(probabilities, riskNatures, exposures, status, pageable);
+		return riskRepository.advancedSearch(probabilities, riskNatures, status, pageable);
 	}
 
 	/**
 	 * add comment to one risk
 	 * 
-	 * @param id      the id of risk
-	 * @param Comment the comment object
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param id
+	 *            the id of risk
+	 * @param Comment
+	 *            the comment object
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public Comment addComment(Long id, Comment comment) {
@@ -409,8 +452,10 @@ public class RiskServiceImpl implements RiskService {
 	/**
 	 * delete comment from action
 	 * 
-	 * @param Comment the comment object
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param Comment
+	 *            the comment object
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public void deleteComment(Long id, Comment comment) {

@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -19,10 +20,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -94,15 +95,11 @@ public class Risk implements Serializable {
 	private Severity severity;
 
 	/**
-	 * The Exposure of this risk.
+	 * The Exposure of this risk (list with the new and old exposures).
 	 */
-	@Enumerated(EnumType.STRING)
-	private Exposure exposure;
-
-	/**
-	 * The Exposure value (probability * severity) of this risk.
-	 */
-	private int exposureValue;
+	@OneToMany(cascade = CascadeType.REMOVE)
+	@OrderBy("createdAt ASC")
+	private Set<Exposure> exposures;
 
 	/**
 	 * The status of this risk.
@@ -169,16 +166,6 @@ public class Risk implements Serializable {
 	private Date createdAt;
 
 	/**
-	 * The last user modified this Action.
-	 * 
-	 * @see User
-	 */
-	@ManyToOne(fetch = FetchType.EAGER)
-	@LastModifiedBy
-	@JoinColumn(name = "Last_Modified_By ", nullable = true, foreignKey = @ForeignKey(name = "FK_LAST_MODIFIED_BY "))
-	private User lastModifiedBy;
-
-	/**
 	 * The last modified date of this Action.
 	 */
 	@Column
@@ -191,7 +178,7 @@ public class Risk implements Serializable {
 	 * 
 	 * @see Comment
 	 */
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private Set<Comment> comments;
 
 	/****** Getters and setters *****/
@@ -252,20 +239,12 @@ public class Risk implements Serializable {
 		this.severity = severity;
 	}
 
-	public Exposure getExposure() {
-		return exposure;
+	public Set<Exposure> getExposures() {
+		return exposures;
 	}
 
-	public void setExposure(Exposure exposure) {
-		this.exposure = exposure;
-	}
-
-	public int getExposureValue() {
-		return exposureValue;
-	}
-
-	public void setExposureValue(int exposureValue) {
-		this.exposureValue = exposureValue;
+	public void setExposures(Set<Exposure> exposures) {
+		this.exposures = exposures;
 	}
 
 	public RiskStatus getRiskStatus() {
@@ -358,14 +337,6 @@ public class Risk implements Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-
-	public User getLastModifiedBy() {
-		return lastModifiedBy;
-	}
-
-	public void setLastModifiedBy(User lastModifiedBy) {
-		this.lastModifiedBy = lastModifiedBy;
 	}
 
 	public Set<Comment> getComments() {

@@ -2,7 +2,6 @@
   <h3>{{'Détails du Risque : #' | translate}}{{risk?.id}}</h3>
 </div>
 <div class="content">
-
   <div class="row">
     <div class="col-lg-4">
       <div class="profile-card-4 z-depth-3">
@@ -37,14 +36,23 @@
                 <div class="list-icon">
                   <i class="fa fa-arrows-v" aria-hidden="true"></i>
                 </div>
-                <div class="list-details">
+                <div class="list-details" *ngFor="let exposure of risk?.exposures | slice: risk.exposures.length-1">
                   <span style="font-size: medium;">{{'Criticité' | translate}}: </span>&nbsp;&nbsp;
-                  <span *ngIf="risk?.exposure == 'Acceptable'" class="badge badge-secondary"
-                    style="font-size: medium;">{{risk?.exposure}}</span>
-                  <span *ngIf="risk?.exposure == 'A_surveiller'" class="badge badge-info"
-                    style="font-size: medium;">{{risk?.exposure}}</span>
-                  <span *ngIf="risk?.exposure == 'Trés_critique'" class="badge badge-warning"
-                    style="font-size: medium;">{{risk?.exposure}}</span>
+                  <span *ngIf="exposure.title == 'Acceptable'" class="badge badge-success"
+                    style="font-size: medium;">{{exposure.title}}</span>
+                  <span *ngIf="exposure.title == 'A_surveiller'" class="badge badge-warning"
+                    style="font-size: medium;">{{exposure.title}}</span>
+                  <span *ngIf="exposure.title == 'Trés_critique'" class="badge badge-danger"
+                    style="font-size: medium;">{{exposure.title}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-arrows-v" aria-hidden="true"></i>
+                </div>
+                <div class="list-details" *ngFor="let value of risk?.exposures | slice: risk.exposures.length-1">
+                  <span style="font-size: medium;">{{'Valeur de criticité' | translate}}: </span>&nbsp;&nbsp;<span
+                    style="font-size: medium;">{{value.value}}</span>
                 </div>
               </li>
               <li class="list-group-item">
@@ -108,10 +116,10 @@
         </div>
       </div>
     </div>
-
     <div class="col-lg-8">
-      <div class="card z-depth-3">
-        <div class="card-body">
+      <!-- Chart section -->
+      <div class="profile-card-4 z-depth-3">
+        <div class="card">
           <ul class="nav nav-pills nav-pills-primary nav-justified">
             <!-- Details menu -->
             <li class="nav-item">
@@ -125,25 +133,22 @@
               <div class="card-body text-center bg-altran rounded-top">
                 <h6 class="text-light">{{'Date de création' | translate}}:</h6>
                 <h5 class="text-light" style="font-size: 20px">{{risk?.createdAt |
-                    date:'dd/MM/yyyy'}}</h5>
+                  date:'dd/MM/yyyy'}}</h5>
               </div>
             </li>
             <li class="nav-item">
               <div class="card-body text-center bg-altran rounded-top">
                 <h6 class="text-light">{{'Date de mise à jour' | translate}}:</h6>
                 <h5 class="text-light" style="font-size: 20px">{{risk?.updatedAt |
-                    date:'dd/MM/yyyy'}}</h5>
+                  date:'dd/MM/yyyy'}}</h5>
               </div>
             </li>
-
           </ul>
           <div class="tab-content p-3">
             <!-- Details section -->
             <div class="tab-pane active show" id="detail">
               <h5 class="mb-3"></h5>
               <div class="row">
-
-
               </div>
               <!-- Interviews information section -->
               <div class="tab-pane" id="quizzes">
@@ -159,12 +164,40 @@
                         </h5>
                       </li>
                       <li class="list-group-item">
-                        <h5><strong>{{'Actions :'| translate}}</strong>
-                          <button type="button" id="add-risk-btn" class="btn btn-primary btn-add"
-                            title="Afficher les actions" data-toggle="modal" data-target="#addActionsModal"
-                            (click)="openActionsListModal(risk?.id)" style="float:right;">
-                            <i class="fa fa-plus-circle fa-lg"></i>&nbsp;Add Actions</button></h5>
-
+                        <h5><strong>{{'Suivie de la Criticité :' | translate}}</strong></h5>
+                        <p-chart type="line" [data]="data"></p-chart>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>&nbsp;&nbsp;
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="profile-card-4 z-depth-3">
+        <div class="card">
+          <div class="card-body text-center bg-altran rounded-top">
+            <h5 class="mb-1 text-white">
+              <strong>{{'Actions '| translate}}</strong>
+              <button type="button" id="add-risk-btn" class="btn btn-primary btn-add-add" title="Afficher les actions"
+                data-toggle="modal" data-target="#addActionsModal" (click)="openActionsListModal(risk?.id)"
+                style="float:right; color: #007EAF;">
+                <i class="fa fa-plus-circle fa-lg"></i>&nbsp;Add Actions</button></h5>
+          </div>
+          <div class="tab-content p-3">
+            <!-- Details section -->
+            <div class="tab-pane active show" id="detail">
+              <!-- Interviews information section -->
+              <div class="tab-pane" id="quizzes">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
                       </li>
                     </ul>
                     <!-- Actions list Table -->
@@ -198,7 +231,8 @@
                       <!-- No data in table message-->
                       <div *ngIf="risk?.actions?.length==0">
                         <div class="nodata-box">
-                          <div class="nodata-text" id="no-data-available">{{'Aucune donnée trouvée.' | translate}}</div>
+                          <div class="nodata-text" id="no-data-available">{{'Aucune donnée trouvée.' | translate}}
+                          </div>
                         </div>
                       </div>
 
@@ -211,5 +245,8 @@
         </div>
       </div>
     </div>
-    <!-- Actions Table -->
-    <app-add-actions [riskToEdit]="editRisk" (reloadEvent)="reloadData()"></app-add-actions>
+  </div>
+</div>
+
+<!-- Actions Table -->
+<app-add-actions [riskToEdit]="editRisk" (reloadEvent)="reloadData()"></app-add-actions>

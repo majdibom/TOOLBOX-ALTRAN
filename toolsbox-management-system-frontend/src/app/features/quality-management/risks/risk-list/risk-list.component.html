@@ -116,14 +116,14 @@
         <td>{{risk.id}}</td>
         <td>{{risk.probability}}</td>
         <td>{{risk.severity}}</td>
-        <td style="text-align: center;">
-          <span *ngIf="risk?.exposure == 'Acceptable'" class="badge badge-success"
-            style="font-size: medium;">{{risk?.exposure}}</span>
-          <span *ngIf="risk?.exposure == 'A_surveiller'" class="badge badge-warning"
-            style="font-size: medium;">{{risk?.exposure}}</span>
-          <span *ngIf="risk?.exposure == 'Trés_critique'" class="badge badge-danger"
-            style="font-size: medium;">{{risk?.exposure}}</span></td>
-        <td style="text-align: center;">{{risk.exposureValue}}</td>
+        <td style="text-align: center;" *ngFor="let exposure of risk.exposures | slice: risk.exposures.length-1">
+          <span *ngIf="exposure.title == 'Acceptable'" class="badge badge-success"
+            style="font-size: medium;">{{exposure.title}}</span>
+          <span *ngIf="exposure.title == 'A_surveiller'" class="badge badge-warning"
+            style="font-size: medium;">{{exposure.title}}</span>
+          <span *ngIf="exposure.title == 'Trés_critique'" class="badge badge-danger"
+            style="font-size: medium;">{{exposure.title}}</span></td>
+        <td style="text-align: center;" *ngFor="let value of risk?.exposures | slice: risk.exposures.length-1">{{value.value}}</td>
         <td style="text-align: center;">
           <span *ngIf="risk?.riskStatus == 'Open'" class="badge badge-primary"
             style="font-size: medium;">{{risk?.riskStatus}}</span>

@@ -115,7 +115,7 @@ export class RiskAddComponent implements OnInit {
 
   /**Add action */
   addAction(description: any, effMeasCriterion: any, openDate: any, dueDate: any,
-    updatedDueDate: any, effMeasDate: any, realizationDate: any, responsibleAction: any, ActionStatus: any, priority: any, typeAction: any, origin: any, comments: any) {
+    updatedDueDate: any, effMeasDate: any, realizationDate: any, responsibleAction: any, ActionStatus: any, priority: any, typeAction: any, origin: any) {
     const action = {
       description: description,
       effMeasCriterion: effMeasCriterion,
@@ -129,7 +129,6 @@ export class RiskAddComponent implements OnInit {
       responsibleAction: responsibleAction,
       typeAction: typeAction,
       origin: origin,
-      comments: comments
     };
     this.riskActiontoAdd = new RiskAction();
     this.riskActiontoAdd.action = action;

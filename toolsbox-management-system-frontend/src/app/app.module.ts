@@ -14,6 +14,7 @@ import { AuthenticationComponent } from './authentication/authentication/authent
 import { AuthenticationAlertComponent } from './authentication/authentication-alert/authentication-alert.component';
 import { NotFoundComponent } from './core/errors/not-found/not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 // import ngx-translate and the http loader
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     FormsModule,
+    ChartsModule,
     ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {

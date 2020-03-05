@@ -5,7 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PageClient } from '@models/page-client';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
-
+import { Chart } from 'chart.js';
+import { ChartModule } from 'primeng/chart';
 
 @Component({
   selector: 'app-risk-detail',
@@ -19,10 +20,11 @@ export class RiskDetailComponent implements OnInit {
   risk: Risk = new Risk();
   // Risk to edit
   editRisk: Risk = new Risk();
-  
-
+  //Array of the chart
+  ids: Array<number> = [];
+  name: Array<String> = [];
+  data: any;
   constructor(private route: ActivatedRoute, private genericService: GenericService, private router: Router) { }
-
   ngOnInit() {
     this.reloadData();
   }
@@ -32,11 +34,13 @@ export class RiskDetailComponent implements OnInit {
     this.getRisk();
   }
 
+
   /** Get Risk detail */
   getRisk() {
     this.idRisk = this.route.snapshot.params.id;
     this.genericService.getGenericById('/risks', this.idRisk).subscribe(data => {
       this.risk = data.value;
+      this.createChart();
     });
   }
 
@@ -44,6 +48,23 @@ export class RiskDetailComponent implements OnInit {
   openDetails(id: number) {
     this.router.navigate(['quality-management/actions/action-detail', id]);
   }
+
+  createChart() {
+    for (let a of this.risk.exposures) {
+      this.ids.push(a.value);
+      this.name.push(a.createdAt);
+    }
+    this.data = {
+      labels: this.name,
+      datasets: [
+        {
+          label: 'Criticité',
+          data: this.ids
+        }
+      ]
+    }
+  }
+
 
   /** Open action detail component */
   openActionsListModal(idRisk: number) {
@@ -99,5 +120,6 @@ export class RiskDetailComponent implements OnInit {
   selectedPage = 0;
   item = 5;
   searchInput: String = '';
+
 
 }
