@@ -35,15 +35,7 @@
         </div>
         <br>
         <div class="row">
-          <!-- Exposures List -->
-          <div class="col-6">
-            <i class="fa fa-arrows-v"></i>&nbsp;
-            <label>{{'Criticité:' | translate}}</label>
-            <ng-multiselect-dropdown id="exposures-multiselect-dropdown" class="form-select" [placeholder]="'Criticité'"
-              [data]="dropdownListExposures" [(ngModel)]="selectedExposures" [settings]="dropdownSettingsExposures"
-              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-            </ng-multiselect-dropdown>
-          </div>
+          
           <!-- Status List -->
           <div class="col-6">
             <i class="fa fa-thumb-tack"></i>&nbsp;

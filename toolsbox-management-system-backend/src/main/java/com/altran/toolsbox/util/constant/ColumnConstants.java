@@ -122,6 +122,7 @@ public final class ColumnConstants {
 	public static final String IMPACT = "impact";
 	public static final String IDENTOFFACTORS = "Identoffactors";
 	public static final String EXPOSUREVALUE = "exposureValue";
+	public static final String EXPOSURES = "exposures";
 
 
 	// Probability

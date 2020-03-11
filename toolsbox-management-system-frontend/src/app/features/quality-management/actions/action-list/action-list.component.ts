@@ -65,7 +65,8 @@ export class ActionListComponent implements OnInit {
   ngOnInit() {
     this.listActions = [];
     this.reloadData();
-
+    
+    
     // Advanced search dropdown initialisation
     this.dropdownSettingsStatus = {
       singleSelection: false,
@@ -140,6 +141,7 @@ export class ActionListComponent implements OnInit {
           this.total = this.pageClient.totalElements;
           this.listActions = this.pageClient.content;
         });
+       
   }
 
   /** Open action detail component */

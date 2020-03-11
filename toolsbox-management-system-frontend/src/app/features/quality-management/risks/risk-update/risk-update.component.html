@@ -95,6 +95,61 @@
             <textarea class="form-control" id="impact-add" name="impact" [(ngModel)]="riskToEdit.impact" rows="1"
               required> </textarea>
           </div>
+          <!-- Cost field -->
+          <div class="form-row">
+            <div class="form-group  col-md-6">
+              <label for="cost" class="required">{{'Coût' | translate}}</label>
+              <select id="cost" (change)="parseValue($event.target.value)" name="cost" class="form-control"
+                [(ngModel)]="riskToEdit.cost" required>
+                <option *ngFor="let Cost of listOfCost" [value]="Cost">{{Cost}}</option>
+              </select>
+            </div>
+
+            <!-- Delay field -->
+            <div class="form-group  col-md-6">
+              <label for="delay" class="required">{{'Retard' | translate}}</label>
+              <select id="delay" (change)="parseValue($event.target.value)" name="delay" class="form-control"
+                [(ngModel)]="riskToEdit.delay" required>
+                <option *ngFor="let Delay of listOfDelay" [value]="Delay">{{Delay}}</option>
+              </select>
+            </div>
+
+            <!-- Satisfaction field -->
+            <div class="form-group  col-md-6">
+              <label for="satisfaction" class="required">{{'Satisfaction' | translate}}</label>
+              <select id="satisfaction" (change)="parseValue($event.target.value)" name="satisfaction"
+                class="form-control" [(ngModel)]="riskToEdit.satisfaction" required>
+                <option *ngFor="let Satisfaction of listOfSatisfaction" [value]="Satisfaction">{{Satisfaction}}</option>
+              </select>
+            </div>
+            <!-- Non Conformity field -->
+            <div class="form-group  col-md-6">
+              <label for="nonConformity" class="required">{{'Non Conformité' | translate}}</label>
+              <select id="nonConformity" (change)="parseValue($event.target.value)" name="nonConformity"
+                class="form-control" [(ngModel)]="riskToEdit.nonConformity" required>
+                <option *ngFor="let NonConformity of listOfNonConformity" [value]="NonConformity">{{NonConformity}}
+                </option>
+              </select>
+            </div>
+            <!-- Frequency field -->
+            <div class="form-group  col-md-6">
+              <label for="frequency" class="required">{{'Frequence' | translate}}</label>
+              <select id="frequency" (change)="parseValue($event.target.value)" name="frequency" class="form-control"
+                [(ngModel)]="riskToEdit.frequency" required>
+                <option *ngFor="let Frequency of listOfFrequency" [ngValue]="Frequency">{{Frequency}}
+                </option>
+              </select>
+            </div>
+            <!-- Risk Origin field -->
+            <div class="form-group  col-md-6">
+              <label for="riskOrigin" class="required">{{'Origine du risque' | translate}}</label>
+              <select id="riskOrigin" (change)="parseValue($event.target.value)" name="riskOrigin" class="form-control"
+                [(ngModel)]="riskToEdit.riskOrigin" required>
+                <option *ngFor="let RiskOrigin of listOfRiskOrigin" [ngValue]="RiskOrigin">{{RiskOrigin}}
+                </option>
+              </select>
+            </div>
+          </div>
           <!-- Identoffactors field -->
           <div class="form-group">
             <label for="factorsIdentif" class="required">{{'Identification des facteurs  +/-' | translate}}</label>

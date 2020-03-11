@@ -48,7 +48,7 @@ export class RiskDetailComponent implements OnInit {
   openDetails(id: number) {
     this.router.navigate(['quality-management/actions/action-detail', id]);
   }
-
+  /** Create chart method */
   createChart() {
     for (let a of this.risk.exposures) {
       this.ids.push(a.value);
@@ -59,14 +59,16 @@ export class RiskDetailComponent implements OnInit {
       datasets: [
         {
           label: 'Criticité',
-          data: this.ids
+          data: this.ids,
+          fill: false,
+          borderColor: '#007EAF'
         }
       ]
     }
   }
 
 
-  /** Open action detail component */
+  /** Open risk detail component */
   openActionsListModal(idRisk: number) {
     this.genericService.getGenericById('/risks', idRisk).subscribe(data => {
       if (data.error === false) {

@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 /**
  * Represents Audits
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Entity

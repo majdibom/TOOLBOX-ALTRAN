@@ -70,8 +70,6 @@
                   </option>
                 </select>
               </div>
-
-
             </div>
             <div class="form-row">
               <!-- detectionDate field -->
@@ -93,6 +91,65 @@
               <label for="impact" class="required">{{'Impact' | translate}}</label>
               <textarea class="form-control" id="impact-add" name="impact" [(ngModel)]="riskToAdd.impact" rows="1"
                 required> </textarea>
+            </div>
+            <div class="form-row">
+              <!-- Satisfaction field -->
+              <div class="form-group col-md-4">
+                <label for="satisfaction" class="required">{{'Satisfaction' | translate}}</label>
+                <select id="satisfaction-add" name="riskSatisfaction" class="form-control"
+                  [(ngModel)]="riskToAdd.satisfaction" required>
+                  <option *ngFor="let satisfaction of satisfactionEnum" [value]="satisfaction">
+                    {{satisfactionLabel[satisfaction]}}
+                  </option>
+                </select>
+              </div>
+              <!-- Cost field -->
+              <div class="form-group col-md-4">
+                <label for="cost" class="required">{{'Coût' | translate}}</label>
+                <select id="cost-add" name="riskCost" class="form-control" [(ngModel)]="riskToAdd.cost" required>
+                  <option *ngFor="let cost of costEnum" [value]="cost">
+                    {{costLabel[cost]}}
+                  </option>
+                </select>
+              </div>
+              <!-- Delay field -->
+              <div class="form-group col-md-4">
+                <label for="delay" class="required">{{'Retard' | translate}}</label>
+                <select id="delay-add" name="RiskDelay" class="form-control" [(ngModel)]="riskToAdd.delay" required>
+                  <option *ngFor="let delay of delayEnum" [value]="delay">
+                    {{delayLabel[delay]}}
+                  </option>
+                </select>
+              </div>
+              <!-- NonConformity field -->
+              <div class="form-group col-md-3">
+                <label for="nonConformity" class="required">{{'Non Conformité' | translate}}</label>
+                <select id="nonConformity-add" name="riskNonConformity" class="form-control"
+                  [(ngModel)]="riskToAdd.nonConformity" required>
+                  <option *ngFor="let nonConformity of nonConformityEnum" [value]="nonConformity">
+                    {{nonConformityLabel[nonConformity]}}
+                  </option>
+                </select>
+              </div>
+              <!-- Frequency field -->
+              <div class="form-group col-md-3">
+                <label for="frequency" class="required">{{'Fréquence' | translate}}</label>
+                <select id="frequency-add" name="riskfrequency" class="form-control" [(ngModel)]="riskToAdd.frequency"
+                  required>
+                  <option *ngFor="let frequency of frequencyEnum" [value]="frequency">
+                    {{frequencyLabel[frequency]}}
+                  </option>
+                </select>
+              </div>
+              <!-- Risk Origin field -->
+              <div class="form-group col-md-4">
+                <label for="riskOrigin" class="required">{{'Origin du risque' | translate}}</label>
+                <select id="riskOrigin-add" name="riskOrigin" class="form-control" [(ngModel)]="riskToAdd.riskOrigin" required>
+                  <option *ngFor="let riskOrigin of riskOriginEnum" [value]="riskOrigin">
+                    {{riskOriginLabel[riskOrigin]}}
+                  </option>
+                </select>
+              </div>
             </div>
             <!-- factorsIdentif field -->
             <div class="form-group">

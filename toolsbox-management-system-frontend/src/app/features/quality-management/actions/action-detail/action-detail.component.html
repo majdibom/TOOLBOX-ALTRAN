@@ -160,8 +160,8 @@
                                 <div class="col-lg-10">
                                   <fieldset>
                                     <div class="form-group">
-                                      <input type="text" class="form-control" id="message" name="message" placeholder="Your comment"
-                                        [(ngModel)]="commentToAdd.message">
+                                      <input type="text" class="form-control" id="message" name="message"
+                                        placeholder="Your comment" [(ngModel)]="commentToAdd.message">
                                     </div>
                                   </fieldset>
                                 </div>
@@ -174,16 +174,6 @@
                         </div>
                       </div>&nbsp;&nbsp;
                       <!-- COMMENT  - START -->
-                      <!-- <div class="media">
-                        <div class="media-body">
-                          <h4 class="media-heading">
-                            {{action?.createdBy?.firstName}}&nbsp;{{action?.createdBy?.lastName}}</h4>
-                          <p>{{action?.comments}}</p>
-                          <ul class="list-unstyled list-inline media-detail pull-left">
-                            <li><i class="fa fa-calendar"></i>{{action?.createdAt}}</li>
-                          </ul>
-                        </div>
-                      </div> -->
                       <div *ngFor="let comment of action?.comments">
                         <div class="comment-wrap">
                           <div class="comment-block">
@@ -199,7 +189,6 @@
                           </div>
                         </div>
                       </div>
-                      <!-- <h5><strong>{{'Commentaires' | translate}} :</strong>&nbsp;&nbsp;{{action?.comments}}</h5> -->
                     </li>
                   </ul>
                 </div>

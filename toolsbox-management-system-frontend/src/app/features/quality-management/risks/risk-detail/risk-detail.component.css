@@ -90,7 +90,7 @@
 .profile-card-4 .list-icon {
     display: table-cell;
     font-size: 27px;
-    padding-right: 20px;
+    padding-right: 15px;
     vertical-align: middle;
     color: #223035;
 }
@@ -504,4 +504,21 @@
     background: rgb(255, 255, 255);
     border-radius:23px;
   }
-  
+  .li-1{
+      display: inline;
+  }
+  .li-1:first-child{
+      margin-right: 10px;
+  }
+  .li-2{
+    display: inline;
+}
+.li-2:first-child{
+    margin-right: 10px;
+}
+  /* .separat{
+      border: 2px solid #000;
+      height:50px;
+      width:5px;
+  }
+   */

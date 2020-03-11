@@ -13,6 +13,12 @@ import { OriginLabel, Origin } from '@models/origin';
 import { RiskNatureLabel, RiskNature } from '@models/risk-nature';
 import { RiskAction } from '@models/risk-Action';
 import { RiskStrategyLabel, RiskStrategy } from '@models/risk-strategy';
+import { Cost, CostLabel } from '@models/cost';
+import { Delay, DelayLabel } from '@models/delay';
+import { Frequency, FrequencyLabel } from '@models/frequency';
+import { NonConformityLabel, NonConformity } from '@models/nonConformity';
+import { SatisfactionLabel, Satisfaction } from '@models/satisfaction';
+import { RiskOriginLabel, RiskOrigin } from '@models/risk-Origin';
 
 
 
@@ -49,15 +55,42 @@ export class RiskAddComponent implements OnInit {
   public severityLabel = SeverityLabel;
   public severityEnum = Object.values(Severity);
 
+  // Cost enum Label
+  public costLabel = CostLabel;
+  public costEnum = Object.values(Cost);
+
+  // Delay enum Label
+  public delayLabel = DelayLabel;
+  public delayEnum = Object.values(Delay);
+
+  // Frequency enum Label
+  public frequencyLabel = FrequencyLabel;
+  public frequencyEnum = Object.values(Frequency);
+
+  // NonConformity enum Label
+  public nonConformityLabel = NonConformityLabel;
+  public nonConformityEnum = Object.values(NonConformity);
+
+  // Satisfaction enum Label
+  public satisfactionLabel = SatisfactionLabel;
+  public satisfactionEnum = Object.values(Satisfaction);
+
+  // Risk Origin enum Label
+  public riskOriginLabel = RiskOriginLabel;
+  public riskOriginEnum = Object.values(RiskOrigin);
+
   // Risk Status enum Label
   public riskStatusLabel = RiskStatusLabel;
   public riskStatusEnum = Object.values(RiskStatus);
+
   // Risk Nature enum Label
   public riskNatureLabel = RiskNatureLabel;
   public riskNatureEnum = Object.values(RiskNature);
+
   // Risk Strategy enum Label
   public riskStrategyLabel = RiskStrategyLabel;
   public riskStrategyEnum = Object.values(RiskStrategy);
+
   // Action Status enum Label
   public ActionstatusLabel = ActionstatusLabel;
   public ActionStatusEnum = Object.values(ActionStatus);

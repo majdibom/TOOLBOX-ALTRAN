@@ -95,6 +95,43 @@ public class Risk implements Serializable {
 	private Severity severity;
 
 	/**
+	 * The RiskOrigin of this risk.
+	 */
+	@Enumerated(EnumType.STRING)
+	private RiskOrigin riskOrigin;
+
+	/**
+	 * The Satisfaction of this risk.
+	 */
+	@Enumerated(EnumType.STRING)
+	private Satisfaction satisfaction;
+
+	/**
+	 * The Cost of this risk.
+	 */
+	@Enumerated(EnumType.STRING)
+	private Cost cost;
+
+	/**
+	 * The Delay of this risk.
+	 */
+	@Enumerated(EnumType.STRING)
+	private Delay delay;
+
+	/**
+	 * The NonConformity of this risk.
+	 */
+
+	@Enumerated(EnumType.STRING)
+	private NonConformity nonConformity;
+
+	/**
+	 * The Frequency of this risk.
+	 */
+	@Enumerated(EnumType.STRING)
+	private Frequency frequency;
+
+	/**
 	 * The Exposure of this risk (list with the new and old exposures).
 	 */
 	@OneToMany(cascade = CascadeType.REMOVE)
@@ -345,6 +382,54 @@ public class Risk implements Serializable {
 
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public Satisfaction getSatisfaction() {
+		return satisfaction;
+	}
+
+	public void setSatisfaction(Satisfaction satisfaction) {
+		this.satisfaction = satisfaction;
+	}
+
+	public Cost getCost() {
+		return cost;
+	}
+
+	public void setCost(Cost cost) {
+		this.cost = cost;
+	}
+
+	public Delay getDelay() {
+		return delay;
+	}
+
+	public void setDelay(Delay delay) {
+		this.delay = delay;
+	}
+
+	public NonConformity getNonConformity() {
+		return nonConformity;
+	}
+
+	public void setNonConformity(NonConformity nonConformity) {
+		this.nonConformity = nonConformity;
+	}
+
+	public Frequency getFrequency() {
+		return frequency;
+	}
+
+	public void setFrequency(Frequency frequency) {
+		this.frequency = frequency;
+	}
+
+	public RiskOrigin getRiskOrigin() {
+		return riskOrigin;
+	}
+
+	public void setRiskOrigin(RiskOrigin riskOrigin) {
+		this.riskOrigin = riskOrigin;
 	}
 
 }

@@ -104,6 +104,7 @@
         <th style="width: 10%;">{{'Type' | translate}}</th>
         <th style="width: 10%;">{{'Date d ouverture' | translate}}</th>
         <th style="width: 12%;">{{'Date d échéance' | translate}}</th>
+        <th style="width: 12%;">{{'Date de mesure de l efficacité' | translate}}</th>
         <th style="width: 5%;" class="text-center">{{'Statut' | translate}}</th>
         <th style="width: 20%;" class="text-center">{{'Actions' | translate}}</th>
       </tr>
@@ -117,7 +118,9 @@
         <td>{{action.typeAction}}</td>
         <td>{{action.openDate | date:'dd/MM/yyyy'}}</td>
         <td>{{action.dueDate  | date:'dd/MM/yyyy'}}</td>
-        <td style="text-align: center;"><span *ngIf="action?.actionStatus == 'Open'" class="badge badge-primary"
+        <td>{{action.effMeasDate  | date:'dd/MM/yyyy'}}</td>
+        <td style="text-align: center;">
+          <span *ngIf="action?.actionStatus == 'Open'" class="badge badge-primary"
             style="font-size: medium;">{{action?.actionStatus}}</span>
           <span *ngIf="action?.actionStatus == 'Closed'" class="badge badge-dark"
             style="font-size: medium;">{{action?.actionStatus}}</span>

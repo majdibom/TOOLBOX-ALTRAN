@@ -9,6 +9,12 @@ import { RiskNature } from '@models/risk-nature';
 import { Priority } from '@models/priority';
 import { RiskStatus } from '@models/risk-status';
 import { RiskStrategy } from '@models/risk-strategy';
+import { Cost } from '@models/cost';
+import { Delay } from '@models/delay';
+import { Satisfaction } from '@models/satisfaction';
+import { NonConformity } from '@models/nonConformity';
+import { Frequency } from '@models/frequency';
+import { RiskOrigin } from '@models/risk-Origin';
 
 @Component({
   selector: 'app-risk-update',
@@ -37,6 +43,24 @@ export class RiskUpdateComponent implements OnInit {
   riskStatusValue: RiskStatus;
   listOfRiskStrategy: string[];
   riskStrategyValue: RiskStrategy;
+
+  listOfCost: string[];
+  costValue: Cost;
+
+  listOfDelay: string[];
+  delayValue: Delay;
+
+  listOfSatisfaction: string[];
+  satisfactionValue: Satisfaction;
+
+  listOfNonConformity: string[];
+  nonConformityValue: NonConformity;
+
+  listOfFrequency: string[];
+  frequencyValue: Frequency;
+
+  listOfRiskOrigin: string[];
+  riskOriginValue: RiskOrigin;
   constructor(private genericService: GenericService) { }
 
   ngOnInit() {
@@ -56,6 +80,24 @@ export class RiskUpdateComponent implements OnInit {
     this.listOfRiskStatus = this.listOfRiskStatus.slice(this.listOfRiskStatus.length / 4);
     this.listOfRiskStrategy = Object.keys(RiskStrategy);
     this.listOfRiskStrategy = this.listOfRiskStrategy.slice(this.listOfRiskStrategy.length / 4);
+
+    this.listOfCost = Object.keys(Cost);
+    this.listOfCost = this.listOfCost.slice(this.listOfCost.length / 5);
+
+    this.listOfDelay = Object.keys(Delay);
+    this.listOfDelay = this.listOfDelay.slice(this.listOfDelay.length / 5);
+
+    this.listOfSatisfaction = Object.keys(Satisfaction);
+    this.listOfSatisfaction = this.listOfSatisfaction.slice(this.listOfSatisfaction.length / 5);
+
+    this.listOfNonConformity = Object.keys(NonConformity);
+    this.listOfNonConformity = this.listOfNonConformity.slice(this.listOfNonConformity.length / 5);
+
+    this.listOfRiskOrigin = Object.keys(RiskOrigin);
+    this.listOfRiskOrigin = this.listOfRiskOrigin.slice(this.listOfRiskOrigin.length / 5);
+
+    this.listOfFrequency = Object.keys(Frequency);
+    this.listOfFrequency = this.listOfFrequency.slice(this.listOfFrequency.length / 5);
   }
   /** Get all users **/
   getListOfUsers() {
@@ -72,7 +114,12 @@ export class RiskUpdateComponent implements OnInit {
     this.riskPriorityValue = Priority[value];
     this.riskStatusValue = RiskStatus[value];
     this.riskStrategyValue = RiskStrategy[value];
-
+    this.costValue = Cost[value];
+    this.delayValue = Delay[value];
+    this.satisfactionValue = Satisfaction[value];
+    this.nonConformityValue = NonConformity[value];
+    this.frequencyValue = Frequency[value];
+    this.riskOriginValue = RiskOrigin[value];
   }
   /** Update Risk */
   updateRisk() {
