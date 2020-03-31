@@ -2,12 +2,14 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Week } from '@models/week';
 import { Process } from '@models/process';
 import { Audit } from '@models/audit';
-import {NgbPopoverConfig} from '@ng-bootstrap/ng-bootstrap';
+import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
 import { GenericService } from '@services/generic.service';
-import {ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import swal from 'sweetalert2';
 
 import { EventEmitter } from 'events';
+import { AuditService } from '@models/audit-Service';
+import { Project } from '@models/project';
 
 @Component({
   selector: 'app-audit-planning',
@@ -18,15 +20,15 @@ export class AuditPlanningComponent implements OnInit {
 
   somme: number;
   weeks: Week[] = [];
-  processList: Process [];
-  titles: string [] = [];
+  processList: Process[];
+  titles: string[] = [];
+  // List of projects
+  listOfProjects: Project[] = [];
   popverDisabled: boolean;
 
   // @Output() submitted = new EventEmitter<boolean>();
 
-  constructor(private config: NgbPopoverConfig, private genericService: GenericService,
-              private route: ActivatedRoute,
-              private router: Router) {
+  constructor(private config: NgbPopoverConfig, private genericService: GenericService, private router: Router) {
     config.placement = 'right';
     config.triggers = 'hover';
     config.container = 'body';
@@ -35,6 +37,7 @@ export class AuditPlanningComponent implements OnInit {
   ngOnInit() {
     this.getProcess();
     this.getWeeks();
+
 
   }
 
@@ -53,6 +56,12 @@ export class AuditPlanningComponent implements OnInit {
       }
     );
   }
+  /** Get all projects*/
+  getProjects(): void {
+    this.genericService.getGenericList('/projects/all').subscribe(data => {
+      this.listOfProjects = data;
+    });
+  }
 
   calculate(idProcess: number, idWeek: number): number {
     let total: number;
@@ -62,20 +71,23 @@ export class AuditPlanningComponent implements OnInit {
     total = 0;
     for (week of this.weeks) {
       if (week.id === idWeek) {
-          for (audit of week.audits) {
-            for (process of audit.processImpacts) {
-              if (process.idProcess === idProcess) {
-                total++;
-                break;
-              }
+        for (audit of week.audits) {
+          for (process of audit.processImpacts) {
+            if (process.idProcess === idProcess) {
+              total++;
+              break;
             }
           }
-          this.somme = total;
-          return total;
         }
+        this.somme = total;
+        return total;
+      }
     }
   }
-
+  /** Open audit detail component */
+  openDetails(id: number) {
+    this.router.navigate(['quality-management/audits/audit-detail', id]);
+  }
   clickCheck(idProcess: number, idWeek: number): number {
     let total: number;
     let week: Week;
@@ -113,14 +125,7 @@ export class AuditPlanningComponent implements OnInit {
     }
   }
 
-//   loadList(idProcess: number, title: string, idWeek: number, semaineNumber: number) {
-
-//     this.auditService.idProcess = idProcess;
-//     this.auditService.title = title;
-//     this.auditService.idSemaine = idWeek;
-//     this.auditService.semaineNumber = semaineNumber;
-//     this.router.navigate(['list'], { relativeTo: this.route } );
-// }
+ 
 
   loadTitles(idProcess: number, idWeek: number) {
 
@@ -142,7 +147,7 @@ export class AuditPlanningComponent implements OnInit {
     }
     this.popverDisabled = (this.titles.length) ? false : true;
 
-}
+  }
   resetTitles() {
     this.titles = [];
   }

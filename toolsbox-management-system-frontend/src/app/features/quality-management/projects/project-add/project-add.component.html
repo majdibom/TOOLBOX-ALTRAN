@@ -1,0 +1,48 @@
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Ajouter un Projet' | translate}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addProjectForm="ngForm">
+           <!-- title field -->
+           <div class="form-group">
+            <label for="title" class="required">{{'Titre' | translate}}</label>
+            <textarea class="form-control" id="title-add" name="title-add"
+              [(ngModel)]="projectToAdd.title" rows="2" required> </textarea>
+          </div>
+          <!-- Activity field -->
+          <div class="form-group">
+            <label for="activity" class="required">{{'Activité' | translate}}</label>
+            <select id="activity-add" name="titleActivity" class="form-control" [(ngModel)]="projectToAdd.activity.id"
+              required>
+              <option *ngFor="let activity of listOfActivities" [ngValue]="activity.id">{{activity.title}}</option>
+            </select>
+          </div>
+          <!-- Delivery Model field -->
+          <div class="form-group">
+            <label for="deliveryModel" class="required">{{'Delivery Model' | translate}}</label>
+            <select id="deliveryModel-add" name="titleDeliveryModel" class="form-control" [(ngModel)]="projectToAdd.deliveryModel.id"
+              required>
+              <option *ngFor="let deliveryModel of listOfDeliveryModels" [ngValue]="deliveryModel.id">{{deliveryModel.title}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- Close button -->
+        <button type="button" id="exit-add-project" class="btn btn-secondary" data-dismiss="modal"
+          (click)="emptyObject()">{{'Fermer'
+          | translate}}</button>
+        &nbsp;
+        <!-- Add button -->
+        <button type="button" id="submit-add-project" class="btn btn-primary" (click)="createProject()"
+          data-dismiss="modal" [disabled]="!addProjectForm.valid">{{'Enregistrer' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

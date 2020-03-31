@@ -3,9 +3,10 @@ import { DeliveryModel } from './delivery-model';
 
 export class Project {
 
-    id: number;
+    idProject: number;
     title: string;
-    activity: Activity;
-    deliveryModel: DeliveryModel;
+    activity: Activity = new Activity();
+    deliveryModel: DeliveryModel = new DeliveryModel();
+
     constructor() { }
 }

@@ -43,7 +43,7 @@ export class AuditAddComponent implements OnInit {
     this.getUsers();
     this.getProcesses();
     this.getProjects();
-    this.getWeeks();
+    this.getWeeks()
   }
 
 
@@ -77,7 +77,7 @@ export class AuditAddComponent implements OnInit {
 
   /** Empty add form fields */
   emptyObject() {
-    this.activityToAdd = new Activity();
+    this.auditToAdd = new Audit();
   }
 
   /** Get all auditors **/
@@ -103,7 +103,7 @@ export class AuditAddComponent implements OnInit {
   }
   /** Get all projects*/
   getProjects(): void {
-    this.genericService.getGenericList('/project/all').subscribe(data => {
+    this.genericService.getGenericList('/projects/all').subscribe(data => {
       this.listOfProjects = data;
     });
   }

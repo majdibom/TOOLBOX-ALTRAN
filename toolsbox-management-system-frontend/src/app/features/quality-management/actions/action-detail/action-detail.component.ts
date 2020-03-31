@@ -35,20 +35,17 @@ export class ActionDetailComponent implements OnInit {
     });
   }
 
-/**Add action */
-addComment(message: any) {
-  const comment = {
-    
-    message: message
-  };
-  this.commentToAdd = new Comment();
+  /**Add action */
+  addComment(message: any) {
+    const comment = {
 
-}
+      message: message
+    };
+    this.commentToAdd = new Comment();
+
+  }
   /** Add coment to the action */
-  createComment(){
-
-    console.log(this.commentToAdd.message);
-
+  createComment() {
     this.genericService.updateGeneric('/actions/comments', this.idAction, this.commentToAdd).subscribe(
       data => {
         if (data.error === false) {
@@ -70,9 +67,9 @@ addComment(message: any) {
           });
         }
       });
-    }
-     /** Empty add form fields */
- emptyObject() {
-  this.commentToAdd = new Comment();
-}
+  }
+  /** Empty add form fields */
+  emptyObject() {
+    this.commentToAdd = new Comment();
+  }
 }

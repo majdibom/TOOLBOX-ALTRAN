@@ -141,7 +141,6 @@ export class ActionListComponent implements OnInit {
           this.total = this.pageClient.totalElements;
           this.listActions = this.pageClient.content;
         });
-       
   }
 
   /** Open action detail component */

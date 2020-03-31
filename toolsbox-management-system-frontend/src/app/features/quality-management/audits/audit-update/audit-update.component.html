@@ -1,0 +1,133 @@
+<form #updateAuditForm="ngForm">
+  <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Modifier cette audit' | translate}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- auditTheme field -->
+          <div class="form-group">
+            <label for="auditTheme" class="required">{{'Theme' | translate}}</label>
+            <textarea rows="2" id="auditTheme-update" name="auditTheme" class="form-control"
+              [(ngModel)]="auditToEdit.auditTheme" required> </textarea>
+          </div>
+          <!-- risks field -->
+          <div class="form-group">
+            <label for="risks" class="required">{{'Risques' | translate}}</label>
+            <textarea rows="2" id="risks-update" name="risks" class="form-control" [(ngModel)]="auditToEdit.risks"
+              required> </textarea>
+          </div>
+          <!-- issues field -->
+          <div class="form-group">
+            <label for="issues" class="required">{{'Enjeux' | translate}}</label>
+            <textarea rows="2" id="issues-update" name="issues" class="form-control" [(ngModel)]="auditToEdit.issues"
+              required> </textarea>
+          </div>
+          <!-- reference field -->
+          <div class="form-group">
+            <label for="reference" class="required">{{'Référence' | translate}}</label>
+            <textarea rows="2" id="reference-update" name="reference" class="form-control"
+              [(ngModel)]="auditToEdit.reference" required> </textarea>
+          </div>
+          <!-- duration field -->
+          <div class="form-group">
+            <label for="duration" class="required">{{'Duré' | translate}}</label>
+            <input type="number" id="duration-update" name="duration" class="form-control"
+              [(ngModel)]="auditToEdit.duration" required>
+          </div>
+          <!-- primary Auditor field -->
+          <div class="form-group">
+            <label for="primaryAuditor-edit" class="required">{{'Auditeur Principal' | translate}}</label>
+            <select id="primaryAuditor-edit"  name="primaryAuditor"
+              class="form-control" [(ngModel)]="auditToEdit.primaryAuditor.id" required>
+              <option *ngFor="let user of listOfUsers" [ngValue]="user.id">{{user.firstName}} {{user.lastName}}
+              </option>
+            </select>
+          </div>
+          <!-- accompanying Auditor field -->
+          <div class="form-group">
+            <label for="accompanyingAuditor-edit" class="required">{{'Auditeur Accompagnant' | translate}}</label>
+            <select id="accompanyingAuditor-edit"  name="accompanyingAuditor"
+              class="form-control" [(ngModel)]="auditToEdit.accompanyingAuditor.id" required>
+              <option *ngFor="let user of listOfUsers" [ngValue]="user.id">{{user.firstName}} {{user.lastName}}
+              </option>
+            </select>
+          </div>
+          <!-- audited field -->
+          <div class="form-group col-md-4">
+            <label for="audited" class="required">{{'Audités' | translate}}</label>
+            <p-listbox [options]="listOfUsers"
+              [(ngModel)]="auditToEdit.audited" name="audited" multiple="multiple" checkbox="checkbox"
+              optionLabel="firstName" [style]="{'width':'450px'}">
+              <p-header>
+                <i class="fa fa-users"></i>
+                {{'Audité' | translate}}
+              </p-header>
+            </p-listbox>
+          </div>
+          <hr>
+          <!-- Process or project Auditor field -->
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="defaultInline1" name="projectProcessToggle"
+              [checked]='true' (click)="setradio('Project')">
+            <label class="custom-control-label" for="defaultInline1">Project</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="defaultInline2" name="projectProcessToggle"
+              (click)="setradio('Process')">
+            <label class="custom-control-label" for="defaultInline2">Process</label>
+          </div>
+
+          <br><br>
+          <div *ngIf="isSelected('Project')">
+            <select id="project-edit" name="project" class="form-control" [(ngModel)]="auditToEdit.project" required>
+              <option *ngFor="let project of listOfProjects" [ngValue]="project">{{project.title}}</option>
+            </select>
+          </div>
+          <div *ngIf="isSelected('Process')">
+            <select id="process-edit" name="process-edit" class="form-control" [(ngModel)]="auditToEdit.process">
+              <option *ngFor="let process of listOfProcesses" [ngValue]="process">{{process.title}}</option>
+            </select>
+          </div>
+          <br>
+          <!-- Process Impacts field -->
+          <div class="form-group col-md-4">
+            <p-listbox [options]="listOfProcesses" 
+              [(ngModel)]="auditToEdit.processImpacts" name="processImpacts" multiple="multiple" checkbox="checkbox"
+              filter="filter" optionLabel="title" [style]="{'width':'450px'}">
+              <p-header>
+                <i class="fa fa-sliders"></i>
+                {{'Process Impacted' | translate}}
+              </p-header>
+            </p-listbox>
+          </div>
+          <!-- Week field -->
+          <div class="form-group">
+            <label for="week-edit" class="required">{{'Semaine' | translate}}</label>
+            <select id="week-edit" name="week"
+              class="form-control" [(ngModel)]="auditToEdit.week.id" required>
+              <option *ngFor="let week of listOfWeeks" [ngValue]="week.id">{{week.number}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- Close button -->
+          <button type="button" id="exit-update-audit" name="exit-update-audit" class="btn btn-secondary"
+            data-dismiss="modal">{{'Fermer'
+            | translate}}</button>
+          &nbsp;
+          <!-- Update button -->
+          <button type="button" id="submit-update-audit" name="submit-update-audit" class="btn btn-primary"
+            data-dismiss="modal" (click)="updateAudit()" [disabled]="!updateAuditForm.valid">{{'Enregistrer'
+            | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

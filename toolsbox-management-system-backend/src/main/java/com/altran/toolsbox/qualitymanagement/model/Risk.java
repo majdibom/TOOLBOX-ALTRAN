@@ -207,7 +207,7 @@ public class Risk implements Serializable {
 	 */
 	@Column
 	@LastModifiedDate
-	@JsonFormat(pattern = "dd-MM-yyy HH:mm:ss")
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date updatedAt;
 
 	/**

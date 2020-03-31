@@ -1,5 +1,8 @@
 package com.altran.toolsbox.qualitymanagement.service.impl;
 
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
+import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -17,9 +20,6 @@ import com.altran.toolsbox.qualitymanagement.repository.AuditRepository;
 import com.altran.toolsbox.qualitymanagement.service.AuditService;
 import com.altran.toolsbox.usermanagement.model.User;
 import com.altran.toolsbox.usermanagement.service.UserService;
-
-import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 
 @Service
 public class AuditServiceImpl implements AuditService {
@@ -183,4 +183,19 @@ public class AuditServiceImpl implements AuditService {
 		auditRepository.deleteById(id);
 	}
 
+	/**
+	 * Check if audit exist
+	 * 
+	 * @param id
+	 *            the of the audit
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
+	 */
+	@Override
+	public boolean existsById(Long id) {
+		if (auditRepository.existsById(id)) {
+			return true;
+		}
+		return false;
+	}
 }

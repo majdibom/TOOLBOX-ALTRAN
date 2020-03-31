@@ -63,7 +63,7 @@ public class Project implements Serializable {
 		return id;
 	}
 
-	public void setIdProject(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

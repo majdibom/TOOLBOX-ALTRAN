@@ -1,5 +1,10 @@
 package com.altran.toolsbox.qualitymanagement.service.impl;
 
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
+import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
+
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -13,16 +18,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.altran.toolsbox.qualitymanagement.model.Audit;
 import com.altran.toolsbox.qualitymanagement.model.AuditReport;
 import com.altran.toolsbox.qualitymanagement.model.Gap;
 import com.altran.toolsbox.qualitymanagement.repository.AuditReportRepository;
 import com.altran.toolsbox.qualitymanagement.service.AuditReportService;
+import com.altran.toolsbox.qualitymanagement.service.AuditService;
 import com.altran.toolsbox.qualitymanagement.service.GapService;
 import com.altran.toolsbox.usermanagement.model.User;
 import com.altran.toolsbox.usermanagement.service.UserService;
-
-import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
 
 /**
  * Represents implementation of audit report service
@@ -38,6 +42,8 @@ public class AuditReportServiceImpl implements AuditReportService {
 	private GapService gapService;
 
 	private UserService userService;
+
+	private AuditService auditService;
 
 	/**
 	 * Constructor of AuditReportServiceImp
@@ -71,6 +77,17 @@ public class AuditReportServiceImpl implements AuditReportService {
 	@Autowired
 	public void setGapService(GapService gapService) {
 		this.gapService = gapService;
+	}
+
+	/**
+	 * Changes audit service.
+	 * 
+	 * @param auditServiceImp
+	 *            audit service.
+	 */
+	@Autowired
+	public void setAuditService(AuditService auditService) {
+		this.auditService = auditService;
 	}
 
 	/**
@@ -148,7 +165,21 @@ public class AuditReportServiceImpl implements AuditReportService {
 
 	@Override
 	public void validateReport(String validation, String validator, Long id) {
-		throw new UnsupportedOperationException();
+		try {
+			AuditReport report = findById(id);
+			Date date = java.sql.Date.valueOf(LocalDate.now());
+			if (validator.equals("auditor")) {
+				report.setValidationAuditor(validation);
+				report.setValidationAuditorDate(date);
+			} else {
+				report.setValidationAudited(validation);
+				report.setValidationAuditedDate(date);
+			}
+			auditReportRepository.save(report);
+		} catch (Exception e) {
+			throw new UnsupportedOperationException();
+		}
+
 	}
 
 	/**
@@ -164,6 +195,10 @@ public class AuditReportServiceImpl implements AuditReportService {
 		if (id != null && !auditReportRepository.existsById(id)) {
 			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
+		AuditReport auditReport = auditReportRepository.findById(id).get();
+		Audit audit = auditReport.getAudit();
+		audit.setAuditReport(null);
+		auditService.update(audit, audit.getId());
 		auditReportRepository.deleteById(id);
 	}
 

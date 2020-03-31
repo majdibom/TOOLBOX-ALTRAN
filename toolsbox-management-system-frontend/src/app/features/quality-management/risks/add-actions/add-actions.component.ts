@@ -21,13 +21,13 @@ export class AddActionsComponent implements OnInit, AfterViewInit {
   selectedPage = 0;
   item = 5;
   searchInput: String = '';
-   // List of actions
-   listActions: any;
+  // List of actions
+  listActions: any;
   // Initial risk id
   idRisk: number;
   idAction: number;
   action: Action = new Action();
-  
+
   // Get Risk to edit form risk details component
   @Input() riskToEdit: Risk;
   // Event for reload table content after update
@@ -38,15 +38,16 @@ export class AddActionsComponent implements OnInit, AfterViewInit {
   // Action to create in risk form
   id: RiskActionId = new RiskActionId();
 
-  constructor(private route: ActivatedRoute, private genericService: GenericService,private router: Router) { }
+  constructor(private route: ActivatedRoute, private genericService: GenericService, private router: Router) { }
 
   ngOnInit() {
     this.reloadData();
+    
+    
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.listActions = [];
-   
   }
 
 
@@ -66,43 +67,43 @@ export class AddActionsComponent implements OnInit, AfterViewInit {
         });
   }
   /** Add Action to a Risk */
-  addActionToRisk(action: Action,){
+  addActionToRisk(action: Action) {
     this.id = new RiskActionId();
     this.riskActiontoAdd = new RiskAction();
     this.riskActiontoAdd.id.actionId = action.id;
     this.riskActiontoAdd.id.riskId = this.riskToEdit.id;
     this.riskActiontoAdd.action = action;
-    this.riskActiontoAdd.risk= this.riskToEdit;
+    this.riskActiontoAdd.risk = this.riskToEdit;
     this.genericService.createGeneric('/risk-action', this.riskActiontoAdd)
-    .subscribe(
-      data => {
-        if (data.error === false) {
-          swal({
-            position: 'top-end',
-            type: 'success',
-            title: data.value,
-            showConfirmButton: false,
-            timer: 1500
-          });
-          // reload table data
-          this.reloadEvent.emit(null);
-        } else {
-          swal({
-            title: 'Erreur!',
-            text: data.value,
-            type: 'error',
-            confirmButtonText: 'ok'
-          });
-        }
-      });
+      .subscribe(
+        data => {
+          if (data.error === false) {
+            swal({
+              position: 'top-end',
+              type: 'success',
+              title: data.value,
+              showConfirmButton: false,
+              timer: 1500
+            });
+            // reload table data
+            this.reloadEvent.emit(null);
+          } else {
+            swal({
+              title: 'Erreur!',
+              text: data.value,
+              type: 'error',
+              confirmButtonText: 'ok'
+            });
+          }
+        });
   }
   /** Reload data after every action added*/
-  reloadRisk(){
-     // reload table data
-     this.reloadEvent.emit(null);
+  reloadRisk() {
+    // reload table data
+    this.reloadEvent.emit(null);
   }
 
-   
+
   /** Pagination: Change number of elements in the table */
   onSelect(pageNumber: number) {
     this.selectedPage = pageNumber - 1;

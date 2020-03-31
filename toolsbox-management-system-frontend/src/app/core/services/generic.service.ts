@@ -130,5 +130,4 @@ export class GenericService {
   deleteListOfMessages(url: any, any: Array<any>): Observable<any> {
     return this.http.post(`${this.baseUrl}` + url, any);
   }
-
 }

@@ -1,0 +1,64 @@
+<form #updateAuditReportForm="ngForm">
+  <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Modifier ce rapport' | translate}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           <!-- examinedPoints field -->
+           <div class="form-group">
+            <label for="examinedPoints" class="required">{{'Point examinés' | translate}}</label>
+            <textarea rows="2" id="examinedPoints-update" name="examinedPoints" class="form-control"
+              [(ngModel)]="auditReportToEdit.examinedPoints" required> </textarea>
+          </div>
+          <!-- strongPoints field -->
+          <div class="form-group">
+            <label for="strongPoints" class="required">{{'Points fort' | translate}}</label>
+            <textarea rows="2" id="strongPoints-update" name="strongPoints" class="form-control"
+              [(ngModel)]="auditReportToEdit.strongPoints" required> </textarea>
+          </div>
+          <div class="form-row"> 
+          <!-- realization Date field -->
+          <div class="form-group col-md-6">
+            <label for="realizationDate" class="required">{{'Date de realisation' | translate}}</label>
+            <input type="date" class="form-control" id="realizationDate-update" name="realizationDate-update"
+              [(ngModel)]="auditReportToEdit.realizationDate" required>
+          </div>
+          <!-- duration field -->
+          <div class="form-group col-md-6">
+            <label for="duration" class="required">{{'Duré' | translate}}</label>
+            <input type="number" id="duration-update" name="duration" class="form-control"
+              [(ngModel)]="auditReportToEdit.duration" required>
+          </div>
+        </div>
+          <!-- Auditor field -->
+          <div class="form-group">
+            <label for="auditor-edit" class="required">{{'Auditeur' | translate}}</label>
+            <select id="auditor-edit"  name="auditor"
+              class="form-control" [(ngModel)]="auditReportToEdit.auditor.id" required>
+              <option *ngFor="let user of listOfUsers" [ngValue]="user.id">{{user.firstName}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- Close button -->
+          <button type="button" id="exit-update-audit-Report" name="exit-update-audit-Report" class="btn btn-secondary"
+            data-dismiss="modal">{{'Fermer'
+              | translate}}</button>
+          &nbsp;
+          <!-- Update button -->
+          <button type="button" id="submit-update-audit-Report" name="submit-update-audit-Report"
+            class="btn btn-primary" data-dismiss="modal" (click)="updateAuditReport()"
+            [disabled]="!updateAuditReportForm.valid">{{'Enregistrer'
+              | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

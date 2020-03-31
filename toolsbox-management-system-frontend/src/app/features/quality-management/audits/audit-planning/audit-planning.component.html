@@ -16,8 +16,9 @@
           <th class="fixed">{{p.title}}</th>
 
           <td [disablePopover]="popverDisabled" ngbPopover="{{titles}}" popoverTitle="Projects/Processes"
-            *ngFor="let w of weeks" (click)="clickCheck(p.idProcess, w.id) "
-            (mouseenter)="loadTitles(p.idProcess, w.id)" (mouseleave)="resetTitles()" onmouseover="" style="cursor: pointer;">
+            *ngFor="let w of weeks" (click)="clickCheck(p.idProcess, w.id)"
+            (mouseenter)="loadTitles(p.idProcess, w.id)" (mouseleave)="resetTitles()" onmouseover=""
+            style="cursor: pointer;">
 
             <a><span class="badge badge-pill badge-danger" *ngIf="calculate(p.idProcess, w.id)">{{somme}}</span></a>
 

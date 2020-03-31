@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { ListboxModule } from 'primeng/listbox';
 import { RisksRoutingModule } from './risks-routing.module';
 import { RiskComponent } from './risk/risk.component';

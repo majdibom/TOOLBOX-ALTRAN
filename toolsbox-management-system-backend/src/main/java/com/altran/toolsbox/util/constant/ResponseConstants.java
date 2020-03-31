@@ -123,7 +123,16 @@ public final class ResponseConstants {
 	public static final String COMMENT_NOT_CREATED = "comment_not_created";
 	public static final String COMMENT_DELETED = "comment_deleted";
 	public static final String COMMENT_NOT_DELETED = "comment_not_deleted";
-
+	// Project
+	public static final String PROJECT_EXIST = "project_exist";
+	public static final String PROJECT_CREATED = "project_created";
+	public static final String PROJECT_NOT_CREATED = "project_not_created";
+	public static final String PROJECT_NOT_EXIST = "project_not_exist";
+	public static final String PROJECT_FIND_ERROR = "project_find_error";
+	public static final String PROJECT_UPDATED = "project_updated";
+	public static final String PROJECT_NOT_UPDATED = "project_not_updated";
+	public static final String PROJECT_DELETED = "project_deleted";
+	public static final String PROJECT_NOT_DELETED = "project_not_deleted";
 	/**
 	 * Training Management
 	 */

@@ -49,7 +49,8 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Constructor of ActionServiceImp
 	 * 
-	 * @param actionRepository the repository of action
+	 * @param actionRepository
+	 *            the repository of action
 	 * 
 	 */
 	@Autowired
@@ -61,7 +62,8 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Changes gap service.
 	 * 
-	 * @param gapService gap service.
+	 * @param gapService
+	 *            gap service.
 	 */
 	@Autowired
 	public void setGapService(GapService gapService) {
@@ -71,7 +73,8 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Changes risk action service.
 	 * 
-	 * @param riskActionService risk action service.
+	 * @param riskActionService
+	 *            risk action service.
 	 */
 	@Autowired
 	public void setRiskActionService(RiskActionService riskActionService) {
@@ -81,7 +84,8 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Changes user service.
 	 * 
-	 * @param userService user service.
+	 * @param userService
+	 *            user service.
 	 */
 	@Autowired
 	public void setUserService(UserService userService) {
@@ -91,7 +95,8 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Changes comment service.
 	 * 
-	 * @param commentService comment service.
+	 * @param commentService
+	 *            comment service.
 	 */
 	@Autowired
 	public void setcommentService(CommentService commentService) {
@@ -121,7 +126,8 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Gets the list of all actions by defined gap
 	 * 
-	 * @param id the id of the gap
+	 * @param id
+	 *            the id of the gap
 	 * @return list of all actions with the input gap
 	 */
 	@Override
@@ -132,7 +138,8 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Gets the list of all actions by there responsible manager
 	 * 
-	 * @param username the userName of the responsible
+	 * @param username
+	 *            the userName of the responsible
 	 * @return list of all actions with the input responsible
 	 */
 	@Override
@@ -144,9 +151,11 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * gets one action by his id
 	 * 
-	 * @param id the id of the action
+	 * @param id
+	 *            the id of the action
 	 * @return action object with the same id
-	 * @throws NoSuchElementException if no element is present with such ID
+	 * @throws NoSuchElementException
+	 *             if no element is present with such ID
 	 */
 	@Override
 	public Action findById(Long id) {
@@ -161,10 +170,11 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Creates a new action
 	 * 
-	 * @param action the action to create
+	 * @param action
+	 *            the action to create
 	 * @return the created action
-	 * @throws EntityExistsException if there is already existing entity with such
-	 *                               ID
+	 * @throws EntityExistsException
+	 *             if there is already existing entity with such ID
 	 */
 	@Override
 	public Action create(Action action) {
@@ -177,30 +187,21 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Updates one action
 	 * 
-	 * @param id     the id of the action
-	 * @param action the new action object with the new values
+	 * @param id
+	 *            the id of the action
+	 * @param action
+	 *            the new action object with the new values
 	 * @return the updated action
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public Action update(Action action, Long id) {
-		System.err.println("update 1");
 
 		if (id != null && !actionRepository.existsById(id)) {
-			System.err.println("update err ");
-
 			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		action.setId(id);
-		System.err.println("update final");
-
-		/*
-		 * // get the same create date as the old action(Fix null problem) Action
-		 * oldAction = findById(id); Date createdDate = oldAction.getCreatedAt();
-		 * action.setCreatedAt(createdDate); // get the same createdBy as the old
-		 * action(Fix null problem) User createdBy = oldAction.getCreatedBy();
-		 * action.setCreatedBy(createdBy);
-		 */
 
 		return actionRepository.save(action);
 	}
@@ -208,8 +209,10 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Deletes one action
 	 * 
-	 * @param id the of the deleted action
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param id
+	 *            the of the deleted action
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public Boolean delete(Long id) {
@@ -229,8 +232,10 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Searches for actions by one term
 	 * 
-	 * @param term     the term to base search on it
-	 * @param pageable pagination information
+	 * @param term
+	 *            the term to base search on it
+	 * @param pageable
+	 *            pagination information
 	 * @return list of actions contains the input term by page
 	 */
 	@Override
@@ -241,9 +246,10 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * Searches for actions by multiple terms
 	 *
-	 * @param actionFilter action filter object with list of advanced search
-	 *                     criteria
-	 * @param pagination   information
+	 * @param actionFilter
+	 *            action filter object with list of advanced search criteria
+	 * @param pagination
+	 *            information
 	 */
 	@Override
 	public Page<Action> advancedSearch(ActionFilter actionFilter, Pageable pageable) {
@@ -273,9 +279,12 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * add comment to one action
 	 * 
-	 * @param id      the id of action
-	 * @param Comment the comment object
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param id
+	 *            the id of action
+	 * @param Comment
+	 *            the comment object
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public Comment addComment(Long id, Comment comment) {
@@ -292,8 +301,10 @@ public class ActionServiceImpl implements ActionService {
 	/**
 	 * delete comment from action
 	 * 
-	 * @param Comment the comment object
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param Comment
+	 *            the comment object
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public void deleteComment(Long id, Comment comment) {

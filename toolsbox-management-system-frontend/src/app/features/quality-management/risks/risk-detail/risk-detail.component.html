@@ -175,7 +175,7 @@
               <div class="col p-2">
                 <h4 class="mb-1 line-height-5" style="font-size: 20px">{{risk?.closureDate |
                                         date:'dd/MM/yyyy'}}</h4>
-                <small class="mb-0 font-weight-bold">{{'Date de fermeture' | translate}}</small>
+                <small class="mb-0 font-weight-bold">{{'Date de clôture' | translate}}</small>
               </div>
             </div>
           </div>
@@ -206,8 +206,7 @@
             <li class="nav-item">
               <div class="card-body text-center bg-altran rounded-top">
                 <h6 class="text-light">{{'Date de mise à jour' | translate}}:</h6>
-                <h5 class="text-light" style="font-size: 20px">{{risk?.updatedAt |
-                  date:'dd/MM/yyyy'}}</h5>
+                <h5 class="text-light" style="font-size: 20px">{{risk?.updatedAt}}</h5>
               </div>
             </li>
           </ul>

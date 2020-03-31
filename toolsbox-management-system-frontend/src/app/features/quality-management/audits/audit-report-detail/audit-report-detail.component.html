@@ -1,0 +1,104 @@
+<div class="title">
+  <h3>{{'Détails du Rapport : #' | translate}}{{auditReport.id}}</h3>
+</div>
+<div class="content">
+
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="profile-card-4 z-depth-3">
+        <!-- action generale information section -->
+        <div class="card ">
+          <div class="card-body text-center bg-altran rounded-top">
+            <h6 class="text-light">{{'Auditeur' | translate}} :</h6>
+            <h5 class="mb-1 text-white">
+              {{auditReport?.auditor?.firstName}}&nbsp;{{auditReport?.auditor?.lastName}}
+            </h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group shadow-none">
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Durée' | translate}}: </span>&nbsp;&nbsp;<span
+                    style="font-size: medium;">{{auditReport?.duration}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Auditeur validation' | translate}}: </span>&nbsp;&nbsp;<span
+                    style="font-size: medium;">{{auditReport?.validationAuditor}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'validation Audited' | translate}}: </span>&nbsp;&nbsp;<span
+                    style="font-size: medium;">{{auditReport?.validationAudited}}</span>
+                </div>
+              </li>
+            </ul>
+            <div class="row text-center mt-4">
+
+              <div class="col p-2">
+                <h4 class="mb-1 line-height-5" style="font-size: 20px">{{auditReport?.realizationDate |
+                                              date:'dd/MM/yyyy'}}</h4>
+                <small class="mb-0 font-weight-bold">{{'Date de réalisation' | translate}}</small>
+              </div>
+            </div>
+            <div class="row text-center mt-4">
+
+              <div class="col p-2">
+                <h4 class="mb-1 line-height-5" style="font-size: 20px">{{auditReport?.validationAuditorDate}}</h4>
+                <small class="mb-0 font-weight-bold">{{'Date de validation de auditeur' | translate}}</small>
+              </div>
+              <div class="col p-2">
+                <h4 class="mb-1 line-height-5" style="font-size: 20px">{{auditReport?.validationAuditedDate }}</h4>
+                <small class="mb-0 font-weight-bold">{{'Date de validation de audité' | translate}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card-card-4  z-depth-3">
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pills-primary nav-justified">
+            <li class="nav-item">
+              <div class="card-body text-center bg-altran rounded-top">
+                <h5 class="text-light">{{'Plus d information' | translate}}</h5>
+              </div>
+            </li>
+          </ul>
+          <div class="tab-content p-3">
+            <!-- Details section -->
+            <div class="tab-pane active show" id="detail">
+              <h5 class="mb-3"></h5>
+              <div class="row">
+                <div class="col-md-12">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <h5><strong>{{'Points examinés' | translate}} :</strong>&nbsp;&nbsp;{{auditReport?.examinedPoints}}</h5>
+                    </li>
+                    <li class="list-group-item">
+                      <h5><strong>{{'Points forts' | translate}} :</strong>&nbsp;&nbsp;{{auditReport?.strongPoints}}</h5>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>

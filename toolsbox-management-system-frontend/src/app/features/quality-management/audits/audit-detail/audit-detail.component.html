@@ -1,0 +1,190 @@
+<div class="title">
+  <h3>{{'Détails de l audit : #' | translate}}{{audit?.id}}</h3>
+</div>
+<div class="content">
+
+  <div class="row">
+    <div class="col-lg-5">
+      <div class="profile-card-4 z-depth-3">
+        <!-- action generale information section -->
+        <div class="card ">
+          <div class="card-body text-center bg-altran rounded-top">
+            <h6 class="text-light">{{'Auditeur Principal' | translate}} :</h6>
+            <h5 class="mb-1 text-white">
+              {{audit?.primaryAuditor?.firstName}}&nbsp;{{audit?.primaryAuditor?.lastName}}</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group shadow-none">
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Auditeur Accompagnant' | translate}}: </span>&nbsp;&nbsp;
+                  <span
+                    style="font-size: medium;">{{audit?.accompanyingAuditor?.firstName}}&nbsp;{{audit?.accompanyingAuditor?.lastName}}
+                  </span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Semaine' | translate}}: </span>&nbsp;&nbsp;<span
+                    style="font-size: medium;">{{audit?.week.number}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Durée' | translate}}: </span>&nbsp;&nbsp;<span
+                    style="font-size: medium;">{{audit?.duration}}</span>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="list-icon">
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                </div>
+                <div class="list-details">
+                  <span style="font-size: medium;">{{'Projet/Process' | translate}}: </span>&nbsp;&nbsp;
+                  <span class="heading" *ngIf="audit.process">{{audit.process.title}}</span>
+                  <span class="heading" *ngIf="audit.project">{{audit.project.title}}</span>
+                </div>
+              </li>
+            </ul><br>
+            <div class="row">
+              <div class="col-md-6 ">
+                <div class="card bg-c-blue order-card">
+                  <div class="card-block">
+                    <h5 class="m-b-20" style="font-weight: bold;">Audité :</h5>
+                    <span class="text-right"
+                      *ngFor="let audited of audit?.audited">{{audited?.firstName}}&nbsp;{{audited?.lastName}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 ">
+                <div class="card bg-c-green order-card">
+                  <div class="card-block">
+                    <h6 class="m-b-20" style="font-weight: bold;">process Impacté:</h6>
+                    <span class="text-right"
+                      *ngFor="let process of audit?.processImpacts">{{process?.title}}&nbsp;{{audited?.lastName}}<br>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-7">
+      <div class="card-card-4  z-depth-3">
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pills-primary nav-justified">
+            <!-- Details menu -->
+            <li class="nav-item">
+              <div class="card-body text-center bg-altran rounded-top">
+                <h6 class="text-light">{{'Créé par' | translate}}:</h6>
+                <h5 class="text-white">
+                  {{audit?.createdBy?.firstName}}&nbsp;{{audit?.createdBy?.lastName}}</h5>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="card-body text-center bg-altran rounded-top">
+                <h6 class="text-light">{{'Date de création' | translate}}:</h6>
+                <h5 class="text-light" style="font-size: 20px">{{audit?.createdAt |
+                    date:'dd/MM/yyyy'}}</h5>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="card-body text-center bg-altran rounded-top">
+                <h6 class="text-light">{{'Date de mise à jour' | translate}}:</h6>
+                <h5 class="text-light" style="font-size: 20px">{{audit?.updatedAt |
+                    date:'dd/MM/yyyy'}}</h5>
+              </div>
+            </li>
+
+          </ul>
+          <div class="tab-content p-3">
+            <!-- Details section -->
+            <div class="tab-pane active show" id="detail">
+              <h5 class="mb-3"></h5>
+              <div class="row">
+                <div class="col-md-12">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <h5><strong>{{'Risques' | translate}} :</strong>&nbsp;&nbsp;{{audit?.risks}}</h5>
+                    </li>
+                    <li class="list-group-item">
+                      <h5><strong>{{'Enjeux' | translate}} :</strong>&nbsp;&nbsp;{{audit?.issues}}</h5>
+
+                    <li class="list-group-item">
+                      <h5><strong>{{'Théme de l audite ' | translate}}
+                          :</strong>&nbsp;&nbsp;{{audit?.auditTheme}}</h5>
+                    </li>
+
+                    <li class="list-group-item">
+                      <h5><strong>{{'Références' | translate}}
+                          :</strong>&nbsp;&nbsp;{{audit?.reference}}</h5>
+                    </li>
+                    <li class="list-group-item">
+                      <h5><strong>{{'Rapport' | translate}}:</strong>
+                        <button type="button" id="add-auditReport-btn" type="button" class="btn btn-primary btn-add"
+                          data-toggle="modal" title="Ajouter un nouveau audit Report" data-target="#addModal"
+                          style="float:right;">
+                          <i class="fa fa-plus-circle fa-lg"></i>&nbsp;Add Report</button></h5>
+                    </li>
+                  </ul>
+                  <!-- Actions list Table -->
+                  <div class="table-responsive-lg">
+                    <table class="table table-bordered table-striped table-hover">
+                      <thead class="row-border hover">
+                        <tr>
+                          <th style="width: 2%;">{{'#' | translate}}</th>
+                          <th style="width: 25%;">{{'Points examinés' | translate}}</th>
+                          <th style="width: 25%;">{{'Date de realisation' | translate}}</th>
+                          <th style="width: 20%;" class="text-center">{{'Actions' | translate}}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngIf="audit?.auditReport">
+                          <td>{{audit?.auditReport.id}} </td>
+                          <td>{{audit?.auditReport.examinedPoints}} </td>
+                          <td>{{audit?.auditReport.realizationDate| date:'dd/MM/yyyy'}} </td>
+
+
+                          <td class="text-center">
+                            <button type="button" class="btn btn-detail"
+                              title="Afficher les details de cette auditReport" data-toggle="modal"
+                              data-target="#detailsmodal" (click)="openDetails(audit?.auditReport.id)"><i
+                                class="fa fa-align-justify"></i></button>&nbsp;
+                            &nbsp; <button type="button" class="btn btn-primary btn-circle"
+                              title="Modifier cette auditReport" data-toggle="modal" data-target="#editmodal"
+                              (click)="openEditModal(audit.auditReport)"><i class="fa fa-edit"></i></button>
+                            &nbsp;
+                            <button type="button" class="btn btn-danger btn-circle" title="Supprimer cette auditReport"
+                              (click)="deleteAuditReport(audit?.auditReport.id)"><i class="fa fa-remove"></i></button>
+                          </td>
+                        </tr>
+                        <tr></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- add report -->
+<app-audit-report-add [auditToEdit]="audit" (reloadEvent)="reloadData()"></app-audit-report-add>
+<!-- Edit report Modal -->
+<app-audit-report-update  [auditToEdit]="audit" [auditReportToEdit]="auditReportEdit" (reloadEvent)="reloadData()"></app-audit-report-update>

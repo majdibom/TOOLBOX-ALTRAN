@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 /**
  * Represents Rest controller of delivery model
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  *
  */
@@ -31,7 +31,8 @@ public class DeliveryModelController {
 	/**
 	 * Constructor of DeliveryModelController
 	 * 
-	 * @param deliveryModelService the service of audit report
+	 * @param deliveryModelService
+	 *            the service of audit report
 	 */
 	@Autowired
 	public DeliveryModelController(DeliveryModelService deliveryModelService) {

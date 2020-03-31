@@ -1,12 +1,17 @@
 package com.altran.toolsbox.qualitymanagement.model;
 
-import java.io.Serializable;
+import static com.altran.toolsbox.util.constant.FilterConstants.AUDIT_FILTER;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,9 +22,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import static com.altran.toolsbox.util.constant.FilterConstants.AUDIT_FILTER;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import com.altran.toolsbox.usermanagement.model.User;
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * Represents Audits
@@ -31,6 +40,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 @Table(name = "AUDITS", uniqueConstraints = { @UniqueConstraint(columnNames = { "week_id", "project_id" }),
 		@UniqueConstraint(columnNames = { "week_id", "process_id" }) })
 @JsonFilter(AUDIT_FILTER)
+@EntityListeners(AuditingEntityListener.class)
 public class Audit implements Serializable {
 
 	/**
@@ -140,6 +150,31 @@ public class Audit implements Serializable {
 	 */
 	@OneToOne(mappedBy = "audit", cascade = CascadeType.REMOVE)
 	private AuditReport auditReport;
+
+	/**
+	 * The creator of this Action.
+	 * 
+	 * @see User
+	 */
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "created_by", nullable = true, foreignKey = @ForeignKey(name = "FK_CREATED_BY"))
+	private User createdBy;
+
+	/**
+	 * The created date of this Action.
+	 */
+	@Column
+	@CreatedDate
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date createdAt;
+
+	/**
+	 * The last modified date of this Action.
+	 */
+	@Column
+	@LastModifiedDate
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private Date updatedAt;
 
 	/****** Getters and setters *****/
 
@@ -253,6 +288,30 @@ public class Audit implements Serializable {
 
 	public void setAuditReport(AuditReport auditReport) {
 		this.auditReport = auditReport;
+	}
+
+	public User getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 }

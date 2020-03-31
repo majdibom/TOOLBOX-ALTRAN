@@ -7,7 +7,6 @@ import { QualityManagementRoutingModule } from './quality-management-routing.mod
   declarations: [],
   imports: [
     CommonModule,
-    QualityManagementRoutingModule
-  ]
+    QualityManagementRoutingModule,]
 })
 export class QualityManagementModule { }

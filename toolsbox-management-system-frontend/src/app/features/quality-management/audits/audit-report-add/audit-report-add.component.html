@@ -1,0 +1,61 @@
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Ajouter un Rapport' | translate}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addAuditReportForm="ngForm">
+         
+          <!-- examinedPoints field -->
+          <div class="form-group  ">
+            <label for="examinedPoints" class="required">{{'Points examinés' | translate}}</label>
+            <input type="text" id="examinedPoints" name="examinedPoints" class="form-control"
+              [(ngModel)]="auditReportToAdd.examinedPoints" required>
+          </div>
+          <!-- strongPoints field -->
+          <div class="form-group  ">
+            <label for="strongPoints" class="required">{{'Points fort' | translate}}</label>
+            <input type="text" id="strongPoints" name="strongPoints" class="form-control"
+              [(ngModel)]="auditReportToAdd.strongPoints" required>
+          </div>
+          <!-- Auditor field -->
+          <div class="form-group">
+            <label for="auditor" class="required">{{'Auditeur' | translate}}</label>
+            <select id="auditor" name="auditor" class="form-control"
+              [(ngModel)]="auditReportToAdd.auditor " required>
+              <option *ngFor="let auditor of listOfUsers" [ngValue]="auditor">{{auditor.firstName}}</option>
+            </select>
+          </div>
+          <div class="form-row">
+           <!-- realization Date field -->
+           <div class="form-group col-md-6">
+            <label for="realizationDate-add" class="required">{{'Date de realisation' | translate}}</label>
+            <input type="date" class="form-control" id="realizationDate-add" name="realizationDate-add"
+              [(ngModel)]="auditReportToAdd.realizationDate" required>
+          </div>
+          <!-- duration field -->
+          <div class="form-group  col-md-6">
+            <label for="duration" class="required">{{'Durée(h)' | translate}}</label>
+            <input type="number" id="duration" name="duration" class="form-control" pattern="[0-9]"
+              [(ngModel)]="auditReportToAdd.duration" required>
+          </div>
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- Close button -->
+        <button type="button" id="exit-add-audit-report" class="btn btn-secondary" data-dismiss="modal"
+          (click)="emptyObject()">{{'Fermer'
+            | translate}}</button>
+        &nbsp;
+        <!-- Add button -->
+        <button type="button" id="submit-add-audit-report" class="btn btn-primary" (click)="createAuditReport()"
+          data-dismiss="modal" [disabled]="!addAuditReportForm.valid">{{'Enregistrer' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

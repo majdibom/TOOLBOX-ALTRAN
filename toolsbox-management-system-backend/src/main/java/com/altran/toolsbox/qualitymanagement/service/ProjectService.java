@@ -2,6 +2,9 @@ package com.altran.toolsbox.qualitymanagement.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.altran.toolsbox.qualitymanagement.model.Project;
 
 /**
@@ -16,4 +19,11 @@ public interface ProjectService {
 
 	Project create(Project project);
 
+	Project update(Project project, Long id);
+
+	void delete(Long id);
+
+	Page<Project> findAllByPage(Pageable pageable);
+
+	Project findById(Long id);
 }

@@ -1,5 +1,57 @@
 package com.altran.toolsbox.qualitymanagement.controller;
 
+import static com.altran.toolsbox.util.constant.ColumnConstants.ACTIONS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.ACTIVITY;
+import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITED;
+import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITOR;
+import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITREPORT;
+import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITTHEME;
+import static com.altran.toolsbox.util.constant.ColumnConstants.DELIVERYMODEL;
+import static com.altran.toolsbox.util.constant.ColumnConstants.DURATION;
+import static com.altran.toolsbox.util.constant.ColumnConstants.EMAIL;
+import static com.altran.toolsbox.util.constant.ColumnConstants.EXAMINEDPOINTS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.FIRSTNAME;
+import static com.altran.toolsbox.util.constant.ColumnConstants.GAPS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.ID;
+import static com.altran.toolsbox.util.constant.ColumnConstants.IDENTIFIEDCAUSES;
+import static com.altran.toolsbox.util.constant.ColumnConstants.IMPROVEMENTCLUE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.ISSUES;
+import static com.altran.toolsbox.util.constant.ColumnConstants.JUSTIFICATION;
+import static com.altran.toolsbox.util.constant.ColumnConstants.LASTNAME;
+import static com.altran.toolsbox.util.constant.ColumnConstants.PASSW;
+import static com.altran.toolsbox.util.constant.ColumnConstants.PROCESSIMPACTS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.REALIZATIONDATE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.REFERENCE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.RISKS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.ROLES;
+import static com.altran.toolsbox.util.constant.ColumnConstants.STRONGPOINTS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.USERNAME;
+import static com.altran.toolsbox.util.constant.ColumnConstants.VALIDATIONAUDITED;
+import static com.altran.toolsbox.util.constant.ColumnConstants.VALIDATIONAUDITOR;
+import static com.altran.toolsbox.util.constant.ColumnConstants.VALIDATIONAUDITORDATE;
+import static com.altran.toolsbox.util.constant.FilterConstants.AUDITREPORT_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.AUDIT_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.GAP_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.PROCESS_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.PROJECT_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.USER_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.WEEK_FILTER;
+import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_CREATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_DELETED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_EXIST;
+import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_FIND_ERROR;
+import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_NOT_CREATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_NOT_DELETED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_NOT_EXIST;
+import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_NOT_UPDATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_UPDATED;
+
+import java.util.NoSuchElementException;
+
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,25 +71,6 @@ import com.altran.toolsbox.qualitymanagement.model.AuditReport;
 import com.altran.toolsbox.qualitymanagement.service.AuditReportService;
 import com.altran.toolsbox.util.GenericResponse;
 import com.altran.toolsbox.util.Translator;
-
-import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_CREATED;
-import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_DELETED;
-import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_EXIST;
-import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_FIND_ERROR;
-import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_NOT_CREATED;
-import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_NOT_DELETED;
-import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_NOT_EXIST;
-import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_NOT_UPDATED;
-import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_UPDATED;
-
-import java.util.NoSuchElementException;
-
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
-
-import static com.altran.toolsbox.util.constant.ColumnConstants.*;
-import static com.altran.toolsbox.util.constant.FilterConstants.*;
-
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
@@ -61,7 +94,8 @@ public class AuditReportController {
 	/**
 	 * Constructor of AuditReportController
 	 * 
-	 * @param actionService the service of audit report
+	 * @param actionService
+	 *            the service of audit report
 	 */
 	@Autowired
 	public AuditReportController(AuditReportService auditReportService) {
@@ -71,7 +105,8 @@ public class AuditReportController {
 	/**
 	 * Changes valid object response object for sending data
 	 * 
-	 * @param validResponse generic response with audit report as object.
+	 * @param validResponse
+	 *            generic response with audit report as object.
 	 */
 	@Autowired
 	public void setObjectResponse(GenericResponse<AuditReport> objectResponse) {
@@ -81,7 +116,8 @@ public class AuditReportController {
 	/**
 	 * Changes message response object for sending message
 	 * 
-	 * @param messageResponse generic response with string as object.
+	 * @param messageResponse
+	 *            generic response with string as object.
 	 */
 	@Autowired
 	public void setMessageResponse(GenericResponse<String> messageResponse) {
@@ -91,8 +127,10 @@ public class AuditReportController {
 	/**
 	 * Gets the list of all audit report by their responsible by page
 	 * 
-	 * @param username audit responsible userName
-	 * @param pageable pagination information
+	 * @param username
+	 *            audit responsible userName
+	 * @param pageable
+	 *            pagination information
 	 * @return list of all audit report by their responsible by page
 	 */
 	@GetMapping(value = "/responsable-audite/{username}")
@@ -124,7 +162,8 @@ public class AuditReportController {
 	 * Handles NoSuchElementException if no element is present with such ID and any
 	 * other exception
 	 * 
-	 * @param id the id of the audit report
+	 * @param id
+	 *            the id of the audit report
 	 * @return ResponseEntity: the object or the error to display when getting audit
 	 *         report by id with HttpStatus status code
 	 */
@@ -138,15 +177,13 @@ public class AuditReportController {
 			// Filter the audit report object
 			SimpleFilterProvider filterProvider = new SimpleFilterProvider();
 			filterProvider.addFilter(AUDITREPORT_FILTER, SimpleBeanPropertyFilter.serializeAll());
-			filterProvider.addFilter(AUDIT_FILTER,
-					SimpleBeanPropertyFilter.serializeAllExcept(RISKS, ISSUES, WEEK, AUDITREPORT, DURATION));
+			filterProvider.addFilter(AUDIT_FILTER, SimpleBeanPropertyFilter.filterOutAllExcept(ID));
 			filterProvider.addFilter(PROJECT_FILTER,
 					SimpleBeanPropertyFilter.serializeAllExcept(ID, ACTIVITY, DELIVERYMODEL));
 			filterProvider.addFilter(PROCESS_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(ID));
 			filterProvider.addFilter(GAP_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(JUSTIFICATION,
 					IMPROVEMENTCLUE, IDENTIFIEDCAUSES, ACTIONS, AUDITREPORT));
-			filterProvider.addFilter(USER_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(EMAIL, USERNAME, PASSW,
-					ROLES, ACTIVITY, AUDITS, ACTIONS));
+			filterProvider.addFilter(USER_FILTER, SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME));
 			// Create the mapping object and set the filters to the mapping
 			MappingJacksonValue auditReportMapping = new MappingJacksonValue(objectResponse);
 			auditReportMapping.setFilters(filterProvider);
@@ -169,7 +206,8 @@ public class AuditReportController {
 	 * Handles EntityExistsException if there is already existing entity with such
 	 * ID and any other exception
 	 * 
-	 * @param auditReport the audit report to create
+	 * @param auditReport
+	 *            the audit report to create
 	 * @return ResponseEntity: the message or the error to display after creating
 	 *         audit report with HttpStatus status code
 	 */
@@ -197,8 +235,10 @@ public class AuditReportController {
 	 * Handles EntityNotFoundException if there is no entity with such ID and any
 	 * other exception
 	 * 
-	 * @param AuditReport the new audit report object with the new values
-	 * @param id          the id of the audit report
+	 * @param AuditReport
+	 *            the new audit report object with the new values
+	 * @param id
+	 *            the id of the audit report
 	 * @return ResponseEntity: the message or the error to display after updating
 	 *         audit report with HttpStatus status code
 	 */
@@ -229,6 +269,7 @@ public class AuditReportController {
 	@GetMapping(value = "/validate/{id}/{validator}/{validation}")
 	public boolean validateReport(@PathVariable Long id, @PathVariable String validator,
 			@PathVariable String validation) {
+		auditReportService.validateReport(validation, validator, id);
 		return true;
 	}
 
@@ -238,11 +279,12 @@ public class AuditReportController {
 	 * Handles EntityNotFoundException if there is no entity with such ID, exception
 	 * if this audit report is used and any other exception
 	 * 
-	 * @param id the of the deleted audit report
+	 * @param id
+	 *            the of the deleted audit report
 	 * @return ResponseEntity: the message or the error to display after deleting
 	 *         audit report with HttpStatus status code
 	 */
-	@DeleteMapping(value = "/delete/{id}")
+	@DeleteMapping(value = "{id}")
 	public ResponseEntity<GenericResponse<String>> deleteAuditReport(@PathVariable Long id) {
 		try {
 			auditReportService.delete(id);

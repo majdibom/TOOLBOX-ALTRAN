@@ -47,7 +47,7 @@ public class AuditReport implements Serializable {
 	/**
 	 * The realization date of the audit report
 	 */
-	@JsonFormat(pattern = "dd-MM-yyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date realizationDate;
 
 	/**
@@ -75,7 +75,7 @@ public class AuditReport implements Serializable {
 	/**
 	 * The validation auditor date of the audit
 	 */
-	@JsonFormat(pattern = "dd-MM-yyy")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date validationAuditorDate;
 
 	/**
@@ -86,7 +86,7 @@ public class AuditReport implements Serializable {
 	/**
 	 * The validation audited date
 	 */
-	@JsonFormat(pattern = "dd-MM-yyy")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date validationAuditedDate;
 
 	/**

@@ -10,8 +10,10 @@ import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITTHEME;
 import static com.altran.toolsbox.util.constant.ColumnConstants.DELIVERYMODEL;
 import static com.altran.toolsbox.util.constant.ColumnConstants.DURATION;
 import static com.altran.toolsbox.util.constant.ColumnConstants.EMAIL;
+import static com.altran.toolsbox.util.constant.ColumnConstants.FIRSTNAME;
 import static com.altran.toolsbox.util.constant.ColumnConstants.ID;
 import static com.altran.toolsbox.util.constant.ColumnConstants.ISSUES;
+import static com.altran.toolsbox.util.constant.ColumnConstants.LASTNAME;
 import static com.altran.toolsbox.util.constant.ColumnConstants.PASSW;
 import static com.altran.toolsbox.util.constant.ColumnConstants.PRIMARYAUDITOR;
 import static com.altran.toolsbox.util.constant.ColumnConstants.REFERENCE;
@@ -47,9 +49,9 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
 /**
- * Represents Rest controller of project
+ * Represents Rest controller of week
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  *
  */
@@ -66,7 +68,8 @@ public class WeekController {
 	/**
 	 * Constructor of WeekController
 	 * 
-	 * @param weekService the service interface of week
+	 * @param weekService
+	 *            the service interface of week
 	 */
 	@Autowired
 	public WeekController(WeekService weekService) {
@@ -76,7 +79,8 @@ public class WeekController {
 	/**
 	 * Changes valid object response object for sending data
 	 * 
-	 * @param validResponse generic response with action as object.
+	 * @param validResponse
+	 *            generic response with action as object.
 	 */
 	@Autowired
 	public void setObjectResponse(GenericResponse<Week> objectResponse) {
@@ -86,7 +90,8 @@ public class WeekController {
 	/**
 	 * Changes message response object for sending message
 	 * 
-	 * @param messageResponse generic response with string as object.
+	 * @param messageResponse
+	 *            generic response with string as object.
 	 */
 	@Autowired
 	public void setMessageResponse(GenericResponse<String> messageResponse) {
@@ -108,6 +113,8 @@ public class WeekController {
 				RISKS, DURATION, ISSUES, PRIMARYAUDITOR, ACCOMPANYINGAUDITOR, AUDITED, AUDITTHEME));
 		filterProvider.addFilter(PROJECT_FILTER,
 				SimpleBeanPropertyFilter.serializeAllExcept(ID, ACTIVITY, DELIVERYMODEL));
+		filterProvider.addFilter(USER_FILTER, SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME));
+
 		filterProvider.addFilter(PROCESS_FILTER, SimpleBeanPropertyFilter.serializeAll());
 		filterProvider.addFilter(WEEK_FILTER, SimpleBeanPropertyFilter.serializeAll());
 		// Create the mapping object and set the filters to the mapping
@@ -140,7 +147,8 @@ public class WeekController {
 	 * Handles NoSuchElementException if no element is present with such ID and any
 	 * other exception
 	 * 
-	 * @param id the id of the week
+	 * @param id
+	 *            the id of the week
 	 * @return ResponseEntity: the object or the error to display when getting week
 	 *         by id with HttpStatus status code
 	 */

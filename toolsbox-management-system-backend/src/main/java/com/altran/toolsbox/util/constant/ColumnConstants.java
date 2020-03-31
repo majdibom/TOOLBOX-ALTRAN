@@ -124,7 +124,6 @@ public final class ColumnConstants {
 	public static final String EXPOSUREVALUE = "exposureValue";
 	public static final String EXPOSURES = "exposures";
 
-
 	// Probability
 	public static final String Faible = "Faible";
 	public static final String Moyenne = "Moyenne";
@@ -157,6 +156,5 @@ public final class ColumnConstants {
 	public static final String ROLEMEMBREACTIVITE = "MEMBRE_ACTIVITE";
 	public static final String ROLERESPONSABLEACTION = "RESPONSABLE_ACTION";
 	public static final String ROLERESPONSABLESYSTEMEMANAGEMENT = "RESPONSABLE_SYSTEME_MANAGEMENT";
-	
 
 }

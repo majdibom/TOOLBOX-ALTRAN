@@ -4,8 +4,14 @@
     <div class="col-lg-6">
       <h3>{{'Gestion des audits internes' | translate}}</h3>
     </div>
+ 
     <!-- Add audit Button -->
     <div class="col-lg-6 text-right">
+      <!-- audit list Button -->
+    <button type="button" class="btn btn-primary btn-add" title="Afficher la liste des audits" data-toggle="modal"
+    data-target="#listmodal" routerLink="all" routerLinkActive="active-link">
+    <i class="fa fa-align-justify"></i> {{'audit list' | translate}}
+  </button> &nbsp;
       <button id="add-audit-btn" type="button" class="btn btn-primary btn-add" data-toggle="modal"
         title="Ajouter un nouveau audit" data-target="#addModal">
         <i class="fa fa-plus-circle fa-lg"></i> {{'Nouvel audit' | translate}}
@@ -20,5 +26,5 @@
   <!-- Add Audit Modal -->
   <app-audit-add (submitted)="audiPlanning.load()"></app-audit-add>
   <!-- Activities Table -->
-  <!-- <app-activity-list #activityList></app-activity-list> -->
+  <!-- <app-audit-list #auditList></app-audit-list> -->
 </div>

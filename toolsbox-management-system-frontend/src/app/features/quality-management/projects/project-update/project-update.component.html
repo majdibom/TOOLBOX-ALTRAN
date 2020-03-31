@@ -1,0 +1,48 @@
+<form #updateProjectForm="ngForm">
+  <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Modifier ce Projet' | translate}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Title field -->
+          <div class="form-group">
+            <label for="title" class="required">{{'Titre' | translate}}</label>
+            <input type="text" id="title-update" name="title" class="form-control" [(ngModel)]="projectToEdit.title"
+              required>
+          </div>
+          <!-- Activity field -->
+          <div class="form-group">
+            <label for="activity" class="required">{{'Activité' | translate}}</label>
+            <select id="activity" name="activity" class="form-control" [(ngModel)]="projectToEdit.activity.id" required>
+              <option *ngFor="let activity of listOfActivities" [ngValue]="activity.id">{{activity.title}}</option>
+            </select>
+          </div>
+          <!-- deliveryModel field -->
+          <div class="form-group">
+            <label for="deliveryModel" class="required">{{'Delivery Model' | translate}}</label>
+            <select id="deliveryModel" name="deliveryModel" class="form-control" [(ngModel)]="projectToEdit.deliveryModel.id" required>
+              <option *ngFor="let deliveryModel of listOfDeliveryModels" [ngValue]="deliveryModel.id">{{deliveryModel.title}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- Close button -->
+          <button type="button" id="exit-update-project" name="exit-update-project" class="btn btn-secondary"
+            data-dismiss="modal">{{'Fermer'
+              | translate}}</button>
+          &nbsp;
+          <!-- Update button -->
+          <button type="button" id="submit-update-project" name="submit-update-project" class="btn btn-primary"
+            data-dismiss="modal" (click)="updateProject()" [disabled]="!updateProjectForm.valid">{{'Enregistrer'
+              | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

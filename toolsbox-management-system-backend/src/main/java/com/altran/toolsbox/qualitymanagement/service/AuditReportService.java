@@ -24,4 +24,5 @@ public interface AuditReportService {
 	void validateReport(String validation, String validator, Long id);
 
 	void delete(Long id);
+
 }
