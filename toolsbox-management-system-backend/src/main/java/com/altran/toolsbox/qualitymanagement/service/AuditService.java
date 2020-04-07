@@ -25,6 +25,8 @@ public interface AuditService {
 
 	Page<Audit> findByAudited(String username, Pageable pageable);
 
+	Page<Audit> simpleSearch(String term, Pageable pageable);
+
 	Audit findById(Long id);
 
 	Audit create(Audit audit);

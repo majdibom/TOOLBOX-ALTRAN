@@ -1,0 +1,61 @@
+<form #updateGapForm="ngForm">
+  <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Modifier cet ecart' | translate}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- description field -->
+          <div class="form-group">
+            <label for="description" class="required">{{'Description' | translate}}</label>
+            <textarea rows="2" id="description-update" name="description" class="form-control"
+              [(ngModel)]="gapToEdit.description" required> </textarea>
+          </div>
+          <!-- justification field -->
+          <div class="form-group">
+            <label for="justification" class="required">{{'Justification' | translate}}</label>
+            <textarea rows="2" id="justification-update" name="justification" class="form-control"
+              [(ngModel)]="gapToEdit.justification" required> </textarea>
+          </div>
+          <!-- improvementClue field -->
+          <div class="form-group">
+            <label for="improvementClue" class="required">{{'Improvement Clue' | translate}}</label>
+            <textarea rows="2" id="improvementClue-update" name="improvementClue" class="form-control"
+              [(ngModel)]="gapToEdit.improvementClue" required> </textarea>
+          </div>
+          <!-- identifiedCauses field -->
+          <div class="form-group">
+            <label for="identifiedCauses" class="required">{{'Identified Causes' | translate}}</label>
+            <textarea rows="2" id="identifiedCauses-update" name="identifiedCauses" class="form-control"
+              [(ngModel)]="gapToEdit.identifiedCauses" required> </textarea>
+          </div>
+          <!-- Type Gap field -->
+          <div class="form-group">
+            <label for="typeGap" class="required">{{'Type d ecart' | translate}}</label>
+            <select id="typeGap" (change)="parseValue($event.target.value)" name="typeGap" class="form-control"
+              [(ngModel)]="gapToEdit.typeGap" required>
+              <option *ngFor="let typeGap of listOfTypeGap" [value]="typeGap">
+                {{typeGap}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- Close button -->
+          <button type="button" id="exit-update-gap" name="exit-update-gap" class="btn btn-secondary"
+            data-dismiss="modal">{{'Fermer'
+              | translate}}</button>
+          &nbsp;
+          <!-- Update button -->
+          <button type="button" id="submit-update-gap" name="submit-update-gap" class="btn btn-primary"
+            data-dismiss="modal" (click)="updateGap()" [disabled]="!updateGapForm.valid">{{'Enregistrer'
+              | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

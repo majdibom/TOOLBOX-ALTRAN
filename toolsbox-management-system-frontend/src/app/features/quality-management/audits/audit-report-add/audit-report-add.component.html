@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         <form #addAuditReportForm="ngForm">
-         
+
           <!-- examinedPoints field -->
           <div class="form-group  ">
             <label for="examinedPoints" class="required">{{'Points examinés' | translate}}</label>
@@ -25,25 +25,156 @@
           <!-- Auditor field -->
           <div class="form-group">
             <label for="auditor" class="required">{{'Auditeur' | translate}}</label>
-            <select id="auditor" name="auditor" class="form-control"
-              [(ngModel)]="auditReportToAdd.auditor " required>
+            <select id="auditor" name="auditor" class="form-control" [(ngModel)]="auditReportToAdd.auditor " required>
               <option *ngFor="let auditor of listOfUsers" [ngValue]="auditor">{{auditor.firstName}}</option>
             </select>
           </div>
+          <!-- Gaps field -->
+          <div class="form-group">
+            <div class="card">
+              <div class="card-header">
+                <label for="gaps" class="required">
+                  {{'Ecarts' | translate}}</label>
+                <!-- Number of action alert -->
+                <div class="alert alert-danger" *ngIf="auditReportToAdd.gaps.length < 1" role="alert">
+                  <div align-text="center">{{'Il faut ajouter au moins un ecart !' | translate}} </div>
+                </div>
+              </div>
+              <div class="card-body" style="background-color: #e6dede;">
+                <form #createGapForm="ngForm">
+                  <div class="form-group">
+                    <!--Description field -->
+                    <div class="form-group">
+                      <label for="description" class="required">{{'description' | translate}}</label>
+                      <textarea class="form-control" id="description-add" name="description"
+                        [(ngModel)]="gapToAdd.description" rows="2" required> </textarea>
+                    </div>
+                    <!--justification field -->
+                    <div class="form-group">
+                      <label for="justification" class="required">{{'justification' | translate}}</label>
+                      <textarea class="form-control" id="justification-add" name="justification"
+                        [(ngModel)]="gapToAdd.justification" rows="2" required> </textarea>
+                    </div>
+                    <!--improvementClue field -->
+                    <div class="form-group">
+                      <label for="improvementClue" class="required">{{'improvement Clue' | translate}}</label>
+                      <textarea class="form-control" id="improvementClue-add" name="improvementClue"
+                        [(ngModel)]="gapToAdd.improvementClue" rows="2" required> </textarea>
+                    </div>
+                    <!--identifiedCauses field -->
+                    <div class="form-group">
+                      <label for="identifiedCauses" class="required">{{'identified Causes' | translate}}</label>
+                      <textarea class="form-control" id="identifiedCauses-add" name="identifiedCauses"
+                        [(ngModel)]="gapToAdd.identifiedCauses" rows="2" required> </textarea>
+                    </div>
+                    <!-- Type Gap field -->
+                    <div class="form-group ">
+                      <label for="typeGap-add" class="required">{{'Type d ecart' | translate}}</label>
+                      <select id="typeGap-add" name="typeGap-add" class="form-control" [(ngModel)]="gapToAdd.typeGap"
+                        required>
+                        <option *ngFor="let typeGap of TypeGapEnum" [value]="typeGap">
+                          {{TypeGapLabel[typeGap]}}
+                        </option>
+                      </select>
+                    </div>
+                    <!-- Add gap button -->
+                    <button id="add-action-btn" type="button" class="btn btn-secondary" data-toggle="modal"
+                      (click)="addGap(gapToAdd.description, gapToAdd.justification, gapToAdd.improvementClue, gapToAdd.identifiedCauses, gapToAdd.typeGap)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </div>
+                  <!-- Gap list section -->
+                  <div class="data">
+                    <br>
+                    <ul class="list-unstyled">
+                      <li *ngFor="let gap of auditReportToAdd.gaps">
+                        <div class="row">
+                          <div class="col-9">
+                            <td><span><strong>{{'description' | translate}}:</strong></span>
+                              <span id="description" name="description">{{gap.description}}</span></td><br>
+                            <td><span><strong>{{'justification' | translate}}:</strong></span>
+                              <span id="justification" name="justification">{{gap.justification}}</span></td><br>
+                            <td><span><strong>{{'improvement Clue' | translate}}:</strong></span>
+                              <span id="improvementClue" name="improvementClue">{{gap.improvementClue}}</span></td><br>
+                            <td><span><strong>{{'identified Causes' | translate}}:</strong></span>
+                              <span id="identifiedCauses" name="identifiedCauses">{{gap.identifiedCauses}}</span></td>
+                            <br>
+                            <td><span><strong>{{'Type d ecart' | translate}}:</strong></span>
+                              <span id="typeGap" name="typeGap">{{gap.typeGap}}</span></td>
+                            <hr>
+                            <form *ngIf="gap.editMode">
+                              <label for="update"><strong>Update:</strong></label>
+                              <div class="input-group mb-3">
+                                <div>
+                                  <span><strong>{{'description' | translate}}:</strong></span>
+                                  <input type="text" class="form-control" id="description" name="description"
+                                    *ngIf="gap.editMode" [(ngModel)]="gap.description">
+                                  &nbsp;</div>
+                                <div>
+                                  <span><strong>{{'justification' | translate}}:</strong></span>
+                                  <input type="text" class="form-control" id="justification" name="justification"
+                                    *ngIf="gap.editMode" [(ngModel)]="gap.justification">
+                                  &nbsp;</div>
+                                <div>
+                                  <span><strong>{{'improvement Clue' | translate}}:</strong></span>
+                                  <input type="text" class="form-control" id="improvementClue" name="improvementClue"
+                                    *ngIf="gap.editMode" [(ngModel)]="gap.improvementClue">
+                                  &nbsp;</div>
+                                <div>
+                                  <span><strong>{{'identified Causes' | translate}}:</strong></span>
+                                  <input type="text" class="form-control" id="identifiedCauses" name="identifiedCauses"
+                                    *ngIf="gap.editMode" [(ngModel)]="gap.identifiedCauses">
+                                  &nbsp;</div>
+                                <!-- Type Gap field -->
+                                <div>
+                                  <label for="typeGap" class="required">{{'Type d ecart' | translate}}</label>
+                                  <select id="typeGap" (change)="parseValue($event.target.value)" name="typeGap"
+                                    class="form-control" [(ngModel)]="gap.typeGap" required>
+                                    <option *ngFor="let typeGap of listOfTypeGap" [value]="typeGap">
+                                      {{typeGap}}</option>
+                                  </select>
+                                </div>
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                                  (click)="editGap(gap)">
+                                  <i class="fa fa-check"></i>
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="col-2">
+                            <td><button type="button" class="icon-button" (click)="gap.editMode=true"
+                                data-toggle="tooltip">
+                                <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                              </button>
+                            </td>
+                            <td><button type="button" class="icon-button" (click)="deleteGap(gap)"
+                                data-toggle="tooltip">
+                                <i class="fa fa-times fa-lg" aria-hidden="true" [ngStyle]="{'color':'red'}"></i>
+                              </button>
+                            </td>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
           <div class="form-row">
-           <!-- realization Date field -->
-           <div class="form-group col-md-6">
-            <label for="realizationDate-add" class="required">{{'Date de realisation' | translate}}</label>
-            <input type="date" class="form-control" id="realizationDate-add" name="realizationDate-add"
-              [(ngModel)]="auditReportToAdd.realizationDate" required>
+            <!-- realization Date field -->
+            <div class="form-group col-md-6">
+              <label for="realizationDate-add" class="required">{{'Date de realisation' | translate}}</label>
+              <input type="date" class="form-control" id="realizationDate-add" name="realizationDate-add"
+                [(ngModel)]="auditReportToAdd.realizationDate" required>
+            </div>
+            <!-- duration field -->
+            <div class="form-group  col-md-6">
+              <label for="duration" class="required">{{'Durée(h)' | translate}}</label>
+              <input type="number" id="duration" name="duration" class="form-control" pattern="[0-9]"
+                [(ngModel)]="auditReportToAdd.duration" required>
+            </div>
           </div>
-          <!-- duration field -->
-          <div class="form-group  col-md-6">
-            <label for="duration" class="required">{{'Durée(h)' | translate}}</label>
-            <input type="number" id="duration" name="duration" class="form-control" pattern="[0-9]"
-              [(ngModel)]="auditReportToAdd.duration" required>
-          </div>
-        </div>
         </form>
       </div>
       <div class="modal-footer">

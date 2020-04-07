@@ -85,5 +85,4 @@ export class AuthenticationService {
     const username = decodedJwtData.sub;
     return username;
   }
-
 }

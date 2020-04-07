@@ -10,6 +10,7 @@ import swal from 'sweetalert2';
 import { EventEmitter } from 'events';
 import { AuditService } from '@models/audit-Service';
 import { Project } from '@models/project';
+import { PageClient } from '@models/page-client';
 
 @Component({
   selector: 'app-audit-planning',
@@ -26,8 +27,8 @@ export class AuditPlanningComponent implements OnInit {
   listOfProjects: Project[] = [];
   popverDisabled: boolean;
 
-  // @Output() submitted = new EventEmitter<boolean>();
-
+  // List of audits
+  listAudits: any;
   constructor(private config: NgbPopoverConfig, private genericService: GenericService, private router: Router) {
     config.placement = 'right';
     config.triggers = 'hover';
@@ -37,10 +38,19 @@ export class AuditPlanningComponent implements OnInit {
   ngOnInit() {
     this.getProcess();
     this.getWeeks();
-
+    this.getAudits();
 
   }
+  /** Get all audits */
+  getAudits() {
+    this.genericService.getGenericList('/audits/all')
+      .subscribe(
+        data => {
+          this.listAudits = data;
+          console.log(this.listAudits);
+        });
 
+  }
   getWeeks(): void {
     this.genericService.getGenericList('/weeks/all').subscribe(
       data => {
@@ -125,7 +135,7 @@ export class AuditPlanningComponent implements OnInit {
     }
   }
 
- 
+
 
   loadTitles(idProcess: number, idWeek: number) {
 

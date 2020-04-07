@@ -20,6 +20,8 @@ import static com.altran.toolsbox.util.constant.ColumnConstants.REALIZATIONDATE;
 import static com.altran.toolsbox.util.constant.ColumnConstants.REFERENCE;
 import static com.altran.toolsbox.util.constant.ColumnConstants.RISKS;
 import static com.altran.toolsbox.util.constant.ColumnConstants.TITLE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.VALIDATIONAUDITED;
+import static com.altran.toolsbox.util.constant.ColumnConstants.VALIDATIONAUDITOR;
 import static com.altran.toolsbox.util.constant.ColumnConstants.WEEK;
 import static com.altran.toolsbox.util.constant.FilterConstants.ACTIVITY_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.AUDITREPORT_FILTER;
@@ -207,14 +209,17 @@ public class AuditController {
 		SimpleBeanPropertyFilter auditFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, AUDITREPORT, RISKS,
 				DURATION, ISSUES, AUDITED, PROCESSIMPACTS, AUDITTHEME, REFERENCE, PRIMARYAUDITOR, ACCOMPANYINGAUDITOR,
 				WEEK, PROJECT, PROCESS);
-		SimpleBeanPropertyFilter weekFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
+		SimpleBeanPropertyFilter weekFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, NUMBER);
 		SimpleBeanPropertyFilter projectFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
 		SimpleBeanPropertyFilter processFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
 		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
+		SimpleBeanPropertyFilter auditReportFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, EXAMINEDPOINTS,
+				REALIZATIONDATE, VALIDATIONAUDITOR, VALIDATIONAUDITED);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(AUDIT_FILTER, auditFilter)
 				.addFilter(WEEK_FILTER, weekFilter).addFilter(PROJECT_FILTER, projectFilter)
-				.addFilter(PROCESS_FILTER, processFilter).addFilter(USER_FILTER, userFilter);
+				.addFilter(PROCESS_FILTER, processFilter).addFilter(AUDITREPORT_FILTER, auditReportFilter)
+				.addFilter(USER_FILTER, userFilter);
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue auditMapping = new MappingJacksonValue(auditList);
 		auditMapping.setFilters(filters);
@@ -238,14 +243,17 @@ public class AuditController {
 		SimpleBeanPropertyFilter auditFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, AUDITREPORT, RISKS,
 				DURATION, ISSUES, AUDITED, PROCESSIMPACTS, AUDITTHEME, REFERENCE, PRIMARYAUDITOR, ACCOMPANYINGAUDITOR,
 				WEEK, PROJECT, PROCESS);
-		SimpleBeanPropertyFilter weekFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
+		SimpleBeanPropertyFilter weekFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, NUMBER);
 		SimpleBeanPropertyFilter projectFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
 		SimpleBeanPropertyFilter processFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
 		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
+		SimpleBeanPropertyFilter auditReportFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, EXAMINEDPOINTS,
+				REALIZATIONDATE, VALIDATIONAUDITOR, VALIDATIONAUDITED);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(AUDIT_FILTER, auditFilter)
 				.addFilter(WEEK_FILTER, weekFilter).addFilter(PROJECT_FILTER, projectFilter)
-				.addFilter(PROCESS_FILTER, processFilter).addFilter(USER_FILTER, userFilter);
+				.addFilter(PROCESS_FILTER, processFilter).addFilter(AUDITREPORT_FILTER, auditReportFilter)
+				.addFilter(USER_FILTER, userFilter);
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue auditMapping = new MappingJacksonValue(auditList);
 		auditMapping.setFilters(filters);
@@ -273,10 +281,13 @@ public class AuditController {
 		SimpleBeanPropertyFilter projectFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
 		SimpleBeanPropertyFilter processFilter = SimpleBeanPropertyFilter.serializeAll();
 		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
+		SimpleBeanPropertyFilter auditReportFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, EXAMINEDPOINTS,
+				REALIZATIONDATE, VALIDATIONAUDITOR, VALIDATIONAUDITED);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(AUDIT_FILTER, auditFilter)
 				.addFilter(WEEK_FILTER, weekFilter).addFilter(PROJECT_FILTER, projectFilter)
-				.addFilter(PROCESS_FILTER, processFilter).addFilter(USER_FILTER, userFilter);
+				.addFilter(PROCESS_FILTER, processFilter).addFilter(AUDITREPORT_FILTER, auditReportFilter)
+				.addFilter(USER_FILTER, userFilter);
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue auditMapping = new MappingJacksonValue(auditList);
 		auditMapping.setFilters(filters);
@@ -436,4 +447,37 @@ public class AuditController {
 		}
 	}
 
+	/**
+	 * Searches for audits by one term
+	 * 
+	 * @param term
+	 * @param pageable
+	 *            pagination information
+	 * @return term the term to base search on it
+	 */
+	@GetMapping(value = "/search/{term}")
+	public MappingJacksonValue searchAudits(@PathVariable(value = "term") String term, Pageable pageable) {
+		Page<Audit> auditList = auditService.simpleSearch(term, pageable);
+		/** Filtering data to send **/
+		// Filter the audit object
+		SimpleBeanPropertyFilter auditFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, AUDITREPORT, RISKS,
+				DURATION, ISSUES, AUDITED, PROCESSIMPACTS, AUDITTHEME, REFERENCE, PRIMARYAUDITOR, ACCOMPANYINGAUDITOR,
+				WEEK, PROJECT, PROCESS);
+		SimpleBeanPropertyFilter weekFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, NUMBER);
+		SimpleBeanPropertyFilter projectFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE, ACTIVITY);
+		SimpleBeanPropertyFilter processFilter = SimpleBeanPropertyFilter.serializeAll();
+		SimpleBeanPropertyFilter activityFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID);
+		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
+		SimpleBeanPropertyFilter auditReportFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, EXAMINEDPOINTS,
+				REALIZATIONDATE);
+		// Add filters to filter provider
+		FilterProvider filters = new SimpleFilterProvider().addFilter(AUDIT_FILTER, auditFilter)
+				.addFilter(WEEK_FILTER, weekFilter).addFilter(PROJECT_FILTER, projectFilter)
+				.addFilter(PROCESS_FILTER, processFilter).addFilter(USER_FILTER, userFilter)
+				.addFilter(AUDITREPORT_FILTER, auditReportFilter).addFilter(ACTIVITY_FILTER, activityFilter);
+		// Create the mapping object and set the filters to the mapping
+		MappingJacksonValue auditMapping = new MappingJacksonValue(auditList);
+		auditMapping.setFilters(filters);
+		return auditMapping;
+	}
 }

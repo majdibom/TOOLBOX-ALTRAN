@@ -1,0 +1,130 @@
+<!-- Title-->
+<div class="title">
+  <div class="row">
+    <div class="col-lg-6">
+      <h3 class="username" id="connected-user-name">{{'Liste des audites pour audité:' | translate}} {{firstName}}
+        {{lastName}}</h3>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Number of elements select form -->
+      <div class=" col-md-8">
+        <div class="btn-group">
+          <span class="label label-default">{{'Afficher' | translate}}</span>&nbsp;
+          <button type="button" id="show-items-list-btn" class="btn dropdown-toggle btn-dropdown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{item}}
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" id="five-items" (click)="getItems(5)">5</a>
+            <a class="dropdown-item" id="ten-items" (click)="getItems(10)">10</a>
+            <a class="dropdown-item" id="twenty-items" (click)="getItems(20)">20</a>
+            <a class="dropdown-item" id="fifty-items" (click)="getItems(50)">50</a>
+            <a class="dropdown-item" id="handred-items" (click)="getItems(100)">100</a>
+          </div>
+          &nbsp;
+          <span class="label label-default">{{'éléments' | translate}}</span>
+        </div>
+      </div>
+      <!-- Search form -->
+      <div class=" col-md-4 text-right">
+        <div class="input-group search">
+          <input type="text" id="search-action" class="form-control search" placeholder="{{'Recherche...' | translate}}"
+            [(ngModel)]="searchInput" (input)="onSearch($event.target.value)">
+        </div>
+      </div>
+    </div>
+    <!-- audit list Table -->
+    <div class="table-responsive-lg">
+      <table class="table table-bordered table-striped table-hover">
+        <thead class="row-border hover">
+          <tr>
+            <th style="width: 5%;">{{'Week' | translate}}</th>
+            <th style="width: 10%;">{{'Process Impacts' | translate}}</th>
+            <th style="width: 10%;">{{'Project/Process' | translate}}</th>
+            <th style="width: 18%;">{{'primary Auditor' | translate}}</th>
+            <th style="width: 18%;">{{'accompanying Auditor' | translate}}</th>
+            <th style="width: 18%;">{{'Audited' | translate}}</th>
+            <th style="width: 5%;">{{'duration(h)' | translate}}</th>
+            <th style="width: 30%;" class="text-center">{{'Actions' | translate}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let audit of listAudits | paginate: { itemsPerPage: item, currentPage: p, totalItems: total }">
+            <td>{{audit.week.number}}</td>
+            <td *ngIf="audit">{{audit.processImpacts[0]?.title}}
+              <label *ngIf="audit.processImpacts.length > 1">
+                <strong> ... </strong>
+                <ng-template #tipContent>
+                  <div *ngFor="let process of audit?.processImpacts">
+                    {{process.title}}
+                  </div>
+                </ng-template>
+                <button type="button" class="btn icon-button btn-sm" placement="right" [ngbTooltip]="tipContent">
+                  <i class="fa fa-info-circle"></i>
+                </button>
+              </label>
+            </td>
+            <td *ngIf="audit.process">
+              {{audit.process.title }}
+            </td>
+            <td *ngIf="audit.project">
+              {{audit.project.title }}
+            </td>
+            <td>{{audit.primaryAuditor?.firstName}} {{audit.primaryAuditor?.lastName}}</td>
+            <td>{{audit.accompanyingAuditor?.firstName}} {{audit.accompanyingAuditor?.lastName}}</td>
+            <td *ngIf="audit">{{audit.audited[0]?.firstName}} {{audit.audited[0]?.lastName}}
+              <label *ngIf="audit.audited.length > 1">
+                <strong> ... </strong>
+                <ng-template #tipContent>
+                  <div *ngFor="let audited of audit?.audited">
+                    {{audited?.firstName}} {{audited?.lastName}}
+                  </div>
+                </ng-template>
+                <button type="button" class="btn icon-button btn-sm" placement="right" [ngbTooltip]="tipContent">
+                  <i class="fa fa-info-circle"></i>
+                </button>
+              </label>
+            </td>
+            <td>{{audit.duration}}</td>
+            <td class="text-center">
+              <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#validateReportModal"
+                (click)="validateReport.validate(audit.auditReport.id,'audited')"
+                *ngIf="audit.auditReport && !audit.auditReport.validationAudited"><i
+                  class="fa fa-check"></i> Validation </a>
+              <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#validateReportModal"
+                (click)="validateReport.validate(audit.auditReport.id,'audited')"
+                *ngIf="audit.auditReport && audit.auditReport.validationAudited && audit.auditReport.validationAudited === 'no'"><i
+                  class="fa fa-check"></i> Validate</a>&nbsp;
+              <button type="button" class="btn btn-detail" title="Afficher les details de cette audit"
+                data-toggle="modal" data-target="#detailsmodal" (click)="openDetails(audit.id)"><i
+                  class="fa fa-align-justify"></i></button>&nbsp;
+              <button type="button" class="btn btn-danger btn-circle" title="Supprimer cette audit"
+                (click)="deleteAudits(audit.id)"><i class="fa fa-remove"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- No data in table message-->
+      <div *ngIf="listActions?.length==0">
+        <div class="nodata-box">
+          <div class="nodata-text" id="no-data-available">{{'Aucune donnée trouvée.' | translate}}</div>
+        </div>
+      </div>
+      <!-- Pagination-->
+      <div class="clearfix">
+        <div class="hint-text">{{'Total' | translate}}: <b>{{total}}</b> {{'éléments' | translate}}</div>
+        <div class="pagination justify-content-end">
+          <nav class="Page navigation example">
+            <pagination-controls (pageChange)="p=$event" (click)="onSelect(p)"
+              previousLabel="{{'Précédente' | translate}}" nextLabel="{{'Suivante' | translate}}"></pagination-controls>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-validate-report #validateReport (reloadEvent)="reloadData()"></app-validate-report>

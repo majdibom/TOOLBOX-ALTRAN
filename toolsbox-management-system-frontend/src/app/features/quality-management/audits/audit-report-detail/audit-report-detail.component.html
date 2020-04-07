@@ -18,7 +18,7 @@
             <ul class="list-group shadow-none">
               <li class="list-group-item">
                 <div class="list-icon">
-                  <i class="fa fa-cog" aria-hidden="true"></i>
+                  <i class="fa fa-clock-o" aria-hidden="true"></i>
                 </div>
                 <div class="list-details">
                   <span style="font-size: medium;">{{'Durée' | translate}}: </span>&nbsp;&nbsp;<span
@@ -27,20 +27,26 @@
               </li>
               <li class="list-group-item">
                 <div class="list-icon">
-                  <i class="fa fa-cog" aria-hidden="true"></i>
+                  <i class="fa fa-check-square-o" aria-hidden="true"></i>
                 </div>
                 <div class="list-details">
-                  <span style="font-size: medium;">{{'Auditeur validation' | translate}}: </span>&nbsp;&nbsp;<span
+                  <span style="font-size: medium;">{{'validation Auditeur' | translate}}: </span>&nbsp;&nbsp;
+                  <span *ngIf="auditReport?.validationAuditor == 'yes'" class="badge badge-success"
                     style="font-size: medium;">{{auditReport?.validationAuditor}}</span>
+                  <span *ngIf="auditReport?.validationAuditor == null" class="badge badge-danger"
+                    style="font-size: medium;">{{auditReport?.validationAuditor}} No</span>
                 </div>
               </li>
               <li class="list-group-item">
                 <div class="list-icon">
-                  <i class="fa fa-cog" aria-hidden="true"></i>
+                  <i class="fa fa-check-square-o" aria-hidden="true"></i>
                 </div>
                 <div class="list-details">
-                  <span style="font-size: medium;">{{'validation Audited' | translate}}: </span>&nbsp;&nbsp;<span
+                  <span style="font-size: medium;">{{'validation Audité' | translate}}: </span>&nbsp;&nbsp;
+                  <span *ngIf="auditReport?.validationAudited == 'yes'" class="badge badge-success"
                     style="font-size: medium;">{{auditReport?.validationAudited}}</span>
+                  <span *ngIf="auditReport?.validationAudited == null" class="badge badge-danger"
+                    style="font-size: medium;">{{auditReport?.validationAudited}} No</span>
                 </div>
               </li>
             </ul>
@@ -86,19 +92,65 @@
                 <div class="col-md-12">
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                      <h5><strong>{{'Points examinés' | translate}} :</strong>&nbsp;&nbsp;{{auditReport?.examinedPoints}}</h5>
+                      <h5><strong>{{'Points examinés' | translate}}
+                          :</strong>&nbsp;&nbsp;{{auditReport?.examinedPoints}}</h5>
                     </li>
                     <li class="list-group-item">
-                      <h5><strong>{{'Points forts' | translate}} :</strong>&nbsp;&nbsp;{{auditReport?.strongPoints}}</h5>
+                      <h5><strong>{{'Points forts' | translate}} :</strong>&nbsp;&nbsp;{{auditReport?.strongPoints}}
+                      </h5>
+                    </li>
+                    <li class="list-group-item">
+                      <!-- Actions list Table -->
+                      <h5><strong>{{'Ecarts' | translate}} :</strong>
+                        <button type="button" id="add-gap-btn" type="button" class="btn btn-primary btn-add"
+                          data-toggle="modal" title="Ajouter un nouveau ecart" data-target="#addModal"
+                          style="float:right;">
+                          <i class="fa fa-plus-circle fa-lg"></i>&nbsp;Add Gap</button></h5>&nbsp;
+                      <div class="table-responsive-lg">
+                        <table class="table table-bordered table-striped table-hover">
+                          <thead class="row-border hover">
+                            <tr>
+                              <th style="width: 2%;">{{'#' | translate}}</th>
+                              <th style="width: 20%;">{{'Description' | translate}}</th>
+                              <th style="width: 20%;">{{'Justification' | translate}}</th>
+                              <th style="width: 20%;">{{'Improvement Clue' | translate}}</th>
+                              <th style="width: 20%;">{{'Identified Causes' | translate}}</th>
+                              <th style="width: 20%;">{{'Type d ecart' | translate}}</th>
+                              <th style="width: 20%;" class="text-center">{{'Actions' | translate}}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let gap of auditReport?.gaps">
+                              <td>{{gap?.id}} </td>
+                              <td>{{gap?.description}} </td>
+                              <td>{{gap?.justification}} </td>
+                              <td>{{gap?.improvementClue}} </td>
+                              <td>{{gap?.identifiedCauses}} </td>
+                              <td>{{gap?.typeGap}} </td>
+                              <td class="text-center">
+                                &nbsp; <button type="button" class="btn btn-primary btn-circle"
+                                  title="Modifier cet ecart" data-toggle="modal" data-target="#editmodal"
+                                  (click)="openEditModal(gap)"><i class="fa fa-edit"></i></button>
+                                &nbsp;
+                                <button type="button" class="btn btn-danger btn-circle" title="Supprimer ce ecart"
+                                  (click)="deleteGap(gap.id)"><i class="fa fa-remove"></i></button>
+                              </td>
+                            </tr>
+                            <tr></tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
   </div>
+  <!-- add gap -->
+  <app-gap-add [auditReportToEdit]="auditReport" (reloadEvent)="reloadData()"></app-gap-add>
+  <!-- Edit Action Modal -->
+  <app-gap-update [gapToEdit]="editGap" (reloadEvent)="reloadData()"></app-gap-update>

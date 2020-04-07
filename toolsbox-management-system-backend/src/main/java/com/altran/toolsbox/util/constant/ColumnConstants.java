@@ -91,6 +91,8 @@ public final class ColumnConstants {
 	public static final String JUSTIFICATION = "justification";
 	public static final String IMPROVEMENTCLUE = "improvementClue";
 	public static final String IDENTIFIEDCAUSES = "identifiedCauses";
+	public static final String TYPEGAP = "typeGap";
+
 	// Origin
 	public static final String Risk = "Risk";
 	// Project

@@ -1,0 +1,59 @@
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Ajouter un ecart' | translate}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addGapForm="ngForm">
+          <!--Description field -->
+          <div class="form-group">
+            <label for="description" class="required">{{'description' | translate}}</label>
+            <textarea class="form-control" id="description-add" name="description" [(ngModel)]="gapToAdd.description"
+              rows="2" required> </textarea>
+          </div>
+          <!--justification field -->
+          <div class="form-group">
+            <label for="justification" class="required">{{'justification' | translate}}</label>
+            <textarea class="form-control" id="justification-add" name="justification"
+              [(ngModel)]="gapToAdd.justification" rows="2" required> </textarea>
+          </div>
+          <!--improvementClue field -->
+          <div class="form-group">
+            <label for="improvementClue" class="required">{{'improvement Clue' | translate}}</label>
+            <textarea class="form-control" id="improvementClue-add" name="improvementClue"
+              [(ngModel)]="gapToAdd.improvementClue" rows="2" required> </textarea>
+          </div>
+          <!--identifiedCauses field -->
+          <div class="form-group">
+            <label for="identifiedCauses" class="required">{{'identified Causes' | translate}}</label>
+            <textarea class="form-control" id="identifiedCauses-add" name="identifiedCauses"
+              [(ngModel)]="gapToAdd.identifiedCauses" rows="2" required> </textarea>
+          </div>
+           <!-- Type Gap field -->
+           <div class="form-group ">
+            <label for="typeGap-add" class="required">{{'Type d ecart' | translate}}</label>
+            <select id="typeGap-add" name="typeGap-add" class="form-control" [(ngModel)]="gapToAdd.typeGap"
+              required>
+              <option *ngFor="let typeGap of TypeGapEnum" [value]="typeGap">
+                {{TypeGapLabel[typeGap]}}
+              </option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- Close button -->
+        <button type="button" id="exit-add-gap" class="btn btn-secondary" data-dismiss="modal" (click)="emptyObject()">{{'Fermer'
+            | translate}}</button>
+        &nbsp;
+        <!-- Add button -->
+        <button type="button" id="submit-add-gap" class="btn btn-primary" (click)="createGap()" data-dismiss="modal"
+          [disabled]="!addGapForm.valid">{{'Enregistrer' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

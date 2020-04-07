@@ -133,14 +133,17 @@ public class AuditReportServiceImpl implements AuditReportService {
 		auditReport.setGaps(new HashSet<Gap>());
 		// new gap list to assign to the created risk
 		Set<Gap> createdGaps = new HashSet<>();
+		AuditReport createdAuditReport = auditReportRepository.save(auditReport);
+
 		// Save every gap in database and add it to report gap list
 		for (Gap gap : gaps) {
 			Gap createdGap = gapService.create(gap);
+			createdGap.setAuditReport(createdAuditReport);
 			createdGaps.add(createdGap);
 		}
 		// Assign the new gap list to the created report
-		auditReport.setGaps(createdGaps);
-		return auditReportRepository.save(auditReport);
+		createdAuditReport.setGaps(createdGaps);
+		return auditReportRepository.save(createdAuditReport);
 	}
 
 	/**

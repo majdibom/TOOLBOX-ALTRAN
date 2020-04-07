@@ -198,4 +198,18 @@ public class AuditServiceImpl implements AuditService {
 		}
 		return false;
 	}
+
+	/**
+	 * Searches for audits by one term
+	 * 
+	 * @param term
+	 *            the term to base search on it
+	 * @param pageable
+	 *            pagination information
+	 * @return list of audits contains the input term by page
+	 */
+	@Override
+	public Page<Audit> simpleSearch(String term, Pageable pageable) {
+		return auditRepository.simpleSearch(term, pageable);
+	}
 }

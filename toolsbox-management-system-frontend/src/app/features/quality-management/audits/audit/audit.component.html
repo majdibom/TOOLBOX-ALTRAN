@@ -7,6 +7,15 @@
  
     <!-- Add audit Button -->
     <div class="col-lg-6 text-right">
+       <!-- auditor space Button -->
+       <button type="button" class="btn btn-primary btn-add" title="Afficher la liste des audits pour l audité" data-toggle="modal"
+    data-target="#listmodal" routerLink="audited-space/:audited" routerLinkActive="active-link">
+    <i class="fa fa-align-justify"></i> {{'Audited space' | translate}}
+  </button> &nbsp;
+    <button type="button" class="btn btn-primary btn-add" title="Afficher la liste des audits pour l auditeur" data-toggle="modal"
+    data-target="#listmodal" routerLink="auditor-space/:auditor" routerLinkActive="active-link">
+    <i class="fa fa-align-justify"></i> {{'Auditor space' | translate}}
+  </button> &nbsp;
       <!-- audit list Button -->
     <button type="button" class="btn btn-primary btn-add" title="Afficher la liste des audits" data-toggle="modal"
     data-target="#listmodal" routerLink="all" routerLinkActive="active-link">

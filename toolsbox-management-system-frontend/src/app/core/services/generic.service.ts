@@ -130,4 +130,7 @@ export class GenericService {
   deleteListOfMessages(url: any, any: Array<any>): Observable<any> {
     return this.http.post(`${this.baseUrl}` + url, any);
   }
+  validateReport(url: any, id: number,validator: string, validation: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}` + url + `/${id}`+ '/' + validator + '/' + validation);
+  }
 }

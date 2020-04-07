@@ -9,24 +9,17 @@ import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITS;
 import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITTHEME;
 import static com.altran.toolsbox.util.constant.ColumnConstants.DELIVERYMODEL;
 import static com.altran.toolsbox.util.constant.ColumnConstants.DURATION;
-import static com.altran.toolsbox.util.constant.ColumnConstants.EMAIL;
 import static com.altran.toolsbox.util.constant.ColumnConstants.EXAMINEDPOINTS;
 import static com.altran.toolsbox.util.constant.ColumnConstants.FIRSTNAME;
 import static com.altran.toolsbox.util.constant.ColumnConstants.GAPS;
 import static com.altran.toolsbox.util.constant.ColumnConstants.ID;
-import static com.altran.toolsbox.util.constant.ColumnConstants.IDENTIFIEDCAUSES;
-import static com.altran.toolsbox.util.constant.ColumnConstants.IMPROVEMENTCLUE;
 import static com.altran.toolsbox.util.constant.ColumnConstants.ISSUES;
-import static com.altran.toolsbox.util.constant.ColumnConstants.JUSTIFICATION;
 import static com.altran.toolsbox.util.constant.ColumnConstants.LASTNAME;
-import static com.altran.toolsbox.util.constant.ColumnConstants.PASSW;
 import static com.altran.toolsbox.util.constant.ColumnConstants.PROCESSIMPACTS;
 import static com.altran.toolsbox.util.constant.ColumnConstants.REALIZATIONDATE;
 import static com.altran.toolsbox.util.constant.ColumnConstants.REFERENCE;
 import static com.altran.toolsbox.util.constant.ColumnConstants.RISKS;
-import static com.altran.toolsbox.util.constant.ColumnConstants.ROLES;
 import static com.altran.toolsbox.util.constant.ColumnConstants.STRONGPOINTS;
-import static com.altran.toolsbox.util.constant.ColumnConstants.USERNAME;
 import static com.altran.toolsbox.util.constant.ColumnConstants.VALIDATIONAUDITED;
 import static com.altran.toolsbox.util.constant.ColumnConstants.VALIDATIONAUDITOR;
 import static com.altran.toolsbox.util.constant.ColumnConstants.VALIDATIONAUDITORDATE;
@@ -148,8 +141,7 @@ public class AuditReportController {
 		filterProvider.addFilter(PROJECT_FILTER,
 				SimpleBeanPropertyFilter.serializeAllExcept(ID, ACTIVITY, DELIVERYMODEL));
 		filterProvider.addFilter(PROCESS_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(ID));
-		filterProvider.addFilter(USER_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(ID, EMAIL, USERNAME, PASSW,
-				ROLES, ACTIVITY, AUDITS, ACTIONS));
+		filterProvider.addFilter(USER_FILTER, SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME));
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue auditReportsMapping = new MappingJacksonValue(auditReportList);
 		auditReportsMapping.setFilters(filterProvider);
@@ -181,8 +173,7 @@ public class AuditReportController {
 			filterProvider.addFilter(PROJECT_FILTER,
 					SimpleBeanPropertyFilter.serializeAllExcept(ID, ACTIVITY, DELIVERYMODEL));
 			filterProvider.addFilter(PROCESS_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(ID));
-			filterProvider.addFilter(GAP_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(JUSTIFICATION,
-					IMPROVEMENTCLUE, IDENTIFIEDCAUSES, ACTIONS, AUDITREPORT));
+			filterProvider.addFilter(GAP_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(ACTIONS, AUDITREPORT));
 			filterProvider.addFilter(USER_FILTER, SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME));
 			// Create the mapping object and set the filters to the mapping
 			MappingJacksonValue auditReportMapping = new MappingJacksonValue(objectResponse);

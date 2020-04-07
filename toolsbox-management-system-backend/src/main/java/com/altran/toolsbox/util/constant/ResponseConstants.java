@@ -106,6 +106,8 @@ public final class ResponseConstants {
 	public static final String AUDITREPORT_DELETED = "auditreport_deleted";
 	public static final String AUDITREPORT_NOT_DELETED = "auditreport_not_deleted";
 	// Audit report
+	public static final String GAP_CREATED = "gap_created";
+	public static final String GAP_NOT_CREATED = "gap_not_created";
 	public static final String GAP_EXIST = "gap_exist";
 	public static final String GAP_NOT_EXIST = "gap_not_exist";
 	public static final String GAP_FIND_ERROR = "gap_find_error";
