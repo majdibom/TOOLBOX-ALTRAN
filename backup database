@@ -1,28 +1,3 @@
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 11.4
--- Dumped by pg_dump version 11.4
-
--- Started on 2020-03-11 09:41:55
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- TOC entry 3088 (class 0 OID 26796)
--- Dependencies: 196
--- Data for Name: activities; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public.activities (id, description, title) VALUES (1, 'Département automobile', 'Automobile');
 INSERT INTO public.activities (id, description, title) VALUES (2, 'Département media', 'Media');
@@ -30,11 +5,6 @@ INSERT INTO public.activities (id, description, title) VALUES (3, 'Département 
 INSERT INTO public.activities (id, description, title) VALUES (4, 'Département sécurité', 'Securité');
 
 
---
--- TOC entry 3094 (class 0 OID 26833)
--- Dependencies: 202
--- Data for Name: delivery_model; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public.delivery_model (id, title) VALUES (1, 'ADM1');
 INSERT INTO public.delivery_model (id, title) VALUES (2, 'ADM2');
@@ -42,11 +12,6 @@ INSERT INTO public.delivery_model (id, title) VALUES (3, 'ADM3');
 INSERT INTO public.delivery_model (id, title) VALUES (4, 'ADM4');
 
 
---
--- TOC entry 3101 (class 0 OID 26883)
--- Dependencies: 209
--- Data for Name: process; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public.process (id, title) VALUES (1, 'BDM');
 INSERT INTO public.process (id, title) VALUES (2, 'PPR');
@@ -61,25 +26,14 @@ INSERT INTO public.process (id, title) VALUES (10, 'GRH');
 INSERT INTO public.process (id, title) VALUES (11, 'IT');
 
 
---
--- TOC entry 3102 (class 0 OID 26888)
--- Dependencies: 210
--- Data for Name: project; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
-INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (1, 'CONTI_Auto-Code', 1, 2);
-INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (2, 'Rapsody', 2, 2);
-INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (3, 'BSCU', 3, 2);
-INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (4, 'MALI', 4, 3);
 INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (5, 'X4_EBC_ACU', 3, 4);
-INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (6, 'CONTI_Safety', 1, 2);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (216, 'CONTI_Auto-Code', 1, 2);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (217, 'CONTI_Auto-Code', 1, 2);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (234, 'CONTI_Auto-Code majdi', 2, 1);
+INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (4, 'test', 4, 3);
 
 
---
--- TOC entry 3108 (class 0 OID 26941)
--- Dependencies: 216
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (3, true, 'Manzah', NULL, 'ines.jebri@altran.com', 'Ines', 'Jebri', '$2a$10$zfjDW7sIJfdmAUtvN9lMee5adV7ZqqG/MgoEqsQJ4Oia6iGLuSkOC', '74589312', 'g', 1);
 INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (4, true, 'Manzah', NULL, 'mariam.djait@altran.com', 'Mariam', 'Djait', '$2a$10$zDvCpVgZ4OZOsdEw.peB4uymkDj3kmZ0uK8ZJVf7yoQKPxw18I0C2', '74589312', 'b', 3);
@@ -91,11 +45,6 @@ INSERT INTO public.users (id, activated, address, birth_date, email, first_name,
 INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (2, true, 'Nasr', NULL, 'ayada.hassine@altran.com', 'Ayada', 'Hassine', '$2a$10$8Efud5JLfRBK.b0KnAiX4uE.GI6KD9jotN0us2bcaeTbTTsvoMkX6', '75142146', 'a', 1);
 
 
---
--- TOC entry 3110 (class 0 OID 26954)
--- Dependencies: 218
--- Data for Name: week; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public.week (id, number) VALUES (1, 1);
 INSERT INTO public.week (id, number) VALUES (2, 2);
@@ -151,47 +100,47 @@ INSERT INTO public.week (id, number) VALUES (51, 51);
 INSERT INTO public.week (id, number) VALUES (52, 52);
 
 
---
--- TOC entry 3091 (class 0 OID 26814)
--- Dependencies: 199
--- Data for Name: audits; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
-INSERT INTO public.audits (id, audit_theme, duration, issues, reference, risks, accompanying_auditor_id, primary_auditor_id, process_id, project_id, week_id) VALUES (1, 'aaa', 2, 'aaa', 'REF20154', 'aaaaa', 14, 2, NULL, 4, 2);
-
-
---
--- TOC entry 3089 (class 0 OID 26804)
--- Dependencies: 197
--- Data for Name: audit_report; Type: TABLE DATA; Schema: public; Owner: postgres
---
+INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (12, 'cccccccc', NULL, 8, 'dddd', 'ddd', 'ddddd', NULL, 4, 39, 39, NULL, 217, 20);
+INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (13, 'ggggg', NULL, 2, 'ggg', 'gggg', 'gggg', NULL, 4, 39, 39, 10, NULL, 18);
+INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (14, 'kkk', '2020-03-24 10:36:11.361', 8, 'kkk', 'kkkk', 'kkkk', '2020-03-24 10:36:11.361', 2, 39, 39, NULL, 217, 17);
+INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (11, 'aaa', NULL, 5, 'ccc', 'bbbb', 'rrrrr', '2020-03-24 10:37:01.086', 2, 39, 39, NULL, 217, 15);
+INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (10, 'test', NULL, 9, 'test', 'test', 'test', '2020-04-06 15:23:40.625', 2, NULL, 39, NULL, 5, 9);
+INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (15, 'tjt', '2020-04-06 15:26:31.72', 4, 'tjtj', 'ttt', 'tjtj', '2020-04-06 15:26:31.72', 2, 39, 39, NULL, 217, 5);
+INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (16, 'jj', '2020-04-06 22:23:47.654', 2, 'jj', 'jjj', 'jj', '2020-04-06 22:23:47.654', 4, 39, 2, NULL, 4, 1);
 
 
 
---
--- TOC entry 3095 (class 0 OID 26838)
--- Dependencies: 203
--- Data for Name: gap; Type: TABLE DATA; Schema: public; Owner: postgres
---
+INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (277, 5, 'bs', '0015-09-10 00:00:00', 'bs', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (279, 5, 'bs', '0015-09-10 00:00:00', 'bs', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (299, 4, 'aaaazzzz', '2020-04-21 00:00:00', 'azaz', 'yes', '2020-04-06 00:00:00', 'yes', '2020-04-06 00:00:00', 12, 13);
+INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (287, 4, 'aaaazzzz', '2020-04-21 00:00:00', 'azaz', 'yes', '2020-04-06 00:00:00', 'yes', '2020-04-06 00:00:00', 14, 39);
+INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (261, 4, 'aaaazzzz', '0023-09-10 00:00:00', 'azaz', 'yes', '2020-04-06 00:00:00', 'yes', '2020-04-06 00:00:00', 11, 39);
+INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (304, 8, 'bb', '2020-04-07 01:00:00', 'bb', 'yes', '2020-04-06 00:00:00', 'yes', '2020-04-06 00:00:00', 10, 39);
+INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (306, 2, 'rr', '2020-04-15 01:00:00', 'grg', 'yes', '2020-04-06 00:00:00', 'yes', '2020-04-06 00:00:00', 15, 39);
+INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (308, 1, 'gg', '2020-04-06 01:00:00', 'gg', 'yes', '2020-04-06 00:00:00', 'yes', '2020-04-06 00:00:00', 13, 39);
+INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (310, 8, 'aaaazzzz', '2020-04-05 01:00:00', 'azaz', 'yes', '2020-04-06 00:00:00', NULL, NULL, 16, 39);
 
 
 
---
--- TOC entry 3112 (class 0 OID 27436)
--- Dependencies: 220
--- Data for Name: actions; Type: TABLE DATA; Schema: public; Owner: postgres
---
+INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (278, NULL, NULL, NULL, NULL, NULL, 277);
+INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (280, 'aa', 'aaa', 'aaa', 'aaa', NULL, 279);
+INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (289, 'rttt', 'rrrrtt', 'rrrrtt', 'rrrrttt', NULL, 287);
+INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (298, 'hy', 'hy', 'hy', 'hy', NULL, 287);
+INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (300, 'gg', 'gg', 'gg', 'gg', 'Minor_gaps', 299);
+INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (301, 'hhh', 'hhhh', 'hhh', 'hhh', 'Major_gaps', 299);
+INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (305, 'ttb', 'tb', 'tb', 'tb', 'Minor_gaps', 304);
+INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (307, 'grgr', 'grgr', 'grgrg', 'grgrg', 'Sensitive_points', 306);
+INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (309, 'gg', 'gg', 'gg', 'gg', 'Minor_gaps', 308);
+INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (311, 'ee', 'ty', 'ttt', 'zz', 'Improvements_track', 310);
 
-INSERT INTO public.actions (id, action_status, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action, last_modified_by) VALUES (206, 'Open', '2020-03-10 16:02:44.208', 'Faire des échanges avec les concernés pour se mettre en accord sur le choix des produits', '2020-03-12 00:00:00', 'absence de commandes  non conformes', '2020-03-22 00:00:00', '2020-03-10 00:00:00', 'Audit', 'Low', '2020-03-21 00:00:00', 'Amélioration', '2020-03-10 16:02:44.208', '2020-03-16 00:00:00', 39, NULL, 15, NULL);
-INSERT INTO public.actions (id, action_status, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action, last_modified_by) VALUES (173, 'Open', '2020-03-05 14:28:49.526', 'Faire des échanges avec les concernés pour se mettre en accord sur le choix des produits', '2020-03-14 00:00:00', 'absence de commandes  non conformes', '2020-03-27 00:00:00', '2020-03-02 00:00:00', 'Audit', 'Low', '2020-03-25 00:00:00', 'Préventive', '2020-03-05 14:28:49.526', '2020-03-15 00:00:00', 39, NULL, 39, NULL);
-INSERT INTO public.actions (id, action_status, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, responsible_action, last_modified_by) VALUES (133, 'Delayed', '2020-02-28 13:33:43.688', 'Assurer une présélections des fournisseurs et des évaluations périodiques.', '2020-02-11 00:00:00', 'Evaluation globale>70%', '2020-02-21 00:00:00', '2020-02-07 00:00:00', 'Risk', 'Nomral', '2020-02-17 00:00:00', 'Protection', '2020-02-28 13:33:43.688', '2020-02-14 00:00:00', 39, NULL, 39, NULL);
 
 
---
--- TOC entry 3115 (class 0 OID 27552)
--- Dependencies: 223
--- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: postgres
---
+INSERT INTO public.actions (id, action_status, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, last_modified_by, responsible_action) VALUES (206, 'Closed', '2020-03-10 16:02:44', 'Faire des échanges avec les concernés pour se mettre en accord sur le choix des produits', '2020-03-12 00:00:00', 'absence de commandes  non conformes', '2020-03-22 00:00:00', '2020-03-10 00:00:00', 'Audit', 'Low', '2020-03-21 00:00:00', 'Amélioration', '2020-03-23 15:43:41.911', '2020-03-16 00:00:00', 39, NULL, NULL, 15);
+INSERT INTO public.actions (id, action_status, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, last_modified_by, responsible_action) VALUES (173, 'Open', '2020-03-05 14:28:49.526', 'Faire des échanges avec les concernés pour se mettre en accord sur le choix des produits', '2020-03-14 00:00:00', 'absence de commandes  non conformes', '2020-03-27 00:00:00', '2020-03-02 00:00:00', 'Audit', 'Low', '2020-03-25 00:00:00', 'Préventive', '2020-03-05 14:28:49.526', '2020-03-15 00:00:00', 39, NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, last_modified_by, responsible_action) VALUES (133, 'Delayed', '2020-02-28 13:33:43.688', 'Assurer une présélections des fournisseurs et des évaluations périodiques.', '2020-02-11 00:00:00', 'Evaluation globale>70%', '2020-02-21 00:00:00', '2020-02-07 00:00:00', 'Risk', 'Nomral', '2020-02-17 00:00:00', 'Protection', '2020-02-28 13:33:43.688', '2020-02-14 00:00:00', 39, NULL, NULL, 39);
+
+
 
 INSERT INTO public.comments (id, created_at, message, created_by) VALUES (134, '2020-02-28 13:44:02.953', 'Liste des fournisseurs agréés établie et process d''évaluation semestrielle mis en place ', 39);
 INSERT INTO public.comments (id, created_at, message, created_by) VALUES (135, '2020-02-28 13:44:13.767', 'Liste des fournisseurs agréés établie et process d''évaluation semestrielle mis en place ', 39);
@@ -200,13 +149,11 @@ INSERT INTO public.comments (id, created_at, message, created_by) VALUES (137, '
 INSERT INTO public.comments (id, created_at, message, created_by) VALUES (174, '2020-03-05 14:29:28.495', 'Preuve de clôture : "Colonne B" du fichier demande d''achats. Preuve d''efficacité :  Aucune commande non conforme depuis septembre 2018', 39);
 INSERT INTO public.comments (id, created_at, message, created_by) VALUES (178, '2020-03-07 10:24:36.253', 'aaaaa', 39);
 INSERT INTO public.comments (id, created_at, message, created_by) VALUES (207, '2020-03-10 16:03:39.159', 'Preuve de clôture : "Colonne B" du fichier demande d''achats. Preuve d''efficacité :  Aucune commande non conforme depuis septembre 2018', 39);
+INSERT INTO public.comments (id, created_at, message, created_by) VALUES (208, '2020-03-12 10:54:13.509', 'Preuve de clôture : "Colonne B" du fichier demande d''achats. Preuve d''efficacité : Aucune commande non conforme depuis septembre 2018', 39);
+INSERT INTO public.comments (id, created_at, message, created_by) VALUES (209, '2020-03-14 19:04:08.19', 'hama', 39);
+INSERT INTO public.comments (id, created_at, message, created_by) VALUES (263, '2020-03-31 12:13:22.94', 'aaa', 39);
 
 
---
--- TOC entry 3114 (class 0 OID 27547)
--- Dependencies: 222
--- Data for Name: actions_comments; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public.actions_comments (action_id, comments_id) VALUES (133, 134);
 INSERT INTO public.actions_comments (action_id, comments_id) VALUES (133, 135);
@@ -215,44 +162,52 @@ INSERT INTO public.actions_comments (action_id, comments_id) VALUES (133, 137);
 INSERT INTO public.actions_comments (action_id, comments_id) VALUES (173, 174);
 INSERT INTO public.actions_comments (action_id, comments_id) VALUES (173, 178);
 INSERT INTO public.actions_comments (action_id, comments_id) VALUES (206, 207);
-
-
---
--- TOC entry 3113 (class 0 OID 27444)
--- Dependencies: 221
--- Data for Name: actions_process_impacts; Type: TABLE DATA; Schema: public; Owner: postgres
---
+INSERT INTO public.actions_comments (action_id, comments_id) VALUES (206, 208);
+INSERT INTO public.actions_comments (action_id, comments_id) VALUES (206, 209);
+INSERT INTO public.actions_comments (action_id, comments_id) VALUES (206, 263);
 
 
 
---
--- TOC entry 3092 (class 0 OID 26823)
--- Dependencies: 200
--- Data for Name: audits_audited; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (1, 14);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (1, 3);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (1, 2);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (1, 4);
-
-
---
--- TOC entry 3093 (class 0 OID 26828)
--- Dependencies: 201
--- Data for Name: audits_process_impacts; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (1, 7);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (1, 10);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (1, 9);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (10, 3);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (11, 4);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (11, 12);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (11, 14);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (11, 13);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (11, 15);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (12, 3);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (13, 2);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (13, 12);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (13, 15);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (14, 14);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (14, 15);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (14, 39);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (15, 13);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (15, 3);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (16, 39);
 
 
---
--- TOC entry 3116 (class 0 OID 27599)
--- Dependencies: 224
--- Data for Name: exposures; Type: TABLE DATA; Schema: public; Owner: postgres
---
+
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (10, 7);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (10, 6);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (10, 11);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (11, 10);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (11, 6);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (11, 8);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (11, 11);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (12, 2);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (12, 6);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (13, 1);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (13, 2);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (14, 5);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (14, 7);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (14, 3);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (15, 2);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (15, 7);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (15, 4);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (16, 6);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (16, 4);
+
+
 
 INSERT INTO public.exposures (id, created_at, title, value) VALUES (187, '2020-03-10 14:14:21.369', 'Trés_critique', 16);
 INSERT INTO public.exposures (id, created_at, title, value) VALUES (188, '2020-03-10 14:14:28.052', 'Acceptable', 1);
@@ -271,53 +226,12 @@ INSERT INTO public.exposures (id, created_at, title, value) VALUES (201, '2020-0
 INSERT INTO public.exposures (id, created_at, title, value) VALUES (202, '2020-03-10 15:59:44.791', 'Acceptable', 3);
 INSERT INTO public.exposures (id, created_at, title, value) VALUES (203, '2020-03-10 16:00:03.845', 'A_surveiller', 4);
 INSERT INTO public.exposures (id, created_at, title, value) VALUES (204, '2020-03-10 16:02:44.156', 'Acceptable', 1);
+INSERT INTO public.exposures (id, created_at, title, value) VALUES (246, '2020-03-23 15:43:02.975', 'Acceptable', 2);
+INSERT INTO public.exposures (id, created_at, title, value) VALUES (247, '2020-03-23 15:43:59.775', 'Trés_critique', 16);
+INSERT INTO public.exposures (id, created_at, title, value) VALUES (248, '2020-03-23 15:54:23.603', 'Acceptable', 1);
+INSERT INTO public.exposures (id, created_at, title, value) VALUES (249, '2020-03-24 10:38:49.165', 'Trés_critique', 16);
 
 
---
--- TOC entry 3106 (class 0 OID 26928)
--- Dependencies: 214
--- Data for Name: training; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- TOC entry 3096 (class 0 OID 26846)
--- Dependencies: 204
--- Data for Name: needs; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- TOC entry 3099 (class 0 OID 26867)
--- Dependencies: 207
--- Data for Name: participants; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- TOC entry 3097 (class 0 OID 26854)
--- Dependencies: 205
--- Data for Name: needs_participants; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- TOC entry 3098 (class 0 OID 26859)
--- Dependencies: 206
--- Data for Name: organisms; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- TOC entry 3100 (class 0 OID 26875)
--- Dependencies: 208
--- Data for Name: privileges; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public.privileges (id, category, title) VALUES (1, 'MENU', 'SHOW_ESPACE_ADMIN');
 INSERT INTO public.privileges (id, category, title) VALUES (2, 'MENU', 'SHOW_ESPACE_QUALITY');
@@ -351,50 +265,21 @@ INSERT INTO public.privileges (id, category, title) VALUES (63, 'AUDIT_REPORT', 
 INSERT INTO public.privileges (id, category, title) VALUES (64, 'AUDIT_REPORT', 'DELETE_AUDIT_REPORT');
 
 
---
--- TOC entry 3117 (class 0 OID 28322)
--- Dependencies: 225
--- Data for Name: risk; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
-INSERT INTO public.risk (id, closure_date, cost, created_at, delay, detection_date, factors_identif, frequency, impact, non_conformity, probability, risk_nature, risk_origin, risk_priority, risk_status, risk_strategy, satisfaction, severity, updated_at, created_by, risk_pilote) VALUES (168, '2020-03-16 00:00:00', 'No', '2020-03-05 14:16:19', 'No', '2020-03-25 00:00:00', 'Faible réactivité des fournisseurs', 'Weekly', ' Non respect des délais de traitement de besoin', 'No', 'Presque_sur', 'Risk', 'Process', 'Nomral', 'Open', 'Eradication', 'No', 'Trés_Important', '2020-03-10 15:50:56.165', 39, 39);
-INSERT INTO public.risk (id, closure_date, cost, created_at, delay, detection_date, factors_identif, frequency, impact, non_conformity, probability, risk_nature, risk_origin, risk_priority, risk_status, risk_strategy, satisfaction, severity, updated_at, created_by, risk_pilote) VALUES (172, '2020-03-20 00:00:00', 'Yes', '2020-03-05 14:28:49', 'Yes', '2020-03-10 00:00:00', 'Absence de capitalisation des connaissances / retour d''expériences', 'Weekly', '- Perte d''expertise 
--Montée en compétence ralentie', 'Yes', 'Moyenne', 'Opportunity', 'Projet', 'Nomral', 'Open', 'Eradication', 'Yes', 'Moyen', '2020-03-10 16:00:03.867', 39, 2);
 INSERT INTO public.risk (id, closure_date, cost, created_at, delay, detection_date, factors_identif, frequency, impact, non_conformity, probability, risk_nature, risk_origin, risk_priority, risk_status, risk_strategy, satisfaction, severity, updated_at, created_by, risk_pilote) VALUES (205, '2020-03-12 00:00:00', 'No', '2020-03-10 16:02:44.184', 'No', '2020-03-02 00:00:00', 'Commande non-conforme au besoin exprimé', 'Monthly', 'Retard de livraison', 'No', 'Faible', 'Risk', 'Projet', 'Nomral', 'Open', 'Réduction', 'No', 'Mineur', '2020-03-10 16:02:44.184', 39, 39);
+INSERT INTO public.risk (id, closure_date, cost, created_at, delay, detection_date, factors_identif, frequency, impact, non_conformity, probability, risk_nature, risk_origin, risk_priority, risk_status, risk_strategy, satisfaction, severity, updated_at, created_by, risk_pilote) VALUES (172, '2020-03-20 00:00:00', 'Yes', '2020-03-05 14:28:49', 'Yes', '2020-03-10 00:00:00', 'Absence de capitalisation des connaissances / retour d''expériences', 'Weekly', '- Perte d''expertise 
+-Montée en compétence ralentie', 'Yes', 'Faible', 'Opportunity', 'Projet', 'Nomral', 'Open', 'Eradication', 'Yes', 'Mineur', '2020-03-23 15:54:23.621', 39, 2);
+INSERT INTO public.risk (id, closure_date, cost, created_at, delay, detection_date, factors_identif, frequency, impact, non_conformity, probability, risk_nature, risk_origin, risk_priority, risk_status, risk_strategy, satisfaction, severity, updated_at, created_by, risk_pilote) VALUES (168, '2020-03-16 00:00:00', 'No', '2020-03-05 14:16:19', 'No', '2020-03-25 00:00:00', 'Faible réactivité des fournisseurs', 'Weekly', ' Non respect des délais de traitement de besoin', 'No', 'Presque_sur', 'Risk', 'Process', 'Nomral', 'Open', 'Eradication', 'No', 'Trés_Important', '2020-03-24 10:38:49.237', 39, 39);
 
 
---
--- TOC entry 3118 (class 0 OID 28330)
--- Dependencies: 226
--- Data for Name: risk_action; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
-INSERT INTO public.risk_action (action_id, risk_id) VALUES (173, 168);
 INSERT INTO public.risk_action (action_id, risk_id) VALUES (133, 172);
 INSERT INTO public.risk_action (action_id, risk_id) VALUES (206, 205);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (133, 168);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (173, 168);
+INSERT INTO public.risk_action (action_id, risk_id) VALUES (206, 168);
 
 
---
--- TOC entry 3119 (class 0 OID 28335)
--- Dependencies: 227
--- Data for Name: risk_comments; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- TOC entry 3120 (class 0 OID 28340)
--- Dependencies: 228
--- Data for Name: risk_contingency_plan; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- TOC entry 3121 (class 0 OID 28345)
--- Dependencies: 229
--- Data for Name: risk_exposures; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public.risk_exposures (risk_id, exposures_id) VALUES (168, 198);
 INSERT INTO public.risk_exposures (risk_id, exposures_id) VALUES (172, 199);
@@ -403,21 +288,12 @@ INSERT INTO public.risk_exposures (risk_id, exposures_id) VALUES (168, 201);
 INSERT INTO public.risk_exposures (risk_id, exposures_id) VALUES (172, 202);
 INSERT INTO public.risk_exposures (risk_id, exposures_id) VALUES (172, 203);
 INSERT INTO public.risk_exposures (risk_id, exposures_id) VALUES (205, 204);
+INSERT INTO public.risk_exposures (risk_id, exposures_id) VALUES (168, 246);
+INSERT INTO public.risk_exposures (risk_id, exposures_id) VALUES (172, 247);
+INSERT INTO public.risk_exposures (risk_id, exposures_id) VALUES (172, 248);
+INSERT INTO public.risk_exposures (risk_id, exposures_id) VALUES (168, 249);
 
 
---
--- TOC entry 3122 (class 0 OID 28350)
--- Dependencies: 230
--- Data for Name: risk_mitigation_approach; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- TOC entry 3103 (class 0 OID 26910)
--- Dependencies: 211
--- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public.roles (id, description, title) VALUES (1, 'Role administrateur', 'Admin');
 INSERT INTO public.roles (id, description, title) VALUES (2, 'Role auditeur', 'Auditeur');
@@ -434,11 +310,6 @@ INSERT INTO public.roles (id, description, title) VALUES (12, 'Role responsable 
 INSERT INTO public.roles (id, description, title) VALUES (13, 'Role responsable systéme management', 'Responsable Systéme Management');
 
 
---
--- TOC entry 3104 (class 0 OID 26918)
--- Dependencies: 212
--- Data for Name: roles_privileges; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 1);
 INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (1, 2);
@@ -483,27 +354,6 @@ INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (12, 20);
 INSERT INTO public.roles_privileges (role_id, privileges_id) VALUES (12, 21);
 
 
---
--- TOC entry 3105 (class 0 OID 26923)
--- Dependencies: 213
--- Data for Name: trainers; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- TOC entry 3107 (class 0 OID 26936)
--- Dependencies: 215
--- Data for Name: training_activity; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- TOC entry 3109 (class 0 OID 26949)
--- Dependencies: 217
--- Data for Name: users_roles; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public.users_roles (user_id, roles_id) VALUES (2, 2);
 INSERT INTO public.users_roles (user_id, roles_id) VALUES (2, 4);
@@ -529,27 +379,12 @@ INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 12);
 INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 8);
 
 
---
--- TOC entry 3128 (class 0 OID 0)
--- Dependencies: 198
--- Name: audits_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
 
-SELECT pg_catalog.setval('public.audits_id_seq', 1, false);
+SELECT pg_catalog.setval('public.audits_id_seq', 16, true);
 
 
---
--- TOC entry 3129 (class 0 OID 0)
--- Dependencies: 219
--- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
 
-SELECT pg_catalog.setval('public.hibernate_sequence', 207, true);
+SELECT pg_catalog.setval('public.hibernate_sequence', 311, true);
 
 
--- Completed on 2020-03-11 09:41:57
-
---
--- PostgreSQL database dump complete
---
 
