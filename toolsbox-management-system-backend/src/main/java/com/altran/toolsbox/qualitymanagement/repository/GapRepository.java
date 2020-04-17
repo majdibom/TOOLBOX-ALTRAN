@@ -12,7 +12,7 @@ import com.altran.toolsbox.qualitymanagement.model.Gap;
 /**
  * Represents repository of gap
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Repository

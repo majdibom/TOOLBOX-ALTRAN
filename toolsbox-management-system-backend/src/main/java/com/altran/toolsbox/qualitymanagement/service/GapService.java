@@ -7,10 +7,11 @@ import com.altran.toolsbox.qualitymanagement.model.Gap;
 /**
  * Represents the interface of gap service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 public interface GapService {
+	List<Gap> findAll();
 
 	List<Gap> findByAuditReport(Long id);
 

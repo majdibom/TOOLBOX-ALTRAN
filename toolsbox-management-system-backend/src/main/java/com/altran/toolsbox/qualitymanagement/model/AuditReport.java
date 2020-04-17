@@ -1,5 +1,7 @@
 package com.altran.toolsbox.qualitymanagement.model;
 
+import static com.altran.toolsbox.util.constant.FilterConstants.AUDITREPORT_FILTER;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -16,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import static com.altran.toolsbox.util.constant.FilterConstants.AUDITREPORT_FILTER;
 import com.altran.toolsbox.usermanagement.model.User;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -24,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 /**
  * Represents Audit report
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Entity
@@ -112,7 +113,7 @@ public class AuditReport implements Serializable {
 	 * 
 	 * @see Gap
 	 */
-	@OneToMany(mappedBy = "auditReport", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "auditReport", cascade = CascadeType.REMOVE)
 	private Set<Gap> gaps;
 
 	/****** Getters and setters *****/

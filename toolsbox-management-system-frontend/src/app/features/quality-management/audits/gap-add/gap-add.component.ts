@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GenericService } from '@services/generic.service';
 import swal from 'sweetalert2';
 import { TypeGapLabel, TypeGap } from '@models/type-gap';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-gap-add',

@@ -1,5 +1,8 @@
 package com.altran.toolsbox.qualitymanagement.service.impl;
 
+import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
+import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,13 +20,10 @@ import com.altran.toolsbox.qualitymanagement.repository.GapRepository;
 import com.altran.toolsbox.qualitymanagement.service.AuditReportService;
 import com.altran.toolsbox.qualitymanagement.service.GapService;
 
-import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
-import static com.altran.toolsbox.util.constant.ResponseConstants.ENTITY_EXIST;
-
 /**
  * Represents implementation of gap service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Service
@@ -36,7 +36,8 @@ public class GapServiceImpl implements GapService {
 	/**
 	 * Constructor of GapServiceImp
 	 * 
-	 * @param gapRepository the repository of gap
+	 * @param gapRepository
+	 *            the repository of gap
 	 */
 	@Autowired
 	public GapServiceImpl(GapRepository gapRepository) {
@@ -46,7 +47,8 @@ public class GapServiceImpl implements GapService {
 	/**
 	 * Changes audit report service.
 	 * 
-	 * @param auditReportService audit report service.
+	 * @param auditReportService
+	 *            audit report service.
 	 */
 	@Autowired
 	public void setAuditReportService(AuditReportService auditReportService) {
@@ -67,9 +69,11 @@ public class GapServiceImpl implements GapService {
 	/**
 	 * gets one gap by his id
 	 * 
-	 * @param id the id of the gap
+	 * @param id
+	 *            the id of the gap
 	 * @return gap object with the same id
-	 * @throws NoSuchElementException if no element is present with such ID
+	 * @throws NoSuchElementException
+	 *             if no element is present with such ID
 	 */
 	@Override
 	public Gap findById(Long id) {
@@ -84,10 +88,11 @@ public class GapServiceImpl implements GapService {
 	/**
 	 * Creates a new gap
 	 * 
-	 * @param gap the gap to create
+	 * @param gap
+	 *            the gap to create
 	 * @return the created gap
-	 * @throws EntityExistsException if there is already existing entity with such
-	 *                               ID
+	 * @throws EntityExistsException
+	 *             if there is already existing entity with such ID
 	 */
 	@Override
 	public Gap create(Gap gap) {
@@ -100,10 +105,13 @@ public class GapServiceImpl implements GapService {
 	/**
 	 * Updates one gap
 	 * 
-	 * @param id  the id of the gap
-	 * @param gab the new gap object with the new values
+	 * @param id
+	 *            the id of the gap
+	 * @param gab
+	 *            the new gap object with the new values
 	 * @return the updated gap
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public Gap update(Gap gap, Long id) {
@@ -117,8 +125,10 @@ public class GapServiceImpl implements GapService {
 	/**
 	 * Deletes one gap
 	 * 
-	 * @param id the of the deleted gap
-	 * @throws EntityNotFoundException if there is no entity with such ID
+	 * @param id
+	 *            the of the deleted gap
+	 * @throws EntityNotFoundException
+	 *             if there is no entity with such ID
 	 */
 	@Override
 	public void delete(Long id) {
@@ -126,6 +136,16 @@ public class GapServiceImpl implements GapService {
 			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
 		gapRepository.deleteById(id);
+	}
+
+	/**
+	 * Gets the list of all gaps
+	 * 
+	 * @return list of all gaps
+	 */
+	@Override
+	public List<Gap> findAll() {
+		return gapRepository.findAll();
 	}
 
 }

@@ -4,7 +4,9 @@ import static com.altran.toolsbox.util.constant.ColumnConstants.ACCOMPANYINGAUDI
 import static com.altran.toolsbox.util.constant.ColumnConstants.ACTIVITY;
 import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITED;
 import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITREPORT;
+import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITSTATUS;
 import static com.altran.toolsbox.util.constant.ColumnConstants.AUDITTHEME;
+import static com.altran.toolsbox.util.constant.ColumnConstants.CREATEDAT;
 import static com.altran.toolsbox.util.constant.ColumnConstants.DURATION;
 import static com.altran.toolsbox.util.constant.ColumnConstants.EXAMINEDPOINTS;
 import static com.altran.toolsbox.util.constant.ColumnConstants.FIRSTNAME;
@@ -142,18 +144,19 @@ public class AuditController {
 		// Filter the audit object
 		SimpleBeanPropertyFilter auditFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, AUDITREPORT, RISKS,
 				DURATION, ISSUES, AUDITED, PROCESSIMPACTS, AUDITTHEME, REFERENCE, PRIMARYAUDITOR, ACCOMPANYINGAUDITOR,
-				WEEK, PROJECT);
+				WEEK, PROJECT, PROCESS, CREATEDAT, AUDITSTATUS);
 		SimpleBeanPropertyFilter weekFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, NUMBER);
-		SimpleBeanPropertyFilter projectFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
+		SimpleBeanPropertyFilter projectFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE, ACTIVITY);
 		SimpleBeanPropertyFilter processFilter = SimpleBeanPropertyFilter.serializeAll();
+		SimpleBeanPropertyFilter activityFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID);
 		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
 		SimpleBeanPropertyFilter auditReportFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, EXAMINEDPOINTS,
 				REALIZATIONDATE);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(AUDIT_FILTER, auditFilter)
 				.addFilter(WEEK_FILTER, weekFilter).addFilter(PROJECT_FILTER, projectFilter)
-				.addFilter(PROCESS_FILTER, processFilter).addFilter(AUDITREPORT_FILTER, auditReportFilter)
-				.addFilter(USER_FILTER, userFilter);
+				.addFilter(PROCESS_FILTER, processFilter).addFilter(USER_FILTER, userFilter)
+				.addFilter(AUDITREPORT_FILTER, auditReportFilter).addFilter(ACTIVITY_FILTER, activityFilter);
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue auditMapping = new MappingJacksonValue(auditList);
 		auditMapping.setFilters(filters);
@@ -173,7 +176,7 @@ public class AuditController {
 		// Filter the audit object
 		SimpleBeanPropertyFilter auditFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, AUDITREPORT, RISKS,
 				DURATION, ISSUES, AUDITED, PROCESSIMPACTS, AUDITTHEME, REFERENCE, PRIMARYAUDITOR, ACCOMPANYINGAUDITOR,
-				WEEK, PROJECT, PROCESS);
+				WEEK, PROJECT, PROCESS, AUDITSTATUS);
 		SimpleBeanPropertyFilter weekFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, NUMBER);
 		SimpleBeanPropertyFilter projectFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE, ACTIVITY);
 		SimpleBeanPropertyFilter processFilter = SimpleBeanPropertyFilter.serializeAll();
@@ -208,7 +211,7 @@ public class AuditController {
 		// Filter the audit object
 		SimpleBeanPropertyFilter auditFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, AUDITREPORT, RISKS,
 				DURATION, ISSUES, AUDITED, PROCESSIMPACTS, AUDITTHEME, REFERENCE, PRIMARYAUDITOR, ACCOMPANYINGAUDITOR,
-				WEEK, PROJECT, PROCESS);
+				WEEK, PROJECT, PROCESS, AUDITSTATUS);
 		SimpleBeanPropertyFilter weekFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, NUMBER);
 		SimpleBeanPropertyFilter projectFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
 		SimpleBeanPropertyFilter processFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
@@ -242,7 +245,7 @@ public class AuditController {
 		// Filter the audit object
 		SimpleBeanPropertyFilter auditFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, AUDITREPORT, RISKS,
 				DURATION, ISSUES, AUDITED, PROCESSIMPACTS, AUDITTHEME, REFERENCE, PRIMARYAUDITOR, ACCOMPANYINGAUDITOR,
-				WEEK, PROJECT, PROCESS);
+				WEEK, PROJECT, PROCESS, AUDITSTATUS);
 		SimpleBeanPropertyFilter weekFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, NUMBER);
 		SimpleBeanPropertyFilter projectFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
 		SimpleBeanPropertyFilter processFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
@@ -276,7 +279,7 @@ public class AuditController {
 		// Filter the audit object
 		SimpleBeanPropertyFilter auditFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, AUDITREPORT, RISKS,
 				DURATION, ISSUES, AUDITED, PROCESSIMPACTS, AUDITTHEME, REFERENCE, PRIMARYAUDITOR, ACCOMPANYINGAUDITOR,
-				WEEK, PROJECT, PROCESS);
+				WEEK, PROJECT, PROCESS, AUDITSTATUS);
 		SimpleBeanPropertyFilter weekFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, NUMBER);
 		SimpleBeanPropertyFilter projectFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
 		SimpleBeanPropertyFilter processFilter = SimpleBeanPropertyFilter.serializeAll();
@@ -462,7 +465,7 @@ public class AuditController {
 		// Filter the audit object
 		SimpleBeanPropertyFilter auditFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, AUDITREPORT, RISKS,
 				DURATION, ISSUES, AUDITED, PROCESSIMPACTS, AUDITTHEME, REFERENCE, PRIMARYAUDITOR, ACCOMPANYINGAUDITOR,
-				WEEK, PROJECT, PROCESS);
+				WEEK, PROJECT, PROCESS, AUDITSTATUS);
 		SimpleBeanPropertyFilter weekFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, NUMBER);
 		SimpleBeanPropertyFilter projectFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE, ACTIVITY);
 		SimpleBeanPropertyFilter processFilter = SimpleBeanPropertyFilter.serializeAll();

@@ -13,9 +13,7 @@ import static com.altran.toolsbox.util.constant.ColumnConstants.IDENTIFIEDCAUSES
 import static com.altran.toolsbox.util.constant.ColumnConstants.IMPROVEMENTCLUE;
 import static com.altran.toolsbox.util.constant.ColumnConstants.JUSTIFICATION;
 import static com.altran.toolsbox.util.constant.ColumnConstants.LASTNAME;
-import static com.altran.toolsbox.util.constant.ColumnConstants.PROBABILITY;
 import static com.altran.toolsbox.util.constant.ColumnConstants.PROCESSIMPACTS;
-import static com.altran.toolsbox.util.constant.ColumnConstants.RISKNATURE;
 import static com.altran.toolsbox.util.constant.ColumnConstants.UPDATEDAT;
 import static com.altran.toolsbox.util.constant.FilterConstants.ACTION_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.GAP_FILTER;
@@ -142,11 +140,12 @@ public class ActionController {
 		/** Filtering data to send **/
 		// Filter the action object
 		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.serializeAllExcept(COMMENTS, EFFMEASCRITERION,
-				PROCESSIMPACTS, GAP, CREATEDBY, CREATEDAT, UPDATEDAT);
-		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, PROBABILITY, RISKNATURE);
+				PROCESSIMPACTS, GAP, CREATEDBY, UPDATEDAT);
+		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
+		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID);
 		// Add filters to filter provider
 		FilterProvider filters = new SimpleFilterProvider().addFilter(ACTION_FILTER, actionFilter)
-				.addFilter(RISK_FILTER, riskFilter);
+				.addFilter(USER_FILTER, userFilter).addFilter(RISK_FILTER, riskFilter);
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue actionsMapping = new MappingJacksonValue(actionList);
 		actionsMapping.setFilters(filters);

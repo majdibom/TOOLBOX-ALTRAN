@@ -4,9 +4,205 @@
 </div>
 <!-- Content-->
 <div class="content">
-  <h2 class="headline text-gray"> <i class="fa fa-gear"></i></h2>
-  <h2 class="margin-top-0 text-gray">{{'En cours de développement... !' | translate}}</h2>
-  <br>
-  <br>
-  <br>
+  <div class="row">
+    <div class="col-md-4 col-xl-3 ">
+      <div class="card bg-c-blue  card-box bg-red">
+        <div class=" inner">
+          <h5 class="m-b-20">{{'Utilisateurs' | translate}}</h5>
+          <h2 class="text-left"><span>{{totalUsers}}</span></h2>
+        </div>
+        <div class="icon">
+          <i class="fa fa-users"></i>
+        </div>
+        <a href="" data-toggle="modal" data-target="" class="card-box-footer" (click)="openUsers()">View More <i
+            class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <div class="col-md-4 col-xl-3 ">
+      <div class="card bg-c-secondary  card-box bg-secondary">
+        <div class=" inner">
+          <h5 class="m-b-20">{{'Activités' | translate}}</h5>
+          <h2 class="text-left"><span>{{totalActivities}}</span></h2>
+        </div>
+        <div class="icon">
+          <i class="fa fa-building"></i>
+        </div>
+        <a href="" data-toggle="modal" data-target="" class="card-box-footer" (click)="openActivities()">View More <i
+            class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <div class="col-md-4 col-xl-3 ">
+      <div class="card bg-c-yellow  card-box bg-yellow">
+        <div class=" inner">
+          <h5 class="m-b-20">{{'Audites' | translate}}</h5>
+          <h2 class="text-left"><span>{{totalAudits}}</span></h2>
+        </div>
+        <div class="icon">
+          <i class="fa fa-balance-scale"></i>
+        </div>
+        <a href="" data-toggle="modal" data-target="" class="card-box-footer" (click)="openAudits()">View More <i
+            class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+    <div class="col-md-4 col-xl-3 ">
+      <div class="card bg-c-green  card-box bg-green">
+        <div class=" inner">
+          <h5 class="m-b-20">{{'Projets' | translate}}</h5>
+          <h2 class="text-left"><span>{{totalProjects}}</span></h2>
+        </div>
+        <div class="icon">
+          <i class="fa fa-cogs"></i>
+        </div>
+        <a href="" data-toggle="modal" data-target="" class="card-box-footer" (click)="openProjects()">View More <i
+            class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card-card-4  z-depth-3">
+        <div class="card-body text-center bg-altran rounded-top">
+          <h5 class="text-light"><strong>{{'Gestion de qualité :' | translate}}</strong></h5>
+        </div>&nbsp;&nbsp;
+        <p-chart type="polarArea" [data]="data"></p-chart>&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card-card-4  z-depth-3">
+        <div class="card-body text-center bg-altran rounded-top">
+          <h5 class="text-light"><strong>{{'Gestion de qualité :' | translate}}</strong></h5>
+        </div>&nbsp;&nbsp;
+        <p-chart type="bar" [data]="dataline"></p-chart>&nbsp;&nbsp;
+      </div>
+    </div>
+  </div>&nbsp;&nbsp;
+  <div class="row">
+    <!-- Actions list Table -->
+    <div>
+      <div class="card-card-4  z-depth-3">
+        <div class="card-body text-center bg-altran rounded-top">
+          <h5 class="text-light"><strong>{{'Dernière action :' | translate}}</strong>
+            <button type="button" id="add-risk-btn" class="btn btn-primary btn-add-add" title="Afficher les actions"
+              data-toggle="modal" data-target="#addActionsModal" (click)="openActions()"
+              style="float:right; color: #007EAF;">
+              <i class="fa fa-align-justify"></i>&nbsp;{{'Voir tout' | translate}}</button></h5>
+        </div>
+        <div class="card-body">
+
+          <div class="table-responsive-lg">
+            <table class="table table-bordered table-striped table-hover">
+              <thead class="row-border hover">
+                <tr>
+                  <th style="width: 2%;">{{'#' | translate}}</th>
+                  <th style="width: 25%;">{{'Description' | translate}}</th>
+                  <th style="width: 13%;">{{'Responsable' | translate}}</th>
+                  <th style="width: 7%;">{{'Origine' | translate}}</th>
+                  <th style="width: 10%;">{{'Type' | translate}}</th>
+                  <th style="width: 10%;">{{'Date d ouverture' | translate}}</th>
+                  <th style="width: 12%;">{{'Date d échéance' | translate}}</th>
+                  <th style="width: 12%;">{{'Date de mesure de l efficacité' | translate}}</th>
+                  <th style="width: 5%;" class="text-center">{{'Statut' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let action of listActions | slice: listActions.length-1 ">
+                  <td>{{action.id}}</td>
+                  <td>{{action.description}}</td>
+                  <td>{{action.responsibleAction?.firstName}} {{action.responsibleAction?.lastName}}</td>
+                  <td>{{action.origin}}</td>
+                  <td>{{action.typeAction}}</td>
+                  <td>{{action.openDate | date:'dd/MM/yyyy'}}</td>
+                  <td>{{action.dueDate  | date:'dd/MM/yyyy'}}</td>
+                  <td>{{action.effMeasDate  | date:'dd/MM/yyyy'}}</td>
+                  <td style="text-align: center;">
+                    <span *ngIf="action?.actionStatus == 'Open'" class="badge badge-primary"
+                      style="font-size: medium;">{{action?.actionStatus}}</span>
+                    <span *ngIf="action?.actionStatus == 'Closed'" class="badge badge-dark"
+                      style="font-size: medium;">{{action?.actionStatus}}</span>
+                    <span *ngIf="action?.actionStatus == 'Done'" class="badge badge-success"
+                      style="font-size: medium;">{{action?.actionStatus}}</span>
+                    <span *ngIf="action?.actionStatus == 'Blocked'" class="badge badge-danger"
+                      style="font-size: medium;">{{action?.actionStatus}}</span>
+                    <span *ngIf="action?.actionStatus == 'Delayed'" class="badge badge-warning"
+                      style="font-size: medium;">{{action?.actionStatus}}</span>
+                    <span *ngIf="action?.actionStatus == 'Cancelled'" class="badge badge-secondary"
+                      style="font-size: medium;">{{action?.actionStatus}}</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- No data in table message-->
+            <div *ngIf="listActions?.length==0">
+              <div class="nodata-box">
+                <div class="nodata-text" id="no-data-available">{{'Aucune donnée trouvée.' | translate}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Risks list Table -->
+      &nbsp;&nbsp;
+      <div class="card-card-4  z-depth-3">
+        <div class="card-body text-center bg-altran rounded-top">
+          <h5 class="text-light"><strong>{{'Dernier risque :' | translate}}</strong>
+            <button type="button" id="add-risk-btn" class="btn btn-primary btn-add-add" title="Afficher les risques"
+              data-toggle="modal" data-target="#addActionsModal" (click)="openRisks()"
+              style="float:right; color: #007EAF;">
+              <i class="fa fa-align-justify"></i>&nbsp;{{'Voir tout' | translate}}</button></h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive-lg">
+            <table class="table table-bordered table-striped table-hover">
+              <thead class="row-border hover">
+                <tr>
+                  <th style="width: 7%;">{{'#' | translate}}</th>
+                  <th style="width: 7%;">{{'Probabilité' | translate}}</th>
+                  <th style="width: 10%;">{{'Gravité' | translate}}</th>
+                  <th style="width: 7%;">{{'Criticité' | translate}}</th>
+                  <th style="width: 7%;">{{'Valeur de criticité' | translate}}</th>
+                  <th style="width: 7%;">{{'Statut' | translate}}</th>
+                  <th style="width: 10%;" class="text-center">{{'Date de detection'  | translate}}</th>
+                  <th style="width: 10%;" class="text-center">{{'Date de clôture'  | translate}}</th>
+                  <th style="width: 10%;" class="text-center">{{'Nature' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let risk of listRisks | slice: listRisks.length-1 ">
+                  <td>{{risk.id}}</td>
+                  <td>{{risk.probability}}</td>
+                  <td>{{risk.severity}}</td>
+                  <td style="text-align: center;"
+                    *ngFor="let exposure of risk.exposures | slice: risk.exposures.length-1">
+                    <span *ngIf="exposure.title == 'Acceptable'" class="badge badge-success"
+                      style="font-size: medium;">{{exposure.title}}</span>
+                    <span *ngIf="exposure.title == 'A_surveiller'" class="badge badge-warning"
+                      style="font-size: medium;">{{exposure.title}}</span>
+                    <span *ngIf="exposure.title == 'Trés_critique'" class="badge badge-danger"
+                      style="font-size: medium;">{{exposure.title}}</span></td>
+                  <td style="text-align: center;"
+                    *ngFor="let value of risk?.exposures | slice: risk.exposures.length-1">{{value.value}}</td>
+                  <td style="text-align: center;">
+                    <span *ngIf="risk?.riskStatus == 'Open'" class="badge badge-primary"
+                      style="font-size: medium;">{{risk?.riskStatus}}</span>
+                    <span *ngIf="risk?.riskStatus == 'Closed'" class="badge badge-dark"
+                      style="font-size: medium;">{{risk?.riskStatus}}</span></td>
+                  <td>{{risk.detectionDate}}</td>
+                  <td>{{risk.closureDate}}</td>
+                  <td>{{risk.riskNature}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- No data in table message-->
+            <div *ngIf="listRisks?.length==0">
+              <div class="nodata-box">
+                <div class="nodata-text" id="no-data-available">{{'Aucune donnée trouvée.' | translate}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>

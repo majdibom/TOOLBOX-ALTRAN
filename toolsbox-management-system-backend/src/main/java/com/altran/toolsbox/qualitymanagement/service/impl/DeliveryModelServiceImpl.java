@@ -12,7 +12,7 @@ import com.altran.toolsbox.qualitymanagement.service.DeliveryModelService;
 /**
  * Represents implementation of delivery model service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Service

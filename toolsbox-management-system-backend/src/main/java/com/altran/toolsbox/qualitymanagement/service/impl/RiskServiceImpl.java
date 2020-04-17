@@ -215,8 +215,6 @@ public class RiskServiceImpl implements RiskService {
 	 */
 	@Override
 	public Risk update(Risk risk, Long id) {
-		System.err.println("exposures");
-
 		if (id != null && !riskRepository.existsById(id)) {
 			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}

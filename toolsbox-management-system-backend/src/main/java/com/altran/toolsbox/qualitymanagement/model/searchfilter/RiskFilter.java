@@ -7,6 +7,12 @@ import com.altran.toolsbox.qualitymanagement.model.Probability;
 import com.altran.toolsbox.qualitymanagement.model.RiskNature;
 import com.altran.toolsbox.qualitymanagement.model.RiskStatus;
 
+/**
+ * Represents Risk Filter
+ * 
+ * @author Majdi.BEN.OTHMEN
+ * @version 1.0
+ */
 public class RiskFilter {
 
 	private Set<Probability> probabilities;

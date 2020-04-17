@@ -10,7 +10,7 @@ import com.altran.toolsbox.qualitymanagement.model.Project;
 /**
  * Represents the interface of project service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 public interface ProjectService {

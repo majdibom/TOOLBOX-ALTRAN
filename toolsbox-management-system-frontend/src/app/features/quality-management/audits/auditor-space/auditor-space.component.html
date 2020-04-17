@@ -49,7 +49,7 @@
             <th style="width: 18%;">{{'accompanying Auditor' | translate}}</th>
             <th style="width: 18%;">{{'Audited' | translate}}</th>
             <th style="width: 5%;">{{'duration(h)' | translate}}</th>
-            <th style="width: 30%;" class="text-center">{{'Actions' | translate}}</th>
+            <th style="width: 35%;" class="text-center">{{'Actions' | translate}}</th>
           </tr>
         </thead>
         <tbody>
@@ -91,11 +91,11 @@
             </td>
             <td>{{audit.duration}}</td>
             <td class="text-center">
-              <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#validateReportModal"
+              <a href="#" class="btn btn-success btn-add" data-toggle="modal" data-target="#validateReportModal"
                 (click)="validateReport.validate(audit.auditReport.id,'auditor')"
                 *ngIf="audit.auditReport && !audit.auditReport.validationAuditor"><i
                   class="fa fa-check"></i> Validation </a>
-              <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#validateReportModal"
+              <a href="#" class="btn btn-success btn-add" data-toggle="modal" data-target="#validateReportModal"
                 (click)="validateReport.validate(audit.auditReport.id,'auditor')"
                 *ngIf="audit.auditReport && audit.auditReport.validationAuditor && audit.auditReport.validationAuditor === 'no'"><i
                   class="fa fa-check"></i> Validate</a>&nbsp;

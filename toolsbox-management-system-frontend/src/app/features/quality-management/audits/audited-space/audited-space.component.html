@@ -91,11 +91,11 @@
             </td>
             <td>{{audit.duration}}</td>
             <td class="text-center">
-              <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#validateReportModal"
+              <a href="#" class="btn btn-success btn-add" data-toggle="modal" data-target="#validateReportModal"
                 (click)="validateReport.validate(audit.auditReport.id,'audited')"
                 *ngIf="audit.auditReport && !audit.auditReport.validationAudited"><i
                   class="fa fa-check"></i> Validation </a>
-              <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#validateReportModal"
+              <a href="#" class="btn btn-success btn-add" data-toggle="modal" data-target="#validateReportModal"
                 (click)="validateReport.validate(audit.auditReport.id,'audited')"
                 *ngIf="audit.auditReport && audit.auditReport.validationAudited && audit.auditReport.validationAudited === 'no'"><i
                   class="fa fa-check"></i> Validate</a>&nbsp;

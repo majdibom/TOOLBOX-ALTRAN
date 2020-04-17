@@ -84,17 +84,27 @@
           </div>
           <div class="form-row">
             <!-- week field -->
-            <div class="form-group  col-md-6">
+            <div class="form-group  col-md-4">
               <label for="week" class="required">{{'Semaine' | translate}}</label>
               <select id="week" name="week" class="form-control" [(ngModel)]="auditToAdd.week " required>
                 <option *ngFor="let week of listOfWeeks" [ngValue]="week">{{week.number}}</option>
               </select>
             </div>
             <!-- duration field -->
-            <div class="form-group  col-md-6">
+            <div class="form-group  col-md-4">
               <label for="duration" class="required">{{'Durée(h)' | translate}}</label>
               <input type="number" id="duration" name="duration" class="form-control" pattern="[0-9]"
                 [(ngModel)]="auditToAdd.duration" required>
+            </div>
+            <!-- status field -->
+            <div class="form-group col-md-4">
+              <label for="auditStatus-add" class="required">{{'status' | translate}}</label>
+              <select id="auditStatus-add" name="auditStatus-add" class="form-control"
+                [(ngModel)]="auditToAdd.auditStatus" required>
+                <option *ngFor="let auditStatus of AuditStatusEnum" [value]="auditStatus">
+                  {{AuditStatusLabel[auditStatus]}}
+                </option>
+              </select>
             </div>
           </div>
 

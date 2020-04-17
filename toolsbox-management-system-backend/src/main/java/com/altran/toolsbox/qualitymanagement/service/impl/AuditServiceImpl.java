@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.altran.toolsbox.qualitymanagement.model.Audit;
+import com.altran.toolsbox.qualitymanagement.model.AuditReport;
 import com.altran.toolsbox.qualitymanagement.repository.AuditRepository;
 import com.altran.toolsbox.qualitymanagement.service.AuditService;
 import com.altran.toolsbox.usermanagement.model.User;
@@ -163,6 +164,9 @@ public class AuditServiceImpl implements AuditService {
 		if (id != null && !auditRepository.existsById(id)) {
 			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
+		Audit oldAudit = findById(id);
+		AuditReport report = oldAudit.getAuditReport();
+		audit.setAuditReport(report);
 		audit.setId(id);
 		return auditRepository.save(audit);
 	}

@@ -9,6 +9,7 @@ import { User } from '@models/user';
 import swal from 'sweetalert2';
 import { EventEmitter } from 'events';
 import { Activity } from '@models/activity';
+import { AuditStatus, AuditStatusLabel } from '@models/audit-Status';
 
 @Component({
   selector: 'app-audit-add',
@@ -31,7 +32,9 @@ export class AuditAddComponent implements OnInit {
   listOfWeeks: Week[] = [];
 
   selectedLink = 'Project';
-
+ // Audit Status enum Label
+ public AuditStatusLabel = AuditStatusLabel;
+ public AuditStatusEnum = Object.values(AuditStatus);
   // Event for table data
   @Output() reloadEvent = new EventEmitter();
   listOfAuditors: any = [];

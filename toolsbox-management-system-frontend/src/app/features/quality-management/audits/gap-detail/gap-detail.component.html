@@ -1,0 +1,103 @@
+<div class="title">
+  <h3>{{'Détails de l ecart : #' | translate}}{{gap.id}}</h3>
+</div>
+<div class="content">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card-card-4  z-depth-3">
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pills-primary nav-justified">
+            <li class="nav-item">
+              <div class="card-body text-center bg-altran rounded-top">
+                <h6 class="text-light">{{'Auditeur' | translate}} :</h6>
+                <h5 class="mb-1 text-white">
+                  {{gap.auditReport?.auditor?.firstName}}&nbsp;{{gap.auditReport?.auditor?.lastName}}
+                </h5>
+              </div>
+            </li>
+          </ul>
+          <div class="tab-content p-3">
+            <!-- Details section -->
+            <div class="tab-pane active show" id="detail">
+              <h5 class="mb-3"></h5>
+              <div class="row">
+                <div class="col-md-12">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <h5><strong>{{'Type d ecart' | translate}}
+                          :</strong>&nbsp;&nbsp;{{gap?.typeGap}}</h5>
+                    </li>
+                    <li class="list-group-item">
+                      <h5><strong>{{'Description' | translate}}
+                          :</strong>&nbsp;&nbsp;{{gap?.description}}</h5>
+                    </li>
+                    <li class="list-group-item">
+                      <h5><strong>{{'Justification' | translate}} :</strong>&nbsp;&nbsp;{{gap?.justification}}
+                      </h5>
+                    </li>
+                    <li class="list-group-item">
+                      <h5><strong>{{'Improvement clue' | translate}} :</strong>&nbsp;&nbsp;{{gap?.improvementClue}}
+                      </h5>
+                    </li>
+                    <li class="list-group-item">
+                      <h5><strong>{{'Identified causes' | translate}} :</strong>&nbsp;&nbsp;{{gap?.identifiedCauses}}
+                      </h5>
+                    </li>
+                    <li class="list-group-item">
+                      <!-- Actions list Table -->
+                      <h5><strong>{{'Actions' | translate}} :</strong>
+                        <button type="button" id="add-actions-btn" class="btn btn-primary btn-add" title="Afficher les actions"
+                        data-toggle="modal" data-target="#addActionsModal" (click)="openActionsListModal(gap?.id)"
+                        style="float:right;">
+                        <i class="fa fa-plus-circle fa-lg"></i>&nbsp;Actions</button>
+
+                        <button type="button" id="add-gap-btn" type="button" class="btn btn-primary btn-add"
+                          data-toggle="modal" title="Ajouter une nouvelle action" data-target="#addModal"
+                          style="float:right;">
+                          <i class="fa fa-plus-circle fa-lg"></i>&nbsp;Add Action</button></h5>&nbsp;
+                      <div class="table-responsive-lg">
+                        <table class="table table-bordered table-striped table-hover">
+                          <thead class="row-border hover">
+                            <tr>
+                              <th style="width: 2%;">{{'#' | translate}}</th>
+                              <th style="width: 40%;">{{'Description' | translate}}</th>
+                              <th style="width: 20%;" class="text-center">{{'Actions' | translate}}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let action of gap?.actions">
+                              <td>{{action.id}} </td>
+                              <td>{{action.description}}</td>
+
+                              <td class="text-center">
+                                <button type="button" class="btn btn-detail"
+                                  title="Afficher les details de cette action" data-toggle="modal"
+                                  data-target="#detailsmodal" (click)="openDetails(action.id)"><i
+                                    class="fa fa-align-justify"></i></button>&nbsp;
+                                <button type="button" class="btn btn-primary btn-circle" title="Modifier cette action"
+                                  data-toggle="modal" data-target="#editmodal" (click)="openEditModal(action)"><i
+                                    class="fa fa-edit"></i></button>
+                                &nbsp;
+                                <button type="button" class="btn btn-danger btn-circle" title="Supprimer cette action"
+                                  (click)="deleteAction(action.id)"><i class="fa fa-remove"></i></button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- add gap -->
+  <app-gap-actions-add [gapToEdit]="gap" (reloadEvent)="reloadData()"></app-gap-actions-add>
+  <!-- Edit Action Modal -->
+  <app-gap-actions-update [actionToEdit]="editAction" (reloadEvent)="reloadData()"></app-gap-actions-update>
+  <!-- Actions Table -->
+  <app-gap-actions-list [gapToEdit]="editGap" (reloadEvent)="reloadData()"></app-gap-actions-list>

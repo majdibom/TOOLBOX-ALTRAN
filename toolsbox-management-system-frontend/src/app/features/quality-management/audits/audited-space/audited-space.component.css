@@ -124,3 +124,6 @@
       background: transparent;
       cursor: pointer;
     }
+    .btn-add {
+      border-radius:23px;
+    }

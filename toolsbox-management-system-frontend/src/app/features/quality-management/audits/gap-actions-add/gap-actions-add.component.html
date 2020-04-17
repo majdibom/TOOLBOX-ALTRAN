@@ -1,0 +1,122 @@
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Ajouter une action' | translate}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addActionForm="ngForm">
+          <!-- Description field -->
+          <div class="form-group">
+            <label for="description" class="required">{{'description' | translate}}</label>
+            <textarea class="form-control" id="description-add" name="description-add"
+              [(ngModel)]="actionToAdd.description" rows="2" required> </textarea>
+          </div>
+          <!-- effMeasCriterion field -->
+          <div class="form-group">
+            <label for="effMeasCriterion" class="required">{{'Critère de mesure de l efficacité' | translate}}</label>
+            <textarea class="form-control" id="effMeasCriterion-add" name="effMeasCriterion-add"
+              [(ngModel)]="actionToAdd.effMeasCriterion" rows="2" required> </textarea>
+          </div>
+          <div class="form-row">
+            <!-- open Date field -->
+            <div class="form-group col-md-6">
+              <label for="openDate-add" class="required">{{'Date d ouverture' | translate}}</label>
+              <input type="date" class="form-control" id="openDate-add" name="openDate-add"
+                [(ngModel)]="actionToAdd.openDate" required>
+            </div>
+            <!-- due Date field -->
+            <div class="form-group col-md-6">
+              <label for="dueDate-add" class="required">{{'Date d écheance' | translate}}</label>
+              <input type="date" class="form-control" id="dueDate-add" name="dueDate-add"
+                [(ngModel)]="actionToAdd.dueDate" required>
+            </div>
+            <!--updated Due Date field -->
+            <div class="form-group col-md-6">
+              <label for="updatedDueDate-add" class="required">{{'date d échéance mise à jour' | translate}}</label>
+              <input type="date" class="form-control" id="updatedDueDate-add" name="updatedDueDate-add"
+                [(ngModel)]="actionToAdd.updatedDueDate" required>
+            </div>
+            <!-- realization Date field -->
+            <div class="form-group col-md-6">
+              <label for="realizationDate-add" class="required">{{'Date de realisation' | translate}}</label>
+              <input type="date" class="form-control" id="realizationDate-add" name="realizationDate-add"
+                [(ngModel)]="actionToAdd.realizationDate" required>
+            </div>
+            <!-- effMeasDate field -->
+            <div class="form-group col-md-6">
+              <label for="effMeasDate-add" class="required">{{'Date de mesure de l efficacité' | translate}}</label>
+              <input type="date" class="form-control" id="effMeasDate-add" name="effMeasDate-add"
+                [(ngModel)]="actionToAdd.effMeasDate" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <!-- responsibleAction field -->
+            <div class="form-group col-md-6">
+              <label for="responsibleAction-add" class="required">{{'responsible d Action' | translate}}</label>
+              <select id="responsibleAction-add" name="titleresponsibleAction" class="form-control"
+                [(ngModel)]="actionToAdd.responsibleAction" required>
+                <option *ngFor="let user of listOfUsers" [ngValue]="user">{{user.firstName}} {{user.lastName}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <!-- status field -->
+            <div class="form-group col-md-6">
+              <label for="ActionStatus-add" class="required">{{'status' | translate}}</label>
+              <select id="actionStatus-add" name="ActionStatus-add" class="form-control"
+                [(ngModel)]="actionToAdd.actionStatus" required>
+                <option *ngFor="let actionStatus of ActionStatusEnum" [value]="actionStatus">
+                  {{ActionstatusLabel[actionStatus]}}
+                </option>
+              </select>
+            </div>
+            <!-- priority field -->
+            <div class="form-group col-md-6">
+              <label for="priority-add" class="required">{{'priorité' | translate}}</label>
+              <select id="priority-add" name="priority-add" class="form-control" [(ngModel)]="actionToAdd.priority"
+                required>
+                <option *ngFor="let priority of priorityEnum" [value]="priority">
+                  {{priorityLabel[priority]}}
+                </option>
+              </select>
+            </div>
+
+            <!-- typeAction field -->
+            <div class="form-group col-md-6">
+              <label for="typeAction-add" class="required">{{'type d Action' | translate}}</label>
+              <select id="typeAction-add" name="typeAction-add" class="form-control"
+                [(ngModel)]="actionToAdd.typeAction" required>
+                <option *ngFor="let typeAction of typeActionEnum" [value]="typeAction">
+                  {{typeActionLabel[typeAction]}}
+                </option>
+              </select>
+            </div>
+            <!-- origin field -->
+            <div class="form-group col-md-6">
+              <label for="origin-add" class="required">{{'Origine' | translate}}</label>
+              <select id="origin-add" name="origin-add" class="form-control" [(ngModel)]="actionToAdd.origin" required>
+                <option *ngFor="let origin of OriginEnum" [value]="origin">
+                  {{OriginLabel[origin]}} 
+                </option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- Close button -->
+        <button type="button" id="exit-add-action" class="btn btn-secondary" data-dismiss="modal"
+          (click)="emptyObject()">{{'Fermer'
+          | translate}}</button>
+        &nbsp;
+        <!-- Add button -->
+        <button type="button" id="submit-add-action" class="btn btn-primary" (click)="createAction()"
+          data-dismiss="modal" [disabled]="!addActionForm.valid">{{'Enregistrer' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

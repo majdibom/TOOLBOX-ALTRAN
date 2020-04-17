@@ -21,13 +21,13 @@ import static com.altran.toolsbox.util.constant.ColumnConstants.RISKS;
 import static com.altran.toolsbox.util.constant.ColumnConstants.ROLES;
 import static com.altran.toolsbox.util.constant.ColumnConstants.USERNAME;
 import static com.altran.toolsbox.util.constant.ColumnConstants.WEEK;
-import static com.altran.toolsbox.util.constant.ResponseConstants.WEEK_NOT_EXIST;
-import static com.altran.toolsbox.util.constant.ResponseConstants.WEEK_FIND_ERROR;
 import static com.altran.toolsbox.util.constant.FilterConstants.AUDIT_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.PROCESS_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.PROJECT_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.USER_FILTER;
 import static com.altran.toolsbox.util.constant.FilterConstants.WEEK_FILTER;
+import static com.altran.toolsbox.util.constant.ResponseConstants.WEEK_FIND_ERROR;
+import static com.altran.toolsbox.util.constant.ResponseConstants.WEEK_NOT_EXIST;
 
 import java.util.List;
 import java.util.NoSuchElementException;

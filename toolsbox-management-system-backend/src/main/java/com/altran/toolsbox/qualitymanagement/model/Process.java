@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 /**
  * Represents process
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.Ben.Othmen
  * @version 1.0
  */
 @Entity

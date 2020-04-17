@@ -40,11 +40,19 @@
             <input type="number" id="duration-update" name="duration" class="form-control"
               [(ngModel)]="auditToEdit.duration" required>
           </div>
+          <!-- Audit Staus field -->
+          <div class="form-group">
+            <label for="auditStatus" class="required">{{'Audit Status' | translate}}</label>
+            <select id="auditStatus-update" (change)="parseValue($event.target.value)" name="auditStatus" class="form-control"
+              [(ngModel)]="auditToEdit.auditStatus" required>
+              <option *ngFor="let auditStatus of listOfAuditStatus" [value]="auditStatus">{{auditStatus}}</option>
+            </select>
+          </div>
           <!-- primary Auditor field -->
           <div class="form-group">
             <label for="primaryAuditor-edit" class="required">{{'Auditeur Principal' | translate}}</label>
-            <select id="primaryAuditor-edit"  name="primaryAuditor"
-              class="form-control" [(ngModel)]="auditToEdit.primaryAuditor.id" required>
+            <select id="primaryAuditor-edit" name="primaryAuditor" class="form-control"
+              [(ngModel)]="auditToEdit.primaryAuditor.id" required>
               <option *ngFor="let user of listOfUsers" [ngValue]="user.id">{{user.firstName}} {{user.lastName}}
               </option>
             </select>
@@ -52,8 +60,8 @@
           <!-- accompanying Auditor field -->
           <div class="form-group">
             <label for="accompanyingAuditor-edit" class="required">{{'Auditeur Accompagnant' | translate}}</label>
-            <select id="accompanyingAuditor-edit"  name="accompanyingAuditor"
-              class="form-control" [(ngModel)]="auditToEdit.accompanyingAuditor.id" required>
+            <select id="accompanyingAuditor-edit" name="accompanyingAuditor" class="form-control"
+              [(ngModel)]="auditToEdit.accompanyingAuditor.id" required>
               <option *ngFor="let user of listOfUsers" [ngValue]="user.id">{{user.firstName}} {{user.lastName}}
               </option>
             </select>
@@ -61,9 +69,8 @@
           <!-- audited field -->
           <div class="form-group col-md-4">
             <label for="audited" class="required">{{'Audités' | translate}}</label>
-            <p-listbox [options]="listOfUsers"
-              [(ngModel)]="auditToEdit.audited" name="audited" multiple="multiple" checkbox="checkbox"
-              optionLabel="firstName" [style]="{'width':'450px'}">
+            <p-listbox [options]="listOfUsers" [(ngModel)]="auditToEdit.audited" name="audited" multiple="multiple"
+              checkbox="checkbox" optionLabel="firstName" [style]="{'width':'450px'}">
               <p-header>
                 <i class="fa fa-users"></i>
                 {{'Audité' | translate}}
@@ -97,9 +104,8 @@
           <br>
           <!-- Process Impacts field -->
           <div class="form-group col-md-4">
-            <p-listbox [options]="listOfProcesses" 
-              [(ngModel)]="auditToEdit.processImpacts" name="processImpacts" multiple="multiple" checkbox="checkbox"
-              filter="filter" optionLabel="title" [style]="{'width':'450px'}">
+            <p-listbox [options]="listOfProcesses" [(ngModel)]="auditToEdit.processImpacts" name="processImpacts"
+              multiple="multiple" checkbox="checkbox" filter="filter" optionLabel="title" [style]="{'width':'450px'}">
               <p-header>
                 <i class="fa fa-sliders"></i>
                 {{'Process Impacted' | translate}}
@@ -109,8 +115,7 @@
           <!-- Week field -->
           <div class="form-group">
             <label for="week-edit" class="required">{{'Semaine' | translate}}</label>
-            <select id="week-edit" name="week"
-              class="form-control" [(ngModel)]="auditToEdit.week.id" required>
+            <select id="week-edit" name="week" class="form-control" [(ngModel)]="auditToEdit.week.id" required>
               <option *ngFor="let week of listOfWeeks" [ngValue]="week.id">{{week.number}}
               </option>
             </select>

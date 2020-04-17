@@ -43,11 +43,11 @@ export class AddActionsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.reloadData();
     
-    
   }
 
   ngAfterViewInit() {
     this.listActions = [];
+
   }
 
 
@@ -64,6 +64,7 @@ export class AddActionsComponent implements OnInit, AfterViewInit {
           this.pageClient = data;
           this.total = this.pageClient.totalElements;
           this.listActions = this.pageClient.content;
+
         });
   }
   /** Add Action to a Risk */

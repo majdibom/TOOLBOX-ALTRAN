@@ -1,5 +1,37 @@
 package com.altran.toolsbox.usermanagement.controller;
 
+import static com.altran.toolsbox.util.constant.ColumnConstants.ACTIVATED;
+import static com.altran.toolsbox.util.constant.ColumnConstants.ACTIVITY;
+import static com.altran.toolsbox.util.constant.ColumnConstants.ADDRESS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.BIRTHDATE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.DESCRIPTION;
+import static com.altran.toolsbox.util.constant.ColumnConstants.EMAIL;
+import static com.altran.toolsbox.util.constant.ColumnConstants.FIRSTNAME;
+import static com.altran.toolsbox.util.constant.ColumnConstants.ID;
+import static com.altran.toolsbox.util.constant.ColumnConstants.LASTNAME;
+import static com.altran.toolsbox.util.constant.ColumnConstants.PHONENUMBER;
+import static com.altran.toolsbox.util.constant.ColumnConstants.PRIVILEGES;
+import static com.altran.toolsbox.util.constant.ColumnConstants.RISKS;
+import static com.altran.toolsbox.util.constant.ColumnConstants.ROLES;
+import static com.altran.toolsbox.util.constant.ColumnConstants.TITLE;
+import static com.altran.toolsbox.util.constant.ColumnConstants.USERNAME;
+import static com.altran.toolsbox.util.constant.FilterConstants.ACTION_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.ACTIVITY_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.AUDIT_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.ROLE_FILTER;
+import static com.altran.toolsbox.util.constant.FilterConstants.USER_FILTER;
+import static com.altran.toolsbox.util.constant.ResponseConstants.ACTIVATE_ACCOUNT;
+import static com.altran.toolsbox.util.constant.ResponseConstants.DISABLE_ACCOUNT;
+import static com.altran.toolsbox.util.constant.ResponseConstants.USER_CREATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.USER_DELETED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.USER_FIND_ERROR;
+import static com.altran.toolsbox.util.constant.ResponseConstants.USER_NOT_CREATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.USER_NOT_DELETED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.USER_NOT_EXIST;
+import static com.altran.toolsbox.util.constant.ResponseConstants.USER_NOT_UPDATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.USER_UPDATED;
+import static com.altran.toolsbox.util.constant.ResponseConstants.USER_WRONG_MAIL_ADDRESS;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -31,14 +63,6 @@ import com.altran.toolsbox.util.Translator;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-
-import static com.altran.toolsbox.util.constant.ColumnConstants.*;
-import static com.altran.toolsbox.util.constant.ResponseConstants.*;
-import static com.altran.toolsbox.util.constant.FilterConstants.USER_FILTER;
-import static com.altran.toolsbox.util.constant.FilterConstants.ROLE_FILTER;
-import static com.altran.toolsbox.util.constant.FilterConstants.ACTIVITY_FILTER;
-import static com.altran.toolsbox.util.constant.FilterConstants.AUDIT_FILTER;
-import static com.altran.toolsbox.util.constant.FilterConstants.ACTION_FILTER;
 
 /**
  * Represents Rest controller of user
@@ -101,9 +125,15 @@ public class UserController {
 		List<User> userList = userService.findAll();
 		/** Filtering data to send **/
 		// Filter the user object
-		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
+		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME,
+				EMAIL, ADDRESS, PHONENUMBER, BIRTHDATE, ACTIVATED, ROLES, ACTIVITY, ROLES);
+		// Filter the role of the user object
+		SimpleBeanPropertyFilter roleFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
+		// Filter the activity object
+		SimpleBeanPropertyFilter activityFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, TITLE);
 		// Add filters to filter provider
-		FilterProvider filters = new SimpleFilterProvider().addFilter(USER_FILTER, userFilter);
+		FilterProvider filters = new SimpleFilterProvider().addFilter(USER_FILTER, userFilter)
+				.addFilter(ROLE_FILTER, roleFilter).addFilter(ACTIVITY_FILTER, activityFilter);
 		// Create the mapping object and set the filters to the mapping
 		MappingJacksonValue userMapping = new MappingJacksonValue(userList);
 		userMapping.setFilters(filters);

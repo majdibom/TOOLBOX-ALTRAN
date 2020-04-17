@@ -11,7 +11,7 @@ import com.altran.toolsbox.usermanagement.model.User;
 /**
  * Represents repository of audit report
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Repository

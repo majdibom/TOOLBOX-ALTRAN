@@ -6,6 +6,7 @@ import { User } from '@models/user';
 import { Project } from '@models/project';
 import { Process } from '@models/process';
 import { Week } from '@models/week';
+import { AuditStatus } from '@models/audit-Status';
 
 @Component({
   selector: 'app-audit-update',
@@ -21,13 +22,14 @@ export class AuditUpdateComponent implements OnInit {
   listOfProcesses: Process[] = [];
   // List of weeks
   listOfWeeks: Week[] = [];
-  // Get Action to edit form users list component
+  // Get audit to edit form audit list component
   @Input() auditToEdit: Audit;
   // Event for reload table content after update
   @Output() reloadEvent = new EventEmitter();
   listOfAuditors: any = [];
   selectedLink = 'Process';
-
+  listOfAuditStatus: string[];
+  auditStatusValue: AuditStatus;
   constructor(private genericService: GenericService) { }
 
   ngOnInit() {
@@ -35,6 +37,12 @@ export class AuditUpdateComponent implements OnInit {
     this.getProcesses();
     this.getProjects();
     this.getWeeks();
+    this.listOfAuditStatus = Object.keys(AuditStatus);
+    this.listOfAuditStatus = this.listOfAuditStatus.slice(this.listOfAuditStatus.length / 5);
+  }
+  /** Enum selected value parsing */
+  parseValue(value: string) {
+    this.auditStatusValue = AuditStatus[value];
   }
   /** Get all users **/
   getListOfUsers() {

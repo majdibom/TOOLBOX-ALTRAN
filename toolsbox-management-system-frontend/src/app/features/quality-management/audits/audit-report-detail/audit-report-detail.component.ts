@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GenericService } from '@services/generic.service';
 import { AuditReport } from '@models/audit-report';
 import swal from 'sweetalert2';
@@ -20,7 +20,7 @@ auditReport: AuditReport = new AuditReport();
  // Gap to edit
  editGap: Gap = new Gap();
 
-  constructor(private route: ActivatedRoute, private genericService: GenericService) { }
+  constructor(private route: ActivatedRoute, private genericService: GenericService,private router: Router) { }
 
   ngOnInit() {
     this.getAuditReport();
@@ -46,6 +46,10 @@ getAuditReport() {
       this.editGap = data.value;
     }
   });
+}
+/** Open audit report detail component */
+openDetails(id: number) {
+  this.router.navigate(['quality-management/audits/gap-detail', id]);
 }
  /** Delete audit report */
  deleteGap(id: number) {

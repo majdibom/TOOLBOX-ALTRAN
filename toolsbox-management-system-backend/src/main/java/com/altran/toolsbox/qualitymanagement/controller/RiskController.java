@@ -43,6 +43,7 @@ import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_NOT_EXIST
 import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_NOT_UPDATED;
 import static com.altran.toolsbox.util.constant.ResponseConstants.RISK_UPDATED;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import javax.persistence.EntityExistsException;
@@ -134,6 +135,29 @@ public class RiskController {
 	@Autowired
 	public void setMessageResponse(GenericResponse<String> messageResponse) {
 		this.messageResponse = messageResponse;
+	}
+
+	/**
+	 * Gets the list of all risks
+	 * 
+	 * @return list of all risks
+	 */
+	@GetMapping(value = "/all")
+	public MappingJacksonValue getRisks() {
+		List<Risk> riskList = riskService.findAll();
+		/** Filtering data to send **/
+		// Filter the action object
+		SimpleBeanPropertyFilter riskFilter = SimpleBeanPropertyFilter.serializeAllExcept(ACTIONS, CREATEDAT, CREATEDBY,
+				UPDATEDAT, CONTINGENCYPLAN, MITIGATIONAPPROACH);
+		SimpleBeanPropertyFilter userFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME);
+		SimpleBeanPropertyFilter actionFilter = SimpleBeanPropertyFilter.filterOutAllExcept(ID, DESCRIPTION);
+		// Add filters to filter provider
+		FilterProvider filters = new SimpleFilterProvider().addFilter(RISK_FILTER, riskFilter)
+				.addFilter(USER_FILTER, userFilter).addFilter(ACTION_FILTER, actionFilter);
+		// Create the mapping object and set the filters to the mapping
+		MappingJacksonValue risksMapping = new MappingJacksonValue(riskList);
+		risksMapping.setFilters(filters);
+		return risksMapping;
 	}
 
 	/**

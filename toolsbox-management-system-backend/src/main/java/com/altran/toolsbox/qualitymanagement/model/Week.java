@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 /**
  * Represents week
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.Ben.Othmen
  * @version 1.0
  */
 @Entity

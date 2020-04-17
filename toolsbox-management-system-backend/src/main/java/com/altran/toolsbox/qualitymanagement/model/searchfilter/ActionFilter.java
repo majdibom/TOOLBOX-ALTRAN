@@ -7,6 +7,12 @@ import com.altran.toolsbox.qualitymanagement.model.Origin;
 import com.altran.toolsbox.qualitymanagement.model.Priority;
 import com.altran.toolsbox.qualitymanagement.model.TypeAction;
 
+/**
+ * Represents Action Filter
+ * 
+ * @author Majdi.BEN.OTHMEN
+ * @version 1.0
+ */
 public class ActionFilter {
 
 	private Set<ActionStatus> status;

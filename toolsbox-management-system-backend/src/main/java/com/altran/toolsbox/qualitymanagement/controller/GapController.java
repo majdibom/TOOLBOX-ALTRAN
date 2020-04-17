@@ -71,7 +71,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 /**
  * Represents Rest controller of gap
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  *
  */
@@ -116,6 +116,29 @@ public class GapController {
 	@Autowired
 	public void setMessageResponse(GenericResponse<String> messageResponse) {
 		this.messageResponse = messageResponse;
+	}
+
+	/**
+	 * Gets the list of all gaps
+	 * 
+	 * @return list of all gaps
+	 */
+	@GetMapping(value = "/all")
+	public MappingJacksonValue getGaps() {
+		List<Gap> gapsList = gapService.findAll();
+		/** Filtering data to send **/
+		// Filter the Gap object
+		SimpleFilterProvider filterProvider = new SimpleFilterProvider();
+		filterProvider.addFilter(GAP_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(AUDITREPORT, JUSTIFICATION,
+				IMPROVEMENTCLUE, IDENTIFIEDCAUSES, AUDITREPORT));
+		filterProvider.addFilter(ACTION_FILTER,
+				SimpleBeanPropertyFilter.serializeAllExcept(PRIORITY, IDENTIFICATIONDATE, PERFORMANCECRITERIA,
+						EFFICIENCYCRITERIA, PROCESSIMPACTS, GAP, ORIGIN, DESCRIPTION, TYPEACTION, ACTIONSTATUS,
+						RESPONSIBLEACTION));
+		// Create the mapping object and set the filters to the mapping
+		MappingJacksonValue gapsMapping = new MappingJacksonValue(gapsList);
+		gapsMapping.setFilters(filterProvider);
+		return gapsMapping;
 	}
 
 	/**

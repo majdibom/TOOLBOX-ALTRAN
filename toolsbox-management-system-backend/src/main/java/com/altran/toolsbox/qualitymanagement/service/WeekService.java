@@ -7,7 +7,7 @@ import com.altran.toolsbox.qualitymanagement.model.Week;
 /**
  * Represents the interface of week service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 public interface WeekService {

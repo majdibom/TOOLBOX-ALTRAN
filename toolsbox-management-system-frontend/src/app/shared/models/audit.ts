@@ -4,6 +4,7 @@ import { Project } from './project';
 import { Process } from './process';
 import { User } from './user';
 import { AuditReport } from './audit-report';
+import { AuditStatus } from './audit-Status';
 
 export class Audit {
 
@@ -14,6 +15,7 @@ export class Audit {
     auditTheme: string;
     reference: string;
     week: Week;
+    auditStatus: AuditStatus;
     project: Project;
     process: Process;
     processImpacts: Array<Process> = [];

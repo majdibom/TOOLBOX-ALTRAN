@@ -124,3 +124,7 @@
       background: transparent;
       cursor: pointer;
     }
+    /* Add button */
+.btn-add {
+  border-radius:23px;
+}

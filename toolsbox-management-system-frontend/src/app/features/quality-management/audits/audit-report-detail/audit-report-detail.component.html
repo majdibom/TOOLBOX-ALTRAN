@@ -2,7 +2,6 @@
   <h3>{{'Détails du Rapport : #' | translate}}{{auditReport.id}}</h3>
 </div>
 <div class="content">
-
   <div class="row">
     <div class="col-lg-4">
       <div class="profile-card-4 z-depth-3">
@@ -111,10 +110,7 @@
                           <thead class="row-border hover">
                             <tr>
                               <th style="width: 2%;">{{'#' | translate}}</th>
-                              <th style="width: 20%;">{{'Description' | translate}}</th>
-                              <th style="width: 20%;">{{'Justification' | translate}}</th>
-                              <th style="width: 20%;">{{'Improvement Clue' | translate}}</th>
-                              <th style="width: 20%;">{{'Identified Causes' | translate}}</th>
+                              <th style="width: 40%;">{{'Description' | translate}}</th>
                               <th style="width: 20%;">{{'Type d ecart' | translate}}</th>
                               <th style="width: 20%;" class="text-center">{{'Actions' | translate}}</th>
                             </tr>
@@ -123,11 +119,12 @@
                             <tr *ngFor="let gap of auditReport?.gaps">
                               <td>{{gap?.id}} </td>
                               <td>{{gap?.description}} </td>
-                              <td>{{gap?.justification}} </td>
-                              <td>{{gap?.improvementClue}} </td>
-                              <td>{{gap?.identifiedCauses}} </td>
                               <td>{{gap?.typeGap}} </td>
                               <td class="text-center">
+                                <button type="button" class="btn btn-detail"
+                                  title="Afficher les details de cette auditReport" data-toggle="modal"
+                                  data-target="#detailsmodal" (click)="openDetails(gap?.id)"><i
+                                    class="fa fa-align-justify"></i></button>
                                 &nbsp; <button type="button" class="btn btn-primary btn-circle"
                                   title="Modifier cet ecart" data-toggle="modal" data-target="#editmodal"
                                   (click)="openEditModal(gap)"><i class="fa fa-edit"></i></button>

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 /**
  * Represents Delivery model
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Entity

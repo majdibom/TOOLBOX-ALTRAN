@@ -1,9 +1,9 @@
 
+
 INSERT INTO public.activities (id, description, title) VALUES (1, 'Département automobile', 'Automobile');
 INSERT INTO public.activities (id, description, title) VALUES (2, 'Département media', 'Media');
 INSERT INTO public.activities (id, description, title) VALUES (3, 'Département aéronautique', 'Aéronautique');
 INSERT INTO public.activities (id, description, title) VALUES (4, 'Département sécurité', 'Securité');
-
 
 
 INSERT INTO public.delivery_model (id, title) VALUES (1, 'ADM1');
@@ -32,7 +32,6 @@ INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (2
 INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (217, 'CONTI_Auto-Code', 1, 2);
 INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (234, 'CONTI_Auto-Code majdi', 2, 1);
 INSERT INTO public.project (id, title, activity_id, delivery_model_id) VALUES (4, 'test', 4, 3);
-
 
 
 INSERT INTO public.users (id, activated, address, birth_date, email, first_name, last_name, password, phone_number, username, activity_id) VALUES (3, true, 'Manzah', NULL, 'ines.jebri@altran.com', 'Ines', 'Jebri', '$2a$10$zfjDW7sIJfdmAUtvN9lMee5adV7ZqqG/MgoEqsQJ4Oia6iGLuSkOC', '74589312', 'g', 1);
@@ -101,44 +100,29 @@ INSERT INTO public.week (id, number) VALUES (52, 52);
 
 
 
-INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (12, 'cccccccc', NULL, 8, 'dddd', 'ddd', 'ddddd', NULL, 4, 39, 39, NULL, 217, 20);
-INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (13, 'ggggg', NULL, 2, 'ggg', 'gggg', 'gggg', NULL, 4, 39, 39, 10, NULL, 18);
-INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (14, 'kkk', '2020-03-24 10:36:11.361', 8, 'kkk', 'kkkk', 'kkkk', '2020-03-24 10:36:11.361', 2, 39, 39, NULL, 217, 17);
-INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (11, 'aaa', NULL, 5, 'ccc', 'bbbb', 'rrrrr', '2020-03-24 10:37:01.086', 2, 39, 39, NULL, 217, 15);
-INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (10, 'test', NULL, 9, 'test', 'test', 'test', '2020-04-06 15:23:40.625', 2, NULL, 39, NULL, 5, 9);
-INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (15, 'tjt', '2020-04-06 15:26:31.72', 4, 'tjtj', 'ttt', 'tjtj', '2020-04-06 15:26:31.72', 2, 39, 39, NULL, 217, 5);
-INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (16, 'jj', '2020-04-06 22:23:47.654', 2, 'jj', 'jjj', 'jj', '2020-04-06 22:23:47.654', 4, 39, 2, NULL, 4, 1);
+INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (17, 'Thème d''audit
+', '2020-04-10 13:28:46', 4, 'Enjeux', 'Référence', 'Risque 1
+Risque 2
+', '2020-04-10 13:54:00.483', 2, 39, 39, NULL, 217, 1);
+INSERT INTO public.audits (id, audit_theme, created_at, duration, issues, reference, risks, updated_at, accompanying_auditor_id, created_by, primary_auditor_id, process_id, project_id, week_id) VALUES (19, 'Thème d''audit
+', '2020-04-10 19:38:47.367', 8, 'Enjeux', 'Référence 1', 'Risques', '2020-04-10 19:38:47.367', 2, 39, 39, NULL, 217, 15);
 
 
 
-INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (277, 5, 'bs', '0015-09-10 00:00:00', 'bs', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (279, 5, 'bs', '0015-09-10 00:00:00', 'bs', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (299, 4, 'aaaazzzz', '2020-04-21 00:00:00', 'azaz', 'yes', '2020-04-06 00:00:00', 'yes', '2020-04-06 00:00:00', 12, 13);
-INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (287, 4, 'aaaazzzz', '2020-04-21 00:00:00', 'azaz', 'yes', '2020-04-06 00:00:00', 'yes', '2020-04-06 00:00:00', 14, 39);
-INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (261, 4, 'aaaazzzz', '0023-09-10 00:00:00', 'azaz', 'yes', '2020-04-06 00:00:00', 'yes', '2020-04-06 00:00:00', 11, 39);
-INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (304, 8, 'bb', '2020-04-07 01:00:00', 'bb', 'yes', '2020-04-06 00:00:00', 'yes', '2020-04-06 00:00:00', 10, 39);
-INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (306, 2, 'rr', '2020-04-15 01:00:00', 'grg', 'yes', '2020-04-06 00:00:00', 'yes', '2020-04-06 00:00:00', 15, 39);
-INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (308, 1, 'gg', '2020-04-06 01:00:00', 'gg', 'yes', '2020-04-06 00:00:00', 'yes', '2020-04-06 00:00:00', 13, 39);
-INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (310, 8, 'aaaazzzz', '2020-04-05 01:00:00', 'azaz', 'yes', '2020-04-06 00:00:00', NULL, NULL, 16, 39);
+INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (312, 8, 'Point examiné ', '2020-04-10 01:00:00', 'Points fort 1', 'yes', '2020-04-10 00:00:00', 'yes', '2020-04-10 00:00:00', 17, 39);
+INSERT INTO public.audit_report (id, duration, examined_points, realization_date, strong_points, validation_audited, validation_audited_date, validation_auditor, validation_auditor_date, audit_id, user_id) VALUES (322, 6, 'Points examinés', '2020-04-10 01:00:00', 'Points fort', 'yes', '2020-04-10 00:00:00', 'yes', '2020-04-10 00:00:00', 19, 39);
 
 
 
-INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (278, NULL, NULL, NULL, NULL, NULL, 277);
-INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (280, 'aa', 'aaa', 'aaa', 'aaa', NULL, 279);
-INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (289, 'rttt', 'rrrrtt', 'rrrrtt', 'rrrrttt', NULL, 287);
-INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (298, 'hy', 'hy', 'hy', 'hy', NULL, 287);
-INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (300, 'gg', 'gg', 'gg', 'gg', 'Minor_gaps', 299);
-INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (301, 'hhh', 'hhhh', 'hhh', 'hhh', 'Major_gaps', 299);
-INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (305, 'ttb', 'tb', 'tb', 'tb', 'Minor_gaps', 304);
-INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (307, 'grgr', 'grgr', 'grgrg', 'grgrg', 'Sensitive_points', 306);
-INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (309, 'gg', 'gg', 'gg', 'gg', 'Minor_gaps', 308);
-INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (311, 'ee', 'ty', 'ttt', 'zz', 'Improvements_track', 310);
+INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (318, 'Description', 'Identified Causes', 'Improvement Clue', 'Justification', 'Minor_gaps', 312);
+INSERT INTO public.gap (id, description, identified_causes, improvement_clue, justification, type_gap, audit_report_id) VALUES (323, 'description', 'identified Causes', 'improvement Clue', 'justification', 'Major_gaps', 322);
 
 
 
 INSERT INTO public.actions (id, action_status, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, last_modified_by, responsible_action) VALUES (206, 'Closed', '2020-03-10 16:02:44', 'Faire des échanges avec les concernés pour se mettre en accord sur le choix des produits', '2020-03-12 00:00:00', 'absence de commandes  non conformes', '2020-03-22 00:00:00', '2020-03-10 00:00:00', 'Audit', 'Low', '2020-03-21 00:00:00', 'Amélioration', '2020-03-23 15:43:41.911', '2020-03-16 00:00:00', 39, NULL, NULL, 15);
-INSERT INTO public.actions (id, action_status, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, last_modified_by, responsible_action) VALUES (173, 'Open', '2020-03-05 14:28:49.526', 'Faire des échanges avec les concernés pour se mettre en accord sur le choix des produits', '2020-03-14 00:00:00', 'absence de commandes  non conformes', '2020-03-27 00:00:00', '2020-03-02 00:00:00', 'Audit', 'Low', '2020-03-25 00:00:00', 'Préventive', '2020-03-05 14:28:49.526', '2020-03-15 00:00:00', 39, NULL, NULL, 39);
-INSERT INTO public.actions (id, action_status, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, last_modified_by, responsible_action) VALUES (133, 'Delayed', '2020-02-28 13:33:43.688', 'Assurer une présélections des fournisseurs et des évaluations périodiques.', '2020-02-11 00:00:00', 'Evaluation globale>70%', '2020-02-21 00:00:00', '2020-02-07 00:00:00', 'Risk', 'Nomral', '2020-02-17 00:00:00', 'Protection', '2020-02-28 13:33:43.688', '2020-02-14 00:00:00', 39, NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, last_modified_by, responsible_action) VALUES (133, 'Delayed', NULL, 'Assurer une présélections des fournisseurs et des évaluations périodiques.', '2020-02-11 00:00:00', NULL, '2020-02-21 00:00:00', '2020-02-07 00:00:00', 'Risk', 'Nomral', '2020-02-17 00:00:00', 'Protection', '2020-04-15 01:47:53.728', '2020-02-14 00:00:00', NULL, NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, last_modified_by, responsible_action) VALUES (173, 'Open', NULL, 'Faire des échanges avec les concernés pour se mettre en accord sur le choix des produits', '2020-03-14 00:00:00', NULL, '2020-03-27 00:00:00', '2020-03-02 00:00:00', 'Audit', 'Low', '2020-03-25 00:00:00', 'Préventive', '2020-04-15 01:56:02.721', '2020-03-15 00:00:00', NULL, NULL, NULL, 39);
+INSERT INTO public.actions (id, action_status, created_at, description, due_date, eff_meas_criterion, eff_meas_date, open_date, origin, priority, realization_date, type_action, updated_at, updated_due_date, created_by, gap_id, last_modified_by, responsible_action) VALUES (331, 'Open', '2020-04-16 14:44:36.682', 'aa', '2020-04-18 01:00:00', 'aa', '2020-04-24 00:00:00', '2020-04-09 01:00:00', 'Audit', 'Nomral', '2020-04-21 00:00:00', 'Préventive', '2020-04-16 14:44:36.682', '2020-04-19 01:00:00', 39, 323, NULL, 13);
 
 
 
@@ -155,12 +139,6 @@ INSERT INTO public.comments (id, created_at, message, created_by) VALUES (263, '
 
 
 
-INSERT INTO public.actions_comments (action_id, comments_id) VALUES (133, 134);
-INSERT INTO public.actions_comments (action_id, comments_id) VALUES (133, 135);
-INSERT INTO public.actions_comments (action_id, comments_id) VALUES (133, 136);
-INSERT INTO public.actions_comments (action_id, comments_id) VALUES (133, 137);
-INSERT INTO public.actions_comments (action_id, comments_id) VALUES (173, 174);
-INSERT INTO public.actions_comments (action_id, comments_id) VALUES (173, 178);
 INSERT INTO public.actions_comments (action_id, comments_id) VALUES (206, 207);
 INSERT INTO public.actions_comments (action_id, comments_id) VALUES (206, 208);
 INSERT INTO public.actions_comments (action_id, comments_id) VALUES (206, 209);
@@ -168,44 +146,22 @@ INSERT INTO public.actions_comments (action_id, comments_id) VALUES (206, 263);
 
 
 
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (10, 3);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (11, 4);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (11, 12);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (11, 14);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (11, 13);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (11, 15);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (12, 3);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (13, 2);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (13, 12);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (13, 15);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (14, 14);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (14, 15);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (14, 39);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (15, 13);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (15, 3);
-INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (16, 39);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (17, 13);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (17, 3);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (17, 14);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (17, 15);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (19, 12);
+INSERT INTO public.audits_audited (audits_id, audited_id) VALUES (19, 13);
 
 
 
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (10, 7);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (10, 6);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (10, 11);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (11, 10);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (11, 6);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (11, 8);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (11, 11);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (12, 2);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (12, 6);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (13, 1);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (13, 2);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (14, 5);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (14, 7);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (14, 3);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (15, 2);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (15, 7);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (15, 4);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (16, 6);
-INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (16, 4);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (17, 10);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (17, 6);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (17, 7);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (19, 5);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (19, 7);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (19, 2);
+INSERT INTO public.audits_process_impacts (audit_id, process_impacts_id) VALUES (19, 11);
 
 
 
@@ -263,7 +219,6 @@ INSERT INTO public.privileges (id, category, title) VALUES (61, 'AUDIT_REPORT', 
 INSERT INTO public.privileges (id, category, title) VALUES (62, 'AUDIT_REPORT', 'UPDATE_AUDIT_REPORT');
 INSERT INTO public.privileges (id, category, title) VALUES (63, 'AUDIT_REPORT', 'VALIDATE_AUDIT_REPORT');
 INSERT INTO public.privileges (id, category, title) VALUES (64, 'AUDIT_REPORT', 'DELETE_AUDIT_REPORT');
-
 
 
 INSERT INTO public.risk (id, closure_date, cost, created_at, delay, detection_date, factors_identif, frequency, impact, non_conformity, probability, risk_nature, risk_origin, risk_priority, risk_status, risk_strategy, satisfaction, severity, updated_at, created_by, risk_pilote) VALUES (205, '2020-03-12 00:00:00', 'No', '2020-03-10 16:02:44.184', 'No', '2020-03-02 00:00:00', 'Commande non-conforme au besoin exprimé', 'Monthly', 'Retard de livraison', 'No', 'Faible', 'Risk', 'Projet', 'Nomral', 'Open', 'Réduction', 'No', 'Mineur', '2020-03-10 16:02:44.184', 39, 39);
@@ -379,12 +334,5 @@ INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 12);
 INSERT INTO public.users_roles (user_id, roles_id) VALUES (39, 8);
 
 
-
-SELECT pg_catalog.setval('public.audits_id_seq', 16, true);
-
-
-
-SELECT pg_catalog.setval('public.hibernate_sequence', 311, true);
-
-
+SELECT pg_catalog.setval('public.hibernate_sequence', 331, true);
 

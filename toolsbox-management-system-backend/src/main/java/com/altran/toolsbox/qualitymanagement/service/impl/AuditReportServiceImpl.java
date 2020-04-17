@@ -6,6 +6,7 @@ import static com.altran.toolsbox.util.constant.ResponseConstants.NO_ENTITY_DB;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
@@ -31,7 +32,7 @@ import com.altran.toolsbox.usermanagement.service.UserService;
 /**
  * Represents implementation of audit report service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Service
@@ -88,6 +89,16 @@ public class AuditReportServiceImpl implements AuditReportService {
 	@Autowired
 	public void setAuditService(AuditService auditService) {
 		this.auditService = auditService;
+	}
+
+	/**
+	 * Gets the list of all audit reports
+	 * 
+	 * @return list of all audit reports
+	 */
+	@Override
+	public List<AuditReport> findAll() {
+		return auditReportRepository.findAll();
 	}
 
 	/**
@@ -162,6 +173,9 @@ public class AuditReportServiceImpl implements AuditReportService {
 		if (id != null && !auditReportRepository.existsById(id)) {
 			throw new EntityNotFoundException(NO_ENTITY_DB);
 		}
+		AuditReport oldReport = findById(id);
+		Set<Gap> gaps = oldReport.getGaps();
+		auditReport.setGaps(gaps);
 		auditReport.setId(id);
 		return auditReportRepository.save(auditReport);
 	}

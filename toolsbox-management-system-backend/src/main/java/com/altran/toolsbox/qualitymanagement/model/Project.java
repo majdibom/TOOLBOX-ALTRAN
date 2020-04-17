@@ -1,5 +1,7 @@
 package com.altran.toolsbox.qualitymanagement.model;
 
+import static com.altran.toolsbox.util.constant.FilterConstants.PROJECT_FILTER;
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -9,14 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import static com.altran.toolsbox.util.constant.FilterConstants.PROJECT_FILTER;
 import com.altran.toolsbox.usermanagement.model.Activity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 /**
  * Represents project
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.Ben.Othmen
  * @version 1.0
  */
 @Entity

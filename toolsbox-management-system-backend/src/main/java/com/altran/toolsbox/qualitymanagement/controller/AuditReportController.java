@@ -40,6 +40,7 @@ import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_NO
 import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_NOT_UPDATED;
 import static com.altran.toolsbox.util.constant.ResponseConstants.AUDITREPORT_UPDATED;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import javax.persistence.EntityExistsException;
@@ -70,7 +71,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 /**
  * Represents Rest controller of audit report
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  *
  */
@@ -115,6 +116,33 @@ public class AuditReportController {
 	@Autowired
 	public void setMessageResponse(GenericResponse<String> messageResponse) {
 		this.messageResponse = messageResponse;
+	}
+
+	/**
+	 * Gets the list of all reports
+	 * 
+	 * @return list of all reports
+	 */
+	@GetMapping(value = "/all")
+	public MappingJacksonValue getAuditReport() {
+		List<AuditReport> auditReportList = auditReportService.findAll();
+		/** Filtering data to send **/
+		// Filter the audit report object
+		SimpleFilterProvider filterProvider = new SimpleFilterProvider();
+		filterProvider.addFilter(AUDITREPORT_FILTER,
+				SimpleBeanPropertyFilter.serializeAllExcept(REALIZATIONDATE, DURATION, EXAMINEDPOINTS, STRONGPOINTS,
+						GAPS, VALIDATIONAUDITOR, VALIDATIONAUDITED, VALIDATIONAUDITORDATE, AUDITOR));
+		filterProvider.addFilter(AUDIT_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(AUDITREPORT, RISKS, ISSUES,
+				AUDITED, PROCESSIMPACTS, REFERENCE, AUDITTHEME));
+		filterProvider.addFilter(WEEK_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(AUDITS, ID));
+		filterProvider.addFilter(PROJECT_FILTER,
+				SimpleBeanPropertyFilter.serializeAllExcept(ID, ACTIVITY, DELIVERYMODEL));
+		filterProvider.addFilter(PROCESS_FILTER, SimpleBeanPropertyFilter.serializeAllExcept(ID));
+		filterProvider.addFilter(USER_FILTER, SimpleBeanPropertyFilter.filterOutAllExcept(ID, FIRSTNAME, LASTNAME));
+		// Create the mapping object and set the filters to the mapping
+		MappingJacksonValue auditReportsMapping = new MappingJacksonValue(auditReportList);
+		auditReportsMapping.setFilters(filterProvider);
+		return auditReportsMapping;
 	}
 
 	/**

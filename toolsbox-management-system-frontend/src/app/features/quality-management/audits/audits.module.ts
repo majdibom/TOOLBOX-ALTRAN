@@ -21,9 +21,13 @@ import { GapAddComponent } from './gap-add/gap-add.component';
 import { AuditorSpaceComponent } from './auditor-space/auditor-space.component';
 import { ValidateReportComponent } from './validate-report/validate-report.component';
 import { AuditedSpaceComponent } from './audited-space/audited-space.component';
+import { GapDetailComponent } from './gap-detail/gap-detail.component';
+import { GapActionsAddComponent } from './gap-actions-add/gap-actions-add.component';
+import { GapActionsUpdateComponent } from './gap-actions-update/gap-actions-update.component';
+import { GapActionsListComponent } from './gap-actions-list/gap-actions-list.component';
 
 @NgModule({
-  declarations: [AuditComponent, AuditPlanningComponent, AuditAddComponent, AuditListComponent, AuditUpdateComponent, AuditDetailComponent, AuditReportAddComponent, AuditReportUpdateComponent, AuditReportDetailComponent, GapUpdateComponent, GapAddComponent, AuditorSpaceComponent, ValidateReportComponent, AuditedSpaceComponent],
+  declarations: [AuditComponent, AuditPlanningComponent, AuditAddComponent, AuditListComponent, AuditUpdateComponent, AuditDetailComponent, AuditReportAddComponent, AuditReportUpdateComponent, AuditReportDetailComponent, GapUpdateComponent, GapAddComponent, AuditorSpaceComponent, ValidateReportComponent, AuditedSpaceComponent, GapDetailComponent, GapActionsAddComponent, GapActionsUpdateComponent, GapActionsListComponent],
   imports: [
     CommonModule,
     AuditsRoutingModule,

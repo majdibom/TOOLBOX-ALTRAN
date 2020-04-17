@@ -8,7 +8,7 @@ import com.altran.toolsbox.qualitymanagement.model.DeliveryModel;
 /**
  * Represents repository of delivery
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Repository

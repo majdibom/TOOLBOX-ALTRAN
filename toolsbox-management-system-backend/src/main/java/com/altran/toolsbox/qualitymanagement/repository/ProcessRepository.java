@@ -8,7 +8,7 @@ import com.altran.toolsbox.qualitymanagement.model.Process;
 /**
  * Represents repository of process
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 @Repository

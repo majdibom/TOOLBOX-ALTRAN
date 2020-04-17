@@ -7,7 +7,7 @@ import com.altran.toolsbox.qualitymanagement.model.Process;
 /**
  * Represents the interface of process service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 public interface ProcessService {

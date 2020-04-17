@@ -10,7 +10,7 @@ import com.altran.toolsbox.qualitymanagement.model.Audit;
 /**
  * Represents the interface of audit service
  * 
- * @author Ahmed.Elayeb
+ * @author Majdi.BEN.OTHMEN
  * @version 1.0
  */
 public interface AuditService {

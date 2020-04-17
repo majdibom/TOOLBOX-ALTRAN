@@ -10,6 +10,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -83,7 +85,13 @@ public class Audit implements Serializable {
 	 * 
 	 */
 	private String reference;
-
+	/**
+	 * The AuditStatus of this audit
+	 * 
+	 * @see AuditStatus
+	 */
+	@Enumerated(EnumType.STRING)
+	private AuditStatus auditStatus;
 	/**
 	 * The week of this audit
 	 * 
@@ -312,6 +320,14 @@ public class Audit implements Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public AuditStatus getAuditStatus() {
+		return auditStatus;
+	}
+
+	public void setAuditStatus(AuditStatus auditStatus) {
+		this.auditStatus = auditStatus;
 	}
 
 }

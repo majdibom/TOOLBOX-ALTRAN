@@ -75,6 +75,8 @@ public final class ColumnConstants {
 	public static final String PRIMARYAUDITOR = "primaryAuditor";
 	public static final String ACCOMPANYINGAUDITOR = "accompanyingAuditor";
 	public static final String AUDITED = "audited";
+	public static final String AUDITSTATUS = "auditStatus";
+
 
 	// AuditReport
 	public static final String EXAMINEDPOINTS = "examinedPoints";
